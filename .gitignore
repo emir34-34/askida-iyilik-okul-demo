@@ -1,0 +1,23 @@
+# Sırlar: şifre, API anahtarı, servis hesabı dosyası repoya girmez
+.env
+.env.*
+!.env.example
+*serviceAccount*.json
+*-firebase-adminsdk-*.json
+
+# Python / Django
+__pycache__/
+*.pyc
+.venv/
+venv/
+db.sqlite3
+
+# Node / Firebase
+node_modules/
+.firebase/
+*.log
+
+# Editör ve sistem
+.vscode/
+.idea/
+.DS_Store

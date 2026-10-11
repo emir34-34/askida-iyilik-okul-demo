@@ -60,6 +60,8 @@ Aşağı oyun riskini azaltmak için önerdiğim önlemler (bunlar da hocalara s
 | E6 | Gizleme (öğretmen) | Öğretmen | ⚠️ Django yönetim paneliyle |
 | E7 | Hata ve uyarı mesajları | Herkes | ✅ |
 | E8 | Profil | Herkes | ✅ |
+| D1 | Ana akış (bilgisayar) | Öğrenci, öğretmen | ✅ |
+| D2 | İstek sayfası (bilgisayar) | Öğrenci, öğretmen | ✅ |
 
 Oylama demoya ancak S-08 kararından sonra eklenir. Demonun zorunlu akışı (aç, üstlen, yapıldı, onayla) oylamaya bağlı değil.
 
@@ -258,6 +260,32 @@ Bu ekran role ve isteğin durumuna göre **farklı düğmeler** gösterir. Düğ
 - Profilde yalnızca `veri.md`'deki alanlar var: görünen ad, kullanıcı adı, rol. Fotoğraf yerine adın baş harfleri (T-03).
 - Reddit profilindeki karma, gönderi sayısı ya da rozet yok (T-02, S-01).
 - "Hakkımda hangi bilgiler tutuluyor?" sayfası kullanıcıya kendisi hakkında tutulan veriyi gösterir. Bu, KVKK'nın aydınlatma yükümlülüğüne uygun bir tasarım. İçeriğini Özgür Hoca'nın KVKK notlarıyla birlikte yazacağız (S-04).
+
+## Bilgisayar arayüzü (D1, D2)
+
+Uygulama okul bilgisayarından ya da akıllı tahtadan açıldığında Reddit'in masaüstü düzeni kullanılır (Ö-05). Kartlar, renkler ve düğmeler telefondakiyle aynıdır. Yalnızca yerleşim değişir: alt menü sol menüye dönüşür, sağa bilgi kartları eklenir.
+
+```
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ 🤝 Askıda İyilik        [ 🔍 İsteklerde ara              ]   (＋ Oluştur) (AK) │
+├───────────────┬──────────────────────────────────────┬───────────────────────┤
+│ 🏠 Akış       │ (Yeni) (Açık olanlar)                │ 🤝 Askıda İyilik      │
+│ 📋 Görevler   │ ┌──────────────────────────────────┐ │ Okulumuzun iyilik     │
+│ 👤 Profil     │ │ k/ders · Mehmet A. · 2 sa        │ │ panosu...             │
+│───────────────│ │ Kimya notları lazım              │ │ ( ＋ Yeni istek )     │
+│ KATEGORİLER   │ │ [🟢 Açık]                        │ ├───────────────────────┤
+│ 📘 k/ders     │ │ Salı günkü dersin notlarına...   │ │ Durumlar              │
+│ 🎒 k/eşya     │ │ (▲ 3 ▼) (💬 1)                   │ │ 🟢 🟡 🔵 ✅            │
+│ 🏫 k/okul     │ └──────────────────────────────────┘ ├───────────────────────┤
+│───────────────│ ┌──────────────────────────────────┐ │ Kurallar              │
+│ BİLGİ         │ │ k/okul · Zeynep T. · 1 gün       │ │ 1. Özel mesaj yok     │
+│ Kurallar      │ │ 2. kat lavabo musluğu akıtıyor   │ │ 2. Kişisel bilgi yok  │
+│ Hangi bilgiler│ │ ...                              │ │ ...                   │
+└───────────────┴──────────────────────────────────────┴───────────────────────┘
+```
+- **D1 Ana akış:** Ortada telefondaki istek kartları, sağda uygulamanın ne olduğu, durum etiketlerinin anlamı ve kurallar.
+- **D2 İstek sayfası:** Ortada istek, rol düğmeleri ve yorumlar. Sağda **"Bu istek nerede?"** kartı isteğin akıştaki yerini adım adım gösterir (Açıldı → Üstlenildi → Yapıldı → Onay). Bu kart durum geçmişini değil, yalnızca şu anki durumu gösterir. Durum geçmişi yalnızca öğretmenlere açıktır (`veri.md`).
+- Kategori açıklamaları ve kurallar metni örnektir. Asıl metni hocalar belirleyecek.
 
 ## E6. Gizleme (öğretmen)
 

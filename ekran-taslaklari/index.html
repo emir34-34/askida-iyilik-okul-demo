@@ -141,6 +141,48 @@ textarea.input{min-height:110px;resize:none}
 .toast small{display:block;opacity:.7;font-size:11px;margin-bottom:2px}
 .live-toast{position:absolute;left:12px;right:12px;bottom:70px;opacity:0;transition:opacity .2s;pointer-events:none}
 .live-toast.show{opacity:1}
+/* bölüm başlıkları */
+.sec{max-width:1200px;margin:0 auto;padding:24px 16px 0}
+.sec h2{margin:0 0 4px;font-size:18px}
+.sec p{margin:0;color:var(--muted)}
+.jump{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.jump a{background:var(--pill);color:var(--text);text-decoration:none;border-radius:999px;padding:6px 12px;font-weight:600;font-size:13px}
+/* bilgisayar arayüzü */
+.desk-list{max-width:1200px;margin:0 auto;padding:16px;display:flex;flex-direction:column;gap:28px}
+.browser{border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--page);box-shadow:0 6px 24px rgba(0,0,0,.12)}
+.chrome{height:36px;background:var(--card);display:flex;align-items:center;gap:6px;padding:0 12px;border-bottom:1px solid var(--line)}
+.chrome i{width:11px;height:11px;border-radius:50%;background:var(--pill-hover);display:inline-block}
+.chrome .url{margin-left:12px;flex:1;max-width:420px;background:var(--pill);border-radius:999px;padding:4px 12px;font-size:12px;color:var(--muted)}
+.desk-scroll{overflow-x:auto}
+.desk{min-width:1040px;height:660px;display:grid;grid-template-rows:56px 1fr}
+.dhead{display:flex;align-items:center;gap:16px;padding:0 16px;background:var(--card);border-bottom:1px solid var(--line)}
+.dhead .search{flex:1;max-width:520px;margin:0 auto;background:var(--pill);border-radius:999px;padding:9px 16px;color:var(--muted)}
+.dbody{display:grid;grid-template-columns:230px 1fr 310px;min-height:0}
+.dleft{border-right:1px solid var(--line);padding:12px 10px;overflow-y:auto;background:var(--page)}
+.dleft a{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;color:var(--text);text-decoration:none;font-weight:500}
+.dleft a.on{background:var(--pill);font-weight:700}
+.dleft a svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dleft .lbl{font-size:11px;letter-spacing:.06em;color:var(--muted);font-weight:700;padding:14px 12px 6px}
+.dleft hr{border:0;border-top:1px solid var(--line);margin:8px 4px}
+.kdot{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;background:var(--pill)}
+.dmain{overflow-y:auto;padding:12px 24px}
+.dmain .inner{max-width:680px;margin:0 auto}
+.dmain .post{border:1px solid var(--line);border-radius:14px;margin-bottom:10px}
+.dmain .post:hover{border-color:var(--muted)}
+.dright{overflow-y:auto;padding:12px 16px 12px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+.card h4{margin:0 0 6px;font-size:14px}
+.card p{margin:0 0 10px;color:var(--muted);font-size:13px}
+.card ol{margin:0;padding-left:18px;font-size:13px}
+.card ol li{margin:4px 0}
+.legend{display:flex;flex-wrap:wrap;gap:6px}
+.steps{list-style:none;margin:0;padding:0;font-size:13px}
+.steps li{display:flex;gap:8px;align-items:center;padding:5px 0;color:var(--muted)}
+.steps li b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:11px;background:var(--pill);color:var(--muted);flex:none}
+.steps li.done{color:var(--text)}
+.steps li.done b{background:var(--text);color:var(--card)}
+.steps li.now{color:var(--text);font-weight:700}
+.steps li.now b{background:var(--brand);color:var(--brand-ink)}
 footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);font-size:13px}
 </style>
 </head>
@@ -150,8 +192,10 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
   <h1>Askıda İyilik — Ekran Taslakları</h1>
   <p><code>ekranlar.md</code> dosyasındaki ekranların tarayıcıda görünen hâli. Arayüz Reddit'in diline göre tasarlandı (Ö-01). Bütün isimler ve istekler uydurmadır.</p>
   <span class="note">⚠ Bu bir ekran taslağıdır, demo değil. Veritabanı ve gerçek giriş yok. Oylar ve düğmeler yalnızca görünüşü denemek için tepki verir.</span>
+  <div class="jump"><a href="#telefon">📱 Telefon arayüzü</a><a href="#bilgisayar">💻 Bilgisayar arayüzü</a></div>
 </header>
 
+<section class="sec" id="telefon"><h2>📱 Telefon arayüzü</h2><p>Öğrencilerin çoğu uygulamayı telefondan açacak (V-10).</p></section>
 <main class="gallery">
 
   <!-- E1 -->
@@ -314,6 +358,112 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
   </figure>
 
 </main>
+
+<section class="sec" id="bilgisayar"><h2>💻 Bilgisayar arayüzü</h2><p>Okul bilgisayarı ya da akıllı tahtadan açıldığında Reddit'in masaüstü düzeni: solda menü ve kategoriler, ortada akış, sağda bilgi kartları (Ö-05). Kartlar ve renkler telefondakiyle aynı. Dar ekranda çerçevenin içi yana kaydırılır.</p></section>
+<div class="desk-list">
+
+  <!-- D1 -->
+  <figure style="width:100%">
+    <figcaption>D1 · Ana akış (bilgisayar)<small>Üç sütun: menü ve kategoriler · istek kartları · bilgi kartları</small></figcaption>
+    <div class="browser"><div class="chrome"><i></i><i></i><i></i><span class="url">localhost:8000/</span></div>
+    <div class="desk-scroll"><div class="desk">
+        <div class="dhead">
+          <div class="logo"><span class="dot">🤝</span>Askıda İyilik</div>
+          <div class="search">🔍 İsteklerde ara</div>
+          <button class="primary sm" type="button">＋ Oluştur</button>
+          <div class="av">AK</div>
+        </div>
+      <div class="dbody">
+        <div class="dleft">
+          <a href="#" class="on"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h5v-6h4v6h5V9.5"/></svg>Akış</a>
+          <a href="#"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 12l2 2 4-4"/></svg>Görevler</a>
+          <a href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Profil</a>
+          <hr>
+          <div class="lbl">KATEGORİLER</div>
+          <a href="#"><span class="kdot">📘</span>k/ders</a>
+          <a href="#"><span class="kdot">🎒</span>k/eşya</a>
+          <a href="#"><span class="kdot">🏫</span>k/okul</a>
+          <hr>
+          <div class="lbl">BİLGİ</div>
+          <a href="#">Uygulama kuralları</a>
+          <a href="#">Hangi bilgiler tutuluyor?</a>
+        </div>
+        <div class="dmain"><div class="inner">
+          <div class="tabs" style="background:transparent;border:0;padding:0 0 10px"><button class="chip on" type="button">Yeni</button><button class="chip" type="button">Açık olanlar</button></div>
+          <div id="dfeed"></div>
+        </div></div>
+        <div class="dright">
+          <div class="card"><h4>🤝 Askıda İyilik</h4><p>Okulumuzun iyilik panosu. Bir ihtiyacını ya da okulda gördüğün bir sorunu yaz, başka biri üstlensin, sen onayla.</p><button class="primary" type="button">＋ Yeni istek</button></div>
+          <div class="card"><h4>Durumlar</h4><div class="legend"><span class="flair f-open">🟢 Açık</span><span class="flair f-claimed">🟡 Üstlenildi</span><span class="flair f-done">🔵 Yapıldı</span><span class="flair f-closed">✅ Tamamlandı</span></div></div>
+          <div class="card"><h4>Kurallar</h4><ol>
+            <li>Konuşmalar isteğin altında, herkese açık yorumlarla olur. Özel mesaj yok.</li>
+            <li>Telefon, adres gibi kişisel bilgi paylaşma.</li>
+            <li>Resim ve videoda kimsenin yüzü görünmesin. (S-09)</li>
+            <li>Saygılı ol. Uygunsuz içeriği öğretmenler gizler.</li>
+          </ol></div>
+        </div>
+      </div>
+    </div></div></div>
+  </figure>
+
+  <!-- D2 -->
+  <figure style="width:100%">
+    <figcaption>D2 · İstek sayfası (bilgisayar)<small>Ortada istek ve yorumlar, sağda isteğin hangi adımda olduğu</small></figcaption>
+    <div class="browser"><div class="chrome"><i></i><i></i><i></i><span class="url">localhost:8000/istek/12/</span></div>
+    <div class="desk-scroll"><div class="desk">
+        <div class="dhead">
+          <div class="logo"><span class="dot">🤝</span>Askıda İyilik</div>
+          <div class="search">🔍 İsteklerde ara</div>
+          <button class="primary sm" type="button">＋ Oluştur</button>
+          <div class="av">AK</div>
+        </div>
+      <div class="dbody">
+        <div class="dleft">
+          <a href="#"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h5v-6h4v6h5V9.5"/></svg>Akış</a>
+          <a href="#"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 12l2 2 4-4"/></svg>Görevler</a>
+          <a href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Profil</a>
+          <hr>
+          <div class="lbl">KATEGORİLER</div>
+          <a href="#" class="on"><span class="kdot">📘</span>k/ders</a>
+          <a href="#"><span class="kdot">🎒</span>k/eşya</a>
+          <a href="#"><span class="kdot">🏫</span>k/okul</a>
+          <hr>
+          <div class="lbl">BİLGİ</div>
+          <a href="#">Uygulama kuralları</a>
+          <a href="#">Hangi bilgiler tutuluyor?</a>
+        </div>
+        <div class="dmain"><div class="inner">
+          <div class="post" style="cursor:default">
+            <div class="meta"><div class="av" style="width:22px;height:22px;font-size:9px">MA</div><b>k/ders</b>· Mehmet A. · 2 sa</div>
+            <div class="title" style="font-size:20px">Kimya notları lazım</div>
+            <span class="flair f-claimed">🟡 Üstlenildi · Ayşe K.</span>
+            <p class="body full">Salı günkü dersin notlarına ihtiyacım var. Defterimi kaybettim, fotokopi çekip geri verebilirim.</p>
+            <div class="actions"><span class="vote" data-n="3"><button type="button" aria-label="Yukarı oy">▲</button><span class="n">3</span><button type="button" aria-label="Aşağı oy">▼</button></span><button class="pillbtn" type="button">💬 2</button></div>
+            <div class="actionbox"><div class="who">Ayşe (üstlenen) olarak görünen düğmeler:</div><button class="primary sm" type="button">Yapıldı</button><button class="secondary" type="button">Bırak</button></div>
+          </div>
+          <div class="comments" style="border:1px solid var(--line);border-radius:14px">
+            <div class="cbox">Yorum ekle...</div>
+            <div class="c"><div class="av">AK</div><div style="flex:1"><div class="cmeta"><b>Ayşe K.</b> · 1 sa</div><div class="ctext">Yarın teneffüste getiririm.</div><div class="reply">↩ Yanıtla</div></div></div>
+            <div class="c" style="margin-top:0"><div class="thread" style="flex:1"><div class="c"><div class="av">MA</div><div><div class="cmeta"><b>Mehmet A.</b> · 50 dk</div><div class="ctext">Çok sağ ol! 🙏</div></div></div></div></div>
+          </div>
+        </div></div>
+        <div class="dright">
+          <div class="card"><h4>Bu istek nerede?</h4>
+            <ul class="steps">
+              <li class="done"><b>✓</b>Açıldı</li>
+              <li class="done"><b>✓</b>Üstlenildi</li>
+              <li class="now"><b>3</b>Yapıldı bekleniyor</li>
+              <li><b>4</b>Mehmet onaylayacak</li>
+            </ul>
+          </div>
+          <div class="card"><h4>k/ders</h4><p>Ders notu, konu anlatımı gibi derslerle ilgili istekler. (Örnek açıklama, kategorileri hocalar belirleyecek.)</p></div>
+          <div class="card"><h4>Kurallar</h4><ol><li>Özel mesaj yok, yorumlar herkese açık.</li><li>Kişisel bilgi paylaşma.</li></ol></div>
+        </div>
+      </div>
+    </div></div></div>
+  </figure>
+
+</div>
 <footer>Askıda İyilik okul sürümü · sistem tasarımı taslağı · Oylama (▲ ▼) açık karardır (S-08), toplam sıfırın altına düşerse 0 gösterilir.</footer>
 
 <script>
@@ -349,13 +499,15 @@ var posts=[
   {k:"ders",who:"Elif S.",ini:"ES",t:"4 gün",title:"İngilizce konuşma pratiği yapacak arkadaş arıyorum",body:"Öğle arasında 15 dakika konuşma pratiği yapabiliriz.",st:"open",v:-2,c:0}
 ];
 function voteHTML(n){return '<span class="vote" data-n="'+n+'"><button type="button" aria-label="Yukarı oy">▲</button><span class="n">'+Math.max(0,n)+'</span><button type="button" aria-label="Aşağı oy">▼</button></span>';}
-document.getElementById("feed").innerHTML=posts.map(function(p){
+function feedHTML(){return posts.map(function(p){
   var f=FLAIR[p.st];
   return '<div class="post"><div class="meta"><div class="av" style="width:22px;height:22px;font-size:9px">'+p.ini+'</div><b>k/'+p.k+'</b>· '+p.who+' · '+p.t+'</div>'+
     '<div class="title">'+p.title+'</div><span class="flair '+f[0]+'">'+f[1]+'</span>'+
     (p.media?'<div class="media"><span class="ph">'+p.media+'</span><span class="tag">örnek görsel · S-09</span></div>':'')+
     '<p class="body">'+p.body+'</p><div class="actions">'+voteHTML(p.v)+'<button class="pillbtn" type="button">💬 '+p.c+'</button></div></div>';
-}).join("");
+}).join("");}
+document.getElementById("feed").innerHTML=feedHTML();
+document.getElementById("dfeed").innerHTML=feedHTML();
 
 // Oylar: yalnızca görünüş. Toplam 0'ın altında gösterilmez (S-08 önlemi).
 document.addEventListener("click",function(e){

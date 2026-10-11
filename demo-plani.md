@@ -86,6 +86,16 @@ WebView'li APK'yı telefonda denedikten sonra Emir, uygulamanın Reddit uygulama
 - **Ekranlar:** Giriş, Akış (sekmeler, kategoriler, aşağı çekip yenileme), İstek (düğmeler, yorumlar), Yeni istek, Görevler, Profil (çıkış, sunucu adresi). Alt menü ve renkler ekran taslaklarıyla aynı.
 - **En düşük Android sürümü:** 8.0 (API 26). Yazı tipinin (Reddit Sans) ağırlıklarını native olarak ayarlayabilmek için gerekli.
 
+## Canlı güncelleme (2026-10-12)
+
+İki telefonla çift üstlenme gösterisinde fark edildi: 1. telefon isteği üstlendiğinde 2. telefonda "Üstlen" düğmesi durmaya devam ediyordu. Uyarı ancak basınca geliyordu. Emir, değişikliğin diğer telefonda canlı görünmesini istedi.
+
+- **Yöntem: kısa aralıklarla sorma (polling).** İstek sayfası açıkken uygulama sunucuya 3 saniyede bir, akış açıkken 10 saniyede bir aynı `/api/` adresini sorar. Veri değiştiyse ekran yeniden çizilir, değişmediyse hiçbir şey yapılmaz.
+- **Neden WebSocket değil:** Sunucunun değişikliği kendisinin göndermesi (WebSocket, Django Channels) yeni bir kütüphane ve farklı bir sunucu türü (ASGI) gerektirir. Görev tanımı yeni teknoloji için Özgür Hoca'ya sormayı istiyor. Demo için birkaç saniyelik gecikme yeterli.
+- **Sınırı:** Değişiklik en geç 3 saniye sonra görünür. Kullanıcı sayısı arttıkça sunucuya giden istek sayısı da artar. Gerçek kullanımda WebSocket'e geçilebilir.
+- **Sunucu değişmedi:** Kurallar aynı. Canlı güncelleme yalnızca görünüş, asıl koruma yine koşullu güncelleme (409).
+- Ekran arka plana geçince ya da başka bir ekran açılınca sorma durur, boşuna istek atılmaz.
+
 ## Telefonda test (2026-10-12, iki cihaz)
 
 Cihazlar: LineageOS telefon (USB) ve Xiaomi 11T (kablosuz hata ayıklama). İkisi aynı bilgisayardaki Django'ya bağlı.

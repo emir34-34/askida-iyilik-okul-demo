@@ -223,6 +223,7 @@ Bu ekran role ve isteğin durumuna göre **farklı düğmeler** gösterir. Düğ
 | Tamamlandı | — | — | — | ⋯ Gizle |
 
 - **Yapılmadı** düğmesine basıldığında gerekçe kutusu açılır. Gerekçe yazmadan gönderilemez (G6).
+- **Canlı güncelleme:** İstek sayfası açıkken başka biri isteği üstlenir, bırakır ya da onaylarsa sayfa kendiliğinden güncellenir. Düğmeler değişir ve bir bildirim çıkar, örneğin "Bu istek az önce Mehmet A. tarafından üstlenildi." Böylece kullanıcı artık geçerli olmayan bir düğmeye basmaz. (Bassa bile sunucu reddeder, akis.md soru 1.)
 
 ## E5. Görevler
 

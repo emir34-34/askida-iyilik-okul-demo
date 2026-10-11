@@ -37,6 +37,17 @@
 | `metin` | `Yarın teneffüste getirebilirim.` | Konuşmanın kendisi. Özel mesaj yok (T-01) |
 | `zaman` | `2026-10-14 11:00` | Konuşmanın sırasını göstermek için |
 | `gizli` | `false` | Öğretmen yorumu gizlerse silmeden saklamak için (V-02) |
+| `ust_yorum` | → Yorum #31 (boş olabilir) | Yanıtın hangi yorumun altında durduğunu bilmek için. Yalnızca bir seviye (V-11) |
+
+## Oy (yalnızca S-08 kabul edilirse)
+
+| Alan | Örnek değer | Neden tutuluyor |
+|------|-------------|-----------------|
+| `istek` | → İstek #12 | Oyun hangi isteğe verildiğini bilmek için |
+| `veren` | → `ogrenci3` | Aynı kişinin aynı isteğe ikinci kez oy vermesini önlemek için. **Ekranda gösterilmez** |
+| `yon` | `+1` (aşağı oy kabul edilirse `-1` de olabilir) | İsteğin oy toplamını hesaplamak için |
+
+Oylar **istek başına** toplanır, **kişi başına asla toplanmaz**. Reddit'teki karma gibi bir kullanıcı puanı yoktur (T-02, S-01).
 
 ## Durum geçmişi
 
@@ -59,7 +70,7 @@ Durum geçmişi yalnızca öğretmenlere görünür. Ondan "kim kaç iyilik yapt
 | Okul numarası, sınıf ve şube | Hiçbir akış bunlara ihtiyaç duymuyor. Hocalar sınıfa göre filtreleme isterse yeniden değerlendirilir |
 | Veli bilgisi | Veliler bu sürümde kullanıcı değil (V-04) |
 | Özel mesajlar | Özel mesaj özelliği yok (T-01) |
-| Puan, kredi, "iyilik sayısı" | Kurallar kesinleşmedi (S-01). Sıralama tablosu da yok (T-02) |
+| Puan, kredi, "iyilik sayısı", karma | Kurallar kesinleşmedi (S-01). Sıralama tablosu da yok (T-02) |
 | Profil fotoğrafı, biyografi | Asgari veri ilkesi gereği gerek yok |
 
 ## Açık konular

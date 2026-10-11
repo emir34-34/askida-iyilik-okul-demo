@@ -32,6 +32,8 @@
 | "Yapılmadı" diye geri çevirmek | 🔸 | 🔸 | ❌ | Yalnızca isteği açan kişi, gerekçe yazarak |
 | Kendi isteğini geri çekmek | 🔸 | 🔸 | ❌ | Yalnızca durum **Açık** iken (V-06) |
 | Yorum yazmak | ✅ | ✅ | ❌ | Herkese açık. Özel mesaj yok (T-01) |
+| Yoruma yanıt vermek | ✅ | ✅ | ❌ | Tek seviye, yanıta yanıt verilemez (V-11) |
+| İsteğe oy vermek | 🔸 | 🔸 | ❌ | **Açık karar (S-08).** Kabul edilirse: kendi isteğine oy veremez, aynı isteğe bir kez oy verir, kimin oy verdiği görünmez |
 | İsteği ya da yorumu gizlemek | ❌ | ✅ | ❌ | Gerekçe yazmak zorunlu (V-02) |
 | Gizlenen içeriği geri açmak | ❌ | ✅ | ❌ | |
 | Hesap açmak ya da kapatmak | ❌ | ❌ | ✅ | V-03 |

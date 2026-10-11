@@ -38,6 +38,38 @@
 - **Örnek veri:** `python manage.py ornek_veri` komutu senaryolardaki uydurma kullanıcıları ve istekleri oluşturur (T-04).
 - **Telefonda test:** Telefon USB ile bağlıyken `adb reverse tcp:8000 tcp:8000`. Telefonun tarayıcısında `http://localhost:8000` açılır.
 
+## Mimari değişikliği (2026-10-12): arayüz istemcide, sunucu yalnızca veri
+
+İlk sürümde sayfalar Django'da üretiliyordu (sunucu her seferinde HTML gönderiyordu). Telefonda iki cihazla denedikten sonra Emir, Reddit uygulaması gibi **arayüzün uygulamanın içinde olmasını, sunucudan yalnızca verinin gelmesini** istedi. Gerekçe: Uygulama daha hızlı açılır, sayfa geçişleri anında olur, gerçek bir uygulama gibi hissettirir.
+
+| | Önce | Sonra |
+|---|------|-------|
+| Sunucu (Django) | Sayfaları HTML olarak üretir | Yalnızca veri gönderir: `/api/...` adreslerinden JSON |
+| Arayüz | Django şablonları | `demo/istemci/` klasöründe tek bir JavaScript uygulaması (HTML + CSS + JS + yazı tipi) |
+| Tarayıcıda (web) | Django sayfaları | Django `demo/istemci/` dosyalarını verir, arayüz tarayıcıda çalışır |
+| APK'da | Sayfalar sunucudan gelir | `demo/istemci/` dosyaları APK'nın içine konur, **sunucudan yalnızca veri gelir** |
+| Kurallar | `gecisler.py` | **Değişmedi**, yine `gecisler.py`'de, sunucuda (T-07) |
+
+**Neden tek arayüz:** Görev tanımı tarayıcıda açılan bir demo istiyor. Web ve APK için ayrı ayrı arayüz yazmak işi ikiye katlar ve ikisi zamanla birbirinden farklılaşır. Aynı dosyalar iki yerde de çalışır.
+
+**APK'da nasıl çalışır:** APK, arayüz dosyalarını (`/`, `/i/...`) sunucuya sormadan kendi içinden verir. Yalnızca `/api/...` istekleri gerçekten sunucuya gider. Dosyalar sunucuyla aynı adresten geliyormuş gibi davrandığı için oturum çerezi ve CSRF koruması değişmeden çalışır.
+
+**API (`/api/`):**
+
+| Adres | Ne yapar |
+|-------|----------|
+| `GET /api/ben` | Giriş yapan kişi (yoksa 401) |
+| `POST /api/giris`, `POST /api/cikis` | Giriş, çıkış (Django oturumu) |
+| `GET /api/istekler?sekme=&k=` | Akış (E2) |
+| `GET /api/gorevler?sekme=` | Görevler (E5) |
+| `POST /api/istekler` | Yeni istek (G1) |
+| `GET /api/istekler/<no>` | İstek, yorumlar ve bu kişinin görebileceği düğmeler (E4) |
+| `POST /api/istekler/<no>/<eylem>` | üstlen, bırak, yapıldı, onayla, yapılmadı, geri çek, yorum |
+
+Hatalar: yetki yok → **403**, durum uygun değil (ör. az önce başkası üstlendi) → **409**, eksik gerekçe → **400**, giriş yapılmamış → **401**.
+
+**Güvenlik:** Kullanıcıların yazdığı her metin (başlık, açıklama, yorum) ekrana basılmadan önce kaçış işlemine (escape) uğrar. Böylece birinin isteğine yazdığı bir kod başkasının telefonunda çalışamaz (XSS).
+
 ## Testler (görev tanımı: en az 3, her birinde gerçek kontrol)
 
 | Test | Neyi kanıtlar |
@@ -46,6 +78,7 @@
 | Çift üstlenme | İki kişi aynı isteği üstlenmeye çalışınca yalnızca ilki başarılı olur, istek ilkinde kalır |
 | Onay akışı | Aç → üstlen → yapıldı → onayla zinciri baştan sona yürür, her adımda durum ve durum geçmişi doğrudur |
 | Bırakma ve yapılmadı | Bırakınca istek yeniden açık olur. Gerekçesiz "yapılmadı" reddedilir |
+| API yetkisi | Yetkisiz biri API adresine doğrudan istek atsa bile 403 alır, giriş yapmayan 401 alır, gizlenen istek öğrenciye 404 döner |
 
 ## Sıra (her adım ayrı commit)
 
@@ -57,4 +90,5 @@
 6. Örnek veri komutu, yönetim paneli
 7. README'ye kurulum ve çalıştırma adımları
 8. Telefonda test, bulunan boşlukları tasarıma geri yazma
+10. **Mimari değişikliği:** API, istemci uygulaması, APK'nın arayüzü kendi içinden vermesi (yukarıda).
 9. **Ek: Android APK kabuğu.** Django sayfalarını tam ekran açan bir Android uygulaması (WebView). Ayrı bir uygulama değil, aynı demonun telefona kurulabilen hâli. Android SDK gerektirdiği için görev tanımı gereği Özgür Hoca'ya sorulacak (S-11). Teslim edilen demonun zorunlu parçası değil, ek.

@@ -123,7 +123,7 @@ Bildirim metni ayrıca saklanmaz, ilgili istek ve yorumdan üretilir. Böylece g
 | `eski_durum` → `yeni_durum` | `yapildi` → `ustlenildi` | Ne değiştiğini bilmek için |
 | `yapan` | → `ogrenci1` | Bir anlaşmazlıkta ya da kötüye kullanımda öğretmen ne olduğunu görebilsin diye |
 | `zaman` | `2026-10-14 15:20` | Olayların sırasını bilmek için |
-| `not` | `Notların yarısı eksik.` | "Yapılmadı" ve gizleme gerekçesini saklamak için (G6, G8) |
+| `notu` | `Notların yarısı eksik.` | "Yapılmadı" ve gizleme gerekçesini saklamak için (G6, G8) |
 
 Durum geçmişi yalnızca öğretmenlere görünür. Ondan "kim kaç iyilik yaptı" sayısı **çıkarılmaz ve gösterilmez** (T-02).
 

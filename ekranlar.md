@@ -64,6 +64,7 @@ Aşağı oyun riskini azaltmak için önerdiğim önlemler (bunlar da hocalara s
 | E10 | Arşiv | Herkes | ❌ yalnızca tasarımda |
 | E11 | Şikâyet et | Öğrenci, öğretmen | ❌ yalnızca tasarımda |
 | E12 | İlk giriş tanıtımı | Herkes, yalnızca ilk girişte | ❌ yalnızca tasarımda |
+| E13 | Onayla ve teşekkür et | İsteği açan kişi | ⚠️ Onay var, teşekkür notu zaman kalırsa |
 | D1 | Ana akış (bilgisayar) | Öğrenci, öğretmen | ✅ |
 | D2 | İstek sayfası (bilgisayar) | Öğrenci, öğretmen | ✅ |
 | D3 | Yönetim özeti (bilgisayar) | Öğretmen, yönetici | ❌ yalnızca tasarımda |
@@ -467,6 +468,30 @@ Kullanıcı ilk kez giriş yaptığında akıştan önce gösterilir. Uygulaman�
 - Son ekranda kurallar var. **"Kuralları okudum" işaretlenmeden "Başla" düğmesi çalışmaz.** "Geç" düğmesi tanıtımı atlar, ama kuralları atlamaz, doğrudan kurallar ekranına götürür.
 - Kurallar değişmez ilkelerden gelir: özel mesaj yok (T-01), kişisel bilgi yok (T-03), sıralama yok (T-02). Kural metni örnektir, asıl metni hocalar belirleyecek.
 - Kurallar daha sonra Profil'deki (E8) **Uygulama kuralları** satırından yeniden okunabilir.
+
+## E13. Onayla ve teşekkür et
+
+İsteği açan kişi **Onayla**'ya bastığında (G5) bu pencere açılır.
+
+```
+┌────────────────────────────────┐
+│ İşi onayla                     │
+│ Ayşe K. isteğini yaptığını     │
+│ söylüyor. Onaylıyor musun?     │
+│                                │
+│ Teşekkür notu (isteğe bağlı)   │
+│ (Çok sağ ol! 🙏) (Eline sağlık👏)│
+│ ┌────────────────────────────┐ │
+│ │ Sınavda çok işime yaradı...│ │
+│ └────────────────────────────┘ │
+│ 💬 Notun herkese görünür.      │
+│          ( Vazgeç ) ( Onayla ) │
+└────────────────────────────────┘
+```
+- Amaç, iyiliği puan ya da sıralama olmadan görünür kılmak. Teşekkür bir sayıya dönüşmez, yalnızca bir yorumdur (T-02, S-01).
+- Not **isteğe bağlıdır**. Boş bırakılırsa istek yine tamamlanır.
+- Hazır cümleler hızlı yazmak için. Not, isteğin altında vurgulu bir yorum olarak görünür, arşivde (E10) de gösterilir.
+- Not herkese açık bir yorum olduğu için uygunsuzsa şikâyet edilebilir ve öğretmen gizleyebilir.
 
 ## E6. Gizleme (öğretmen)
 

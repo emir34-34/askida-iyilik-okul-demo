@@ -120,6 +120,10 @@ figcaption small{display:block;font-weight:400;color:var(--muted)}
 .dots i.on{width:22px;background:var(--brand)}
 .agree{display:flex;gap:8px;align-items:center;font-size:13px;margin-bottom:12px}
 .agree input{accent-color:var(--brand);width:18px;height:18px;margin:0}
+/* teşekkür */
+.quick{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.thanks{border-left:3px solid var(--brand);background:color-mix(in srgb, var(--brand) 7%, var(--card));border-radius:0 10px 10px 0;padding:8px 10px;margin-top:10px}
+.thanks .cmeta b{color:var(--text)}
 /* profil */
 .prof{background:var(--card);padding:20px 16px;text-align:center;border-bottom:1px solid var(--line)}
 .prof .big{width:72px;height:72px;font-size:24px;margin:0 auto 10px}
@@ -443,7 +447,7 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
       <div class="tabs"><button class="chip on" type="button">Tümü</button><button class="chip" type="button">k/ders</button><button class="chip" type="button">k/eşya</button><button class="chip" type="button">k/okul</button></div>
       <div class="info" style="margin:10px 12px">✅ Okulumuzda yapılan iyilikler. İstekler tamamlandıktan sonra buraya taşınır.</div>
       <div class="scroll">
-        <div class="post"><div class="meta"><b>k/okul</b>· Zeynep T. · 12 Eki</div><div class="title">Kütüphanede priz çalışmıyor</div><span class="flair f-closed">✅ Tamamlandı · Can B.</span><p class="body">Okuma salonundaki pencere kenarındaki priz çalışmıyor.</p><div class="actions"><button class="pillbtn" type="button">💬 4</button></div></div>
+        <div class="post"><div class="meta"><b>k/okul</b>· Zeynep T. · 12 Eki</div><div class="title">Kütüphanede priz çalışmıyor</div><span class="flair f-closed">✅ Tamamlandı · Can B.</span><p class="body">Okuma salonundaki pencere kenarındaki priz çalışmıyor.</p><div class="thanks"><div class="cmeta" style="font-size:12px;color:var(--muted)">💛 <b>Zeynep T.</b> teşekkür etti</div><div style="font-size:13px">Hademe abiye haber verdiğin için sağ ol, artık çalışıyor!</div></div><div class="actions"><button class="pillbtn" type="button">💬 4</button></div></div>
         <div class="post"><div class="meta"><b>k/ders</b>· Elif S. · 9 Eki</div><div class="title">Geometri konu anlatımı</div><span class="flair f-closed">✅ Tamamlandı · Mehmet A.</span><p class="body">Üçgende açılar konusunu anlatabilecek biri var mı?</p><div class="actions"><button class="pillbtn" type="button">💬 6</button></div></div>
         <div class="post"><div class="meta"><b>k/eşya</b>· Ayşe K. · 3 Eki</div><div class="title">Pergel ödünç lazım</div><span class="flair f-closed">✅ Tamamlandı · Zeynep T.</span><p class="body">Matematik dersi için bir günlüğüne pergel lazım.</p><div class="actions"><button class="pillbtn" type="button">💬 2</button></div></div>
       </div>
@@ -475,6 +479,26 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
   <figure id="e12">
     <figcaption>E12 · İlk giriş tanıtımı<small>Yalnızca ilk girişte. "İleri" ile gezilebilir</small></figcaption>
     <div class="phone"><div class="intro" id="intro"></div></div>
+  </figure>
+
+  <!-- E13 -->
+  <figure id="e13">
+    <figcaption>E13 · Onayla ve teşekkür et<small>Not isteğe bağlı, yorum olarak herkese görünür</small></figcaption>
+    <div class="phone">
+      <div class="bar"><button class="iconbtn" type="button" aria-label="Geri">←</button><b>k/eşya</b></div>
+      <div class="scroll" style="filter:saturate(.6)">
+        <div class="post"><div class="meta"><b>k/eşya</b>· Mehmet A. · 3 gün</div><div class="title">Hesap makinesi ödünç lazım</div><span class="flair f-done">🔵 Yapıldı · Ayşe K.</span><p class="body full">Perşembe fizik sınavı için bilimsel hesap makinesi lazım.</p></div>
+      </div>
+      <div class="dim"><div class="sheet">
+        <h3>İşi onayla</h3>
+        <p style="margin:0 0 8px;color:var(--muted)"><b style="color:var(--text)">Ayşe K.</b> isteğini yaptığını söylüyor. Onaylıyor musun?</p>
+        <label class="l" style="margin-top:6px">Teşekkür notu (isteğe bağlı)</label>
+        <div class="quick"><button class="chip" type="button">Çok sağ ol! 🙏</button><button class="chip" type="button">Eline sağlık 👏</button><button class="chip" type="button">Hayatımı kurtardın 💛</button></div>
+        <textarea class="input" style="min-height:64px" aria-label="Teşekkür notu">Sınavda çok işime yaradı, çok sağ ol! 🙏</textarea>
+        <p style="margin:8px 0;color:var(--muted);font-size:12px">💬 Notun isteğin altında yorum olarak herkese görünür.</p>
+        <div style="display:flex;gap:8px;justify-content:flex-end"><button class="secondary" type="button">Vazgeç</button><button class="primary sm" type="button">Onayla</button></div>
+      </div></div>
+    </div>
   </figure>
 
 </main>

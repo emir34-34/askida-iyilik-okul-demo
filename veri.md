@@ -38,6 +38,7 @@
 | `metin` | `Yarın teneffüste getirebilirim.` | Konuşmanın kendisi. Özel mesaj yok (T-01) |
 | `zaman` | `2026-10-14 11:00` | Konuşmanın sırasını göstermek için |
 | `gizli` | `false` | Öğretmen yorumu gizlerse silmeden saklamak için (V-02) |
+| `tesekkur` | `true` | Onaylarken yazılan teşekkür notunu diğer yorumlardan ayırıp vurgulu göstermek için (E13). Hiçbir yerde sayılmaz |
 | `ust_yorum` | → Yorum #31 (boş olabilir) | Yanıtın hangi yorumun altında durduğunu bilmek için. Yalnızca bir seviye (V-11) |
 
 ## Ek: resim ya da video (yalnızca S-09 kabul edilirse)

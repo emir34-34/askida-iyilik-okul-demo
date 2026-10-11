@@ -19,7 +19,7 @@
 | 5 | Ayşe | "Yarın teneffüste getiririm." yorumunu yazar | E4 | Yorumu herkes görür (T-01) |
 | 6 | Ayşe | Notları verdikten sonra **Yapıldı**'ya basar | E4 | İstek **Yapıldı** (G4) |
 | 7 | Mehmet | **Benim işlerim**'de "Onayını bekliyor" uyarısını görür | E5 | |
-| 8 | Mehmet | İsteği açıp **Onayla**'ya basar | E4 | İstek **Tamamlandı** (G5), arşive geçer |
+| 8 | Mehmet | İsteği açıp **Onayla**'ya basar, isteğe bağlı olarak "Çok sağ ol! 🙏" notunu yazar | E4, E13 | İstek **Tamamlandı** (G5), not yorum olarak görünür, istek arşive geçer |
 
 **Kontrol:** Her adımda durum geçmişine bir satır yazıldı mı? Ayşe 8. adımda **Onayla** düğmesini görmüyor mu, adresi elle yazarsa 403 alıyor mu?
 

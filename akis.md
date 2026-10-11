@@ -36,7 +36,7 @@
 | G2 | Üstlen | Açan kişi dışında biri | Durum **Açık** | **Üstlenildi**, üstlenen kişi kaydedilir |
 | G3 | Bırak | Yalnızca üstlenen | Durum **Üstlenildi** | **Açık**, üstlenen kişi silinir |
 | G4 | Yapıldı de | Yalnızca üstlenen | Durum **Üstlenildi** | **Yapıldı** |
-| G5 | Onayla | Yalnızca açan | Durum **Yapıldı** | **Tamamlandı** |
+| G5 | Onayla | Yalnızca açan | Durum **Yapıldı** | **Tamamlandı**. İsteğe bağlı teşekkür notu yorum olarak eklenir (E13) |
 | G6 | Yapılmadı de | Yalnızca açan | Durum **Yapıldı**, gerekçe yazılmış | **Üstlenildi** (aynı kişide kalır) |
 | G7 | Geri çek | Yalnızca açan | Durum **Açık** | **Geri çekildi** |
 | G8 | Gizle | Öğretmen | Gerekçe yazılmış | **Gizlendi** |

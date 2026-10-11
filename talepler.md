@@ -9,13 +9,13 @@ Anlamadığım ya da birbiriyle çelişen bir talebi uydurmam: "Açık sorular" 
 
 | No | Talep | Kim istedi | Tarih | Geri okundu mu? | Tasarımda nerede | Demoda nerede |
 |----|-------|------------|-------|-----------------|------------------|---------------|
-| T-01 | Özel mesaj yok, konuşma isteğin altında herkese açık yorumlarla olur | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | — | — |
-| T-02 | Sıralama tablosu yok | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | — | — |
-| T-03 | TC kimlik no, telefon, fotoğraf, konum ve doğum tarihi tutulmaz, her alanın gerekçesi yazılır | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | — | — |
-| T-04 | Demo yalnızca örnek veriyle çalışır | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | — | — |
-| T-05 | Temel akış: isteği aç → üstlen → yapıldı → onayla, demoda uçtan uca çalışır | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | — | — |
-| T-06 | Aynı iş iki kişi tarafından aynı anda üstlenilemez | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | — | — |
-| T-07 | Yetki kontrolü sunucuda yapılır, yalnızca ekranda yapılmaz | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | — | — |
+| T-01 | Özel mesaj yok, konuşma isteğin altında herkese açık yorumlarla olur | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | roller.md (yorum yazmak), veri.md (Yorum) | — |
+| T-02 | Sıralama tablosu yok | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | roller.md (son satır), akis.md, veri.md (Durum geçmişi) | — |
+| T-03 | TC kimlik no, telefon, fotoğraf, konum ve doğum tarihi tutulmaz, her alanın gerekçesi yazılır | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | veri.md (tamamı) | — |
+| T-04 | Demo yalnızca örnek veriyle çalışır | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | roller.md (demo rolleri), veri.md | — |
+| T-05 | Temel akış: isteği aç → üstlen → yapıldı → onayla, demoda uçtan uca çalışır | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | akis.md (G1, G2, G4, G5) | — |
+| T-06 | Aynı iş iki kişi tarafından aynı anda üstlenilemez | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | akis.md (soru 1) | — |
+| T-07 | Yetki kontrolü sunucuda yapılır, yalnızca ekranda yapılmaz | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | roller.md (yetki nerede kontrol edilir) | — |
 
 ## B. Yasemin Hoca ve Eyüp Hoca'nın talepleri
 
@@ -25,9 +25,28 @@ Anlamadığım ya da birbiriyle çelişen bir talebi uydurmam: "Açık sorular" 
 |----|-------|------------|-------|-----------------|------------------|---------------|
 | | | | | | | |
 
+## B2. Taslaktaki varsayımlar (hocalara sorulacak)
+
+Hocalarla görüşemediğim için roller, akış ve veri dosyalarının taslağını bu varsayımlarla yazdım. Hiçbiri talep değildir. Görüşmede her birini sorup sonucunu buraya yazacağım: onaylanırsa B tablosuna talep olarak geçer, reddedilirse taslak düzeltilir.
+
+| No | Varsayım | Tasarımda nerede | Hangi soru | Sonuç |
+|----|----------|------------------|------------|-------|
+| V-01 | Öğrenciler hem istek açabilir hem de karşılayabilir | roller.md | 2 | bekliyor |
+| V-02 | Uygunsuz içeriğe öğretmenler müdahale eder, içerik silinmez, gerekçeyle gizlenir | roller.md, veri.md | 13 | bekliyor |
+| V-03 | Kimse kendi kendine kayıt olamaz, hesapları yönetici açar, e-posta tutulmaz | roller.md, veri.md | 3 | bekliyor |
+| V-04 | Veliler ve personel bu sürümde kullanıcı değil | roller.md | 1 | bekliyor |
+| V-05 | Yapılan işi isteği açan kişi onaylar, öğretmen onaylamaz | roller.md, akis.md | 9 | bekliyor |
+| V-06 | Üstlenilmiş bir istek açan kişi tarafından geri çekilemez | roller.md, akis.md | 11 | bekliyor |
+| V-07 | İstekler öğretmen onayı beklemeden yayına girer | akis.md | 14 | bekliyor |
+| V-08 | İşi bırakırken gerekçe yazmak zorunlu değil | akis.md | 11 | bekliyor |
+| V-09 | Görünen ad yalnızca ad ve soyadın baş harfi (Ayşe K.) | veri.md | — | bekliyor |
+
 ## C. Açık sorular ve açık kararlar
 
 | No | Soru | Kime | Durum |
 |----|------|------|-------|
 | S-01 | Kredi veya puan istenecek mi? İstenirse kural icat edilmez, Özgür Hoca'ya sorulur | Yasemin Hoca, Eyüp Hoca → Özgür Hoca | açık |
 | S-02 | Teslim ve sunum tarihi | Yasemin Hoca, Eyüp Hoca | açık |
+| S-03 | İsteği açan kişi "Yapıldı" durumundaki isteğe hiç cevap vermezse ne olsun, ne kadar süre sonra? (akis.md, soru 3) | Yasemin Hoca, Eyüp Hoca | açık |
+| S-04 | Veriler ne kadar süre saklanacak, mezun olan öğrencinin hesabı ne olacak? (KVKK) | Özgür Hoca | açık |
+| S-05 | Hocalarla görüşmeden önce roller, akış ve veri taslağını yazmam uygun mu? | Özgür Hoca | 2026-10-11: Hafta içi bakacağını ve devam etmemi söyledi. Taslak, varsayımları işaretlenerek yazıldı |

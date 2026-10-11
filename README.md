@@ -70,14 +70,18 @@ Tarayıcıda **http://localhost:8000** adresini aç. Bütün örnek kullanıcıl
 
 **Telefonda denemek:** Telefon USB ile bağlıyken (USB hata ayıklama açık) `adb reverse tcp:8000 tcp:8000` komutunu çalıştır, telefonun tarayıcısında `http://localhost:8000` adresini aç.
 
-**Android uygulaması (APK, ek):** `apk/` klasöründe. Arayüz dosyaları (`demo/istemci/`) APK'nın içine konur, sunucudan yalnızca `/api/` üzerinden veri gelir (Reddit uygulaması gibi). Tarayıcıdaki demo da aynı arayüz dosyalarını kullanır. Kurallar yine sunucuda uygulanır. Görev tanımı gereği Özgür Hoca'ya sorulacak bir ek (S-11). Derlemek için Android SDK (`platforms;android-34`, `build-tools;35.0.0`) ve JDK gerekir:
+**Android uygulaması (APK, ek):** `apk/` klasöründe, **tamamen native** bir Android uygulaması (Java, Android'in kendi bileşenleri, ek kütüphane yok). Sunucudan yalnızca `/api/` üzerinden veri gelir (Reddit uygulaması gibi). Tarayıcıdaki demo (`demo/istemci/`) ayrıca durur, ikisi de aynı API'yi kullanır. Kurallar yalnızca sunucuda uygulanır. Görev tanımı gereği Özgür Hoca'ya sorulacak bir ek (S-11). Derlemek için Android SDK (`platforms;android-34`, `build-tools;35.0.0`) ve JDK gerekir:
 
 ```bash
 cd apk && ./derle.sh                       # çıktı: apk/build/AskidaIyilik.apk
 adb install -r build/AskidaIyilik.apk      # telefona kur (USB hata ayıklama açık)
 adb reverse tcp:8000 tcp:8000              # telefonun localhost'unu bilgisayardaki Django'ya yönlendir
 ```
-Uygulama sunucuya bağlanamazsa başka bir adres sorar (ör. ev sunucusu).
+Uygulama sunucuya bağlanamazsa başka bir adres sorar (ör. ev sunucusu). Adres Profil sayfasından da değiştirilebilir.
+
+Kablosuz bağlanmak için (telefonun USB portu yalnızca şarj alıyorsa): Telefonda Geliştirici seçenekleri → Kablosuz hata ayıklama → "Eşleştirme koduyla eşle", sonra bilgisayarda `adb pair IP:PORT KOD` ve `adb connect IP:PORT`. Ardından `adb reverse` yine çalışır.
+
+**Bilinen durum:** USB kablosu bir an bile çıkarsa `adb reverse` yönlendirmesi silinir ve uygulama "Sunucuya bağlanılamadı" der. Kabloyu takıp `adb reverse tcp:8000 tcp:8000` komutunu yeniden çalıştırmak yeter.
 
 **Örnek veriyi sıfırlamak:** `python manage.py ornek_veri` komutunu yeniden çalıştırmak bütün istekleri silip baştan oluşturur.
 

@@ -86,6 +86,22 @@ WebView'li APK'yı telefonda denedikten sonra Emir, uygulamanın Reddit uygulama
 - **Ekranlar:** Giriş, Akış (sekmeler, kategoriler, aşağı çekip yenileme), İstek (düğmeler, yorumlar), Yeni istek, Görevler, Profil (çıkış, sunucu adresi). Alt menü ve renkler ekran taslaklarıyla aynı.
 - **En düşük Android sürümü:** 8.0 (API 26). Yazı tipinin (Reddit Sans) ağırlıklarını native olarak ayarlayabilmek için gerekli.
 
+## Telefonda test (2026-10-12, iki cihaz)
+
+Cihazlar: LineageOS telefon (USB) ve Xiaomi 11T (kablosuz hata ayıklama). İkisi aynı bilgisayardaki Django'ya bağlı.
+
+**Senaryo 1 iki cihazda native uygulamayla baştan sona yürütüldü:** Ayşe 2. telefonda üstlendi, yorum yazdı ve "Yapıldı" dedi. Mehmet 1. telefonda onayladı ve teşekkür notu yazdı. Durum geçmişi: Açık → Üstlenildi → Yapıldı → Tamamlandı, her adım doğru kişiyle kaydedildi.
+
+| Bulunan | Ne yapıldı |
+|---------|------------|
+| Dokunurken Android'in mavi vurgusu çıkıyordu (WebView) | Kaldırıldı, sonra native uygulamaya geçildi (dokunma dalgası) |
+| WebView'li uygulama web sayfası gibi hissettiriyordu | Tamamen native uygulama yazıldı (yukarıda) |
+| Kullanıcı adı kutusu eşit aralıklı yazı tipiyle görünüyordu | Yazı tipi giriş türünden sonra yeniden veriliyor |
+| Alt menü yazıları sola yaslıydı | Ortalandı |
+| Klavyenin İleri/Bitti tuşları çalışmıyordu | İleri şifreye geçiyor, Bitti giriş yapıyor |
+| USB kablosu çıkınca `adb reverse` siliniyor, uygulama sunucuya ulaşamıyor | README'ye yazıldı. Uygulama bu durumda adres penceresi açıyor |
+| Telefonda örnek şifreyi yazmak zordu (rastgele üretilmişti) | `.env` dosyasında daha kolay bir şifre seçilebileceği README'de |
+
 ## Testler (görev tanımı: en az 3, her birinde gerçek kontrol)
 
 | Test | Neyi kanıtlar |

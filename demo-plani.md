@@ -38,7 +38,7 @@
 - **Örnek veri:** `python manage.py ornek_veri` komutu senaryolardaki uydurma kullanıcıları ve istekleri oluşturur (T-04).
 - **Telefonda test:** Telefon USB ile bağlıyken `adb reverse tcp:8000 tcp:8000`. Telefonun tarayıcısında `http://localhost:8000` açılır.
 
-## Mimari değişikliği (2026-10-12): arayüz istemcide, sunucu yalnızca veri
+## Mimari değişikliği (2026-10-11): arayüz istemcide, sunucu yalnızca veri
 
 İlk sürümde sayfalar Django'da üretiliyordu (sunucu her seferinde HTML gönderiyordu). Telefonda iki cihazla denedikten sonra Emir, Reddit uygulaması gibi **arayüzün uygulamanın içinde olmasını, sunucudan yalnızca verinin gelmesini** istedi. Gerekçe: Uygulama daha hızlı açılır, sayfa geçişleri anında olur, gerçek bir uygulama gibi hissettirir.
 
@@ -70,7 +70,7 @@ Hatalar: yetki yok → **403**, durum uygun değil (ör. az önce başkası üst
 
 **Güvenlik:** Kullanıcıların yazdığı her metin (başlık, açıklama, yorum) ekrana basılmadan önce kaçış işlemine (escape) uğrar. Böylece birinin isteğine yazdığı bir kod başkasının telefonunda çalışamaz (XSS).
 
-## Native Android uygulaması (2026-10-12)
+## Native Android uygulaması (2026-10-11)
 
 WebView'li APK'yı telefonda denedikten sonra Emir, uygulamanın Reddit uygulaması gibi **tamamen native** olmasını istedi. Gerekçe: WebView içinde kaydırma, dokunma ve geçişler hâlâ bir web sayfası gibi hissettiriyor.
 
@@ -86,7 +86,7 @@ WebView'li APK'yı telefonda denedikten sonra Emir, uygulamanın Reddit uygulama
 - **Ekranlar:** Giriş, Akış (sekmeler, kategoriler, aşağı çekip yenileme), İstek (düğmeler, yorumlar), Yeni istek, Görevler, Profil (çıkış, sunucu adresi). Alt menü ve renkler ekran taslaklarıyla aynı.
 - **En düşük Android sürümü:** 8.0 (API 26). Yazı tipinin (Reddit Sans) ağırlıklarını native olarak ayarlayabilmek için gerekli.
 
-## Canlı güncelleme (2026-10-12)
+## Canlı güncelleme (2026-10-11)
 
 İki telefonla çift üstlenme gösterisinde fark edildi: 1. telefon isteği üstlendiğinde 2. telefonda "Üstlen" düğmesi durmaya devam ediyordu. Uyarı ancak basınca geliyordu. Emir, değişikliğin diğer telefonda canlı görünmesini istedi.
 
@@ -96,7 +96,7 @@ WebView'li APK'yı telefonda denedikten sonra Emir, uygulamanın Reddit uygulama
 - **Sunucu değişmedi:** Kurallar aynı. Canlı güncelleme yalnızca görünüş, asıl koruma yine koşullu güncelleme (409).
 - Ekran arka plana geçince ya da başka bir ekran açılınca sorma durur, boşuna istek atılmaz.
 
-## Telefonda test (2026-10-12, iki cihaz)
+## Telefonda test (2026-10-11, iki cihaz)
 
 Cihazlar: LineageOS telefon (USB) ve Xiaomi 11T (kablosuz hata ayıklama). İkisi aynı bilgisayardaki Django'ya bağlı.
 

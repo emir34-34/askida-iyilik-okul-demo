@@ -236,7 +236,7 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
     <figcaption>E2 · Ana akış<small>İstek kartları, kategori, durum etiketi (flair), oy ve yorum</small></figcaption>
     <div class="phone">
       <div class="bar"><div class="logo"><span class="dot">🤝</span>Askıda İyilik</div><div class="spacer"></div><button class="iconbtn" type="button" aria-label="Ara">🔍</button><button class="iconbtn bell" type="button" aria-label="Bildirimler"><svg viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span class="cnt">3</span></button><div class="av">AK</div></div>
-      <div class="tabs"><button class="chip on" type="button">Yeni</button><button class="chip" type="button">Açık olanlar</button><button class="chip" type="button">k/ders ▾</button></div>
+      <div class="tabs"><button class="chip on" type="button">Yeni</button><button class="chip" type="button">Açık olanlar</button><button class="chip" type="button">Arşiv</button><button class="chip" type="button">k/ders ▾</button></div>
       <div class="scroll" id="feed"></div>
       <div class="nav" data-on="akis"></div>
     </div>
@@ -390,6 +390,21 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
     </div>
   </figure>
 
+  <!-- E10 -->
+  <figure id="e10">
+    <figcaption>E10 · Arşiv<small>Tamamlanan iyilikler. Kişiye göre filtre ya da sayı yok</small></figcaption>
+    <div class="phone">
+      <div class="bar"><button class="iconbtn" type="button" aria-label="Geri">←</button><b style="font-size:16px">Arşiv</b></div>
+      <div class="tabs"><button class="chip on" type="button">Tümü</button><button class="chip" type="button">k/ders</button><button class="chip" type="button">k/eşya</button><button class="chip" type="button">k/okul</button></div>
+      <div class="info" style="margin:10px 12px">✅ Okulumuzda yapılan iyilikler. İstekler tamamlandıktan sonra buraya taşınır.</div>
+      <div class="scroll">
+        <div class="post"><div class="meta"><b>k/okul</b>· Zeynep T. · 12 Eki</div><div class="title">Kütüphanede priz çalışmıyor</div><span class="flair f-closed">✅ Tamamlandı · Can B.</span><p class="body">Okuma salonundaki pencere kenarındaki priz çalışmıyor.</p><div class="actions"><button class="pillbtn" type="button">💬 4</button></div></div>
+        <div class="post"><div class="meta"><b>k/ders</b>· Elif S. · 9 Eki</div><div class="title">Geometri konu anlatımı</div><span class="flair f-closed">✅ Tamamlandı · Mehmet A.</span><p class="body">Üçgende açılar konusunu anlatabilecek biri var mı?</p><div class="actions"><button class="pillbtn" type="button">💬 6</button></div></div>
+        <div class="post"><div class="meta"><b>k/eşya</b>· Ayşe K. · 3 Eki</div><div class="title">Pergel ödünç lazım</div><span class="flair f-closed">✅ Tamamlandı · Zeynep T.</span><p class="body">Matematik dersi için bir günlüğüne pergel lazım.</p><div class="actions"><button class="pillbtn" type="button">💬 2</button></div></div>
+      </div>
+    </div>
+  </figure>
+
 </main>
 
 <section class="sec" id="bilgisayar"><h2>💻 Bilgisayar arayüzü</h2><p>Okul bilgisayarı ya da akıllı tahtadan açıldığında Reddit'in masaüstü düzeni: solda menü ve kategoriler, ortada akış, sağda bilgi kartları (Ö-05). Kartlar ve renkler telefondakiyle aynı. Dar ekranda çerçevenin içi yana kaydırılır.</p></section>
@@ -417,6 +432,7 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
         <div class="dleft">
           <a href="#" class="on"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h5v-6h4v6h5V9.5"/></svg>Akış</a>
           <a href="#"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 12l2 2 4-4"/></svg>Görevler</a>
+          <a href="#"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="5" rx="1"/><path d="M5 9v10h14V9M10 13h4"/></svg>Arşiv</a>
           <a href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Profil</a>
           <hr>
           <div class="lbl">KATEGORİLER</div>
@@ -462,6 +478,7 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
         <div class="dleft">
           <a href="#"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h5v-6h4v6h5V9.5"/></svg>Akış</a>
           <a href="#"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 12l2 2 4-4"/></svg>Görevler</a>
+          <a href="#"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="5" rx="1"/><path d="M5 9v10h14V9M10 13h4"/></svg>Arşiv</a>
           <a href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Profil</a>
           <hr>
           <div class="lbl">KATEGORİLER</div>

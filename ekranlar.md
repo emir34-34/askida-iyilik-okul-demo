@@ -61,6 +61,7 @@ Aşağı oyun riskini azaltmak için önerdiğim önlemler (bunlar da hocalara s
 | E7 | Hata ve uyarı mesajları | Herkes | ✅ |
 | E8 | Profil | Herkes | ✅ |
 | E9 | Bildirimler | Öğrenci, öğretmen | ❌ yalnızca tasarımda |
+| E10 | Arşiv | Herkes | ❌ yalnızca tasarımda |
 | D1 | Ana akış (bilgisayar) | Öğrenci, öğretmen | ✅ |
 | D2 | İstek sayfası (bilgisayar) | Öğrenci, öğretmen | ✅ |
 
@@ -98,7 +99,7 @@ Oylama demoya ancak S-08 kararından sonra eklenir. Demonun zorunlu akışı (a�
 ┌────────────────────────────────┐
 │ 🤝 Askıda İyilik  🔍 🔔³ (AK)  │  ← üst çubuk: arama, bildirimler, profil
 ├────────────────────────────────┤
-│ (Yeni) (Açık olanlar) (k/ders▾)│  ← sekmeler ve kategori filtresi
+│ (Yeni) (Açık olanlar) (Arşiv)  │  ← sekmeler ve kategori filtresi
 ├────────────────────────────────┤
 │ k/ders · Mehmet A. · 2 sa      │
 │ Kimya notları lazım            │
@@ -330,6 +331,33 @@ Sağ üstteki 🔔 düğmesiyle açılır (Ö-06). Okunmamış bildirim sayısı
 - Bildirimler yalnızca uygulamanın içinde görünür. Telefon numarası ya da e-posta tutmadığımız için SMS ya da e-posta gönderilmez (T-03).
 - Bildirim, herkese açık olayları haber verir. Özel mesaj değildir (T-01).
 - Görev tanımına göre bildirimler demoda olmayabilir. Önce zorunlu akış (aç, üstlen, yapıldı, onayla) yapılacak, zaman kalırsa bildirimler eklenecek.
+
+## E10. Arşiv
+
+Tamamlanan istekler akıştan kalkıp arşive taşınır. Arşive akıştaki **Arşiv** sekmesinden, bilgisayarda sol menüden girilir.
+
+```
+┌────────────────────────────────┐
+│ ←  Arşiv                       │
+├────────────────────────────────┤
+│ (Tümü) (k/ders) (k/eşya) (k/okul)
+├────────────────────────────────┤
+│ ✅ Okulumuzda yapılan iyilikler│
+├────────────────────────────────┤
+│ k/okul · Zeynep T. · 12 Eki    │
+│ Kütüphanede priz çalışmıyor    │
+│ [✅ Tamamlandı · Can B.]       │
+│ (💬 4)                         │
+├────────────────────────────────┤
+│ k/ders · Elif S. · 9 Eki       │
+│ Geometri konu anlatımı         │
+│ [✅ Tamamlandı · Mehmet A.]    │
+└────────────────────────────────┘
+```
+- Amaç, okulda yapılan iyilikleri görünür kılmak (görev tanımı, bölüm 2).
+- Yalnızca **kategoriye** göre filtrelenir. **Kişiye göre filtre ya da arama yoktur.** "Ayşe'nin yaptığı iyilikler" diye bir liste çıkarılabilseydi bu, gizli bir sıralama tablosuna dönüşürdü (T-02).
+- Arşivdeki isteklerde oy düğmesi yok, yorumlar okunabilir ama yeni yorum yazılamaz.
+- Arşivin ne kadar süre tutulacağı saklama süresi kararına bağlı (S-04).
 
 ## E6. Gizleme (öğretmen)
 

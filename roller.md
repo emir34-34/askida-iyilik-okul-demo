@@ -24,6 +24,7 @@
 |-------|:-------:|:--------:|:--------:|-----|
 | Giriş yapmak | ✅ | ✅ | ✅ | |
 | Açık istekleri görmek | ✅ | ✅ | ✅ | |
+| Arşivi (tamamlanan istekleri) görmek | ✅ | ✅ | ✅ | Kişiye göre filtrelenemez (T-02) |
 | İstek açmak | ✅ | ✅ | ❌ | V-01. Yönetici yalnızca hesap işleriyle ilgilenir |
 | İsteği üstlenmek | 🔸 | 🔸 | ❌ | Kendi açtığı isteği üstlenemez. Yalnızca durumu **Açık** olan istek üstlenilebilir |
 | Üstlendiği işi bırakmak | 🔸 | 🔸 | ❌ | Yalnızca o işi üstlenen kişi bırakabilir |

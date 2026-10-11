@@ -124,6 +124,12 @@ figcaption small{display:block;font-weight:400;color:var(--muted)}
 .quick{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
 .thanks{border-left:3px solid var(--brand);background:color-mix(in srgb, var(--brand) 7%, var(--card));border-radius:0 10px 10px 0;padding:8px 10px;margin-top:10px}
 .thanks .cmeta b{color:var(--text)}
+/* boş durumlar */
+.empty{background:var(--card);border-bottom:8px solid var(--page);padding:18px 18px 20px;text-align:center}
+.empty .lab{font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--muted);text-align:left;margin-bottom:8px}
+.empty .ic{font-size:40px;margin:4px 0 6px}
+.empty h4{margin:0 0 4px;font-size:15px}
+.empty p{margin:0 0 12px;color:var(--muted);font-size:13px}
 /* profil */
 .prof{background:var(--card);padding:20px 16px;text-align:center;border-bottom:1px solid var(--line)}
 .prof .big{width:72px;height:72px;font-size:24px;margin:0 auto 10px}
@@ -499,6 +505,17 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
         <div style="display:flex;gap:8px;justify-content:flex-end"><button class="secondary" type="button">Vazgeç</button><button class="primary sm" type="button">Onayla</button></div>
       </div></div>
     </div>
+  </figure>
+
+  <!-- E14 -->
+  <figure id="e14">
+    <figcaption>E14 · Boş durumlar<small>Gösterilecek bir şey olmadığında ekranlar boş kalmaz</small></figcaption>
+    <div class="phone"><div class="scroll">
+      <div class="empty"><div class="lab">AKIŞ · AÇIK İSTEK YOK</div><div class="ic">🌱</div><h4>Şu an açık istek yok</h4><p>Bir ihtiyacın ya da okulda gördüğün bir sorun varsa ilk isteği sen aç.</p><button class="primary sm" type="button">＋ İstek aç</button></div>
+      <div class="empty"><div class="lab">GÖREVLER · HENÜZ BİR ŞEY YOK</div><div class="ic">📋</div><h4>Henüz bir işin yok</h4><p>Açtığın ve üstlendiğin istekler burada görünür.</p><button class="secondary" type="button">Açık isteklere bak</button></div>
+      <div class="empty"><div class="lab">BİLDİRİMLER · YENİ BİR ŞEY YOK</div><div class="ic">🔔</div><h4>Yeni bildirim yok</h4><p>İsteğine yorum gelince ya da biri üstlenince burada göreceksin.</p></div>
+      <div class="empty"><div class="lab">ARŞİV · BU KATEGORİ BOŞ</div><div class="ic">🗂️</div><h4>k/eşya kategorisinde henüz tamamlanan istek yok</h4><p>Başka bir kategoriye göz at.</p></div>
+    </div></div>
   </figure>
 
 </main>

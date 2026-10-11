@@ -64,6 +64,7 @@ Aşağı oyun riskini azaltmak için önerdiğim önlemler (bunlar da hocalara s
 | E10 | Arşiv | Herkes | ❌ yalnızca tasarımda |
 | E11 | Şikâyet et | Öğrenci, öğretmen | ❌ yalnızca tasarımda |
 | E12 | İlk giriş tanıtımı | Herkes, yalnızca ilk girişte | ❌ yalnızca tasarımda |
+| E14 | Boş durumlar | Herkes | ✅ akış ve görevler için |
 | E13 | Onayla ve teşekkür et | İsteği açan kişi | ⚠️ Onay var, teşekkür notu zaman kalırsa |
 | D1 | Ana akış (bilgisayar) | Öğrenci, öğretmen | ✅ |
 | D2 | İstek sayfası (bilgisayar) | Öğrenci, öğretmen | ✅ |
@@ -492,6 +493,21 @@ Kullanıcı ilk kez giriş yaptığında akıştan önce gösterilir. Uygulaman�
 - Not **isteğe bağlıdır**. Boş bırakılırsa istek yine tamamlanır.
 - Hazır cümleler hızlı yazmak için. Not, isteğin altında vurgulu bir yorum olarak görünür, arşivde (E10) de gösterilir.
 - Not herkese açık bir yorum olduğu için uygunsuzsa şikâyet edilebilir ve öğretmen gizleyebilir.
+
+## E14. Boş durumlar
+
+Gösterilecek bir şey olmadığında ekran boş kalmaz. Kullanıcıya neden boş olduğu ve ne yapabileceği söylenir.
+
+| Ekran | Ne zaman | Gösterilen | Düğme |
+|-------|----------|------------|-------|
+| Akış (E2) | Açık istek yok | 🌱 "Şu an açık istek yok. Bir ihtiyacın ya da okulda gördüğün bir sorun varsa ilk isteği sen aç." | ＋ İstek aç |
+| Görevler (E5) | Kullanıcı hiç istek açmamış ya da üstlenmemiş | 📋 "Henüz bir işin yok. Açtığın ve üstlendiğin istekler burada görünür." | Açık isteklere bak |
+| Bildirimler (E9) | Bildirim yok | 🔔 "Yeni bildirim yok. İsteğine yorum gelince ya da biri üstlenince burada göreceksin." | — |
+| Arşiv (E10) | Seçilen kategoride tamamlanan istek yok | 🗂️ "Bu kategoride henüz tamamlanan istek yok. Başka bir kategoriye göz at." | — |
+| Arama (E15) | Sonuç yok | E15'te | — |
+
+- Boş ekranlar yeni bir kullanıcının ilk gördüğü şeydir. Okulda uygulama yeni açıldığında akış boş olacak, bu yüzden "ilk isteği sen aç" çağrısı önemli.
+- Metinlerde suçlayıcı ya da kıyaslayan bir dil yok ("henüz kimseye yardım etmedin" gibi ifadeler kullanılmaz).
 
 ## E6. Gizleme (öğretmen)
 

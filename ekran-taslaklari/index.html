@@ -118,6 +118,11 @@ figcaption small{display:block;font-weight:400;color:var(--muted)}
 .dots{display:flex;justify-content:center;gap:6px;margin-bottom:16px}
 .dots i{width:8px;height:8px;border-radius:999px;background:var(--pill-hover);transition:width .2s}
 .dots i.on{width:22px;background:var(--brand)}
+.wait{position:relative;overflow:hidden}
+.wait[disabled]{background:var(--pill-hover);color:var(--muted);cursor:not-allowed}
+.wait[disabled]::before{content:"";position:absolute;inset:0;width:0;background:color-mix(in srgb, var(--brand) 35%, transparent);animation:fill 2s linear forwards}
+.wait span{position:relative}
+@keyframes fill{to{width:100%}}
 .agree{display:flex;gap:8px;align-items:center;font-size:13px;margin-bottom:12px}
 .agree input{accent-color:var(--brand);width:18px;height:18px;margin:0}
 /* teşekkür */
@@ -871,7 +876,7 @@ function intro(){
   var el=document.getElementById("intro"), x=SLIDES[si];
   var dots='<div class="dots">'+SLIDES.map(function(_,i){return '<i class="'+(i===si?'on':'')+'"></i>';}).join("")+'</div>';
   if(x.rules){
-    el.innerHTML='<button class="skip" type="button" style="visibility:hidden">Geç</button><div class="art" style="flex:none;margin:6px 0 14px"><div style="width:96px;height:96px;font-size:44px">📋</div></div>'+
+    el.innerHTML='<div class="art" style="flex:none;margin:26px 0 14px"><div style="width:96px;height:96px;font-size:44px">📋</div></div>'+
       '<h3>Birkaç kural</h3><ul>'+
       '<li>Özel mesaj yok. Konuşmalar herkese açık yorumlarla olur.</li>'+
       '<li>Telefon, adres gibi kişisel bilgi paylaşma.</li>'+
@@ -879,15 +884,18 @@ function intro(){
       '<li>Kaç iyilik yaptığın bir yerde sayılmaz. Bu bir yarışma değil.</li></ul>'+
       '<div class="spacer"></div>'+dots+
       '<label class="agree"><input type="checkbox" id="ok"> Kuralları okudum</label>'+
-      '<button class="primary" type="button" id="go" disabled style="opacity:.5">Başla</button>';
-    var ok=document.getElementById("ok"), go=document.getElementById("go");
-    ok.addEventListener("change",function(){go.disabled=!ok.checked; go.style.opacity=ok.checked?1:.5;});
+      '<button class="primary wait" type="button" id="go" disabled><span>Başla</span></button>';
+    var ok=document.getElementById("ok"), go=document.getElementById("go"), timeUp=false;
+    function upd(){go.disabled=!(timeUp&&ok.checked);}
+    ok.addEventListener("change",upd);
+    clearTimeout(window._iw); window._iw=setTimeout(function(){timeUp=true;upd();},2000);
     go.addEventListener("click",function(){si=0;intro();});
     return;
   }
-  el.innerHTML='<button class="skip" type="button" id="skip">Geç</button><div class="art"><div>'+x.e+'</div></div><h3>'+x.h+'</h3><p>'+x.p+'</p>'+dots+'<button class="primary" type="button" id="next">İleri</button>';
-  document.getElementById("next").addEventListener("click",function(){si++;intro();});
-  document.getElementById("skip").addEventListener("click",function(){si=SLIDES.length-1;intro();});
+  el.innerHTML='<div class="art"><div>'+x.e+'</div></div><h3>'+x.h+'</h3><p>'+x.p+'</p>'+dots+'<button class="primary wait" type="button" id="next" disabled><span>İleri</span></button>';
+  var nx=document.getElementById("next");
+  clearTimeout(window._iw); window._iw=setTimeout(function(){nx.disabled=false;},2000);
+  nx.addEventListener("click",function(){si++;intro();});
 }
 intro();
 </script>

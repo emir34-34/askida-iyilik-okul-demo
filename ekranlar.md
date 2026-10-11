@@ -457,7 +457,7 @@ Kullanıcı ilk kez giriş yaptığında akıştan önce gösterilir. Uygulaman�
 ```
   1/4               2/4               3/4               4/4
 ┌──────────┐     ┌──────────┐     ┌──────────┐     ┌──────────────┐
-│     Geç  │     │     Geç  │     │     Geç  │     │ Birkaç kural │
+│          │     │          │     │          │     │ Birkaç kural │
 │    📝    │ ──▶ │    🤝    │ ──▶ │    ✅    │ ──▶ │ • Özel mesaj │
 │ İstek aç │     │  Biri    │     │   Sen    │     │   yok        │
 │          │     │ üstlenir │     │ onaylarsın│    │ • Kişisel    │
@@ -467,7 +467,9 @@ Kullanıcı ilk kez giriş yaptığında akıştan önce gösterilir. Uygulaman�
                                                    └──────────────┘
 ```
 - İlk üç ekran temel akışı anlatır: aç, üstlen, onayla (T-05).
-- Son ekranda kurallar var. **"Kuralları okudum" işaretlenmeden "Başla" düğmesi çalışmaz.** "Geç" düğmesi tanıtımı atlar, ama kuralları atlamaz, doğrudan kurallar ekranına götürür.
+- **Tanıtım atlanamaz, "Geç" düğmesi yok.** Her ekranda "İleri" düğmesi **2 saniye kilitli** kalır, kilitliyken düğmenin içi soldan sağa dolar. Amaç, kullanıcının metni okumadan hızla geçip gitmesini önlemek.
+- Son ekranda kurallar var. "Başla" düğmesi hem 2 saniye geçmeden hem de **"Kuralları okudum" işaretlenmeden** çalışmaz.
+- 2 saniye kısa tutuldu: Tanıtım yalnızca bir kez gösterildiği için kullanıcıyı sıkmadan okumaya yönlendirmek yeterli.
 - Kurallar değişmez ilkelerden gelir: özel mesaj yok (T-01), kişisel bilgi yok (T-03), sıralama yok (T-02). Kural metni örnektir, asıl metni hocalar belirleyecek.
 - Kurallar daha sonra Profil'deki (E8) **Uygulama kuralları** satırından yeniden okunabilir.
 

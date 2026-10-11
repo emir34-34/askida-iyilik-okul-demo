@@ -106,6 +106,20 @@ figcaption small{display:block;font-weight:400;color:var(--muted)}
 /* şikâyet */
 .opt{display:flex;gap:10px;align-items:center;padding:11px 2px;border-bottom:1px solid var(--line);font-size:14px}
 .opt input{accent-color:var(--brand);width:18px;height:18px;margin:0}
+/* tanıtım */
+.intro{height:100%;display:flex;flex-direction:column;padding:20px 22px 22px;background:var(--card)}
+.intro .skip{align-self:flex-end;color:var(--muted);font-size:13px;font-weight:600;background:none;border:0;cursor:pointer}
+.intro .art{flex:1;display:grid;place-items:center}
+.intro .art div{width:150px;height:150px;border-radius:50%;background:color-mix(in srgb, var(--brand) 14%, var(--card));display:grid;place-items:center;font-size:64px}
+.intro h3{margin:0 0 6px;font-size:22px;text-align:center}
+.intro p{margin:0 0 18px;color:var(--muted);text-align:center}
+.intro ul{margin:0 0 14px;padding-left:20px;font-size:13px}
+.intro ul li{margin:6px 0}
+.dots{display:flex;justify-content:center;gap:6px;margin-bottom:16px}
+.dots i{width:8px;height:8px;border-radius:999px;background:var(--pill-hover);transition:width .2s}
+.dots i.on{width:22px;background:var(--brand)}
+.agree{display:flex;gap:8px;align-items:center;font-size:13px;margin-bottom:12px}
+.agree input{accent-color:var(--brand);width:18px;height:18px;margin:0}
 /* profil */
 .prof{background:var(--card);padding:20px 16px;text-align:center;border-bottom:1px solid var(--line)}
 .prof .big{width:72px;height:72px;font-size:24px;margin:0 auto 10px}
@@ -457,6 +471,12 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
     </div>
   </figure>
 
+  <!-- E12 -->
+  <figure id="e12">
+    <figcaption>E12 · İlk giriş tanıtımı<small>Yalnızca ilk girişte. "İleri" ile gezilebilir</small></figcaption>
+    <div class="phone"><div class="intro" id="intro"></div></div>
+  </figure>
+
 </main>
 
 <section class="sec" id="bilgisayar"><h2>💻 Bilgisayar arayüzü</h2><p>Okul bilgisayarı ya da akıllı tahtadan açıldığında Reddit'in masaüstü düzeni: solda menü ve kategoriler, ortada akış, sağda bilgi kartları (Ö-05). Kartlar ve renkler telefondakiyle aynı. Dar ekranda çerçevenin içi yana kaydırılır.</p></section>
@@ -777,6 +797,38 @@ document.getElementById("actionbox").addEventListener("click",function(e){
 });
 document.getElementById("dots").addEventListener("click",function(){toast(role==="ogretmen"?"Menü: Şikâyet et (E11), Gizle (E6)":"Menü: Şikâyet et (bkz. E11)");});
 render();
+
+// E12: tanıtım ekranları
+var SLIDES=[
+  {e:"📝",h:"İstek aç",p:"Bir ihtiyacın mı var, ya da okulda bir sorun mu gördün? Kısa bir istek yaz."},
+  {e:"🤝",h:"Biri üstlenir",p:"Okuldan biri isteğini üstlenir. Konuşmalar isteğin altında, herkese açık yorumlarla olur."},
+  {e:"✅",h:"Sen onaylarsın",p:"İş yapılınca sen onaylarsın. Böylece okulda yapılan iyilikler görünür olur."},
+  {rules:true}
+];
+var si=0;
+function intro(){
+  var el=document.getElementById("intro"), x=SLIDES[si];
+  var dots='<div class="dots">'+SLIDES.map(function(_,i){return '<i class="'+(i===si?'on':'')+'"></i>';}).join("")+'</div>';
+  if(x.rules){
+    el.innerHTML='<button class="skip" type="button" style="visibility:hidden">Geç</button><div class="art" style="flex:none;margin:6px 0 14px"><div style="width:96px;height:96px;font-size:44px">📋</div></div>'+
+      '<h3>Birkaç kural</h3><ul>'+
+      '<li>Özel mesaj yok. Konuşmalar herkese açık yorumlarla olur.</li>'+
+      '<li>Telefon, adres gibi kişisel bilgi paylaşma.</li>'+
+      '<li>Saygılı ol. Uygunsuz içeriği öğretmenler gizler.</li>'+
+      '<li>Kaç iyilik yaptığın bir yerde sayılmaz. Bu bir yarışma değil.</li></ul>'+
+      '<div class="spacer"></div>'+dots+
+      '<label class="agree"><input type="checkbox" id="ok"> Kuralları okudum</label>'+
+      '<button class="primary" type="button" id="go" disabled style="opacity:.5">Başla</button>';
+    var ok=document.getElementById("ok"), go=document.getElementById("go");
+    ok.addEventListener("change",function(){go.disabled=!ok.checked; go.style.opacity=ok.checked?1:.5;});
+    go.addEventListener("click",function(){si=0;intro();});
+    return;
+  }
+  el.innerHTML='<button class="skip" type="button" id="skip">Geç</button><div class="art"><div>'+x.e+'</div></div><h3>'+x.h+'</h3><p>'+x.p+'</p>'+dots+'<button class="primary" type="button" id="next">İleri</button>';
+  document.getElementById("next").addEventListener("click",function(){si++;intro();});
+  document.getElementById("skip").addEventListener("click",function(){si=SLIDES.length-1;intro();});
+}
+intro();
 </script>
 </body>
 </html>

@@ -63,6 +63,7 @@ Aşağı oyun riskini azaltmak için önerdiğim önlemler (bunlar da hocalara s
 | E9 | Bildirimler | Öğrenci, öğretmen | ❌ yalnızca tasarımda |
 | E10 | Arşiv | Herkes | ❌ yalnızca tasarımda |
 | E11 | Şikâyet et | Öğrenci, öğretmen | ❌ yalnızca tasarımda |
+| E12 | İlk giriş tanıtımı | Herkes, yalnızca ilk girişte | ❌ yalnızca tasarımda |
 | D1 | Ana akış (bilgisayar) | Öğrenci, öğretmen | ✅ |
 | D2 | İstek sayfası (bilgisayar) | Öğrenci, öğretmen | ✅ |
 | D3 | Yönetim özeti (bilgisayar) | Öğretmen, yönetici | ❌ yalnızca tasarımda |
@@ -445,6 +446,27 @@ Tamamlanan istekler akıştan kalkıp arşive taşınır. Arşive akıştaki **A
 - "2 kişi bildirdi ›" bağlantısı, kimin şikâyet ettiğini yalnızca öğretmene gösterir (V-13).
 - Her karar durum geçmişine yazılır (`veri.md`).
 - Demoda bu sayfa yerine Django'nun yönetim paneli kullanılacak.
+
+## E12. İlk giriş tanıtımı
+
+Kullanıcı ilk kez giriş yaptığında akıştan önce gösterilir. Uygulamanın nasıl çalıştığını ve kuralları baştan anlatır.
+
+```
+  1/4               2/4               3/4               4/4
+┌──────────┐     ┌──────────┐     ┌──────────┐     ┌──────────────┐
+│     Geç  │     │     Geç  │     │     Geç  │     │ Birkaç kural │
+│    📝    │ ──▶ │    🤝    │ ──▶ │    ✅    │ ──▶ │ • Özel mesaj │
+│ İstek aç │     │  Biri    │     │   Sen    │     │   yok        │
+│          │     │ üstlenir │     │ onaylarsın│    │ • Kişisel    │
+│ ( İleri )│     │ ( İleri )│     │ ( İleri )│     │   bilgi yok  │
+└──────────┘     └──────────┘     └──────────┘     │ ☐ Okudum     │
+                                                   │ ( Başla )    │
+                                                   └──────────────┘
+```
+- İlk üç ekran temel akışı anlatır: aç, üstlen, onayla (T-05).
+- Son ekranda kurallar var. **"Kuralları okudum" işaretlenmeden "Başla" düğmesi çalışmaz.** "Geç" düğmesi tanıtımı atlar, ama kuralları atlamaz, doğrudan kurallar ekranına götürür.
+- Kurallar değişmez ilkelerden gelir: özel mesaj yok (T-01), kişisel bilgi yok (T-03), sıralama yok (T-02). Kural metni örnektir, asıl metni hocalar belirleyecek.
+- Kurallar daha sonra Profil'deki (E8) **Uygulama kuralları** satırından yeniden okunabilir.
 
 ## E6. Gizleme (öğretmen)
 

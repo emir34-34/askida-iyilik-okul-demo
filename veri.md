@@ -12,6 +12,7 @@
 | `gorunen_ad` | `Ayşe K.` | İsteklerde ve yorumlarda kimin yazdığı görünsün diye. Yalnızca ad ve soyadın baş harfi (V-09) |
 | `rol` | `ogrenci` | Kimin neyi yapabileceğine karar vermek için (`roller.md`) |
 | `aktif` | `true` | Okuldan ayrılan birinin hesabını silmeden kapatmak için |
+| `tanitim_goruldu` | `true` | İlk giriş tanıtımını ve kuralları (ekranlar.md E12) yalnızca bir kez göstermek için |
 
 - **V-09:** Görünen adda tam soyad yerine baş harf yeterli. (Hocalara sorulacak)
 

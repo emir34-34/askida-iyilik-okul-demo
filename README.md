@@ -15,13 +15,13 @@ Askıda İyilik, okulda insanların birbirine yaptığı iyiliği görünür kı
 | 5 | veri.md | Tutulan alanlar ve gerekçeleri, tutulmayacaklar | — |
 | 6 | ekranlar.md | En az 5 ekran taslağı | — |
 | 7 | senaryolar.md | En az 4 senaryo, adım adım | — |
-| 8 | [teknoloji.md](teknoloji.md) | Firebase ile Django karşılaştırması ve seçimin gerekçesi | araştırma hazır, karar bekliyor |
+| 8 | [teknoloji.md](teknoloji.md) | Firebase ile Django karşılaştırması ve seçimin gerekçesi | karar: Django |
 
 Yardımcı belge: [gorusme-1-sorular.md](gorusme-1-sorular.md) — Yasemin Hoca ve Eyüp Hoca ile yapılacak ilk görüşmenin soru listesi.
 
 ## Demoyu kurma ve çalıştırma
 
-Teknoloji seçimi yapıldıktan sonra yazılacak (bkz. `teknoloji.md`).
+Teknoloji: Django (gerekçe `teknoloji.md` dosyasında). Kurulum adımları demo yazılınca eklenecek.
 
 ## Değişmez ilkeler (projenin baştan verilmiş kararları)
 

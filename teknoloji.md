@@ -1,6 +1,6 @@
 # Teknoloji: Firebase mi, Django mu?
 
-> **Durum:** Araştırma notları hazır, **karar henüz verilmedi.** Görev tanımına göre karar en erken `roller.md`, `akis.md` ve `veri.md` bittikten sonra verilir. Bu tasarım dosyaları hangi kuralların sunucuda uygulanması gerektiğini gösterecek, karşılaştırmanın en önemli girdisi de bu olacak.
+> **Durum:** Karar verildi: **Django** (2026-10-11). Gerekçe aşağıda. `roller.md`, `akis.md` ve `veri.md` bittikten sonra kararı bu dosyalara göre yeniden kontrol edeceğim. Bir çelişki çıkarsa önce burayı güncellerim.
 > Araştırma tarihi: 2026-10-11. Fiyatlar ve sınırlar değişebilir, karar vermeden önce resmî sayfalardan yeniden kontrol edilmeli.
 
 ## Kısaca iki seçenek
@@ -38,17 +38,17 @@
 
 ## Seçimim ve gerekçem
 
-_Bu bölümü ben (Emir) kendi cümlelerimle yazacağım. Görev tanımına göre "yapay zekâ önerdi" bir gerekçe değil._
+**Seçimim: Django**
 
-Karar verirken kendime soracağım sorular:
-1. Hocaların taleplerinde öğretmen onayı ya da moderasyon gibi karmaşık kurallar var mı? Varsa bunları Security Rules ile yazmak mı, Python ile yazmak mı bana daha kolay?
-2. Demoyu sunumda nereden açacağım? GitHub Pages linki mi, başka bir adres mi?
-3. Verinin Türkiye'de durması ileride okul için ne kadar önemli? (Demo örnek veriyle çalıştığı için şimdilik sorun yok, ama tasarımda bunu nasıl anlatacağım?)
-4. Ben okuldan ayrıldıktan sonra uygulamayı okulda kim yönetecek?
-5. Testleri hangi dilde yazmak bana daha kolay?
+Firebase'in sunucuları Türkiye dışında ve verilerin yurt dışına gitmesini istemiyorum. Bunun yerine evdeki Core 2 Duo'lu bilgisayarı tamir ettirip sunucu olarak kullanacağım. Bu yüzden Django benim için daha iyi bir seçenek.
 
 ## Sınırlar
-_Seçtiğim teknolojinin sınırları karardan sonra yazılacak._
+
+- **Evdeki sunucu yalnızca test ve demo için.** Orada da yalnızca örnek veri olacak. Gerçek öğrenci verisinin nerede duracağına okul idaresi ve MEM karar verir, ev sunucusu bunun için uygun bir yer değil.
+- **Demo GitHub Pages'te çalışmaz.** Pages'te yalnızca tasarım belgeleri durur. Demo yerelde (`runserver`) ya da evdeki sunucuda çalışır.
+- **Ev sunucusu eski bir bilgisayar** (Core 2 Duo, 3 GB RAM). Demo için yeterli, ama okulun tamamının kullanacağı bir sistem için değil.
+- **Sunucunun bakımı benim sorumluluğumda.** Güncellemeleri ve yedekleri ben yapmalıyım.
+- **Firebase'deki hazır özellikler** (bildirimler, kendiliğinden ölçeklenme) Django'da yok. Gerekirse kendim yazmam gerekir.
 
 ## Kaynaklar
 - Firestore bölgeleri: https://firebase.google.com/docs/firestore/locations

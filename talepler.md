@@ -41,6 +41,16 @@ Hocalarla görüşemediğim için roller, akış ve veri dosyalarının taslağ�
 | V-08 | İşi bırakırken gerekçe yazmak zorunlu değil | akis.md | 11 | bekliyor |
 | V-09 | Görünen ad yalnızca ad ve soyadın baş harfi (Ayşe K.) | veri.md | — | bekliyor |
 | V-10 | Uygulama çoğunlukla telefondan kullanılır, ekranlar dar ekrana göre tasarlanır | ekranlar.md | 16 | bekliyor |
+| V-11 | Yorumlara tek seviye yanıt verilebilir | ekranlar.md, roller.md, veri.md | — | bekliyor |
+
+## B3. Tasarımcının (benim) önerileri
+
+Bunlar hocalardan değil, benden gelen önerilerdir. Hocalara gösterilip onayları alınacak.
+
+| No | Öneri | Tarih | Tasarımda nerede | Sonuç |
+|----|-------|-------|------------------|-------|
+| Ö-01 | Arayüz Reddit'in arayüz diline göre tasarlansın: istek kartları, kategoriler, durum etiketi (flair), istek altında yorumlar. Öğrenciler bu düzeni zaten tanıyor | 2026-10-11 | ekranlar.md | hocalara gösterilecek |
+| Ö-02 | İsteklere yukarı ve aşağı oy verilebilsin | 2026-10-11 | ekranlar.md, veri.md | açık karar → S-08 |
 
 ## C. Açık sorular ve açık kararlar
 
@@ -53,3 +63,4 @@ Hocalarla görüşemediğim için roller, akış ve veri dosyalarının taslağ�
 | S-05 | Hocalarla görüşmeden önce roller, akış ve veri taslağını yazmam uygun mu? | Özgür Hoca | 2026-10-11: Hafta içi bakacağını ve devam etmemi söyledi. Taslak, varsayımları işaretlenerek yazıldı |
 | S-06 | Aynı kişi bir isteği defalarca üstlenip bırakırsa bir sınır olsun mu? (senaryolar.md, Senaryo 2) | Yasemin Hoca, Eyüp Hoca | açık |
 | S-07 | Senaryo 3 ve 4 için adaylar (yapılmadı diye geri çevirme, uygunsuz içeriği gizleme) uygun mu, yoksa hocaların seçtiği başka durumlar mı yazılmalı? | Yasemin Hoca, Eyüp Hoca | açık |
+| S-08 | Oylama olsun mu? A) yukarı ve aşağı oy, B) yalnızca "Ben de" destek oyu, C) oylama yok. Aşağı oy zorbalığa dönüşebilir, kişi başına toplanan oy da ilke 2 (sıralama yok) ve ilke 5 (puan kuralı) ile çelişebilir (ekranlar.md) | Yasemin Hoca, Eyüp Hoca → Özgür Hoca | açık |

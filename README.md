@@ -13,7 +13,7 @@ Askıda İyilik, okulda insanların birbirine yaptığı iyiliği görünür kı
 | 3 | [roller.md](roller.md) | Rol × eylem tablosu | taslak, hocalara sorulacak |
 | 4 | [akis.md](akis.md) | İsteğin durumları ve geçişleri | taslak, hocalara sorulacak |
 | 5 | [veri.md](veri.md) | Tutulan alanlar ve gerekçeleri, tutulmayacaklar | taslak, hocalara sorulacak |
-| 6 | ekranlar.md | En az 5 ekran taslağı | — |
+| 6 | [ekranlar.md](ekranlar.md) | En az 5 ekran taslağı | taslak, 7 ekran |
 | 7 | senaryolar.md | En az 4 senaryo, adım adım | — |
 | 8 | [teknoloji.md](teknoloji.md) | Firebase ile Django karşılaştırması ve seçimin gerekçesi | karar: Django |
 

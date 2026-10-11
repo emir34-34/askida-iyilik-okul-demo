@@ -58,6 +58,7 @@ Bunlar hocalardan değil, benden gelen önerilerdir. Hocalara gösterilip onayla
 | Ö-04 | İsteklere resim ve video eklenebilsin (ör. bozuk musluğun resmi) | 2026-10-11 | ekranlar.md (E2, E3), veri.md (Ek) | ilke 3 ile çelişebilir → S-09 |
 | Ö-05 | Telefon arayüzünün yanında bilgisayar arayüzü de olsun (Reddit'in masaüstü düzeni: sol menü, orta akış, sağ bilgi kartları) | 2026-10-11 | ekranlar.md (D1, D2) | hocalara gösterilecek |
 | Ö-06 | Sağ üstte bir bildirimler düğmesi olsun, gelen yorumlar ve isteklerdeki değişiklikler orada görünsün | 2026-10-11 | ekranlar.md (E9, D1), veri.md (Bildirim) | hocalara gösterilecek |
+| Ö-07 | Öğretmen ve yönetici hesaplarında şifreden sonra, öğretmenlerin ve yöneticilerin aralarında belirlediği özel bir okul kelimesi sorulsun. Böylece öğretmenin şifresini öğrenen bir öğrenci giriş yapamasın | 2026-10-11 | ekranlar.md (E16, D5), veri.md (Sistem ayarı, Giriş denemesi) | hocalara gösterilecek → S-10 |
 
 ## C. Açık sorular ve açık kararlar
 
@@ -72,3 +73,4 @@ Bunlar hocalardan değil, benden gelen önerilerdir. Hocalara gösterilip onayla
 | S-07 | Senaryo 3 ve 4 için adaylar (yapılmadı diye geri çevirme, uygunsuz içeriği gizleme) uygun mu, yoksa hocaların seçtiği başka durumlar mı yazılmalı? | Yasemin Hoca, Eyüp Hoca | açık |
 | S-08 | Oylama olsun mu? A) yukarı ve aşağı oy (tasarımcının tercihi, tasarımda bu var), B) yalnızca "Ben de" destek oyu, C) oylama yok. Aşağı oy zorbalığa dönüşebilir, kişi başına toplanan oy da ilke 2 (sıralama yok) ve ilke 5 (puan kuralı) ile çelişebilir (ekranlar.md) | Yasemin Hoca, Eyüp Hoca → Özgür Hoca | açık |
 | S-09 | İsteklere resim ve video eklenebilir mi? Değişmez ilke 3 "fotoğraf tutulmaz" diyor. Önerilen önlemler: konum ve cihaz bilgisi silinir, yüz görünmemesi kuralı, öğretmen gizleyebilir, boyut sınırı, istenirse yalnızca resim (ekranlar.md E3) | Özgür Hoca (ilke), Yasemin Hoca ve Eyüp Hoca (içerik) | açık |
+| S-10 | Görevli girişinde ortak okul kelimesi mi (Ö-07), yoksa her öğretmenin kendi telefonunda ürettiği kişisel doğrulama kodu mu (iki adımlı doğrulama) kullanılsın? Ortak kelime kolay ama bir kez öğrenilirse herkes için geçerli olur | Özgür Hoca (güvenlik), Yasemin Hoca ve Eyüp Hoca | açık |

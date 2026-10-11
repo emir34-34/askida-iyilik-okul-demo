@@ -67,10 +67,12 @@ Aşağı oyun riskini azaltmak için önerdiğim önlemler (bunlar da hocalara s
 | E13 | Onayla ve teşekkür et | İsteği açan kişi | ⚠️ Onay var, teşekkür notu zaman kalırsa |
 | E14 | Boş durumlar | Herkes | ✅ akış ve görevler için |
 | E15 | Arama sonuçları | Öğrenci, öğretmen | ❌ yalnızca tasarımda |
+| E16 | Görevli girişi (2. adım) | Öğretmen, yönetici | ❌ yalnızca tasarımda |
 | D1 | Ana akış (bilgisayar) | Öğrenci, öğretmen | ✅ |
 | D2 | İstek sayfası (bilgisayar) | Öğrenci, öğretmen | ✅ |
 | D3 | Yönetim özeti (bilgisayar) | Öğretmen, yönetici | ❌ yalnızca tasarımda |
 | D4 | Kontrol (bilgisayar) | Öğretmen | ⚠️ Django yönetim paneliyle |
+| D5 | Görevli girişi (bilgisayar) | Öğretmen, yönetici | ❌ yalnızca tasarımda |
 
 Oylama demoya ancak S-08 kararından sonra eklenir. Demonun zorunlu akışı (aç, üstlen, yapıldı, onayla) oylamaya bağlı değil.
 
@@ -538,6 +540,35 @@ Gösterilecek bir şey olmadığında ekran boş kalmaz. Kullanıcıya neden bo�
 - **Kişi aranamaz.** Bir öğrencinin adını yazıp bütün isteklerini ve yaptığı işleri listelemek mümkün olsaydı, bu bir kişi profili ve gizli bir sıralama oluştururdu (T-02). Ayrıca asgari veri ilkesinin ruhuna aykırı olurdu (T-03).
 - Gizlenen istekler arama sonuçlarında çıkmaz.
 - Eşleşen kelime turuncu arka planla vurgulanır. Sonuç yoksa "farklı bir kelime dene ya da yeni bir istek aç" önerilir (E14).
+
+## E16 ve D5. Görevli girişi (2. adım)
+
+Öğretmen ve yönetici hesaplarında şifreden sonra ikinci bir adım vardır: öğretmenlerin ve yöneticilerin aralarında belirlediği **okul kelimesi** (Ö-07). Amaç, bir öğretmenin şifresini bir şekilde öğrenen bir öğrencinin o hesapla giriş yapamaması.
+
+```
+  1. adım (E1)                2. adım (E16)
+┌──────────────────┐       ┌──────────────────────────┐
+│ Kullanıcı adı    │       │ 2. ADIM · GÖREVLİ        │
+│ Şifre            │  ──▶  │ 🛡  Okul kelimesini gir  │
+│ ( Giriş yap )    │       │ (SÖ) Selin Öğretmen      │
+└──────────────────┘       │ [ •••••• ]               │
+  öğrenci hesabıysa        │ ✕ Kelime hatalı.         │
+  doğrudan akışa gider     │   2 deneme hakkın kaldı. │
+                           │ ( Giriş yap )            │
+                           └──────────────────────────┘
+```
+**Nasıl çalışır?**
+1. Herkes E1'de kullanıcı adı ve şifresini girer.
+2. Hesap **öğrenci** hesabıysa doğrudan akışa geçer. Öğrenciler ikinci adımı hiç görmez.
+3. Hesap **öğretmen ya da yönetici** hesabıysa E16 açılır ve okul kelimesi sorulur.
+4. Kelime doğruysa giriş tamamlanır. Kontrol sunucuda yapılır (T-07): Kelime doğru girilmeden hiçbir öğretmen sayfası açılmaz, adres elle yazılsa bile.
+
+**Güvenlik önlemleri**
+- **3 yanlış denemede** hesap **15 dakika** kilitlenir ve yöneticiye bildirim gider. Böylece kelime tahmin edilerek bulunamaz. (Sayılar örnektir, sistem ayarlarından değiştirilebilir.)
+- Kelime veritabanında düz metin olarak değil, şifreler gibi **geri çevrilemez bir özet** olarak saklanır (`veri.md`).
+- Kelimeyi yalnızca yönetici, sistem ayarlarından **değiştirebilir**. Örneğin her dönem başında ya da bir öğrencinin kelimeyi öğrendiğinden şüphelenildiğinde.
+
+**Sınırı:** Okul kelimesi bütün öğretmenlerin paylaştığı tek bir kelimedir. Bir öğrenci kelimeyi bir kez duyarsa bütün öğretmen hesapları için işe yarar. Daha güçlü bir seçenek, her öğretmenin telefonundaki bir uygulamanın ürettiği **kişisel doğrulama kodu** (iki adımlı doğrulama, TOTP) olurdu. Hangisinin kullanılacağı açık bir karar (S-10).
 
 ## E6. Gizleme (öğretmen)
 

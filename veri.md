@@ -73,6 +73,24 @@ Oylar **istek başına** toplanır, **kişi başına asla toplanmaz**. Reddit'te
 | `zaman` | `2026-10-14 09:15` | Şikâyetleri sıraya koymak için |
 | `durum` | `bekliyor` | Öğretmenin inceleyip incelemediğini bilmek için (`bekliyor`, `gizlendi`, `sorun_yok`) |
 
+## Sistem ayarı
+
+| Alan | Örnek değer | Neden tutuluyor |
+|------|-------------|-----------------|
+| `okul_kelimesi_ozeti` | (geri çevrilemez özet) | Görevli girişinde (E16) kelimeyi doğrulamak için. Kelimenin kendisi hiçbir yerde saklanmaz |
+| `okul_kelimesi_degisme_zamani` | `2026-09-15` | Kelimenin ne zamandır değişmediğini yöneticiye hatırlatmak için |
+
+## Giriş denemesi
+
+| Alan | Örnek değer | Neden tutuluyor |
+|------|-------------|-----------------|
+| `kullanici` | → `ogretmen1` | Hangi hesaba deneme yapıldığını bilmek için |
+| `adim` | `okul_kelimesi` | Şifre mi, okul kelimesi mi yanlış girildi |
+| `basarili` | `false` | Üst üste yanlış denemeleri sayıp hesabı geçici olarak kilitlemek için |
+| `zaman` | `2026-10-14 08:02` | 15 dakikalık kilidi hesaplamak için |
+
+IP adresi ya da cihaz bilgisi tutulmaz. Giriş denemeleri kısa süre saklanır, örneğin 30 gün. Kesin süre S-04 kararıyla belirlenecek.
+
 ## Bildirim
 
 | Alan | Örnek değer | Neden tutuluyor |

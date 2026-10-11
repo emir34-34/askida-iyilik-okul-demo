@@ -18,7 +18,8 @@
 | Herkese açık yorumlar | E4, T-01 |
 | Görevler (açtıklarım, üstlendiklerim) | E5 |
 | Durum geçmişi (her geçiş kaydedilir) | veri.md |
-| Gizleme ve hesap işleri: Django yönetim paneli | E6, D4, D6 |
+| Öğretmen: istek sayfasında Gizle / Gizlemeyi kaldır, Kontrol sekmesinde gizlenenler (gerekçeleriyle) | E6, D4 |
+| Hesap işleri: Django yönetim paneli | D6 |
 | Reddit tarzı, turuncu tema, telefona uygun görünüm | ekranlar.md |
 
 | Demoda yok ❌ (tasarımda var) |

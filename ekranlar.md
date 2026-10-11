@@ -73,7 +73,7 @@ Aşağı oyun riskini azaltmak için önerdiğim önlemler (bunlar da hocalara s
 | D1 | Ana akış (bilgisayar) | Öğrenci, öğretmen | ✅ |
 | D2 | İstek sayfası (bilgisayar) | Öğrenci, öğretmen | ✅ |
 | D3 | Yönetim özeti (bilgisayar) | Öğretmen, yönetici | ❌ yalnızca tasarımda |
-| D4 | Kontrol (bilgisayar) | Öğretmen | ⚠️ Django yönetim paneliyle |
+| D4 | Kontrol (bilgisayar) | Öğretmen | ⚠️ Gizlenenler sekmesi var. Şikâyetler yalnızca tasarımda |
 | D5 | Görevli girişi (bilgisayar) | Öğretmen, yönetici | ❌ yalnızca tasarımda |
 | D6 | Yönetici paneli (bilgisayar) | Yönetici | ⚠️ Django yönetim paneliyle |
 | D7 | Sistem ayarları (bilgisayar) | Yönetici | ❌ yalnızca tasarımda |
@@ -456,7 +456,7 @@ Tamamlanan istekler akıştan kalkıp arşive taşınır. Arşive akıştaki **A
 
 - "2 kişi bildirdi ›" bağlantısı, kimin şikâyet ettiğini yalnızca öğretmene gösterir (V-13).
 - Her karar durum geçmişine yazılır (`veri.md`).
-- Demoda bu sayfa yerine Django'nun yönetim paneli kullanılacak.
+- Demoda yalnızca **Gizlenenler** sekmesi var (native uygulama ve web). Şikâyetler (E11) tasarımda kalıyor. Öğretmenin menüsünde 🛡️ **Kontrol** sekmesi görünür, öğrencilerde görünmez.
 
 ## E12. İlk giriş tanıtımı
 
@@ -657,7 +657,7 @@ Yönetici, bazı kuralları kod değiştirmeden açıp kapatabilir (Ö-08). En b
 ```
 - İsteğin ya da yorumun `⋯` menüsünden, ya da Kontrol sayfasındaki (D4) **Gizle…** düğmesinden açılır.
 - İçerik silinmez, gizlenir. Gerekçe durum geçmişine yazılır (G8, `veri.md`).
-- Demoda bu ekran yerine Django'nun yönetim paneli kullanılacak.
+- Demoda öğretmen, istek sayfasındaki **Öğretmen** kutusundan **Gizle…** der, gerekçe yazmadan gizleyemez. Gizlenen bir isteği aynı yerden geri açabilir.
 
 ## E7. Hata ve uyarı mesajları
 

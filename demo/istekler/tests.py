@@ -157,37 +157,15 @@ class BirakmaVeYapilmadiTesti(OrnekVeri):
         self.assertEqual(self.durum(), Durum.USTLENILDI)
 
 
-class SayfaYetkiTesti(OrnekVeri):
-    """T-07: Yetkisiz biri adresi elle yazsa bile başkasının işlemini yapamaz (sayfa seviyesinde)."""
+class IstemciDosyalariTesti(TestCase):
+    """Arayüz dosyaları tarayıcıya veriliyor mu? (APK aynı dosyaları kendi içinden verir.)"""
 
-    def test_adresi_elle_yazan_yabanci_403_alir(self):
-        gecisler.ustlen(self.istek.pk, self.ayse)
-        gecisler.yapildi_de(self.istek.pk, self.ayse)
-        # Can, onay düğmesini hiç görmedi ama onay adresine doğrudan POST ediyor
-        self.client.force_login(self.can)
-        cevap = self.client.post(f"/istek/{self.istek.pk}/onayla/")
-        self.assertEqual(cevap.status_code, 403)
-        self.assertEqual(self.durum(), Durum.YAPILDI)
-
-    def test_giris_yapmayan_giris_sayfasina_gider(self):
-        cevap = self.client.post(f"/istek/{self.istek.pk}/ustlen/")
-        self.assertEqual(cevap.status_code, 302)
-        self.assertIn("/giris/", cevap["Location"])
-        self.assertEqual(self.durum(), Durum.ACIK)
-
-    def test_istek_sayfasi_role_gore_dugme_gosterir(self):
-        self.client.force_login(self.ayse)
-        self.assertContains(self.client.get(f"/istek/{self.istek.pk}/"), "Üstlen</button>")
-        self.client.force_login(self.mehmet)  # kendi isteği: üstlen yok, geri çek var
-        cevap = self.client.get(f"/istek/{self.istek.pk}/")
-        self.assertNotContains(cevap, "Üstlen</button>")
-        self.assertContains(cevap, "Geri çek</button>")
-
-    def test_gizlenen_istegi_ogrenci_goremez(self):
-        gecisler.gizle(self.istek.pk, self.selin, "Uygunsuz.")
-        self.client.force_login(self.ayse)
-        self.assertEqual(self.client.get(f"/istek/{self.istek.pk}/").status_code, 404)
-        self.assertNotContains(self.client.get("/"), "Kimya notları lazım")
+    def test_ana_sayfa_ve_uygulama_dosyalari(self):
+        cevap = self.client.get("/")
+        self.assertEqual(cevap.status_code, 200)
+        self.assertIn(b'<script src="/i/app.js">', b"".join(cevap.streaming_content))
+        self.assertEqual(self.client.get("/i/app.js").status_code, 200)
+        self.assertEqual(self.client.get("/i/stil.css").status_code, 200)
 
 
 class ApiTesti(OrnekVeri):

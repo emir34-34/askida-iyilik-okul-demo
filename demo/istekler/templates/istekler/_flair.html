@@ -1,1 +1,0 @@
-<span class="flair f-{{ istek.durum }}">{% if istek.durum == "acik" %}🟢{% elif istek.durum == "ustlenildi" %}🟡{% elif istek.durum == "yapildi" %}🔵{% elif istek.durum == "tamamlandi" %}✅{% else %}⚪{% endif %} {{ istek.get_durum_display }}{% if istek.ustlenen and istek.durum != "acik" %} · {{ istek.ustlenen.gorunen_ad }}{% endif %}</span>

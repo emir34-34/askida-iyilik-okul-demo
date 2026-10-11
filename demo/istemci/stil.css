@@ -120,3 +120,26 @@ textarea.girdi{min-height:96px;resize:vertical}
 .yukleniyor{padding:40px;text-align:center;color:var(--muted)}
 .cerceve{min-height:100dvh}
 button.link{border:0;background:none;font:inherit;color:inherit;padding:0;cursor:pointer}
+/* --- Bilgisayar düzeni (ekranlar.md D1, D2): solda menü, ortada içerik, sağda bilgi kartları --- */
+.sag{display:none}
+.ust-olustur{display:none}
+@media (min-width:1100px){
+  .sayfa{max-width:1240px;grid-template-columns:220px minmax(0,1fr) 300px}
+  .icerik{max-width:none}
+  .sag{display:block;position:sticky;top:72px;align-self:start}
+  .ust-olustur{display:inline-flex;padding:8px 16px;margin-right:6px}
+}
+.bkart{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+.bkart h4{margin:0 0 6px;font-size:15px}
+.bkart p{margin:0 0 12px;color:var(--muted);font-size:13px}
+.bkart ol{margin:0;padding-left:18px;font-size:13px}
+.bkart ol li{margin:5px 0}
+.lejant{display:flex;flex-wrap:wrap;gap:6px}
+.lejant .flair{margin:0}
+.adimlar{list-style:none;margin:0;padding:0;font-size:14px}
+.adimlar li{display:flex;gap:10px;align-items:center;padding:6px 0;color:var(--muted)}
+.adimlar li b{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:11px;background:var(--pill);color:var(--muted);flex:none}
+.adimlar li.bitti{color:var(--text)}
+.adimlar li.bitti b{background:var(--text);color:var(--card)}
+.adimlar li.simdi{color:var(--text);font-weight:700}
+.adimlar li.simdi b{background:var(--brand);color:var(--brand-ink)}

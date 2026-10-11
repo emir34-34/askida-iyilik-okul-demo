@@ -123,19 +123,52 @@ function ikon(ad) {
   return `<svg class="i" viewBox="0 0 24 24">${IKON[ad]}</svg>`;
 }
 
-function cerceve(bolum, icerik) {
+// Bilgisayarda sağ sütun (ekranlar.md D1). Telefonda gizlenir (stil.css).
+const DURUMLAR_KARTI = `<div class="bkart"><h4>Durumlar</h4><div class="lejant">
+    <span class="flair f-acik">🟢 Açık</span><span class="flair f-ustlenildi">🟡 Üstlenildi</span>
+    <span class="flair f-yapildi">🔵 Yapıldı</span><span class="flair f-tamamlandi">✅ Tamamlandı</span></div></div>`;
+// Kural metni örnektir, asıl metni hocalar belirleyecek (ekranlar.md).
+const KURALLAR_KARTI = `<div class="bkart"><h4>Kurallar</h4><ol>
+    <li>Konuşmalar isteğin altında, herkese açık yorumlarla olur. Özel mesaj yok.</li>
+    <li>Telefon, adres gibi kişisel bilgi paylaşma.</li>
+    <li>Kaç iyilik yaptığın bir yerde sayılmaz. Bu bir yarışma değil.</li>
+    <li>Saygılı ol. Uygunsuz içeriği öğretmenler gizler.</li></ol></div>`;
+const VARSAYILAN_SAG = `<div class="bkart"><h4>🤝 Askıda İyilik</h4>
+    <p>Okulumuzun iyilik panosu. Bir ihtiyacını ya da okulda gördüğün bir sorunu yaz, başka biri üstlensin, sen onayla.</p>
+    <a class="btn ana tam" href="#/yeni">＋ Yeni istek</a></div>` + DURUMLAR_KARTI + KURALLAR_KARTI;
+
+/** D2: isteğin akıştaki yeri. Yalnızca şu anki durum gösterilir, durum geçmişi değil (veri.md). */
+function adimKarti(i) {
+  const sira = ["acik", "ustlenildi", "yapildi", "tamamlandi"];
+  const n = sira.indexOf(i.durum);
+  if (n < 0) return `<div class="bkart"><h4>Bu istek nerede?</h4><p>${kac(i.durum_adi)}</p></div>`;
+  const acan = kac(i.acan.gorunen_ad);
+  const adimlar = ["Açıldı", "Üstlenildi", "Yapıldı", `${acan} onaylayacak`];
+  const bekleyen = ["Üstlenecek biri bekleniyor", "Yapılması bekleniyor", `${acan} onaylayacak`, "Tamamlandı 🎉"];
+  const li = adimlar.map((ad, k) => {
+    if (k <= n) return `<li class="bitti"><b>✓</b>${k === 3 ? "Onaylandı" : ad}</li>`;
+    if (k === n + 1) return `<li class="simdi"><b>${k + 1}</b>${bekleyen[n]}</li>`;
+    return `<li><b>${k + 1}</b>${ad}</li>`;
+  }).join("");
+  return `<div class="bkart"><h4>Bu istek nerede?</h4><ul class="adimlar">${li}</ul></div>`;
+}
+
+function cerceve(bolum, icerik, sag = VARSAYILAN_SAG) {
   const menu = (sinif) => MENU.map(([ad, adres, etiket]) =>
     `<a href="${adres}" class="${ad === bolum ? "on" : ""}">${ikon(ad)}<span>${etiket}</span></a>`).join("");
   const yonetim = ben.yonetim_paneli ? `<div class="lbl">ÖĞRETMEN</div><a href="/yonetim/">🛡️ Yönetim paneli</a>` : "";
   return `
     <header class="bar">
       <a class="logo" href="#/"><span class="dot">🤝</span>Askıda İyilik</a>
+ 
       <span class="spacer"></span>
+      <a class="btn ana ust-olustur" href="#/yeni">＋ Oluştur</a>
       <a class="av" href="#/profil" title="${kac(ben.gorunen_ad)}">${kac(ben.bas_harfler)}</a>
     </header>
     <div class="sayfa">
       <nav class="yan" aria-label="Menü">${menu()}${yonetim}</nav>
       <main class="icerik">${icerik}</main>
+      <aside class="sag">${sag}</aside>
     </div>
     <nav class="alt" aria-label="Alt menü">${menu()}</nav>`;
 }
@@ -263,7 +296,7 @@ async function istekEkrani(no) {
     <section class="yorumlar">
       <b>Yorumlar</b> <span style="color:var(--muted);font-size:13px">· herkese açık</span>
       ${yorumFormu}${yorumlar}
-    </section>`);
+    </section>`, adimKarti(i) + KURALLAR_KARTI);
 
   // Düğmeler ve formlar: hepsi aynı API adresine gider, sonuç sunucudan gelir.
   const calistir = async (eylem, govde) => {

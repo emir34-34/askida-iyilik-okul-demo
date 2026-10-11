@@ -115,6 +115,7 @@ const IKON = {
   yeni: '<path d="M12 5v14M5 12h14"/>',
   gorevler: '<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 12l2 2 4-4"/>',
   profil: '<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',
+  kontrol: '<path d="M12 3l8 3v6c0 4.5-3.5 8-8 9-4.5-1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
 };
 const MENU = [["akis", "#/", "Akış"], ["yeni", "#/yeni", "Oluştur"], ["gorevler", "#/gorevler", "Görevler"], ["profil", "#/profil", "Profil"]];
 const DURUM_SIMGE = { acik: "🟢", ustlenildi: "🟡", yapildi: "🔵", tamamlandi: "✅" };
@@ -154,7 +155,9 @@ function adimKarti(i) {
 }
 
 function cerceve(bolum, icerik, sag = VARSAYILAN_SAG) {
-  const menu = (sinif) => MENU.map(([ad, adres, etiket]) =>
+  // Öğretmenlere beşinci sekme olarak Kontrol (D4) görünür, öğrencilere görünmez.
+  const ogeler = ben.ogretmen ? [...MENU.slice(0, 3), ["kontrol", "#/kontrol", "Kontrol"], MENU[3]] : MENU;
+  const menu = (sinif) => ogeler.map(([ad, adres, etiket]) =>
     `<a href="${adres}" class="${ad === bolum ? "on" : ""}">${ikon(ad)}<span>${etiket}</span></a>`).join("");
   const yonetim = ben.yonetim_paneli ? `<div class="lbl">ÖĞRETMEN</div><a href="/yonetim/">🛡️ Yönetim paneli</a>` : "";
   return `
@@ -188,6 +191,7 @@ function kart(i) {
     <div class="baslik">${kac(i.baslik)}</div>
     ${flair(i)}
     <p class="govde">${kac(i.aciklama)}</p>
+    ${i.gizleme_gerekcesi ? `<p class="gizli-not">🛡️ Gizlendi: ${kac(i.gizleme_gerekcesi)}</p>` : ""}
     <span class="pill">💬 ${i.yorum_sayisi ?? 0}</span>
   </a>`;
 }
@@ -263,10 +267,23 @@ function dugmelerHTML(i) {
   return `<div class="islem"><div class="not">Senin için:</div>${i.dugmeler.map((x) => d[x] || "").join("")}</div>`;
 }
 
+/** E6: yalnızca öğretmenin gördüğü kutu. Sunucu öğretmen olmayanın isteğini zaten reddeder. */
+function ogretmenKutusu(i) {
+  if (!i.ogretmen_dugmeleri || !i.ogretmen_dugmeleri.length) return "";
+  const gerekce = i.gizleme_gerekcesi ? `<div style="margin-top:6px">Gizlendi: ${kac(i.gizleme_gerekcesi)}</div>` : "";
+  const dugme = i.ogretmen_dugmeleri[0] === "gizle"
+    ? `<details class="ac"><summary class="btn ikincil" style="color:var(--danger)">Gizle…</summary>
+        <form data-eylem="gizle"><label class="alan"><span>Neden gizliyorsun? (zorunlu, durum geçmişine yazılır)</span>
+        <textarea class="girdi" name="gerekce" required></textarea></label><button class="btn ikincil" style="color:var(--danger)">Gizle</button></form></details>`
+    : `<button class="btn ikincil" data-eylem="gizlemeyi_kaldir">Gizlemeyi kaldır</button>`;
+  return `<div class="ogretmen-kutu"><b>🛡️ Öğretmen</b>${gerekce}<div style="margin-top:8px">${dugme}</div></div>`;
+}
+
 const BASARI = {
   ustlen: "İsteği üstlendin.", birak: "İşi bıraktın. İstek yeniden açık.",
   yapildi: "Harika! Şimdi isteği açan kişinin onayı bekleniyor.", geri_cek: "İsteğini geri çektin.",
   onayla: "Teşekkürler! İstek tamamlandı.", yapilmadi: "İstek yeniden üstlenen kişiye döndü.", yorum: "Yorumun eklendi.",
+  gizle: "İstek gizlendi. Öğrenciler artık göremez.", gizlemeyi_kaldir: "Gizleme kaldırıldı, istek yeniden açık.",
 };
 
 async function istekEkrani(no) {
@@ -292,6 +309,7 @@ async function istekEkrani(no) {
       ${flair(i)}
       <p class="govde tam">${kac(i.aciklama)}</p>
       ${dugmelerHTML(i)}
+      ${ogretmenKutusu(i)}
     </div>
     <section class="yorumlar">
       <b>Yorumlar</b> <span style="color:var(--muted);font-size:13px">· herkese açık</span>
@@ -361,6 +379,19 @@ async function gorevlerEkrani(parametre) {
     </div>${liste}`);
 }
 
+/** D4: Öğretmenin Kontrol sayfası. Demoda yalnızca gizlenenler (şikâyetler tasarımda). */
+async function kontrolEkrani() {
+  const c = await api("GET", "gizlenenler");
+  if (!c.ok) {
+    kok.innerHTML = cerceve("kontrol", bos("🚫", "Bu sayfayı yalnızca öğretmenler görebilir", "", '<a class="btn ikincil" href="#/">Akışa dön</a>'));
+    return;
+  }
+  const liste = c.veri.istekler.length
+    ? c.veri.istekler.map(kart).join("")
+    : bos("🛡️", "Gizlenen içerik yok", "Uygunsuz bulduğun bir isteği, istek sayfasındaki Öğretmen kutusundan gizleyebilirsin.");
+  kok.innerHTML = cerceve("kontrol", `<div class="sekmeler"><span class="chip on">Gizlenenler</span></div>${liste}`);
+}
+
 function profilEkrani() {
   kok.innerHTML = cerceve("profil", `
     <div class="kutu" style="text-align:center">
@@ -397,6 +428,7 @@ async function yonlendir() {
   if (yol === "/yeni") return yeniEkrani();
   if (yol === "/gorevler") return gorevlerEkrani(parametre);
   if (yol === "/profil") return profilEkrani();
+  if (yol === "/kontrol") return kontrolEkrani();
   return akisEkrani(parametre);
 }
 

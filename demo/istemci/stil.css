@@ -143,3 +143,7 @@ button.link{border:0;background:none;font:inherit;color:inherit;padding:0;cursor
 .adimlar li.bitti b{background:var(--text);color:var(--card)}
 .adimlar li.simdi{color:var(--text);font-weight:700}
 .adimlar li.simdi b{background:var(--brand);color:var(--brand-ink)}
+/* Öğretmene özel (E6, D4) */
+.ogretmen-kutu{margin-top:10px;padding:10px 12px;border-radius:12px;background:var(--warn-bg);color:var(--text);font-size:14px}
+.ogretmen-kutu>b{color:var(--warn);font-size:12px}
+.gizli-not{display:inline-block;margin:0 0 8px;padding:6px 10px;border-radius:10px;background:var(--warn-bg);color:var(--warn);font-size:13px;font-weight:600}

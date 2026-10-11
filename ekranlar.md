@@ -33,11 +33,16 @@ Seçenekler:
 
 | | Seçenek | Ekranda | Not |
 |---|---------|---------|-----|
-| A | Yukarı ve aşağı oy | `▲ 5 ▼` | Benim ilk önerim. Aşağı oy riski var |
+| **A** ✔ | **Yukarı ve aşağı oy** | `▲ 5 ▼` | **Tasarımcının tercihi (Emir).** Aşağı oy riski var, aşağıdaki önlemlerle |
 | B | Yalnızca destek oyu: "Ben de" | `▲ 5 Ben de` | "Bu sorunu ben de gördüm" ya da "buna ben de ihtiyaç duyuyorum" anlamına gelir. Aşağı oy yok |
 | C | Oylama yok | — | En basit seçenek |
 
-Hangi seçenek seçilirse seçilsin: oylar kişi başına toplanmaz ve gösterilmez, kimin oy verdiği görünmez, kişi kendi isteğine oy veremez. Ekran çizimlerinde oylama `▲ 5 ▼` olarak gösterildi. Karar verilince çizimler güncellenecek.
+**Tasarımcının tercihi A'dır, çizimler buna göre yapıldı.** Hocalar ya da Özgür Hoca B ya da C derse çizimler değiştirilir.
+
+Aşağı oyun riskini azaltmak için önerdiğim önlemler (bunlar da hocalara sorulacak):
+- Oylar kişi başına toplanmaz ve gösterilmez, kimin oy verdiği görünmez, kişi kendi isteğine oy veremez.
+- Bir isteğin oy toplamı sıfırın altına düşerse ekranda **0** gösterilir. Böylece kimsenin ihtiyacı "−5" olarak herkesin önünde durmaz.
+- Aşağı oy bir isteği gizlemez ya da silmez. İçeriği yalnızca öğretmen gizleyebilir (V-02).
 
 ## Ekran listesi
 

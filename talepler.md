@@ -50,7 +50,7 @@ Bunlar hocalardan değil, benden gelen önerilerdir. Hocalara gösterilip onayla
 | No | Öneri | Tarih | Tasarımda nerede | Sonuç |
 |----|-------|-------|------------------|-------|
 | Ö-01 | Arayüz Reddit'in arayüz diline göre tasarlansın: istek kartları, kategoriler, durum etiketi (flair), istek altında yorumlar. Öğrenciler bu düzeni zaten tanıyor | 2026-10-11 | ekranlar.md | hocalara gösterilecek |
-| Ö-02 | İsteklere yukarı ve aşağı oy verilebilsin | 2026-10-11 | ekranlar.md, veri.md | açık karar → S-08 |
+| Ö-02 | İsteklere yukarı ve aşağı oy verilebilsin (seçenek A). Riskleri bildiğim hâlde aşağı oyun da olmasını tercih ediyorum, önlemleri ekranlar.md'de | 2026-10-11 | ekranlar.md, veri.md | tasarıma A olarak kondu, son onay → S-08 |
 
 ## C. Açık sorular ve açık kararlar
 
@@ -63,4 +63,4 @@ Bunlar hocalardan değil, benden gelen önerilerdir. Hocalara gösterilip onayla
 | S-05 | Hocalarla görüşmeden önce roller, akış ve veri taslağını yazmam uygun mu? | Özgür Hoca | 2026-10-11: Hafta içi bakacağını ve devam etmemi söyledi. Taslak, varsayımları işaretlenerek yazıldı |
 | S-06 | Aynı kişi bir isteği defalarca üstlenip bırakırsa bir sınır olsun mu? (senaryolar.md, Senaryo 2) | Yasemin Hoca, Eyüp Hoca | açık |
 | S-07 | Senaryo 3 ve 4 için adaylar (yapılmadı diye geri çevirme, uygunsuz içeriği gizleme) uygun mu, yoksa hocaların seçtiği başka durumlar mı yazılmalı? | Yasemin Hoca, Eyüp Hoca | açık |
-| S-08 | Oylama olsun mu? A) yukarı ve aşağı oy, B) yalnızca "Ben de" destek oyu, C) oylama yok. Aşağı oy zorbalığa dönüşebilir, kişi başına toplanan oy da ilke 2 (sıralama yok) ve ilke 5 (puan kuralı) ile çelişebilir (ekranlar.md) | Yasemin Hoca, Eyüp Hoca → Özgür Hoca | açık |
+| S-08 | Oylama olsun mu? A) yukarı ve aşağı oy (tasarımcının tercihi, tasarımda bu var), B) yalnızca "Ben de" destek oyu, C) oylama yok. Aşağı oy zorbalığa dönüşebilir, kişi başına toplanan oy da ilke 2 (sıralama yok) ve ilke 5 (puan kuralı) ile çelişebilir (ekranlar.md) | Yasemin Hoca, Eyüp Hoca → Özgür Hoca | açık |

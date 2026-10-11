@@ -54,6 +54,7 @@ Bunlar hocalardan değil, benden gelen önerilerdir. Hocalara gösterilip onayla
 | Ö-03 | Alt menü Akış, Oluştur, Görevler ve Profil düğmelerinden oluşsun. Profil ekranı eklensin | 2026-10-11 | ekranlar.md (E2, E5, E8) | hocalara gösterilecek |
 | Ö-04 | İsteklere resim ve video eklenebilsin (ör. bozuk musluğun resmi) | 2026-10-11 | ekranlar.md (E2, E3), veri.md (Ek) | ilke 3 ile çelişebilir → S-09 |
 | Ö-05 | Telefon arayüzünün yanında bilgisayar arayüzü de olsun (Reddit'in masaüstü düzeni: sol menü, orta akış, sağ bilgi kartları) | 2026-10-11 | ekranlar.md (D1, D2) | hocalara gösterilecek |
+| Ö-06 | Sağ üstte bir bildirimler düğmesi olsun, gelen yorumlar ve isteklerdeki değişiklikler orada görünsün | 2026-10-11 | ekranlar.md (E9, D1), veri.md (Bildirim) | hocalara gösterilecek |
 
 ## C. Açık sorular ve açık kararlar
 

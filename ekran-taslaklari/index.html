@@ -87,6 +87,22 @@ figcaption small{display:block;font-weight:400;color:var(--muted)}
 .nav a.on{color:var(--text);font-weight:700}
 .nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .nav a.on svg{stroke-width:2.4}
+/* bildirimler */
+.bell{position:relative;display:grid;place-items:center}
+.bell svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.bell .cnt{position:absolute;top:1px;right:0;min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:var(--brand);color:var(--brand-ink);font-size:10px;font-weight:800;display:grid;place-items:center;border:2px solid var(--card)}
+.ntf{display:flex;gap:10px;padding:12px;background:var(--card);border-bottom:1px solid var(--line);align-items:flex-start}
+.ntf.unread{background:color-mix(in srgb, var(--brand) 8%, var(--card))}
+.ntf .ico{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--pill);flex:none;font-size:15px}
+.ntf .txt{flex:1;min-width:0;font-size:13px}
+.ntf .txt b{font-weight:700}
+.ntf .txt .q{color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ntf .t{font-size:11px;color:var(--muted);flex:none}
+.ntf .nd{width:8px;height:8px;border-radius:50%;background:var(--brand);flex:none;margin-top:12px}
+.nhead{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:var(--card);border-bottom:1px solid var(--line);font-size:13px}
+.nhead a{color:var(--brand);font-weight:700;text-decoration:none}
+.npanel{position:absolute;top:50px;right:60px;width:360px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.2);overflow:hidden;z-index:5}
+.npanel .ttl{padding:12px 14px;font-weight:800;font-size:15px;border-bottom:1px solid var(--line)}
 /* profil */
 .prof{background:var(--card);padding:20px 16px;text-align:center;border-bottom:1px solid var(--line)}
 .prof .big{width:72px;height:72px;font-size:24px;margin:0 auto 10px}
@@ -155,7 +171,7 @@ textarea.input{min-height:110px;resize:none}
 .chrome .url{margin-left:12px;flex:1;max-width:420px;background:var(--pill);border-radius:999px;padding:4px 12px;font-size:12px;color:var(--muted)}
 .desk-scroll{overflow-x:auto}
 .desk{min-width:1040px;height:660px;display:grid;grid-template-rows:56px 1fr}
-.dhead{display:flex;align-items:center;gap:16px;padding:0 16px;background:var(--card);border-bottom:1px solid var(--line)}
+.dhead{position:relative;display:flex;align-items:center;gap:16px;padding:0 16px;background:var(--card);border-bottom:1px solid var(--line)}
 .dhead .search{flex:1;max-width:520px;margin:0 auto;background:var(--pill);border-radius:999px;padding:9px 16px;color:var(--muted)}
 .dbody{display:grid;grid-template-columns:230px 1fr 310px;min-height:0}
 .dleft{border-right:1px solid var(--line);padding:12px 10px;overflow-y:auto;background:var(--page)}
@@ -219,7 +235,7 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
   <figure>
     <figcaption>E2 · Ana akış<small>İstek kartları, kategori, durum etiketi (flair), oy ve yorum</small></figcaption>
     <div class="phone">
-      <div class="bar"><div class="logo"><span class="dot">🤝</span>Askıda İyilik</div><div class="spacer"></div><button class="iconbtn" type="button" aria-label="Ara">🔍</button><div class="av">AK</div></div>
+      <div class="bar"><div class="logo"><span class="dot">🤝</span>Askıda İyilik</div><div class="spacer"></div><button class="iconbtn" type="button" aria-label="Ara">🔍</button><button class="iconbtn bell" type="button" aria-label="Bildirimler"><svg viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span class="cnt">3</span></button><div class="av">AK</div></div>
       <div class="tabs"><button class="chip on" type="button">Yeni</button><button class="chip" type="button">Açık olanlar</button><button class="chip" type="button">k/ders ▾</button></div>
       <div class="scroll" id="feed"></div>
       <div class="nav" data-on="akis"></div>
@@ -337,6 +353,23 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
     </div></div></div>
   </figure>
 
+  <!-- E9 -->
+  <figure>
+    <figcaption>E9 · Bildirimler<small>Sağ üstteki 🔔. Yorum, yanıt ve durum değişiklikleri. Oy bildirimi yok</small></figcaption>
+    <div class="phone">
+      <div class="bar"><button class="iconbtn" type="button" aria-label="Geri">←</button><b style="font-size:16px">Bildirimler</b></div>
+      <div class="nhead"><span>3 okunmamış</span><a href="#">Tümünü okundu say</a></div>
+      <div class="scroll">
+        <div class="ntf unread"><span class="ico">💬</span><div class="txt"><b>Ayşe K.</b> isteğine yorum yaptı: <b>Kimya notları lazım</b><div class="q">"Yarın teneffüste getiririm."</div></div><span class="t">1 sa</span><span class="nd"></span></div>
+        <div class="ntf unread"><span class="ico">🟡</span><div class="txt"><b>Ayşe K.</b> isteğini üstlendi: <b>Kimya notları lazım</b></div><span class="t">1 sa</span><span class="nd"></span></div>
+        <div class="ntf unread"><span class="ico">🔵</span><div class="txt"><b>Hesap makinesi ödünç lazım</b> yapıldı. <b>Onayını bekliyor.</b></div><span class="t">3 sa</span><span class="nd"></span></div>
+        <div class="ntf"><span class="ico">↩</span><div class="txt"><b>Can B.</b> yorumuna yanıt verdi<div class="q">"Ben de aynı notları arıyordum."</div></div><span class="t">5 sa</span></div>
+        <div class="ntf"><span class="ico">✅</span><div class="txt"><b>Zeynep T.</b> yaptığın işi onayladı: <b>Kütüphanede priz çalışmıyor</b> 🙏</div><span class="t">2 gün</span></div>
+        <div class="ntf"><span class="ico">↺</span><div class="txt"><b>Matematik konu anlatımı</b> isteğini üstlenen kişi işi bıraktı. İstek yeniden açık.</div><span class="t">3 gün</span></div>
+      </div>
+    </div>
+  </figure>
+
   <!-- E8 -->
   <figure>
     <figcaption>E8 · Profil<small>Yalnızca asgari bilgi. Karma, iyilik sayısı ya da fotoğraf yok</small></figcaption>
@@ -371,6 +404,13 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
           <div class="logo"><span class="dot">🤝</span>Askıda İyilik</div>
           <div class="search">🔍 İsteklerde ara</div>
           <button class="primary sm" type="button">＋ Oluştur</button>
+          <button class="iconbtn bell" type="button" aria-label="Bildirimler"><svg viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span class="cnt">3</span></button>
+          <div class="npanel"><div class="ttl">Bildirimler</div><div class="ntf unread"><span class="ico">💬</span><div class="txt"><b>Ayşe K.</b> isteğine yorum yaptı: <b>Kimya notları lazım</b><div class="q">"Yarın teneffüste getiririm."</div></div><span class="t">1 sa</span><span class="nd"></span></div>
+            <div class="ntf unread"><span class="ico">🟡</span><div class="txt"><b>Ayşe K.</b> isteğini üstlendi: <b>Kimya notları lazım</b></div><span class="t">1 sa</span><span class="nd"></span></div>
+            <div class="ntf unread"><span class="ico">🔵</span><div class="txt"><b>Hesap makinesi ödünç lazım</b> yapıldı. <b>Onayını bekliyor.</b></div><span class="t">3 sa</span><span class="nd"></span></div>
+            <div class="ntf"><span class="ico">↩</span><div class="txt"><b>Can B.</b> yorumuna yanıt verdi<div class="q">"Ben de aynı notları arıyordum."</div></div><span class="t">5 sa</span></div>
+            <div class="ntf"><span class="ico">✅</span><div class="txt"><b>Zeynep T.</b> yaptığın işi onayladı: <b>Kütüphanede priz çalışmıyor</b> 🙏</div><span class="t">2 gün</span></div>
+            <div class="ntf"><span class="ico">↺</span><div class="txt"><b>Matematik konu anlatımı</b> isteğini üstlenen kişi işi bıraktı. İstek yeniden açık.</div><span class="t">3 gün</span></div><div class="nhead" style="border:0;justify-content:center"><a href="#">Tümünü gör</a></div></div>
           <div class="av">AK</div>
         </div>
       <div class="dbody">
@@ -415,6 +455,7 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
           <div class="logo"><span class="dot">🤝</span>Askıda İyilik</div>
           <div class="search">🔍 İsteklerde ara</div>
           <button class="primary sm" type="button">＋ Oluştur</button>
+          <button class="iconbtn bell" type="button" aria-label="Bildirimler"><svg viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span class="cnt">3</span></button>
           <div class="av">AK</div>
         </div>
       <div class="dbody">

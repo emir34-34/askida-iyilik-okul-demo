@@ -60,6 +60,18 @@ Dosyadaki **konum ve cihaz bilgisi (EXIF)** kaydedilmeden önce silinir (T-03: k
 
 Oylar **istek başına** toplanır, **kişi başına asla toplanmaz**. Reddit'teki karma gibi bir kullanıcı puanı yoktur (T-02, S-01).
 
+## Bildirim
+
+| Alan | Örnek değer | Neden tutuluyor |
+|------|-------------|-----------------|
+| `alici` | → `ogrenci1` | Bildirimin kime gösterileceğini bilmek için |
+| `tur` | `yorum` | Ekranda hangi simge ve metnin gösterileceğini bilmek için (ekranlar.md E9) |
+| `istek` | → İstek #12 | Bildirime basınca ilgili isteğe gitmek için |
+| `okundu` | `false` | Okunmamış sayısını rozette göstermek için |
+| `zaman` | `2026-10-14 11:00` | Bildirimleri sıralamak için |
+
+Bildirim metni ayrıca saklanmaz, ilgili istek ve yorumdan üretilir. Böylece gizlenen bir yorum bildirimde de görünmez. Eski bildirimlerin ne zaman silineceği S-04 (saklama süresi) ile birlikte karar verilecek.
+
 ## Durum geçmişi
 
 | Alan | Örnek değer | Neden tutuluyor |

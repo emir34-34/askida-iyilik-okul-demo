@@ -60,6 +60,7 @@ Aşağı oyun riskini azaltmak için önerdiğim önlemler (bunlar da hocalara s
 | E6 | Gizleme (öğretmen) | Öğretmen | ⚠️ Django yönetim paneliyle |
 | E7 | Hata ve uyarı mesajları | Herkes | ✅ |
 | E8 | Profil | Herkes | ✅ |
+| E9 | Bildirimler | Öğrenci, öğretmen | ❌ yalnızca tasarımda |
 | D1 | Ana akış (bilgisayar) | Öğrenci, öğretmen | ✅ |
 | D2 | İstek sayfası (bilgisayar) | Öğrenci, öğretmen | ✅ |
 
@@ -95,7 +96,7 @@ Oylama demoya ancak S-08 kararından sonra eklenir. Demonun zorunlu akışı (a�
 
 ```
 ┌────────────────────────────────┐
-│ 🤝 Askıda İyilik    🔍   (AK)  │  ← üst çubuk, sağda adın baş harfleri
+│ 🤝 Askıda İyilik  🔍 🔔³ (AK)  │  ← üst çubuk: arama, bildirimler, profil
 ├────────────────────────────────┤
 │ (Yeni) (Açık olanlar) (k/ders▾)│  ← sekmeler ve kategori filtresi
 ├────────────────────────────────┤
@@ -267,7 +268,7 @@ Uygulama okul bilgisayarından ya da akıllı tahtadan açıldığında Reddit'i
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────┐
-│ 🤝 Askıda İyilik        [ 🔍 İsteklerde ara              ]   (＋ Oluştur) (AK) │
+│ 🤝 Askıda İyilik     [ 🔍 İsteklerde ara            ]  (＋ Oluştur) 🔔³ (AK) │
 ├───────────────┬──────────────────────────────────────┬───────────────────────┤
 │ 🏠 Akış       │ (Yeni) (Açık olanlar)                │ 🤝 Askıda İyilik      │
 │ 📋 Görevler   │ ┌──────────────────────────────────┐ │ Okulumuzun iyilik     │
@@ -286,6 +287,49 @@ Uygulama okul bilgisayarından ya da akıllı tahtadan açıldığında Reddit'i
 - **D1 Ana akış:** Ortada telefondaki istek kartları, sağda uygulamanın ne olduğu, durum etiketlerinin anlamı ve kurallar.
 - **D2 İstek sayfası:** Ortada istek, rol düğmeleri ve yorumlar. Sağda **"Bu istek nerede?"** kartı isteğin akıştaki yerini adım adım gösterir (Açıldı → Üstlenildi → Yapıldı → Onay). Bu kart durum geçmişini değil, yalnızca şu anki durumu gösterir. Durum geçmişi yalnızca öğretmenlere açıktır (`veri.md`).
 - Kategori açıklamaları ve kurallar metni örnektir. Asıl metni hocalar belirleyecek.
+
+## E9. Bildirimler
+
+Sağ üstteki 🔔 düğmesiyle açılır (Ö-06). Okunmamış bildirim sayısı düğmenin üstünde turuncu bir rozetle gösterilir. Bilgisayarda aynı liste, düğmenin altında açılan bir panelde görünür.
+
+```
+┌────────────────────────────────┐
+│ ←  Bildirimler                 │
+├────────────────────────────────┤
+│ 3 okunmamış  Tümünü okundu say │
+├────────────────────────────────┤
+│ 💬 Ayşe K. isteğine yorum      │
+│    yaptı: Kimya notları lazım ●│
+│    "Yarın teneffüste getiririm"│
+├────────────────────────────────┤
+│ 🟡 Ayşe K. isteğini üstlendi  ●│
+├────────────────────────────────┤
+│ 🔵 Hesap makinesi ödünç lazım  │
+│    yapıldı. Onayını bekliyor. ●│
+├────────────────────────────────┤
+│ ↩  Can B. yorumuna yanıt verdi │
+├────────────────────────────────┤
+│ ✅ Zeynep T. yaptığın işi      │
+│    onayladı 🙏                 │
+└────────────────────────────────┘
+```
+
+**Hangi olaylar bildirim olur?**
+
+| Olay | Kime gider |
+|------|------------|
+| İsteğine yorum yazıldı | İsteği açan kişiye |
+| Yorumuna yanıt verildi | Yorumu yazan kişiye |
+| İsteğin üstlenildi | İsteği açan kişiye |
+| İş "Yapıldı" olarak işaretlendi, onay bekleniyor | İsteği açan kişiye |
+| İş onaylandı ya da "Yapılmadı" dendi | Üstlenen kişiye |
+| Üstlenen kişi işi bıraktı | İsteği açan kişiye |
+| Öğretmen içeriği gizledi | İçeriği yazan kişiye, gerekçesiyle |
+
+- **Oylar bildirim olmaz.** "İsteğin 5 oy aldı" gibi bildirimler bir popülerlik yarışı hissi yaratır (T-02).
+- Bildirimler yalnızca uygulamanın içinde görünür. Telefon numarası ya da e-posta tutmadığımız için SMS ya da e-posta gönderilmez (T-03).
+- Bildirim, herkese açık olayları haber verir. Özel mesaj değildir (T-01).
+- Görev tanımına göre bildirimler demoda olmayabilir. Önce zorunlu akış (aç, üstlen, yapıldı, onayla) yapılacak, zaman kalırsa bildirimler eklenecek.
 
 ## E6. Gizleme (öğretmen)
 

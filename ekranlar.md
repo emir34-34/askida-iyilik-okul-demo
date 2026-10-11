@@ -56,9 +56,10 @@ Aşağı oyun riskini azaltmak için önerdiğim önlemler (bunlar da hocalara s
 | E2 | Ana akış (istek kartları) | Öğrenci, öğretmen | ✅ |
 | E3 | Yeni istek | Öğrenci, öğretmen | ✅ |
 | E4 | İstek sayfası (düğmeler ve yorumlar) | Öğrenci, öğretmen | ✅ |
-| E5 | Benim işlerim | Öğrenci, öğretmen | ✅ |
+| E5 | Görevler | Öğrenci, öğretmen | ✅ |
 | E6 | Gizleme (öğretmen) | Öğretmen | ⚠️ Django yönetim paneliyle |
 | E7 | Hata ve uyarı mesajları | Herkes | ✅ |
+| E8 | Profil | Herkes | ✅ |
 
 Oylama demoya ancak S-08 kararından sonra eklenir. Demonun zorunlu akışı (aç, üstlen, yapıldı, onayla) oylamaya bağlı değil.
 
@@ -113,9 +114,11 @@ Oylama demoya ancak S-08 kararından sonra eklenir. Demonun zorunlu akışı (a�
 │ [🔵 Yapıldı]                   │
 │ (▲ 1 ▼)  (💬 2)                │
 ├────────────────────────────────┤
-│   🏠 Akış    (＋)    📋 İşlerim │  ← alt menü, ortada "Yeni istek"
+│  🏠      ＋      📋      👤    │  ← alt menü
+│ Akış  Oluştur Görevler Profil  │
 └────────────────────────────────┘
 ```
+- Alt menüde dört düğme var: **Akış**, **Oluştur** (＋, yeni istek), **Görevler** (E5) ve **Profil** (E8). Sohbet sekmesi yok, çünkü özel mesaj yok (T-01).
 - Kart düzeni Reddit gibi: üstte kategori, yazan ve zaman, sonra kalın başlık, durum etiketi (flair), açıklamanın ilk satırları, altta oy ve yorum düğmeleri.
 - Varsayılan sekme **Yeni**. Tamamlanan istekler arşive geçer, akışta görünmez.
 - Oylama (`▲ 3 ▼`) açık karardır (S-08).
@@ -195,11 +198,11 @@ Bu ekran role ve isteğin durumuna göre **farklı düğmeler** gösterir. Düğ
 
 - **Yapılmadı** düğmesine basıldığında gerekçe kutusu açılır. Gerekçe yazmadan gönderilemez (G6).
 
-## E5. Benim işlerim
+## E5. Görevler
 
 ```
 ┌────────────────────────────────┐
-│ ←  Benim işlerim               │
+│ ←  Görevler                    │
 ├────────────────────────────────┤
 │ (Açtıklarım)  (Üstlendiklerim) │
 ├────────────────────────────────┤
@@ -212,11 +215,41 @@ Bu ekran role ve isteğin durumuna göre **farklı düğmeler** gösterir. Düğ
 │ Matematik konu anlatımı        │
 │ [🟢 Açık]                      │
 ├────────────────────────────────┤
-│   🏠 Akış    (＋)    📋 İşlerim │
+│  🏠      ＋      📋      👤    │
+│ Akış  Oluştur Görevler Profil  │
 └────────────────────────────────┘
 ```
 - Kullanıcının kendi takip etmesi gereken işleri gösterir. En önemlisi **onayını bekleyen** işlerdir, çünkü onay verilmezse istek bekler (S-03).
 - Reddit profillerindeki gibi bir karma ya da toplam "iyilik sayısı" gösterilmez (T-02).
+
+## E8. Profil
+
+```
+┌────────────────────────────────┐
+│ Profil                         │
+├────────────────────────────────┤
+│              (AK)              │
+│             Ayşe K.            │
+│       ogrenci2 · Öğrenci       │
+├────────────────────────────────┤
+│ Görünüm           Açık / koyu ›│
+│ Şifremi değiştir              ›│
+│ Hakkımda hangi bilgiler        │
+│ tutuluyor?                    ›│
+│ Uygulama kuralları            ›│
+│ Çıkış yap                      │
+├────────────────────────────────┤
+│ ⓘ Profilinde kaç iyilik yap-   │
+│   tığın ya da puanın gösteril- │
+│   mez.                         │
+├────────────────────────────────┤
+│  🏠      ＋      📋      👤    │
+│ Akış  Oluştur Görevler Profil  │
+└────────────────────────────────┘
+```
+- Profilde yalnızca `veri.md`'deki alanlar var: görünen ad, kullanıcı adı, rol. Fotoğraf yerine adın baş harfleri (T-03).
+- Reddit profilindeki karma, gönderi sayısı ya da rozet yok (T-02, S-01).
+- "Hakkımda hangi bilgiler tutuluyor?" sayfası kullanıcıya kendisi hakkında tutulan veriyi gösterir. Bu, KVKK'nın aydınlatma yükümlülüğüne uygun bir tasarım. İçeriğini Özgür Hoca'nın KVKK notlarıyla birlikte yazacağız (S-04).
 
 ## E6. Gizleme (öğretmen)
 

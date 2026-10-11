@@ -51,6 +51,7 @@ Bunlar hocalardan değil, benden gelen önerilerdir. Hocalara gösterilip onayla
 |----|-------|-------|------------------|-------|
 | Ö-01 | Arayüz Reddit'in arayüz diline göre tasarlansın: istek kartları, kategoriler, durum etiketi (flair), istek altında yorumlar. Öğrenciler bu düzeni zaten tanıyor | 2026-10-11 | ekranlar.md | hocalara gösterilecek |
 | Ö-02 | İsteklere yukarı ve aşağı oy verilebilsin (seçenek A). Riskleri bildiğim hâlde aşağı oyun da olmasını tercih ediyorum, önlemleri ekranlar.md'de | 2026-10-11 | ekranlar.md, veri.md | tasarıma A olarak kondu, son onay → S-08 |
+| Ö-03 | Alt menü Akış, Oluştur, Görevler ve Profil düğmelerinden oluşsun. Profil ekranı eklensin | 2026-10-11 | ekranlar.md (E2, E5, E8) | hocalara gösterilecek |
 
 ## C. Açık sorular ve açık kararlar
 

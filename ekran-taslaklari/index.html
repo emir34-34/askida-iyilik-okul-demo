@@ -82,10 +82,19 @@ figcaption small{display:block;font-weight:400;color:var(--muted)}
 .vote.down{background:var(--down);color:#fff}.vote.down button,.vote.down .n{color:#fff}
 .pillbtn{display:inline-flex;align-items:center;gap:6px;border:0;background:var(--pill);color:var(--text);border-radius:999px;height:32px;padding:0 12px;font:inherit;font-weight:600;font-size:13px;cursor:pointer}
 /* alt menü */
-.nav{display:flex;justify-content:space-around;align-items:center;padding:6px 0 10px;background:var(--card);border-top:1px solid var(--line)}
-.nav a{display:flex;flex-direction:column;align-items:center;font-size:11px;color:var(--muted);text-decoration:none;gap:2px}
+.nav{display:flex;justify-content:space-around;align-items:center;padding:6px 4px 10px;background:var(--card);border-top:1px solid var(--line)}
+.nav a{flex:1;display:flex;flex-direction:column;align-items:center;font-size:11px;color:var(--muted);text-decoration:none;gap:2px}
 .nav a.on{color:var(--text);font-weight:700}
-.nav .plus{width:44px;height:44px;border-radius:50%;background:var(--brand);color:var(--brand-ink);display:grid;place-items:center;font-size:24px;font-weight:700;margin-top:-18px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.nav a.on svg{stroke-width:2.4}
+/* profil */
+.prof{background:var(--card);padding:20px 16px;text-align:center;border-bottom:1px solid var(--line)}
+.prof .big{width:72px;height:72px;font-size:24px;margin:0 auto 10px}
+.prof .name{font-weight:800;font-size:18px}
+.prof .sub{color:var(--muted);font-size:13px}
+.menu a{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:var(--card);border-bottom:1px solid var(--line);color:var(--text);text-decoration:none}
+.menu a span{color:var(--muted)}
+.menu a.out{color:var(--danger);font-weight:700}
 /* form */
 .field{padding:0 14px}
 label.l{display:block;font-size:12px;color:var(--muted);margin:14px 0 4px;font-weight:600}
@@ -162,7 +171,7 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
       <div class="bar"><div class="logo"><span class="dot">🤝</span>Askıda İyilik</div><div class="spacer"></div><button class="iconbtn" type="button" aria-label="Ara">🔍</button><div class="av">AK</div></div>
       <div class="tabs"><button class="chip on" type="button">Yeni</button><button class="chip" type="button">Açık olanlar</button><button class="chip" type="button">k/ders ▾</button></div>
       <div class="scroll" id="feed"></div>
-      <div class="nav"><a class="on" href="#">🏠<span>Akış</span></a><a href="#"><span class="plus">＋</span></a><a href="#">📋<span>İşlerim</span></a></div>
+      <div class="nav" data-on="akis"></div>
     </div>
   </figure>
 
@@ -231,16 +240,16 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
 
   <!-- E5 -->
   <figure>
-    <figcaption>E5 · Benim işlerim<small>Onay bekleyen işler öne çıkar, karma ya da sayı yok</small></figcaption>
+    <figcaption>E5 · Görevler<small>Onay bekleyen işler öne çıkar, karma ya da sayı yok</small></figcaption>
     <div class="phone">
-      <div class="bar"><button class="iconbtn" type="button" aria-label="Geri">←</button><b>Benim işlerim</b></div>
+      <div class="bar"><button class="iconbtn" type="button" aria-label="Geri">←</button><b>Görevler</b></div>
       <div class="tabs"><button class="chip on" type="button">Açtıklarım</button><button class="chip" type="button">Üstlendiklerim</button></div>
       <div class="scroll">
         <div class="post"><div class="meta"><b>k/eşya</b>· 3 gün</div><div class="title">Hesap makinesi ödünç lazım</div><span class="flair f-done">🔵 Yapıldı</span><div><span class="badge">⚠ Onayını bekliyor</span></div></div>
         <div class="post"><div class="meta"><b>k/ders</b>· 5 gün</div><div class="title">Matematik konu anlatımı</div><span class="flair f-open">🟢 Açık</span></div>
         <div class="post"><div class="meta"><b>k/okul</b>· 2 hafta</div><div class="title">Kütüphanede priz çalışmıyor</div><span class="flair f-closed">✅ Tamamlandı</span></div>
       </div>
-      <div class="nav"><a href="#">🏠<span>Akış</span></a><a href="#"><span class="plus">＋</span></a><a class="on" href="#">📋<span>İşlerim</span></a></div>
+      <div class="nav" data-on="gorevler"></div>
     </div>
   </figure>
 
@@ -275,6 +284,26 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
     </div></div></div>
   </figure>
 
+  <!-- E8 -->
+  <figure>
+    <figcaption>E8 · Profil<small>Yalnızca asgari bilgi. Karma, iyilik sayısı ya da fotoğraf yok</small></figcaption>
+    <div class="phone">
+      <div class="bar"><b style="font-size:16px">Profil</b></div>
+      <div class="scroll">
+        <div class="prof"><div class="av big">AK</div><div class="name">Ayşe K.</div><div class="sub">ogrenci2 · Öğrenci</div></div>
+        <div class="menu">
+          <a href="#">Görünüm <span>Açık / koyu ›</span></a>
+          <a href="#">Şifremi değiştir <span>›</span></a>
+          <a href="#">Hakkımda hangi bilgiler tutuluyor? <span>›</span></a>
+          <a href="#">Uygulama kuralları <span>›</span></a>
+          <a href="#" class="out">Çıkış yap</a>
+        </div>
+        <div class="info">ⓘ Profilinde kaç iyilik yaptığın ya da puanın gösterilmez. Askıda İyilik bir yarışma değil.</div>
+      </div>
+      <div class="nav" data-on="profil"></div>
+    </div>
+  </figure>
+
 </main>
 <footer>Askıda İyilik okul sürümü · sistem tasarımı taslağı · Oylama (▲ ▼) açık karardır (S-08), toplam sıfırın altına düşerse 0 gösterilir.</footer>
 
@@ -289,6 +318,18 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
     try{localStorage.setItem(key,next);}catch(e){}
   });
 })();
+
+// Alt menü: Akış, Oluştur, Görevler, Profil
+var ICON={
+  akis:'<svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h5v-6h4v6h5V9.5"/></svg>',
+  olustur:'<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>',
+  gorevler:'<svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 12l2 2 4-4"/></svg>',
+  profil:'<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>'
+};
+var NAV=[["akis","Akış"],["olustur","Oluştur"],["gorevler","Görevler"],["profil","Profil"]];
+document.querySelectorAll(".nav[data-on]").forEach(function(n){
+  n.innerHTML=NAV.map(function(x){return '<a href="#"'+(x[0]===n.dataset.on?' class="on"':'')+'>'+ICON[x[0]]+'<span>'+x[1]+'</span></a>';}).join("");
+});
 
 // E2 akışı: örnek istekler
 var FLAIR={open:["f-open","🟢 Açık"],claimed:["f-claimed","🟡 Üstlenildi"],done:["f-done","🔵 Yapıldı"],closed:["f-closed","✅ Tamamlandı"]};

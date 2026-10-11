@@ -163,6 +163,7 @@ public abstract class Ekran {
             e.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
             e.setSingleLine(true);
         }
+        e.setTypeface(t.yazi(400)); // giriş türü değişince Android yazı tipini sıfırlıyor, yeniden ver
         return e;
     }
 

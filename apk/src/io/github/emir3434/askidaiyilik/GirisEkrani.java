@@ -54,10 +54,14 @@ public class GirisEkrani extends Ekran {
 
         k.addView(etiket("Kullanıcı adı"));
         EditText kullanici = girdi("", false, false);
-        kullanici.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        // Büyük harf ve otomatik düzeltme olmasın (kullanıcı adları küçük harf)
+        kullanici.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+        kullanici.setTypeface(t.yazi(400));
+        kullanici.setImeOptions(android.view.inputmethod.EditorInfo.IME_ACTION_NEXT);
         k.addView(kullanici);
         k.addView(etiket("Şifre"));
         EditText sifre = girdi("", true, false);
+        sifre.setImeOptions(android.view.inputmethod.EditorInfo.IME_ACTION_DONE);
         k.addView(sifre);
 
         TextView giris = t.dugme("Giriş yap", true);
@@ -84,6 +88,15 @@ public class GirisEkrani extends Ekran {
                     api.get("ben", c2 -> a.sekmeyeGec("akis")); // girişten sonra yeni csrftoken
                 }
             }));
+        });
+
+        // Klavyedeki "Bitti" tuşu doğrudan giriş yapar
+        sifre.setOnEditorActionListener((v, eylem, olay) -> {
+            if (eylem == android.view.inputmethod.EditorInfo.IME_ACTION_DONE) {
+                giris.performClick();
+                return true;
+            }
+            return false;
         });
 
         TextView unuttum = t.yazi("Şifreni unuttuysan okul yöneticisine başvur.", 13, 400, t.soluk);

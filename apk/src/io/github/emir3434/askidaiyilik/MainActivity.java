@@ -208,7 +208,7 @@ public class MainActivity extends Activity {
             oge.addView(s, new LinearLayout.LayoutParams(t.dp(24), t.dp(24)));
             TextView etiket = t.yazi(menu[i][1], 11, secili ? 700 : 500, secili ? t.metin : t.soluk);
             etiket.setPadding(0, t.dp(3), 0, 0);
-            oge.addView(etiket);
+            oge.addView(etiket, new LinearLayout.LayoutParams(-2, -2)); // yazı simgenin altında ortalı dursun
             oge.setOnClickListener(v -> {
                 if (ad.equals(seciliSekme) && yigin.size() == 1) yigin.peek().yenile(); // aynı sekmeye basınca yenile
                 else sekmeyeGec(ad);

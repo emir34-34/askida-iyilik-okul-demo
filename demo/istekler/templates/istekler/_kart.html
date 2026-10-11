@@ -1,0 +1,7 @@
+<a class="kart" href="{% url 'istek' istek.pk %}">
+  <div class="meta"><span class="av sm">{{ istek.acan.bas_harfler }}</span><b>{{ istek.get_kategori_display }}</b>· {{ istek.acan.gorunen_ad }} · {{ istek.olusturma_zamani|timesince }} önce</div>
+  <div class="baslik">{{ istek.baslik }}</div>
+  {% include "istekler/_flair.html" %}
+  <p class="govde">{{ istek.aciklama }}</p>
+  <span class="pill">💬 {{ istek.yorum_sayisi }}</span>
+</a>

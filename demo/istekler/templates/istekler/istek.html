@@ -1,0 +1,58 @@
+{% extends "istekler/base.html" %}
+{% block baslik %}{{ istek.baslik }} · Askıda İyilik{% endblock %}
+{% block icerik %}
+<div class="kart" style="cursor:default">
+  <div class="meta"><span class="av sm">{{ istek.acan.bas_harfler }}</span><b>{{ istek.get_kategori_display }}</b>· {{ istek.acan.gorunen_ad }} · {{ istek.olusturma_zamani|timesince }} önce</div>
+  <div class="baslik" style="font-size:20px">{{ istek.baslik }}</div>
+  {% include "istekler/_flair.html" %}
+  <p class="govde tam">{{ istek.aciklama }}</p>
+
+  {% if dugmeler %}
+  <div class="islem">
+    <div class="not">Senin için:</div>
+    {% for d in dugmeler %}
+      {% if d == "ustlen" %}
+        <form method="post" action="{% url 'istek_eylem' istek.pk 'ustlen' %}">{% csrf_token %}<button class="btn ana">Üstlen</button></form>
+      {% elif d == "yapildi" %}
+        <form method="post" action="{% url 'istek_eylem' istek.pk 'yapildi' %}">{% csrf_token %}<button class="btn ana">Yapıldı</button></form>
+      {% elif d == "birak" %}
+        <form method="post" action="{% url 'istek_eylem' istek.pk 'birak' %}">{% csrf_token %}<button class="btn ikincil">Bırak</button></form>
+      {% elif d == "geri_cek" %}
+        <form method="post" action="{% url 'istek_eylem' istek.pk 'geri_cek' %}">{% csrf_token %}<button class="btn ikincil">Geri çek</button></form>
+      {% elif d == "onayla" %}
+        <details class="ac"><summary class="btn ana">Onayla</summary>
+          <form method="post" action="{% url 'istek_eylem' istek.pk 'onayla' %}">{% csrf_token %}
+            <label class="alan"><span>Teşekkür notu (isteğe bağlı, herkese görünür)</span><textarea class="girdi" name="tesekkur" placeholder="Çok sağ ol! 🙏"></textarea></label>
+            <button class="btn ana">Onayla</button>
+          </form>
+        </details>
+      {% elif d == "yapilmadi" %}
+        <details class="ac"><summary class="btn ikincil">Yapılmadı</summary>
+          <form method="post" action="{% url 'istek_eylem' istek.pk 'yapilmadi' %}">{% csrf_token %}
+            <label class="alan"><span>Neyin eksik olduğunu yaz (zorunlu)</span><textarea class="girdi" name="gerekce"></textarea></label>
+            <button class="btn ikincil">Gönder</button>
+          </form>
+        </details>
+      {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+
+<section class="yorumlar">
+  <b>Yorumlar</b> <span style="color:var(--muted);font-size:13px">· herkese açık</span>
+  {% if yorum_yazilabilir %}
+  <form method="post" action="{% url 'istek_eylem' istek.pk 'yorum' %}" style="margin-top:10px;display:flex;gap:8px">{% csrf_token %}
+    <input class="girdi" name="metin" placeholder="Yorum ekle..." maxlength="1000" required>
+    <button class="btn ana">Gönder</button>
+  </form>
+  {% endif %}
+  {% for y in yorumlar %}
+    <div class="yorum{% if y.tesekkur %} tesekkur{% endif %}"><span class="av">{{ y.yazan.bas_harfler }}</span>
+      <div><div class="cm">{% if y.tesekkur %}💛 {% endif %}<b>{{ y.yazan.gorunen_ad }}</b>{% if y.tesekkur %} teşekkür etti{% endif %} · {{ y.zaman|timesince }} önce</div><p>{{ y.metin }}</p></div>
+    </div>
+  {% empty %}
+    <p style="color:var(--muted);font-size:13px">Henüz yorum yok.</p>
+  {% endfor %}
+</section>
+{% endblock %}

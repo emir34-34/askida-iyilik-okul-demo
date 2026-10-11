@@ -1,0 +1,13 @@
+{% extends "istekler/base.html" %}
+{% block icerik %}
+<div class="sekmeler">
+  <a class="chip {% if sekme != 'acik' %}on{% endif %}" href="?sekme=yeni{% if kategori %}&k={{ kategori }}{% endif %}">Yeni</a>
+  <a class="chip {% if sekme == 'acik' %}on{% endif %}" href="?sekme=acik{% if kategori %}&k={{ kategori }}{% endif %}">Açık olanlar</a>
+  {% for deger, ad in kategoriler %}<a class="chip {% if kategori == deger %}on{% endif %}" href="?sekme={{ sekme }}{% if kategori != deger %}&k={{ deger }}{% endif %}">{{ ad }}</a>{% endfor %}
+</div>
+{% for istek in istekler %}
+  {% include "istekler/_kart.html" %}
+{% empty %}
+  <div class="bos"><div class="ic">🌱</div><h3>Şu an açık istek yok</h3><p>Bir ihtiyacın ya da okulda gördüğün bir sorun varsa ilk isteği sen aç.</p><a class="btn ana" href="{% url 'yeni' %}">＋ İstek aç</a></div>
+{% endfor %}
+{% endblock %}

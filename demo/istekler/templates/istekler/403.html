@@ -1,0 +1,5 @@
+{% extends "istekler/base.html" %}
+{% block baslik %}Yetki yok · Askıda İyilik{% endblock %}
+{% block icerik %}
+<div class="bos"><div class="ic">🚫</div><h3>Bu işlemi yapma yetkin yok.</h3><p>{{ mesaj }}</p><a class="btn ikincil" href="{% url 'akis' %}">Akışa dön</a></div>
+{% endblock %}

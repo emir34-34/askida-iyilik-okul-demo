@@ -1,0 +1,13 @@
+{% extends "istekler/base.html" %}
+{% block baslik %}Görevler · Askıda İyilik{% endblock %}
+{% block icerik %}
+<div class="sekmeler">
+  <a class="chip {% if sekme == 'actiklarim' %}on{% endif %}" href="?sekme=actiklarim">Açtıklarım</a>
+  <a class="chip {% if sekme == 'ustlendiklerim' %}on{% endif %}" href="?sekme=ustlendiklerim">Üstlendiklerim</a>
+</div>
+{% for istek in istekler %}
+  {% include "istekler/_kart.html" %}
+{% empty %}
+  <div class="bos"><div class="ic">📋</div><h3>Henüz bir işin yok</h3><p>Açtığın ve üstlendiğin istekler burada görünür.</p><a class="btn ikincil" href="{% url 'akis' %}?sekme=acik">Açık isteklere bak</a></div>
+{% endfor %}
+{% endblock %}

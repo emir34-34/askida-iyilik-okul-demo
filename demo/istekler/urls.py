@@ -1,7 +1,7 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
-from . import views
+from . import api, views
 
 urlpatterns = [
     path("", views.akis, name="akis"),
@@ -12,4 +12,13 @@ urlpatterns = [
     path("istek/<int:pk>/<slug:eylem>/", views.istek_eylem, name="istek_eylem"),
     path("gorevler/", views.gorevler, name="gorevler"),
     path("profil/", views.profil, name="profil"),
+
+    # Veri API'si (demo-plani.md, mimari değişikliği)
+    path("api/ben", api.ben),
+    path("api/giris", api.giris),
+    path("api/cikis", api.cikis),
+    path("api/istekler", api.istekler),
+    path("api/gorevler", api.gorevler),
+    path("api/istekler/<int:no>", api.istek),
+    path("api/istekler/<int:no>/<slug:eylem>", api.istek_eylem),
 ]

@@ -188,3 +188,69 @@ class SayfaYetkiTesti(OrnekVeri):
         self.client.force_login(self.ayse)
         self.assertEqual(self.client.get(f"/istek/{self.istek.pk}/").status_code, 404)
         self.assertNotContains(self.client.get("/"), "Kimya notları lazım")
+
+
+class ApiTesti(OrnekVeri):
+    """API (demo-plani.md): kurallar API üzerinden de aynı şekilde uygulanır (T-07)."""
+
+    def post(self, yol, veri=None):
+        return self.client.post(yol, data=veri or {}, content_type="application/json")
+
+    def test_giris_yapmayan_401_alir(self):
+        self.assertEqual(self.client.get("/api/istekler").status_code, 401)
+        self.assertEqual(self.post(f"/api/istekler/{self.istek.pk}/ustlen").status_code, 401)
+        self.assertEqual(self.durum(), Durum.ACIK)
+
+    def test_api_ile_giris_ve_akis(self):
+        self.assertEqual(self.post("/api/giris", {"kullanici_adi": "ogrenci2", "sifre": "yanlis"}).status_code, 400)
+        cevap = self.post("/api/giris", {"kullanici_adi": "ogrenci2", "sifre": "test-sifresi-123"})
+        self.assertEqual(cevap.status_code, 200)
+        self.assertEqual(cevap.json()["gorunen_ad"], "Ayşe K.")
+        basliklar = [i["baslik"] for i in self.client.get("/api/istekler").json()["istekler"]]
+        self.assertIn("Kimya notları lazım", basliklar)
+
+    def test_api_adresine_dogrudan_istek_atan_yabanci_403_alir(self):
+        gecisler.ustlen(self.istek.pk, self.ayse)
+        gecisler.yapildi_de(self.istek.pk, self.ayse)
+        self.client.force_login(self.can)
+        cevap = self.post(f"/api/istekler/{self.istek.pk}/onayla")
+        self.assertEqual(cevap.status_code, 403)
+        self.assertIn("isteği açan", cevap.json()["hata"])
+        self.assertEqual(self.durum(), Durum.YAPILDI)
+
+    def test_api_cift_ustlenme_409(self):
+        self.client.force_login(self.ayse)
+        self.assertEqual(self.post(f"/api/istekler/{self.istek.pk}/ustlen").status_code, 200)
+        self.client.force_login(self.can)
+        cevap = self.post(f"/api/istekler/{self.istek.pk}/ustlen")
+        self.assertEqual(cevap.status_code, 409)
+        self.assertEqual(Istek.objects.get(pk=self.istek.pk).ustlenen, self.ayse)
+
+    def test_api_dugmeleri_role_gore_doner(self):
+        self.client.force_login(self.ayse)
+        self.assertEqual(self.client.get(f"/api/istekler/{self.istek.pk}").json()["dugmeler"], ["ustlen"])
+        self.client.force_login(self.mehmet)
+        self.assertEqual(self.client.get(f"/api/istekler/{self.istek.pk}").json()["dugmeler"], ["geri_cek"])
+
+    def test_api_gizlenen_istegi_ogrenciye_gostermez(self):
+        gecisler.gizle(self.istek.pk, self.selin, "Uygunsuz.")
+        self.client.force_login(self.ayse)
+        self.assertEqual(self.client.get(f"/api/istekler/{self.istek.pk}").status_code, 404)
+        basliklar = [i["baslik"] for i in self.client.get("/api/istekler").json()["istekler"]]
+        self.assertNotIn("Kimya notları lazım", basliklar)
+
+    def test_api_gerekcesiz_yapilmadi_400(self):
+        gecisler.ustlen(self.istek.pk, self.ayse)
+        gecisler.yapildi_de(self.istek.pk, self.ayse)
+        self.client.force_login(self.mehmet)
+        self.assertEqual(self.post(f"/api/istekler/{self.istek.pk}/yapilmadi", {"gerekce": " "}).status_code, 400)
+        self.assertEqual(self.durum(), Durum.YAPILDI)
+
+    def test_csrf_jetonu_olmadan_veri_degistirilemez(self):
+        """Başka bir siteden gizlice gönderilen istek (CSRF) reddedilir."""
+        from django.test import Client
+        c = Client(enforce_csrf_checks=True)
+        c.force_login(self.ayse)
+        cevap = c.post(f"/api/istekler/{self.istek.pk}/ustlen", content_type="application/json")
+        self.assertEqual(cevap.status_code, 403)
+        self.assertEqual(self.durum(), Durum.ACIK)

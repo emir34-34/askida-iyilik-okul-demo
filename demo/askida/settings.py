@@ -59,7 +59,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'istekler',
 ]
+
+# Django'nun kullanıcı modeli yerine rol ve görünen ad eklenmiş kendi modelimiz (veri.md)
+AUTH_USER_MODEL = 'istekler.Kullanici'
+LOGIN_URL = 'giris'
+LOGIN_REDIRECT_URL = 'akis'
+LOGOUT_REDIRECT_URL = 'giris'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

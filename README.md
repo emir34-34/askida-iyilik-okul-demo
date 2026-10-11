@@ -10,7 +10,7 @@ Askıda İyilik, okulda insanların birbirine yaptığı iyiliği görünür kı
 |---|-------|--------|-------|
 | 1 | [README.md](README.md) | Özet, dosya listesi, demoyu kurma ve çalıştırma | başladı |
 | 2 | [talepler.md](talepler.md) | Talepler, kimin istediği, geri okunup okunmadığı, tasarımda ve demoda nerede olduğu | başladı |
-| 3 | roller.md | Rol × eylem tablosu | — |
+| 3 | [roller.md](roller.md) | Rol × eylem tablosu | taslak, hocalara sorulacak |
 | 4 | akis.md | İsteğin durumları ve geçişleri | — |
 | 5 | veri.md | Tutulan alanlar ve gerekçeleri, tutulmayacaklar | — |
 | 6 | ekranlar.md | En az 5 ekran taslağı | — |

@@ -470,6 +470,7 @@ Kullanıcı ilk kez giriş yaptığında akıştan önce gösterilir. Uygulaman�
 - **Tanıtım atlanamaz, "Geç" düğmesi yok.** Her ekranda "İleri" düğmesi **2 saniye kilitli** kalır, kilitliyken düğmenin içi soldan sağa dolar. Amaç, kullanıcının metni okumadan hızla geçip gitmesini önlemek.
 - Son ekranda kurallar var. "Başla" düğmesi hem 2 saniye geçmeden hem de **"Kuralları okudum" işaretlenmeden** çalışmaz.
 - 2 saniye kısa tutuldu: Tanıtım yalnızca bir kez gösterildiği için kullanıcıyı sıkmadan okumaya yönlendirmek yeterli.
+- **Easter egg:** Düğme kilitliyken üst üste 3 kez basılırsa düğme sallanır ve "Sakin ol, sabırsız! 😄" gibi şakacı bir mesaj çıkar (üç mesajdan biri rastgele seçilir). Kurallar ekranında süre dolduğu hâlde "okudum" işaretlenmediyse mesaj "Önce kuralları okuduğunu işaretle." olur. Amaç, beklemeyi sinir bozucu olmaktan çıkarıp gülümseten bir ana çevirmek.
 - Kurallar değişmez ilkelerden gelir: özel mesaj yok (T-01), kişisel bilgi yok (T-03), sıralama yok (T-02). Kural metni örnektir, asıl metni hocalar belirleyecek.
 - Kurallar daha sonra Profil'deki (E8) **Uygulama kuralları** satırından yeniden okunabilir.
 

@@ -119,10 +119,12 @@ figcaption small{display:block;font-weight:400;color:var(--muted)}
 .dots i{width:8px;height:8px;border-radius:999px;background:var(--pill-hover);transition:width .2s}
 .dots i.on{width:22px;background:var(--brand)}
 .wait{position:relative;overflow:hidden}
-.wait[disabled]{background:var(--pill-hover);color:var(--muted);cursor:not-allowed}
-.wait[disabled]::before{content:"";position:absolute;inset:0;width:0;background:color-mix(in srgb, var(--brand) 35%, transparent);animation:fill 2s linear forwards}
+.wait.locked{background:var(--pill-hover);color:var(--muted);cursor:not-allowed}
+.wait.locked::before{content:"";position:absolute;inset:0;width:0;background:color-mix(in srgb, var(--brand) 35%, transparent);animation:fill 2s linear forwards}
 .wait span{position:relative}
 @keyframes fill{to{width:100%}}
+.wait.shake{animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
 .agree{display:flex;gap:8px;align-items:center;font-size:13px;margin-bottom:12px}
 .agree input{accent-color:var(--brand);width:18px;height:18px;margin:0}
 /* teşekkür */
@@ -494,7 +496,7 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
   <!-- E12 -->
   <figure id="e12">
     <figcaption>E12 · İlk giriş tanıtımı<small>Yalnızca ilk girişte. "İleri" ile gezilebilir</small></figcaption>
-    <div class="phone"><div class="intro" id="intro"></div></div>
+    <div class="phone"><div class="intro" id="intro"></div><div class="toast live-toast" id="introToast" style="bottom:96px;text-align:center"></div></div>
   </figure>
 
   <!-- E13 -->
@@ -871,8 +873,17 @@ var SLIDES=[
   {e:"✅",h:"Sen onaylarsın",p:"İş yapılınca sen onaylarsın. Böylece okulda yapılan iyilikler görünür olur."},
   {rules:true}
 ];
-var si=0;
+var si=0, taps=0;
+// Easter egg: kilitliyken üst üste 3 kez basılırsa
+var SABIRSIZ=["Sakin ol, sabırsız! 😄","Acele etme, önce bir oku 📖","Düğme kaçmıyor, söz veriyoruz 🙃"];
+function toastIntro(t){var el=document.getElementById("introToast"); el.textContent=t; el.classList.add("show"); clearTimeout(el._t); el._t=setTimeout(function(){el.classList.remove("show");},1800);}
+function impatient(btn){
+  taps++;
+  btn.classList.remove("shake"); void btn.offsetWidth; btn.classList.add("shake");
+  if(taps>=3){ toastIntro(SABIRSIZ[Math.floor(Math.random()*SABIRSIZ.length)]); taps=0; }
+}
 function intro(){
+  taps=0;
   var el=document.getElementById("intro"), x=SLIDES[si];
   var dots='<div class="dots">'+SLIDES.map(function(_,i){return '<i class="'+(i===si?'on':'')+'"></i>';}).join("")+'</div>';
   if(x.rules){
@@ -884,18 +895,24 @@ function intro(){
       '<li>Kaç iyilik yaptığın bir yerde sayılmaz. Bu bir yarışma değil.</li></ul>'+
       '<div class="spacer"></div>'+dots+
       '<label class="agree"><input type="checkbox" id="ok"> Kuralları okudum</label>'+
-      '<button class="primary wait" type="button" id="go" disabled><span>Başla</span></button>';
+      '<button class="primary wait locked" type="button" id="go" aria-disabled="true"><span>Başla</span></button>';
     var ok=document.getElementById("ok"), go=document.getElementById("go"), timeUp=false;
-    function upd(){go.disabled=!(timeUp&&ok.checked);}
+    function upd(){var on=timeUp&&ok.checked; go.classList.toggle("locked",!on); go.setAttribute("aria-disabled",on?"false":"true");}
     ok.addEventListener("change",upd);
     clearTimeout(window._iw); window._iw=setTimeout(function(){timeUp=true;upd();},2000);
-    go.addEventListener("click",function(){si=0;intro();});
+    go.addEventListener("click",function(){
+      if(go.classList.contains("locked")){ if(timeUp) toastIntro("Önce kuralları okuduğunu işaretle."); else impatient(go); return; }
+      si=0;intro();
+    });
     return;
   }
-  el.innerHTML='<div class="art"><div>'+x.e+'</div></div><h3>'+x.h+'</h3><p>'+x.p+'</p>'+dots+'<button class="primary wait" type="button" id="next" disabled><span>İleri</span></button>';
+  el.innerHTML='<div class="art"><div>'+x.e+'</div></div><h3>'+x.h+'</h3><p>'+x.p+'</p>'+dots+'<button class="primary wait locked" type="button" id="next" aria-disabled="true"><span>İleri</span></button>';
   var nx=document.getElementById("next");
-  clearTimeout(window._iw); window._iw=setTimeout(function(){nx.disabled=false;},2000);
-  nx.addEventListener("click",function(){si++;intro();});
+  clearTimeout(window._iw); window._iw=setTimeout(function(){nx.classList.remove("locked");nx.setAttribute("aria-disabled","false");},2000);
+  nx.addEventListener("click",function(){
+    if(nx.classList.contains("locked")){impatient(nx);return;}
+    si++;intro();
+  });
 }
 intro();
 </script>

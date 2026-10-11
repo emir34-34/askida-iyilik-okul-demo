@@ -142,6 +142,7 @@ public class IstekEkrani extends Ekran {
         g.setLineSpacing(0, 1.25f);
         k.addView(g);
         k.addView(dugmeler(i.optJSONArray("dugmeler")));
+        k.addView(ogretmenKutusu(i));
         l.addView(k);
         l.addView(t.cizgi());
 
@@ -230,6 +231,44 @@ public class IstekEkrani extends Ekran {
         return kutu;
     }
 
+    /** E6: Yalnızca öğretmenin gördüğü kutu. Sunucu öğretmen olmayanın isteğini zaten reddeder. */
+    private View ogretmenKutusu(JSONObject i) {
+        LinearLayout kutu = new LinearLayout(a);
+        JSONArray d = i.optJSONArray("ogretmen_dugmeleri");
+        if (d == null || d.length() == 0) return kutu;
+        kutu.setOrientation(LinearLayout.VERTICAL);
+        kutu.setPadding(t.dp(12), t.dp(10), t.dp(12), t.dp(12));
+        kutu.setBackground(t.yuvarlak(t.uyariZemin, 12));
+        LinearLayout.LayoutParams klp = new LinearLayout.LayoutParams(-1, -2);
+        klp.setMargins(0, t.dp(10), 0, 0);
+        kutu.setLayoutParams(klp);
+        kutu.addView(t.yazi("🛡️ Öğretmen", 12, 700, t.uyari));
+        String gerekce = i.optString("gizleme_gerekcesi", "");
+        if (!gerekce.isEmpty()) {
+            TextView g = t.yazi("Gizlendi: " + gerekce, 14, 500, t.metin);
+            g.setPadding(0, t.dp(6), 0, 0);
+            kutu.addView(g);
+        }
+        LinearLayout satir = new LinearLayout(a);
+        satir.setPadding(0, t.dp(8), 0, 0);
+        kutu.addView(satir);
+        if ("gizle".equals(d.optString(0))) {
+            TextView b = t.dugme("Gizle…", false);
+            b.setTextColor(t.tehlike);
+            b.setOnClickListener(v -> {
+                EditText gerekceGirdi = girdi("Neden gizliyorsun?", false, true);
+                pencere("İçeriği gizle", "İstek silinmez, gizlenir. Gerekçe zorunlu ve durum geçmişine yazılır.",
+                        gerekceGirdi, "Gizle", () -> eylem("gizle", "gerekce", gerekceGirdi.getText().toString()));
+            });
+            satir.addView(b);
+        } else {
+            TextView b = t.dugme("Gizlemeyi kaldır", false);
+            b.setOnClickListener(v -> eylem("gizlemeyi_kaldir", null, null));
+            satir.addView(b);
+        }
+        return kutu;
+    }
+
     /** E13: Onayla, isteğe bağlı teşekkür notuyla. */
     private void onayPenceresi() {
         EditText not = girdi("Çok sağ ol! 🙏", false, true);
@@ -266,6 +305,8 @@ public class IstekEkrani extends Ekran {
         BASARI.put("onayla", "Teşekkürler! İstek tamamlandı.");
         BASARI.put("yapilmadi", "İstek yeniden üstlenen kişiye döndü.");
         BASARI.put("yorum", "Yorumun eklendi.");
+        BASARI.put("gizle", "İstek gizlendi. Öğrenciler artık göremez.");
+        BASARI.put("gizlemeyi_kaldir", "Gizleme kaldırıldı, istek yeniden açık.");
     }
 
     /** Bütün düğmeler aynı adrese gider: /api/istekler/<no>/<eylem>. Yetkiyi sunucu kontrol eder. */

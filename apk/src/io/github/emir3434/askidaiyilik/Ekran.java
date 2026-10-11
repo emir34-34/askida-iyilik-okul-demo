@@ -135,6 +135,15 @@ public abstract class Ekran {
         g.setEllipsize(android.text.TextUtils.TruncateAt.END);
         g.setPadding(0, 0, 0, t.dp(10));
         k.addView(g);
+        String gerekce = i.optString("gizleme_gerekcesi", "");
+        if (!gerekce.isEmpty()) {
+            TextView gz = t.yazi("🛡️ Gizlendi: " + gerekce, 13, 600, t.uyari);
+            gz.setPadding(t.dp(10), t.dp(7), t.dp(10), t.dp(7));
+            gz.setBackground(t.yuvarlak(t.uyariZemin, 10));
+            LinearLayout.LayoutParams glp = new LinearLayout.LayoutParams(-2, -2);
+            glp.setMargins(0, 0, 0, t.dp(10));
+            k.addView(gz, glp);
+        }
         k.addView(yorumHapi(i.optInt("yorum_sayisi")));
         final int no = i.optInt("no");
         k.setOnClickListener(v -> a.ac(new IstekEkrani(a, no)));

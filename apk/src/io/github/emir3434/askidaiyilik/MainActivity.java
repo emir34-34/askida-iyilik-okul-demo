@@ -130,6 +130,7 @@ public class MainActivity extends Activity {
             case "olustur": e = new YeniEkrani(this); break;
             case "gorevler": e = new GorevlerEkrani(this); break;
             case "profil": e = new ProfilEkrani(this); break;
+            case "kontrol": e = new KontrolEkrani(this); break;
             default: e = new AkisEkrani(this);
         }
         yigin.push(e);
@@ -214,8 +215,14 @@ public class MainActivity extends Activity {
 
         altMenu.removeAllViews();
         altMenu.setBackgroundColor(t.kart);
-        String[][] menu = {{"akis", "Akış"}, {"olustur", "Oluştur"}, {"gorevler", "Görevler"}, {"profil", "Profil"}};
-        int[] simgeler = {R.drawable.i_akis, R.drawable.i_olustur, R.drawable.i_gorevler, R.drawable.i_profil};
+        boolean ogretmen = ben != null && ben.optBoolean("ogretmen");
+        // Öğretmenlere beşinci sekme olarak Kontrol (D4) görünür, öğrencilere görünmez.
+        String[][] menu = ogretmen
+                ? new String[][]{{"akis", "Akış"}, {"olustur", "Oluştur"}, {"gorevler", "Görevler"}, {"kontrol", "Kontrol"}, {"profil", "Profil"}}
+                : new String[][]{{"akis", "Akış"}, {"olustur", "Oluştur"}, {"gorevler", "Görevler"}, {"profil", "Profil"}};
+        int[] simgeler = ogretmen
+                ? new int[]{R.drawable.i_akis, R.drawable.i_olustur, R.drawable.i_gorevler, R.drawable.i_kontrol, R.drawable.i_profil}
+                : new int[]{R.drawable.i_akis, R.drawable.i_olustur, R.drawable.i_gorevler, R.drawable.i_profil};
         for (int i = 0; i < menu.length; i++) {
             final String ad = menu[i][0];
             boolean secili = ad.equals(seciliSekme);

@@ -40,6 +40,7 @@ Hocalarla görüşemediğim için roller, akış ve veri dosyalarının taslağ�
 | V-07 | İstekler öğretmen onayı beklemeden yayına girer | akis.md | 14 | bekliyor |
 | V-08 | İşi bırakırken gerekçe yazmak zorunlu değil | akis.md | 11 | bekliyor |
 | V-09 | Görünen ad yalnızca ad ve soyadın baş harfi (Ayşe K.) | veri.md | — | bekliyor |
+| V-10 | Uygulama çoğunlukla telefondan kullanılır, ekranlar dar ekrana göre tasarlanır | ekranlar.md | 16 | bekliyor |
 
 ## C. Açık sorular ve açık kararlar
 
@@ -50,3 +51,5 @@ Hocalarla görüşemediğim için roller, akış ve veri dosyalarının taslağ�
 | S-03 | İsteği açan kişi "Yapıldı" durumundaki isteğe hiç cevap vermezse ne olsun, ne kadar süre sonra? (akis.md, soru 3) | Yasemin Hoca, Eyüp Hoca | açık |
 | S-04 | Veriler ne kadar süre saklanacak, mezun olan öğrencinin hesabı ne olacak? (KVKK) | Özgür Hoca | açık |
 | S-05 | Hocalarla görüşmeden önce roller, akış ve veri taslağını yazmam uygun mu? | Özgür Hoca | 2026-10-11: Hafta içi bakacağını ve devam etmemi söyledi. Taslak, varsayımları işaretlenerek yazıldı |
+| S-06 | Aynı kişi bir isteği defalarca üstlenip bırakırsa bir sınır olsun mu? (senaryolar.md, Senaryo 2) | Yasemin Hoca, Eyüp Hoca | açık |
+| S-07 | Senaryo 3 ve 4 için adaylar (yapılmadı diye geri çevirme, uygunsuz içeriği gizleme) uygun mu, yoksa hocaların seçtiği başka durumlar mı yazılmalı? | Yasemin Hoca, Eyüp Hoca | açık |

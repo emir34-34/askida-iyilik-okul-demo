@@ -16,6 +16,7 @@ public abstract class ListeEkrani extends Ekran {
 
     protected CekYenile liste;
     private LinearLayout cipler;
+    private String sonVeri; // son çizilen veri; aynıysa yeniden çizilmez
 
     protected ListeEkrani(MainActivity a) {
         super(a);
@@ -65,6 +66,18 @@ public abstract class ListeEkrani extends Ekran {
     }
 
     @Override
+    protected long canliAralik() {
+        return 10000; // akış 10 saniyede bir güncellenir
+    }
+
+    @Override
+    protected void canliSor() {
+        api.get(adres(), c -> {
+            if (c.tamam() && !c.veri.toString().equals(sonVeri)) listeyiCiz(c.veri);
+        });
+    }
+
+    @Override
     void yenile() {
         if (liste == null) return;
         api.get(adres(), c -> {
@@ -74,7 +87,14 @@ public abstract class ListeEkrani extends Ekran {
                 a.bildir(c.hata(), true);
                 return;
             }
-            JSONArray istekler = c.veri.optJSONArray("istekler");
+            listeyiCiz(c.veri);
+        });
+    }
+
+    private void listeyiCiz(org.json.JSONObject veri) {
+        sonVeri = veri.toString();
+        {
+            JSONArray istekler = veri.optJSONArray("istekler");
             liste.liste.removeAllViews();
             if (istekler == null || istekler.length() == 0) {
                 liste.liste.addView(bosGorunum());
@@ -84,6 +104,6 @@ public abstract class ListeEkrani extends Ekran {
                 liste.liste.addView(istekKarti(istekler.optJSONObject(i)));
                 liste.liste.addView(t.cizgi());
             }
-        });
+        }
     }
 }

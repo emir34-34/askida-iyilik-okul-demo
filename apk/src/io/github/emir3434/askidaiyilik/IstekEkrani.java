@@ -23,6 +23,7 @@ public class IstekEkrani extends Ekran {
     private CekYenile liste;
     private LinearLayout yorumCubugu;
     private EditText yorumGirdi;
+    private JSONObject son; // son çizilen veri
 
     public IstekEkrani(MainActivity a, int no) {
         super(a);
@@ -81,7 +82,50 @@ public class IstekEkrani extends Ekran {
         });
     }
 
+    @Override
+    protected long canliAralik() {
+        return 3000; // istek sayfası 3 saniyede bir güncellenir
+    }
+
+    @Override
+    protected void canliSor() {
+        api.get("istekler/" + no, c -> {
+            if (c.kod == 404 && son != null) {
+                yenile(); // istek gizlendi ya da kaldırıldı
+            } else if (c.tamam() && (son == null || !c.veri.toString().equals(son.toString()))) {
+                baskasiDegistirdi(son, c.veri);
+                ciz(c.veri);
+            }
+        });
+    }
+
+    /**
+     * Ekran açıkken başka biri isteği değiştirdi. (Kendi işlemlerimiz ciz() ile hemen çizildiği için
+     * buraya yalnızca başkalarının yaptığı değişiklikler düşer.) Kullanıcıya ne olduğunu söyler.
+     */
+    private void baskasiDegistirdi(JSONObject eski, JSONObject yeni) {
+        if (eski == null) return;
+        String once = eski.optString("durum"), simdi = yeni.optString("durum");
+        if (once.equals(simdi)) return; // yalnızca yeni yorum geldi: sessizce güncelle
+        String yeniKisi = ad(yeni.optJSONObject("ustlenen"));
+        String eskiKisi = ad(eski.optJSONObject("ustlenen"));
+        String mesaj;
+        if (once.equals("acik") && simdi.equals("ustlenildi")) mesaj = "Bu istek az önce " + yeniKisi + " tarafından üstlenildi.";
+        else if (once.equals("ustlenildi") && simdi.equals("acik")) mesaj = eskiKisi + " işi bıraktı. İstek yeniden açık.";
+        else if (once.equals("ustlenildi") && simdi.equals("yapildi")) mesaj = yeniKisi + " işi yaptığını söyledi.";
+        else if (once.equals("yapildi") && simdi.equals("tamamlandi")) mesaj = "İstek onaylandı ve tamamlandı. 🎉";
+        else if (once.equals("yapildi") && simdi.equals("ustlenildi")) mesaj = "İş yeniden " + yeniKisi + " kişisine döndü.";
+        else if (simdi.equals("geri_cekildi")) mesaj = "İsteği açan kişi isteğini geri çekti.";
+        else mesaj = "İstek güncellendi: " + yeni.optString("durum_adi");
+        a.bildir(mesaj, false);
+    }
+
+    private static String ad(JSONObject kisi) {
+        return kisi == null ? "Biri" : kisi.optString("gorunen_ad", "Biri");
+    }
+
     private void ciz(JSONObject i) {
+        son = i;
         LinearLayout l = liste.liste;
         l.removeAllViews();
 

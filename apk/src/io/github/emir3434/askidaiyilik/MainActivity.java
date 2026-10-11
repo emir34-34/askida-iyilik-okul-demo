@@ -40,6 +40,7 @@ public class MainActivity extends Activity {
     private FrameLayout icerik;
     private final ArrayDeque<Ekran> yigin = new ArrayDeque<>();
     private String seciliSekme = "akis";
+    private Ekran ondeki; // şu an görünen ekran (canlı güncelleme yalnızca onda çalışır)
     private boolean pencereAcik = false;
 
     @Override
@@ -66,6 +67,21 @@ public class MainActivity extends Activity {
         setContentView(kokKatman);
 
         baslat();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (ondeki != null) ondeki.gizlendi(); // uygulama arka planda: sorma dursun
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (ondeki != null) {
+            ondeki.gorundu();
+            ondeki.yenile(); // geri gelince hemen güncelle
+        }
     }
 
     /** Durum ve gezinme çubuklarını uygulamanın renklerine boyar (native görünüm). */
@@ -147,6 +163,9 @@ public class MainActivity extends Activity {
     }
 
     private void ekraniKoy(Ekran e, boolean kaydir) {
+        if (ondeki != null) ondeki.gizlendi();
+        ondeki = e;
+        e.gorundu();
         icerik.removeAllViews();
         View v = e.gorunum();
         if (v.getParent() != null) ((ViewGroup) v.getParent()).removeView(v);

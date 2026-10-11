@@ -34,6 +34,41 @@ public abstract class Ekran {
     void yenile() {
     }
 
+    // --- Canlı güncelleme (demo-plani.md): ekran görünürken belirli aralıklarla sunucuya sorar ---
+
+    private final android.os.Handler zamanlayici = new android.os.Handler(android.os.Looper.getMainLooper());
+    private boolean gorunur = false;
+    private final Runnable dongu = new Runnable() {
+        @Override
+        public void run() {
+            if (!gorunur) return;
+            canliSor();
+            zamanlayici.postDelayed(this, canliAralik());
+        }
+    };
+
+    /** Kaç milisaniyede bir sorulacak. 0: canlı güncelleme yok. */
+    protected long canliAralik() {
+        return 0;
+    }
+
+    /** Sessizce sunucuya sorar, veri değiştiyse ekranı günceller (alt sınıflar doldurur). */
+    protected void canliSor() {
+    }
+
+    /** Ekran öne geldi: canlı güncelleme başlar. */
+    final void gorundu() {
+        if (gorunur || canliAralik() <= 0) return;
+        gorunur = true;
+        zamanlayici.postDelayed(dongu, canliAralik());
+    }
+
+    /** Ekran arka plana gitti: canlı güncelleme durur, boşuna istek atılmaz. */
+    final void gizlendi() {
+        gorunur = false;
+        zamanlayici.removeCallbacks(dongu);
+    }
+
     /** Üst çubukta, geri okunun yanında gösterilen başlık. */
     String baslik() {
         return "";

@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Askıda İyilik Ekran Taslakları</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Reddit+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#dae0e6; --page:#f6f7f8; --card:#ffffff; --text:#1c1c1c; --muted:#576f76;
+  --line:#e5ebee; --pill:#eaedef; --pill-hover:#dbe0e3;
+  --up:#d93a00; --down:#6a5cff; --brand:#0f8a6c; --brand-ink:#ffffff;
+  --open:#1a7f37; --open-bg:#dcf5e3; --claimed:#9a6700; --claimed-bg:#fff1c2;
+  --done:#0a58ca; --done-bg:#dbe8ff; --closed:#57606a; --closed-bg:#eaeef2;
+  --warn:#b35900; --warn-bg:#fff0e0; --danger:#cf222e; --toast:#1c1c1c; --toast-ink:#fff;
+  --frame:#1c1c1c;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b1416; --page:#0e1113; --card:#181c1f; --text:#e3e6e8; --muted:#8ba2ad;
+    --line:#2a3236; --pill:#2a3236; --pill-hover:#333d42;
+    --up:#ff6a33; --down:#8f84ff; --brand:#2fbf94; --brand-ink:#04140f;
+    --open:#4ac26b; --open-bg:#12301c; --claimed:#e3b341; --claimed-bg:#3a2e0b;
+    --done:#6ea8fe; --done-bg:#102a4c; --closed:#9aa4ae; --closed-bg:#262c31;
+    --warn:#ffa657; --warn-bg:#3a250d; --danger:#ff7b72; --toast:#e3e6e8; --toast-ink:#0e1113;
+    --frame:#000;
+  }
+}
+:root[data-theme="dark"]{
+    --bg:#0b1416; --page:#0e1113; --card:#181c1f; --text:#e3e6e8; --muted:#8ba2ad;
+    --line:#2a3236; --pill:#2a3236; --pill-hover:#333d42;
+    --up:#ff6a33; --down:#8f84ff; --brand:#2fbf94; --brand-ink:#04140f;
+    --open:#4ac26b; --open-bg:#12301c; --claimed:#e3b341; --claimed-bg:#3a2e0b;
+    --done:#6ea8fe; --done-bg:#102a4c; --closed:#9aa4ae; --closed-bg:#262c31;
+    --warn:#ffa657; --warn-bg:#3a250d; --danger:#ff7b72; --toast:#e3e6e8; --toast-ink:#0e1113;
+    --frame:#000;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Reddit Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:14px;line-height:1.4}
+header.top{max-width:1200px;margin:0 auto;padding:24px 16px 8px}
+header.top h1{margin:0 0 4px;font-size:22px}
+header.top p{margin:0;color:var(--muted);max-width:760px}
+.note{display:inline-block;margin-top:10px;padding:6px 10px;border-radius:8px;background:var(--warn-bg);color:var(--warn);font-weight:600;font-size:13px}
+.themebtn{float:right;border:0;background:var(--pill);color:var(--text);border-radius:999px;padding:6px 12px;font:inherit;cursor:pointer}
+.gallery{max-width:1200px;margin:0 auto;padding:16px;display:flex;flex-wrap:wrap;gap:28px;justify-content:center}
+figure{margin:0;width:340px;max-width:100%}
+figcaption{font-weight:700;margin:0 0 8px}
+figcaption small{display:block;font-weight:400;color:var(--muted)}
+.phone{width:100%;height:640px;border:10px solid var(--frame);border-radius:34px;background:var(--page);overflow:hidden;display:flex;flex-direction:column;position:relative}
+.scroll{flex:1;overflow-y:auto}
+/* üst çubuk */
+.bar{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--card);border-bottom:1px solid var(--line)}
+.logo{font-weight:800;font-size:16px;display:flex;align-items:center;gap:6px}
+.logo .dot{width:26px;height:26px;border-radius:50%;background:var(--brand);color:var(--brand-ink);display:grid;place-items:center;font-size:14px}
+.spacer{flex:1}
+.av{width:28px;height:28px;border-radius:50%;background:var(--pill);display:grid;place-items:center;font-size:11px;font-weight:700;color:var(--muted);flex:none}
+.iconbtn{border:0;background:transparent;color:var(--text);font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer}
+.iconbtn:hover{background:var(--pill)}
+/* sekmeler */
+.tabs{display:flex;gap:6px;padding:8px 12px;background:var(--card);border-bottom:1px solid var(--line);overflow-x:auto}
+.chip{border:0;background:var(--pill);color:var(--text);border-radius:999px;padding:6px 12px;font:inherit;font-weight:600;font-size:13px;white-space:nowrap;cursor:pointer}
+.chip.on{background:var(--text);color:var(--card)}
+/* kart */
+.post{background:var(--card);padding:10px 12px 8px;border-bottom:1px solid var(--line);cursor:default}
+.meta{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:12px}
+.meta b{color:var(--text);font-weight:700}
+.title{font-weight:700;font-size:16px;margin:4px 0 6px;line-height:1.25}
+.body{color:var(--text);opacity:.9;margin:0 0 8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.body.full{display:block}
+.flair{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px;margin-bottom:6px}
+.f-open{color:var(--open);background:var(--open-bg)}
+.f-claimed{color:var(--claimed);background:var(--claimed-bg)}
+.f-done{color:var(--done);background:var(--done-bg)}
+.f-closed{color:var(--closed);background:var(--closed-bg)}
+.actions{display:flex;gap:8px;align-items:center}
+.vote{display:inline-flex;align-items:center;background:var(--pill);border-radius:999px}
+.vote button{border:0;background:transparent;color:var(--text);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:14px}
+.vote button:hover{background:var(--pill-hover)}
+.vote .n{font-weight:700;font-size:13px;min-width:18px;text-align:center}
+.vote.up{background:var(--up);color:#fff}.vote.up button,.vote.up .n{color:#fff}
+.vote.down{background:var(--down);color:#fff}.vote.down button,.vote.down .n{color:#fff}
+.pillbtn{display:inline-flex;align-items:center;gap:6px;border:0;background:var(--pill);color:var(--text);border-radius:999px;height:32px;padding:0 12px;font:inherit;font-weight:600;font-size:13px;cursor:pointer}
+/* alt menü */
+.nav{display:flex;justify-content:space-around;align-items:center;padding:6px 0 10px;background:var(--card);border-top:1px solid var(--line)}
+.nav a{display:flex;flex-direction:column;align-items:center;font-size:11px;color:var(--muted);text-decoration:none;gap:2px}
+.nav a.on{color:var(--text);font-weight:700}
+.nav .plus{width:44px;height:44px;border-radius:50%;background:var(--brand);color:var(--brand-ink);display:grid;place-items:center;font-size:24px;font-weight:700;margin-top:-18px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+/* form */
+.field{padding:0 14px}
+label.l{display:block;font-size:12px;color:var(--muted);margin:14px 0 4px;font-weight:600}
+.input{width:100%;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:12px;padding:12px;font:inherit}
+textarea.input{min-height:110px;resize:none}
+.primary{display:block;width:100%;border:0;background:var(--brand);color:var(--brand-ink);border-radius:999px;padding:12px;font:inherit;font-weight:700;font-size:15px;cursor:pointer}
+.primary.sm{display:inline-block;width:auto;padding:8px 16px;font-size:14px}
+.secondary{border:0;background:var(--pill);color:var(--text);border-radius:999px;padding:8px 16px;font:inherit;font-weight:700;cursor:pointer}
+.danger{border:0;background:var(--danger);color:#fff;border-radius:999px;padding:8px 16px;font:inherit;font-weight:700;cursor:pointer}
+.info{margin:14px;padding:10px 12px;border-radius:12px;background:var(--pill);color:var(--muted);font-size:13px}
+.center{display:flex;flex-direction:column;justify-content:center;height:100%;padding:24px}
+/* ayrıntı */
+.actionbox{margin:8px 0 4px;padding:10px;border:1px dashed var(--line);border-radius:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.actionbox .who{width:100%;font-size:12px;color:var(--muted)}
+.rolepick{display:flex;flex-wrap:wrap;gap:6px;padding:8px 12px;background:var(--warn-bg)}
+.rolepick span{width:100%;font-size:11px;color:var(--warn);font-weight:700}
+.rolepick .chip{font-size:12px;padding:4px 10px}
+.comments{background:var(--card);padding:8px 12px 16px}
+.cbox{border:1px solid var(--line);border-radius:999px;padding:10px 14px;color:var(--muted);margin-bottom:12px}
+.c{display:flex;gap:8px;margin-top:10px}
+.c .thread{border-left:2px solid var(--line);margin-left:13px;padding-left:12px}
+.c .cmeta{font-size:12px;color:var(--muted)}
+.c .cmeta b{color:var(--text)}
+.c .ctext{margin:2px 0 4px}
+.c .reply{font-size:12px;color:var(--muted);font-weight:700}
+.reasonbox{display:none;width:100%}
+.reasonbox.show{display:block}
+/* benim işlerim */
+.badge{display:inline-flex;gap:4px;align-items:center;font-size:12px;font-weight:700;color:var(--warn);background:var(--warn-bg);padding:2px 8px;border-radius:999px}
+/* modal */
+.dim{position:absolute;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:flex-end}
+.sheet{background:var(--card);width:100%;border-radius:18px 18px 0 0;padding:16px}
+.sheet h3{margin:0 0 8px;font-size:16px}
+/* toast */
+.toasts{display:flex;flex-direction:column;gap:8px;padding:14px}
+.toast{background:var(--toast);color:var(--toast-ink);border-radius:12px;padding:10px 12px;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.toast small{display:block;opacity:.7;font-size:11px;margin-bottom:2px}
+.live-toast{position:absolute;left:12px;right:12px;bottom:70px;opacity:0;transition:opacity .2s;pointer-events:none}
+.live-toast.show{opacity:1}
+footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<header class="top">
+  <button class="themebtn" id="themeBtn" type="button">Açık / koyu</button>
+  <h1>Askıda İyilik — Ekran Taslakları</h1>
+  <p><code>ekranlar.md</code> dosyasındaki ekranların tarayıcıda görünen hâli. Arayüz Reddit'in diline göre tasarlandı (Ö-01). Bütün isimler ve istekler uydurmadır.</p>
+  <span class="note">⚠ Bu bir ekran taslağıdır, demo değil. Veritabanı ve gerçek giriş yok. Oylar ve düğmeler yalnızca görünüşü denemek için tepki verir.</span>
+</header>
+
+<main class="gallery">
+
+  <!-- E1 -->
+  <figure>
+    <figcaption>E1 · Giriş<small>Kayıt ol yok, hesapları yönetici açar (V-03)</small></figcaption>
+    <div class="phone"><div class="scroll"><div class="center">
+      <div style="text-align:center;margin-bottom:28px">
+        <div class="logo" style="justify-content:center;font-size:22px"><span class="dot" style="width:40px;height:40px;font-size:20px">🤝</span>Askıda İyilik</div>
+        <div style="color:var(--muted);margin-top:6px">Okulumuzun iyilik panosu</div>
+      </div>
+      <input class="input" placeholder="Kullanıcı adı" value="ogrenci1" aria-label="Kullanıcı adı">
+      <div style="height:10px"></div>
+      <input class="input" type="password" placeholder="Şifre" value="12345678" aria-label="Şifre">
+      <div style="height:18px"></div>
+      <button class="primary" type="button">Giriş yap</button>
+      <p style="text-align:center;color:var(--muted);font-size:13px;margin-top:16px">Şifreni unuttuysan okul yöneticisine başvur.</p>
+    </div></div></div>
+  </figure>
+
+  <!-- E2 -->
+  <figure>
+    <figcaption>E2 · Ana akış<small>İstek kartları, kategori, durum etiketi (flair), oy ve yorum</small></figcaption>
+    <div class="phone">
+      <div class="bar"><div class="logo"><span class="dot">🤝</span>Askıda İyilik</div><div class="spacer"></div><button class="iconbtn" type="button" aria-label="Ara">🔍</button><div class="av">AK</div></div>
+      <div class="tabs"><button class="chip on" type="button">Yeni</button><button class="chip" type="button">Açık olanlar</button><button class="chip" type="button">k/ders ▾</button></div>
+      <div class="scroll" id="feed"></div>
+      <div class="nav"><a class="on" href="#">🏠<span>Akış</span></a><a href="#"><span class="plus">＋</span></a><a href="#">📋<span>İşlerim</span></a></div>
+    </div>
+  </figure>
+
+  <!-- E3 -->
+  <figure>
+    <figcaption>E3 · Yeni istek<small>Fotoğraf yükleme yok, kişisel bilgi uyarısı var</small></figcaption>
+    <div class="phone">
+      <div class="bar"><button class="iconbtn" type="button" aria-label="Kapat">✕</button><div class="spacer"></div><button class="primary sm" type="button">Yayınla</button></div>
+      <div class="scroll">
+        <div class="field">
+          <label class="l">Kategori</label>
+          <select class="input" aria-label="Kategori"><option>k/ders</option><option>k/eşya</option><option>k/okul</option></select>
+          <label class="l">Başlık</label>
+          <input class="input" value="Kimya notları lazım" aria-label="Başlık">
+          <label class="l">Açıklama</label>
+          <textarea class="input" aria-label="Açıklama">Salı günkü dersin notlarına ihtiyacım var.</textarea>
+        </div>
+        <div class="info">ⓘ Telefon, adres ya da başka kişisel bilgi yazma. İstekleri okuldaki herkes görür.</div>
+      </div>
+    </div>
+  </figure>
+
+  <!-- E4 -->
+  <figure>
+    <figcaption>E4 · İstek sayfası<small>Düğmeler role ve duruma göre değişir. Üstteki seçicilerle dene.</small></figcaption>
+    <div class="phone">
+      <div class="bar"><button class="iconbtn" type="button" aria-label="Geri">←</button><b>k/ders</b><div class="spacer"></div><button class="iconbtn" type="button" id="dots" aria-label="Menü">⋯</button></div>
+      <div class="rolepick">
+        <span>TASLAK İÇİN: kim olarak bakıyorsun, istek hangi durumda?</span>
+        <button class="chip" data-role="acan" type="button">Mehmet (açan)</button>
+        <button class="chip on" data-role="ustlenen" type="button">Ayşe (üstlenen)</button>
+        <button class="chip" data-role="diger" type="button">Can (diğer)</button>
+        <button class="chip" data-role="ogretmen" type="button">Selin Öğretmen</button>
+        <button class="chip" data-st="open" type="button">Açık</button>
+        <button class="chip on" data-st="claimed" type="button">Üstlenildi</button>
+        <button class="chip" data-st="done" type="button">Yapıldı</button>
+        <button class="chip" data-st="closed" type="button">Tamamlandı</button>
+      </div>
+      <div class="scroll">
+        <div class="post">
+          <div class="meta"><div class="av" style="width:22px;height:22px;font-size:9px">MA</div><b>k/ders</b>· Mehmet A. · 2 sa</div>
+          <div class="title">Kimya notları lazım</div>
+          <span class="flair" id="dFlair"></span>
+          <p class="body full">Salı günkü dersin notlarına ihtiyacım var. Defterimi kaybettim, fotokopi çekip geri verebilirim.</p>
+          <div class="actions"><span class="vote" data-n="3"><button type="button" aria-label="Yukarı oy">▲</button><span class="n">3</span><button type="button" aria-label="Aşağı oy">▼</button></span><button class="pillbtn" type="button">💬 2</button></div>
+          <div class="actionbox" id="actionbox"></div>
+        </div>
+        <div class="comments">
+          <div class="cbox">Yorum ekle...</div>
+          <div class="c"><div class="av">AK</div><div style="flex:1">
+            <div class="cmeta"><b>Ayşe K.</b> · 1 sa</div>
+            <div class="ctext">Yarın teneffüste getiririm.</div>
+            <div class="reply">↩ Yanıtla</div>
+          </div></div>
+          <div class="c" style="margin-top:0"><div class="thread" style="flex:1">
+            <div class="c"><div class="av">MA</div><div>
+              <div class="cmeta"><b>Mehmet A.</b> · 50 dk</div>
+              <div class="ctext">Çok sağ ol! 🙏</div>
+            </div></div>
+          </div></div>
+        </div>
+      </div>
+      <div class="toast live-toast" id="liveToast"></div>
+    </div>
+  </figure>
+
+  <!-- E5 -->
+  <figure>
+    <figcaption>E5 · Benim işlerim<small>Onay bekleyen işler öne çıkar, karma ya da sayı yok</small></figcaption>
+    <div class="phone">
+      <div class="bar"><button class="iconbtn" type="button" aria-label="Geri">←</button><b>Benim işlerim</b></div>
+      <div class="tabs"><button class="chip on" type="button">Açtıklarım</button><button class="chip" type="button">Üstlendiklerim</button></div>
+      <div class="scroll">
+        <div class="post"><div class="meta"><b>k/eşya</b>· 3 gün</div><div class="title">Hesap makinesi ödünç lazım</div><span class="flair f-done">🔵 Yapıldı</span><div><span class="badge">⚠ Onayını bekliyor</span></div></div>
+        <div class="post"><div class="meta"><b>k/ders</b>· 5 gün</div><div class="title">Matematik konu anlatımı</div><span class="flair f-open">🟢 Açık</span></div>
+        <div class="post"><div class="meta"><b>k/okul</b>· 2 hafta</div><div class="title">Kütüphanede priz çalışmıyor</div><span class="flair f-closed">✅ Tamamlandı</span></div>
+      </div>
+      <div class="nav"><a href="#">🏠<span>Akış</span></a><a href="#"><span class="plus">＋</span></a><a class="on" href="#">📋<span>İşlerim</span></a></div>
+    </div>
+  </figure>
+
+  <!-- E6 -->
+  <figure>
+    <figcaption>E6 · Gizleme (öğretmen)<small>İçerik silinmez, gerekçeyle gizlenir. Demoda yönetim paneli.</small></figcaption>
+    <div class="phone">
+      <div class="bar"><div class="logo"><span class="dot">🤝</span>Askıda İyilik</div><div class="spacer"></div><div class="av">SÖ</div></div>
+      <div class="scroll" style="filter:saturate(.6)">
+        <div class="post"><div class="meta"><b>k/okul</b>· Zeynep T. · 1 gün</div><div class="title">2. kat lavabo musluğu akıtıyor</div><span class="flair f-claimed">🟡 Üstlenildi</span></div>
+      </div>
+      <div class="dim"><div class="sheet">
+        <h3>İçeriği gizle</h3>
+        <p style="margin:0 0 10px;color:var(--muted)">"2. kat lavabo musluğu akıtıyor" isteğini gizlemek üzeresin.</p>
+        <label class="l" style="margin-top:0">Gerekçe (zorunlu)</label>
+        <textarea class="input" style="min-height:80px" placeholder="Neden gizliyorsun?" aria-label="Gerekçe"></textarea>
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px"><button class="secondary" type="button">Vazgeç</button><button class="danger" type="button">Gizle</button></div>
+      </div></div>
+    </div>
+  </figure>
+
+  <!-- E7 -->
+  <figure>
+    <figcaption>E7 · Hata ve uyarı mesajları<small>Ekranın altında kısa süreli bildirim (toast)</small></figcaption>
+    <div class="phone"><div class="scroll"><div class="toasts">
+      <div class="toast"><small>İki kişi aynı anda üstlendi</small>Bu istek az önce başka biri tarafından üstlenildi.</div>
+      <div class="toast"><small>Adres elle değiştirildi (403)</small>Bu işlemi yapma yetkin yok.</div>
+      <div class="toast"><small>Durum uygun değil</small>Bu istek artık bu durumda değil, sayfayı yenile.</div>
+      <div class="toast"><small>Gerekçesiz "Yapılmadı"</small>Lütfen neyin eksik olduğunu yaz.</div>
+      <div class="toast"><small>Kendi isteğine oy (S-08)</small>Kendi isteğine oy veremezsin.</div>
+      <div class="toast"><small>Yanlış şifre</small>Kullanıcı adı ya da şifre hatalı.</div>
+    </div></div></div>
+  </figure>
+
+</main>
+<footer>Askıda İyilik okul sürümü · sistem tasarımı taslağı · Oylama (▲ ▼) açık karardır (S-08), toplam sıfırın altına düşerse 0 gösterilir.</footer>
+
+<script>
+// Tema düğmesi
+(function(){
+  var root=document.documentElement, key="ai-tema";
+  try{var t=localStorage.getItem(key); if(t) root.setAttribute("data-theme",t);}catch(e){}
+  document.getElementById("themeBtn").addEventListener("click",function(){
+    var dark=root.getAttribute("data-theme")==="dark"||(!root.getAttribute("data-theme")&&matchMedia("(prefers-color-scheme: dark)").matches);
+    var next=dark?"light":"dark"; root.setAttribute("data-theme",next);
+    try{localStorage.setItem(key,next);}catch(e){}
+  });
+})();
+
+// E2 akışı: örnek istekler
+var FLAIR={open:["f-open","🟢 Açık"],claimed:["f-claimed","🟡 Üstlenildi"],done:["f-done","🔵 Yapıldı"],closed:["f-closed","✅ Tamamlandı"]};
+var posts=[
+  {k:"ders",who:"Mehmet A.",ini:"MA",t:"2 sa",title:"Kimya notları lazım",body:"Salı günkü dersin notlarına ihtiyacım var. Defterimi kaybettim, fotokopi çekip geri verebilirim.",st:"open",v:3,c:1},
+  {k:"okul",who:"Zeynep T.",ini:"ZT",t:"1 gün",title:"2. kat lavabo musluğu akıtıyor",body:"Kız tuvaletindeki soldan ikinci musluk sürekli akıyor.",st:"claimed",v:12,c:3},
+  {k:"eşya",who:"Can B.",ini:"CB",t:"3 gün",title:"Hesap makinesi ödünç lazım",body:"Perşembe fizik sınavı için bilimsel hesap makinesi lazım, sınavdan sonra geri veririm.",st:"done",v:1,c:2},
+  {k:"ders",who:"Elif S.",ini:"ES",t:"4 gün",title:"İngilizce konuşma pratiği yapacak arkadaş arıyorum",body:"Öğle arasında 15 dakika konuşma pratiği yapabiliriz.",st:"open",v:-2,c:0}
+];
+function voteHTML(n){return '<span class="vote" data-n="'+n+'"><button type="button" aria-label="Yukarı oy">▲</button><span class="n">'+Math.max(0,n)+'</span><button type="button" aria-label="Aşağı oy">▼</button></span>';}
+document.getElementById("feed").innerHTML=posts.map(function(p){
+  var f=FLAIR[p.st];
+  return '<div class="post"><div class="meta"><div class="av" style="width:22px;height:22px;font-size:9px">'+p.ini+'</div><b>k/'+p.k+'</b>· '+p.who+' · '+p.t+'</div>'+
+    '<div class="title">'+p.title+'</div><span class="flair '+f[0]+'">'+f[1]+'</span>'+
+    '<p class="body">'+p.body+'</p><div class="actions">'+voteHTML(p.v)+'<button class="pillbtn" type="button">💬 '+p.c+'</button></div></div>';
+}).join("");
+
+// Oylar: yalnızca görünüş. Toplam 0'ın altında gösterilmez (S-08 önlemi).
+document.addEventListener("click",function(e){
+  var b=e.target.closest(".vote button"); if(!b) return;
+  var v=b.parentElement, base=+v.dataset.n, up=b.getAttribute("aria-label")==="Yukarı oy";
+  var cur=v.classList.contains("up")?"up":v.classList.contains("down")?"down":"";
+  v.classList.remove("up","down");
+  var next=(up&&cur!=="up")?"up":(!up&&cur!=="down")?"down":"";
+  if(next) v.classList.add(next);
+  var n=base+(next==="up"?1:next==="down"?-1:0);
+  v.querySelector(".n").textContent=Math.max(0,n);
+});
+
+// E4: role ve duruma göre düğmeler (ekranlar.md'deki tablo)
+var role="ustlenen", st="claimed";
+var LABEL={acan:"Mehmet (isteği açan)",ustlenen:"Ayşe (üstlenen)",diger:"Can (diğer öğrenci)",ogretmen:"Selin Öğretmen"};
+function buttons(){
+  var b=[];
+  if(st==="open"){ if(role==="acan") b=[["secondary","Geri çek"]]; else if(role==="diger"||role==="ogretmen") b=[["primary sm","Üstlen"]]; }
+  if(st==="claimed"){ if(role==="ustlenen") b=[["primary sm","Yapıldı"],["secondary","Bırak"]]; }
+  if(st==="done"){ if(role==="acan") b=[["primary sm","Onayla"],["secondary","Yapılmadı"]]; }
+  return b;
+}
+var MSG={"Üstlen":"İsteği üstlendin. Durum: Üstlenildi","Yapıldı":"Mehmet'in onayı bekleniyor. Durum: Yapıldı","Bırak":"İşi bıraktın. İstek yeniden Açık","Onayla":"Teşekkürler! İstek Tamamlandı","Geri çek":"İsteğini geri çektin"};
+function render(){
+  var f=FLAIR[st], fl=document.getElementById("dFlair");
+  fl.className="flair "+f[0];
+  fl.textContent=f[1]+((st==="claimed"||st==="done")?" · Ayşe K.":"");
+  var bs=buttons(), box=document.getElementById("actionbox");
+  var html='<div class="who">'+LABEL[role]+' olarak görünen düğmeler:</div>';
+  html+= bs.length? bs.map(function(x){return '<button type="button" class="'+x[0]+'" data-act="'+x[1]+'">'+x[1]+'</button>';}).join("") : '<span style="color:var(--muted);font-size:13px">Bu durumda senin için bir işlem yok.</span>';
+  if(role==="acan"&&st==="done") html+='<div class="reasonbox" id="reason"><textarea class="input" style="min-height:60px;margin-top:6px" placeholder="Neyin eksik olduğunu yaz (zorunlu)" aria-label="Gerekçe"></textarea><button class="secondary" type="button" data-act="gonder" style="margin-top:6px">Gönder</button></div>';
+  box.innerHTML=html;
+  document.getElementById("dots").style.visibility=role==="ogretmen"?"visible":"hidden";
+}
+function toast(t){var el=document.getElementById("liveToast"); el.textContent=t; el.classList.add("show"); clearTimeout(el._t); el._t=setTimeout(function(){el.classList.remove("show");},2200);}
+document.querySelector(".rolepick").addEventListener("click",function(e){
+  var c=e.target.closest(".chip"); if(!c) return;
+  if(c.dataset.role){role=c.dataset.role; this.querySelectorAll("[data-role]").forEach(function(x){x.classList.toggle("on",x===c);});}
+  if(c.dataset.st){st=c.dataset.st; this.querySelectorAll("[data-st]").forEach(function(x){x.classList.toggle("on",x===c);});}
+  render();
+});
+document.getElementById("actionbox").addEventListener("click",function(e){
+  var b=e.target.closest("[data-act]"); if(!b) return;
+  var a=b.dataset.act;
+  if(a==="Yapılmadı"){document.getElementById("reason").classList.add("show"); return;}
+  if(a==="gonder"){var t=document.querySelector("#reason textarea").value.trim(); toast(t?"İstek yeniden Ayşe'ye döndü. Durum: Üstlenildi":"Lütfen neyin eksik olduğunu yaz."); return;}
+  toast(MSG[a]||a);
+});
+document.getElementById("dots").addEventListener("click",function(){toast("Öğretmen menüsü: Gizle (bkz. E6)");});
+render();
+</script>
+</body>
+</html>

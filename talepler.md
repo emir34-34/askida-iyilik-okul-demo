@@ -42,6 +42,7 @@ Hocalarla görüşemediğim için roller, akış ve veri dosyalarının taslağ�
 | V-09 | Görünen ad yalnızca ad ve soyadın baş harfi (Ayşe K.) | veri.md | — | bekliyor |
 | V-10 | Uygulama çoğunlukla telefondan kullanılır, ekranlar dar ekrana göre tasarlanır | ekranlar.md | 16 | bekliyor |
 | V-11 | Yorumlara tek seviye yanıt verilebilir | ekranlar.md, roller.md, veri.md | — | bekliyor |
+| V-12 | Yönetim özetini öğretmenler ve yönetici görür, öğrenciler görmez. Sayfada yalnızca toplam sayılar olur | roller.md, ekranlar.md (D3) | — | bekliyor |
 
 ## B3. Tasarımcının (benim) önerileri
 

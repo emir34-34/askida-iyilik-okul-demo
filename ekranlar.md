@@ -64,6 +64,7 @@ Aşağı oyun riskini azaltmak için önerdiğim önlemler (bunlar da hocalara s
 | E10 | Arşiv | Herkes | ❌ yalnızca tasarımda |
 | D1 | Ana akış (bilgisayar) | Öğrenci, öğretmen | ✅ |
 | D2 | İstek sayfası (bilgisayar) | Öğrenci, öğretmen | ✅ |
+| D3 | Yönetim özeti (bilgisayar) | Öğretmen, yönetici | ❌ yalnızca tasarımda |
 
 Oylama demoya ancak S-08 kararından sonra eklenir. Demonun zorunlu akışı (aç, üstlen, yapıldı, onayla) oylamaya bağlı değil.
 
@@ -358,6 +359,41 @@ Tamamlanan istekler akıştan kalkıp arşive taşınır. Arşive akıştaki **A
 - Yalnızca **kategoriye** göre filtrelenir. **Kişiye göre filtre ya da arama yoktur.** "Ayşe'nin yaptığı iyilikler" diye bir liste çıkarılabilseydi bu, gizli bir sıralama tablosuna dönüşürdü (T-02).
 - Arşivdeki isteklerde oy düğmesi yok, yorumlar okunabilir ama yeni yorum yazılamaz.
 - Arşivin ne kadar süre tutulacağı saklama süresi kararına bağlı (S-04).
+
+## D3. Yönetim özeti
+
+Öğretmenlerin ve okul idaresinin uygulamanın nasıl kullanıldığını görmesi için hazırlanmış sayfa. Genelde bilgisayardan açılacağı için yalnızca bilgisayar düzeni çizildi. Bilgisayarda sol menünün **Öğretmen** bölümünden açılır.
+
+```
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ 🏠 Akış       │ Yönetim özeti                 (Bu hafta) (Bu ay) (Bu dönem)  │
+│ 🗄 Arşiv      │ 🔒 Yalnızca toplam sayılar. Kişi bazında bilgi yok.          │
+│───────────────│ ┌──────────┐┌──────────┐┌──────────┐┌─────────────────┐      │
+│ ÖĞRETMEN      │ │Açılan    ││Tamamlanan││Ort. süre ││⚠ Uzun süredir   │      │
+│ 📊 Yönetim    │ │   58     ││   42     ││ 1,8 gün  ││  bekleyen: 5    │      │
+│    özeti      │ └──────────┘└──────────┘└──────────┘└─────────────────┘      │
+│               │ Kategoriye göre        │ 🏫 Okulda bildirilen açık sorunlar  │
+│               │ k/okul ████████ 24     │ 2. kat lavabo musluğu   🟡 1 gün    │
+│               │ k/ders ███████  21     │ Spor salonu kapı kolu   🟢 4 gün    │
+│               │ k/eşya ████     13     │                                     │
+│               │ ⚠ Uzun süredir bekleyen istekler                             │
+│               │ Hesap makinesi ödünç lazım · Yapıldı, onay bekliyor   4 gün  │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+```
+
+**Sayfada neler var, neden?**
+
+| Bölüm | Neden |
+|-------|-------|
+| Açılan, tamamlanan, ortalama süre | Uygulamanın gerçekten kullanılıp kullanılmadığını görmek için |
+| Uzun süredir bekleyen istekler | Onay verilmeden ya da üstlenilmeden bekleyen işleri fark etmek için. Eşik (ör. 3 gün) S-03 kararıyla belirlenecek |
+| Kategoriye göre dağılım | Okulda en çok neye ihtiyaç duyulduğunu görmek için |
+| Okulda bildirilen açık sorunlar | `k/okul` kategorisindeki bozuk musluk, kırık kapı gibi sorunlar idarenin doğrudan ilgilenmesi gereken işler olabilir |
+
+**Bilerek olmayanlar**
+- **Kişi bazında hiçbir sayı yok.** "En çok istek açan", "en çok iyilik yapan", "en az onay veren" gibi listeler yok. Uzun süredir bekleyenler listesinde de **kişi değil istek** gösterilir (T-02).
+- Sınıf ya da şube bazında kırılım yok, çünkü sınıf bilgisini tutmuyoruz (`veri.md`).
+- Bütün sayılar mevcut verilerden (istek, durum, zaman, kategori) hesaplanır. Bu sayfa için yeni bir veri tutulmaz.
 
 ## E6. Gizleme (öğretmen)
 

@@ -35,12 +35,14 @@
 | Yorum yazmak | ✅ | ✅ | ❌ | Herkese açık. Özel mesaj yok (T-01) |
 | Yoruma yanıt vermek | ✅ | ✅ | ❌ | Tek seviye, yanıta yanıt verilemez (V-11) |
 | İsteğe oy vermek | 🔸 | 🔸 | ❌ | **Açık karar (S-08).** Kabul edilirse: kendi isteğine oy veremez, aynı isteğe bir kez oy verir, kimin oy verdiği görünmez |
+| Yönetim özetini görmek | ❌ | ✅ | ✅ | Yalnızca toplam sayılar, kişi bazında bilgi yok (V-12) |
 | İsteği ya da yorumu gizlemek | ❌ | ✅ | ❌ | Gerekçe yazmak zorunlu (V-02) |
 | Gizlenen içeriği geri açmak | ❌ | ✅ | ❌ | |
 | Hesap açmak ya da kapatmak | ❌ | ❌ | ✅ | V-03 |
 | Kimin kaç iyilik yaptığını gösteren bir liste görmek | ❌ | ❌ | ❌ | Sıralama tablosu yok (T-02). Bu liste kimseye gösterilmez |
 
 - **V-05:** Onayı isteği açan kişi verir, öğretmen vermez. (Soru 9)
+- **V-12:** Yönetim özetini öğretmenler ve yönetici görür, öğrenciler görmez. (Hocalara sorulacak)
 - **V-06:** Üstlenilmiş bir isteği açan kişi tek başına geri çekemez. Önce üstlenen kişiyle yorumlarda konuşulur. (Soru 11)
 
 ## Yetki nerede kontrol edilir?

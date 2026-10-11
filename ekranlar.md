@@ -69,12 +69,14 @@ Aşağı oyun riskini azaltmak için önerdiğim önlemler (bunlar da hocalara s
 | E15 | Arama sonuçları | Öğrenci, öğretmen | ❌ yalnızca tasarımda |
 | E16 | Görevli girişi (kullanıcı adı + şifre + okul kelimesi) | Öğretmen, yönetici | ❌ yalnızca tasarımda |
 | E17 | Yönetici paneli | Yönetici | ⚠️ Django yönetim paneliyle |
+| E18 | Sistem ayarları | Yönetici | ❌ yalnızca tasarımda |
 | D1 | Ana akış (bilgisayar) | Öğrenci, öğretmen | ✅ |
 | D2 | İstek sayfası (bilgisayar) | Öğrenci, öğretmen | ✅ |
 | D3 | Yönetim özeti (bilgisayar) | Öğretmen, yönetici | ❌ yalnızca tasarımda |
 | D4 | Kontrol (bilgisayar) | Öğretmen | ⚠️ Django yönetim paneliyle |
 | D5 | Görevli girişi (bilgisayar) | Öğretmen, yönetici | ❌ yalnızca tasarımda |
 | D6 | Yönetici paneli (bilgisayar) | Yönetici | ⚠️ Django yönetim paneliyle |
+| D7 | Sistem ayarları (bilgisayar) | Yönetici | ❌ yalnızca tasarımda |
 
 Oylama demoya ancak S-08 kararından sonra eklenir. Demonun zorunlu akışı (aç, üstlen, yapıldı, onayla) oylamaya bağlı değil.
 
@@ -608,6 +610,32 @@ Yönetici görevli girişinden (E16) girince bu panel açılır. Yönetici istek
 - Hesap listesinde **kimin kaç istek açtığı ya da kaç iyilik yaptığı yoktur** (T-02). Yönetici kişilerin uygulamadaki etkinliğini görmez, yalnızca hesap işlerini yapar.
 - "Son giriş zamanı" sütunu yok. Bu bilgi hiçbir işe gerekmiyor ve kimin ne zaman uygulamaya girdiğini izlemeye dönüşebilir.
 - Demoda bu panelin yerini Django'nun yönetim paneli tutacak.
+
+## E18 ve D7. Sistem ayarları
+
+Yönetici, bazı kuralları kod değiştirmeden açıp kapatabilir (Ö-08). En büyük faydası şu: Hocalarla konuştuğumuz **açık kararların çoğu birer ayar hâline geliyor.** Hocalar "öğretmen onayı olsun" ya da "aşağı oy olmasın" derse yönetici bunu tek bir anahtarla ayarlar.
+
+| Grup | Ayar | Varsayılan | Bağlı karar |
+|------|------|-----------|-------------|
+| Güvenlik | Okul kelimesini değiştir | — | Ö-07, S-10 |
+| Güvenlik | Yanlış deneme sınırı | 3 | E16 |
+| Güvenlik | Kilit süresi | 15 dakika | E16 |
+| İstekler | İstekler öğretmen onayıyla yayına girsin | Kapalı | V-07 |
+| İstekler | Onay bekleyen işi öğretmene bildir (gün) | Boş | S-03 |
+| İstekler | Yeni istek açmayı durdur (tatil, bakım) | Kapalı | — |
+| Etkileşim | Oylama | Açık | S-08 |
+| Etkileşim | Aşağı oy | **Kilitli** | S-08 |
+| Etkileşim | Resim ekleme / video ekleme | **Kilitli** | S-09 |
+| Etkileşim | Yorumlara yanıt | Açık | V-11 |
+| Etkileşim | Onaylarken teşekkür notu | Açık | E13 |
+| Etkileşim | Tanıtım bekleme süresi | 5 saniye | E12 |
+| Kategoriler | Kategori ekle / kaldır | ders, eşya, okul | Soru 8 |
+
+**Kilitli ayarlar (turuncu etiketli):** Aşağı oy ve resim/video ekleme değişmez ilkelerle çelişebileceği için (S-08, S-09), Özgür Hoca ve hocaların kararı gelene kadar ayarlardan açılamaz. Karar gelince kilit kaldırılır. Ekran çizimlerinde aşağı oy (`▲ ▼`) tasarımcının tercihi olarak gösteriliyor, ama gerçek uygulamada bu ayar karar gelene kadar kapalı kalır.
+
+**Değişmez ilkeler ayarlarda yoktur, yalnızca kilitli olarak gösterilir:** özel mesaj (T-01), sıralama tablosu ve kişi başına sayı (T-02), TC no, telefon, profil fotoğrafı, konum ve doğum tarihi (T-03). Bunlar projenin baştan verilmiş kararlarıdır. Bir anahtarla açılabilselerdi ilke olmaktan çıkarlardı. Değişmeleri ancak okul idaresinin kararı ve kod değişikliğiyle olabilir.
+
+**Değişiklik geçmişi:** Her ayar değişikliği kimin, ne zaman, neyi neye çevirdiğiyle birlikte kaydedilir (`veri.md`). Böylece "aşağı oyu kim açtı?" gibi soruların cevabı bellidir.
 
 ## E6. Gizleme (öğretmen)
 

@@ -43,6 +43,7 @@
 | Kontrol sayfasını görmek, şikâyeti "sorun yok" diye kapatmak | ❌ | ✅ | ❌ | `ekranlar.md` D4 |
 | Hesap açmak ya da kapatmak | ❌ | ❌ | ✅ | V-03. Toplu açmada yalnızca kullanıcı adı, görünen ad ve rol kabul edilir |
 | Şifre sıfırlamak, kilitli hesabın kilidini açmak, rol değiştirmek | ❌ | ❌ | ✅ | `ekranlar.md` E17, D6 |
+| Sistem ayarlarını değiştirmek, okul kelimesini değiştirmek | ❌ | ❌ | ✅ | Değişmez ilkeler ayarlardan değiştirilemez. Her değişiklik kaydedilir (`ekranlar.md` E18) |
 | Kimin kaç iyilik yaptığını gösteren bir liste görmek | ❌ | ❌ | ❌ | Sıralama tablosu yok (T-02). Bu liste kimseye gösterilmez |
 
 - **V-05:** Onayı isteği açan kişi verir, öğretmen vermez. (Soru 9)

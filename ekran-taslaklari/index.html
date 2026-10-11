@@ -161,6 +161,23 @@ mark{background:color-mix(in srgb, var(--brand) 22%, transparent);color:inherit;
 .urow .txt{flex:1;min-width:0;font-size:13px}
 .urow .txt div{color:var(--muted);font-size:12px}
 .alertbar{display:flex;gap:8px;align-items:center;background:var(--warn-bg);color:var(--warn);font-size:12px;font-weight:600;padding:8px 12px;border-radius:12px;margin:10px 12px}
+/* sistem ayarları */
+.set-group{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:0 0 12px;overflow:hidden}
+.set-group h5{margin:0;padding:12px 14px 6px;font-size:11px;letter-spacing:.06em;color:var(--muted)}
+.set{display:flex;gap:12px;align-items:center;padding:10px 14px;border-top:1px solid var(--line)}
+.set:first-of-type{border-top:0}
+.set .txt{flex:1;min-width:0;font-size:13px}
+.set .txt b{font-weight:600;font-size:14px}
+.set .txt div{color:var(--muted);font-size:12px;margin-top:1px}
+.sw{position:relative;width:44px;height:26px;border-radius:999px;background:var(--pill-hover);border:0;cursor:pointer;flex:none;transition:background .15s}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:left .15s}
+.sw[aria-checked="true"]{background:var(--brand)}
+.sw[aria-checked="true"]::after{left:21px}
+.sw:disabled{opacity:.45;cursor:not-allowed}
+.num{width:64px;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:10px;padding:6px 8px;font:inherit;text-align:center}
+.lockrow .txt b::before{content:"🔒 "}
+.pend{font-size:11px;font-weight:700;color:var(--warn);background:var(--warn-bg);padding:1px 7px;border-radius:999px;margin-left:4px}
+.kchips{display:flex;flex-wrap:wrap;gap:6px;padding:4px 14px 12px}
 /* profil */
 .prof{background:var(--card);padding:20px 16px;text-align:center;border-bottom:1px solid var(--line)}
 .prof .big{width:72px;height:72px;font-size:24px;margin:0 auto 10px}
@@ -607,6 +624,43 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
     </div>
   </figure>
 
+  <!-- E18 -->
+  <figure id="e18">
+    <figcaption>E18 · Sistem ayarları<small>Açık kararlar ayardan açılıp kapanır. Değişmez ilkeler kilitli</small></figcaption>
+    <div class="phone">
+      <div class="bar"><button class="iconbtn" type="button" aria-label="Geri">←</button><b style="font-size:16px">Sistem ayarları</b><div class="spacer"></div><button class="primary sm" type="button" style="padding:6px 14px">Kaydet</button></div>
+      <div class="scroll" style="padding:12px">
+        <div class="set-group"><h5>GÜVENLİK</h5>
+          <div class="set"><div class="txt"><b>Okul kelimesi</b><div>Görevli girişinde istenir (E16). Son değişiklik: 26 gün önce</div></div><button class="secondary" type="button" style="padding:6px 12px">Değiştir</button></div>
+          <div class="set"><div class="txt"><b>Yanlış deneme sınırı</b><div>Bu kadar yanlış denemede hesap kilitlenir</div></div><input class="num" value="3" aria-label="Deneme sınırı"></div>
+          <div class="set"><div class="txt"><b>Kilit süresi (dakika)</b></div><input class="num" value="15" aria-label="Kilit süresi"></div>
+        </div>
+        <div class="set-group"><h5>İSTEKLER</h5>
+          <div class="set"><div class="txt"><b>İstekler öğretmen onayıyla yayına girsin</b><div>Kapalıysa istek hemen yayına girer, öğretmen sonradan gizler (V-07)</div></div><button class="sw" type="button" role="switch" aria-checked="false"></button></div>
+          <div class="set"><div class="txt"><b>Onay bekleyen işi öğretmene bildir</b><div>İsteği açan bu kadar gün onay vermezse (S-03)</div></div><input class="num" value="—" aria-label="Gün"></div>
+          <div class="set"><div class="txt"><b>Yeni istek açmayı durdur</b><div>Tatilde ya da bakımda. Var olan istekler görünmeye devam eder</div></div><button class="sw" type="button" role="switch" aria-checked="false"></button></div>
+        </div>
+        <div class="set-group"><h5>ETKİLEŞİM</h5>
+          <div class="set"><div class="txt"><b>Oylama</b><div>İsteklerde ▲ ▼ düğmeleri</div></div><button class="sw" type="button" role="switch" aria-checked="true"></button></div>
+          <div class="set"><div class="txt"><b>Aşağı oy</b><span class="pend">S-08 kararı bekleniyor</span><div>Kapalıysa yalnızca ▲ gösterilir</div></div><button class="sw" type="button" role="switch" aria-checked="false" disabled></button></div>
+          <div class="set"><div class="txt"><b>Resim ekleme</b><span class="pend">S-09</span><div>Konum bilgisi otomatik silinir</div></div><button class="sw" type="button" role="switch" aria-checked="false" disabled></button></div>
+          <div class="set"><div class="txt"><b>Video ekleme</b><span class="pend">S-09</span></div><button class="sw" type="button" role="switch" aria-checked="false" disabled></button></div>
+          <div class="set"><div class="txt"><b>Yorumlara yanıt</b><div>Tek seviye (V-11)</div></div><button class="sw" type="button" role="switch" aria-checked="true"></button></div>
+          <div class="set"><div class="txt"><b>Onaylarken teşekkür notu</b><div>E13</div></div><button class="sw" type="button" role="switch" aria-checked="true"></button></div>
+          <div class="set"><div class="txt"><b>Tanıtım bekleme süresi (saniye)</b><div>İlk giriş tanıtımında "İleri" kilidi (E12)</div></div><input class="num" value="5" aria-label="Saniye"></div>
+        </div>
+        <div class="set-group"><h5>KATEGORİLER</h5>
+          <div class="kchips"><span class="chip">📘 k/ders ✕</span><span class="chip">🎒 k/eşya ✕</span><span class="chip">🏫 k/okul ✕</span><button class="chip" type="button" style="color:var(--brand)">＋ Kategori ekle</button></div>
+        </div>
+        <div class="set-group"><h5>DEĞİŞMEZ İLKELER · AYARLARDAN DEĞİŞTİRİLEMEZ</h5>
+          <div class="set lockrow"><div class="txt"><b>Özel mesaj</b><div>Konuşmalar yalnızca herkese açık yorumlarla (T-01)</div></div><span class="tag">Kapalı</span></div>
+          <div class="set lockrow"><div class="txt"><b>Sıralama tablosu, kişi başına sayı</b><div>T-02</div></div><span class="tag">Kapalı</span></div>
+          <div class="set lockrow"><div class="txt"><b>TC no, telefon, profil fotoğrafı, konum, doğum tarihi</b><div>T-03</div></div><span class="tag">Tutulmaz</span></div>
+        </div>
+      </div>
+    </div>
+  </figure>
+
 </main>
 
 <section class="sec" id="bilgisayar"><h2>💻 Bilgisayar arayüzü</h2><p>Okul bilgisayarı ya da akıllı tahtadan açıldığında Reddit'in masaüstü düzeni: solda menü ve kategoriler, ortada akış, sağda bilgi kartları (Ö-05). Kartlar ve renkler telefondakiyle aynı. Dar ekranda çerçevenin içi yana kaydırılır.</p></section>
@@ -894,6 +948,60 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
     </div></div></div>
   </figure>
 
+  <!-- D7 -->
+  <figure style="width:100%" id="d7">
+    <figcaption>D7 · Sistem ayarları (bilgisayar)<small>İki sütun. Her değişiklik kimin yaptığıyla birlikte kaydedilir</small></figcaption>
+    <div class="browser"><div class="chrome"><i></i><i></i><i></i><span class="url">localhost:8000/yonetici/ayarlar/</span></div>
+    <div class="desk-scroll"><div class="desk" style="height:880px">
+        <div class="dhead"><div class="logo"><span class="dot">🤝</span>Askıda İyilik</div><div class="search">🔍 İsteklerde ara</div><div class="av">YK</div></div>
+      <div class="dbody" style="grid-template-columns:230px 1fr">
+        <div class="dleft">
+          <div class="lbl">YÖNETİCİ</div>
+          <a href="#"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c1-3.5 3.5-5 6.5-5s5.5 1.5 6.5 5"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.3 0 4 1.3 4.8 4"/></svg>Hesaplar</a>
+          <a href="#" class="on"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>Sistem ayarları</a>
+          <a href="#"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Yönetim özeti</a>
+        </div>
+        <div class="dmain"><div class="inner" style="max-width:980px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><b style="font-size:18px">Sistem ayarları</b><div class="spacer"></div><button class="secondary" type="button">Değişiklik geçmişi</button><button class="primary sm" type="button">Kaydet</button></div>
+          <div class="grid2" style="align-items:start">
+            <div>
+              <div class="set-group"><h5>GÜVENLİK</h5>
+          <div class="set"><div class="txt"><b>Okul kelimesi</b><div>Görevli girişinde istenir (E16). Son değişiklik: 26 gün önce</div></div><button class="secondary" type="button" style="padding:6px 12px">Değiştir</button></div>
+          <div class="set"><div class="txt"><b>Yanlış deneme sınırı</b><div>Bu kadar yanlış denemede hesap kilitlenir</div></div><input class="num" value="3" aria-label="Deneme sınırı"></div>
+          <div class="set"><div class="txt"><b>Kilit süresi (dakika)</b></div><input class="num" value="15" aria-label="Kilit süresi"></div>
+        </div>
+              <div class="set-group"><h5>İSTEKLER</h5>
+          <div class="set"><div class="txt"><b>İstekler öğretmen onayıyla yayına girsin</b><div>Kapalıysa istek hemen yayına girer, öğretmen sonradan gizler (V-07)</div></div><button class="sw" type="button" role="switch" aria-checked="false"></button></div>
+          <div class="set"><div class="txt"><b>Onay bekleyen işi öğretmene bildir</b><div>İsteği açan bu kadar gün onay vermezse (S-03)</div></div><input class="num" value="—" aria-label="Gün"></div>
+          <div class="set"><div class="txt"><b>Yeni istek açmayı durdur</b><div>Tatilde ya da bakımda. Var olan istekler görünmeye devam eder</div></div><button class="sw" type="button" role="switch" aria-checked="false"></button></div>
+        </div>
+              <div class="set-group"><h5>KATEGORİLER</h5>
+          <div class="kchips"><span class="chip">📘 k/ders ✕</span><span class="chip">🎒 k/eşya ✕</span><span class="chip">🏫 k/okul ✕</span><button class="chip" type="button" style="color:var(--brand)">＋ Kategori ekle</button></div>
+        </div>
+            </div>
+            <div>
+              <div class="set-group"><h5>ETKİLEŞİM</h5>
+          <div class="set"><div class="txt"><b>Oylama</b><div>İsteklerde ▲ ▼ düğmeleri</div></div><button class="sw" type="button" role="switch" aria-checked="true"></button></div>
+          <div class="set"><div class="txt"><b>Aşağı oy</b><span class="pend">S-08 kararı bekleniyor</span><div>Kapalıysa yalnızca ▲ gösterilir</div></div><button class="sw" type="button" role="switch" aria-checked="false" disabled></button></div>
+          <div class="set"><div class="txt"><b>Resim ekleme</b><span class="pend">S-09</span><div>Konum bilgisi otomatik silinir</div></div><button class="sw" type="button" role="switch" aria-checked="false" disabled></button></div>
+          <div class="set"><div class="txt"><b>Video ekleme</b><span class="pend">S-09</span></div><button class="sw" type="button" role="switch" aria-checked="false" disabled></button></div>
+          <div class="set"><div class="txt"><b>Yorumlara yanıt</b><div>Tek seviye (V-11)</div></div><button class="sw" type="button" role="switch" aria-checked="true"></button></div>
+          <div class="set"><div class="txt"><b>Onaylarken teşekkür notu</b><div>E13</div></div><button class="sw" type="button" role="switch" aria-checked="true"></button></div>
+          <div class="set"><div class="txt"><b>Tanıtım bekleme süresi (saniye)</b><div>İlk giriş tanıtımında "İleri" kilidi (E12)</div></div><input class="num" value="5" aria-label="Saniye"></div>
+        </div>
+              <div class="set-group"><h5>DEĞİŞMEZ İLKELER · AYARLARDAN DEĞİŞTİRİLEMEZ</h5>
+          <div class="set lockrow"><div class="txt"><b>Özel mesaj</b><div>Konuşmalar yalnızca herkese açık yorumlarla (T-01)</div></div><span class="tag">Kapalı</span></div>
+          <div class="set lockrow"><div class="txt"><b>Sıralama tablosu, kişi başına sayı</b><div>T-02</div></div><span class="tag">Kapalı</span></div>
+          <div class="set lockrow"><div class="txt"><b>TC no, telefon, profil fotoğrafı, konum, doğum tarihi</b><div>T-03</div></div><span class="tag">Tutulmaz</span></div>
+        </div>
+            </div>
+          </div>
+          <div class="privacy">ⓘ Turuncu etiketli ayarlar Özgür Hoca ve hocaların kararı gelene kadar kilitli. Her değişiklik kimin, ne zaman, neyi değiştirdiğiyle birlikte "Değişiklik geçmişi"ne yazılır.</div>
+        </div></div>
+      </div>
+    </div></div></div>
+  </figure>
+
 </div>
 <footer>Askıda İyilik okul sürümü · sistem tasarımı taslağı · Oylama (▲ ▼) açık karardır (S-08), toplam sıfırın altına düşerse 0 gösterilir.</footer>
 
@@ -990,6 +1098,12 @@ document.getElementById("actionbox").addEventListener("click",function(e){
 });
 document.getElementById("dots").addEventListener("click",function(){toast(role==="ogretmen"?"Menü: Şikâyet et (E11), Gizle (E6)":"Menü: Şikâyet et (bkz. E11)");});
 render();
+
+// Sistem ayarları: anahtarlar tıklanınca açılıp kapanır (yalnızca görünüş)
+document.addEventListener("click",function(e){
+  var sw=e.target.closest(".sw"); if(!sw||sw.disabled) return;
+  sw.setAttribute("aria-checked", sw.getAttribute("aria-checked")==="true"?"false":"true");
+});
 
 // E12: tanıtım ekranları
 var SLIDES=[

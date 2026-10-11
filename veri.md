@@ -79,6 +79,18 @@ Oylar **istek başına** toplanır, **kişi başına asla toplanmaz**. Reddit'te
 |------|-------------|-----------------|
 | `okul_kelimesi_ozeti` | (geri çevrilemez özet) | Görevli girişinde (E16) kullanıcı adı ve şifreyle birlikte kelimeyi doğrulamak için. Kelimenin kendisi hiçbir yerde saklanmaz |
 | `okul_kelimesi_degisme_zamani` | `2026-09-15` | Kelimenin ne zamandır değişmediğini yöneticiye hatırlatmak için |
+| Diğer ayarlar (`ogretmen_onayi`, `oylama`, `asagi_oy`, `resim`, `video`, `yanit`, `tesekkur`, `deneme_siniri`, `kilit_suresi`, `onay_bildirim_gunu`, `istek_acma_durduruldu`, `tanitim_suresi`) | `ogretmen_onayi = false` | Yöneticinin kod değiştirmeden açıp kapatabildiği kurallar (`ekranlar.md` E18). Kişisel veri değildir |
+
+## Ayar değişikliği
+
+| Alan | Örnek değer | Neden tutuluyor |
+|------|-------------|-----------------|
+| `ayar` | `ogretmen_onayi` | Hangi ayarın değiştiğini bilmek için |
+| `eski_deger` → `yeni_deger` | `false` → `true` | Ne değiştiğini bilmek, gerekirse geri almak için |
+| `degistiren` | → `yonetici1` | Kimin değiştirdiğini bilmek için (hesap verebilirlik) |
+| `zaman` | `2026-10-20 13:40` | Ne zaman değiştiğini bilmek için |
+
+Okul kelimesi değiştiğinde eski ve yeni değer **kaydedilmez**, yalnızca "değiştirildi" bilgisi yazılır.
 
 ## Giriş denemesi
 

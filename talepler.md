@@ -59,6 +59,7 @@ Bunlar hocalardan değil, benden gelen önerilerdir. Hocalara gösterilip onayla
 | Ö-05 | Telefon arayüzünün yanında bilgisayar arayüzü de olsun (Reddit'in masaüstü düzeni: sol menü, orta akış, sağ bilgi kartları) | 2026-10-11 | ekranlar.md (D1, D2) | hocalara gösterilecek |
 | Ö-06 | Sağ üstte bir bildirimler düğmesi olsun, gelen yorumlar ve isteklerdeki değişiklikler orada görünsün | 2026-10-11 | ekranlar.md (E9, D1), veri.md (Bildirim) | hocalara gösterilecek |
 | Ö-07 | Öğretmen ve yönetici hesapları ayrı bir ekrandan, kullanıcı adı + şifre + öğretmenlerin ve yöneticilerin aralarında belirlediği okul kelimesi ile birlikte giriş yapsın. Böylece öğretmenin şifresini öğrenen bir öğrenci giriş yapamasın | 2026-10-11 | ekranlar.md (E16, D5), veri.md (Sistem ayarı, Giriş denemesi) | hocalara gösterilecek → S-10 |
+| Ö-08 | Yönetici için sistem ayarları olsun, bazı kurallar açılıp kapanabilsin | 2026-10-11 | ekranlar.md (E18, D7), veri.md (Sistem ayarı, Ayar değişikliği) | hocalara gösterilecek. Değişmez ilkeler ayar yapılmadı |
 
 ## C. Açık sorular ve açık kararlar
 

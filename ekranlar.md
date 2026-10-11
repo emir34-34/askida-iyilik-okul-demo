@@ -62,6 +62,7 @@ Aşağı oyun riskini azaltmak için önerdiğim önlemler (bunlar da hocalara s
 | E8 | Profil | Herkes | ✅ |
 | E9 | Bildirimler | Öğrenci, öğretmen | ❌ yalnızca tasarımda |
 | E10 | Arşiv | Herkes | ❌ yalnızca tasarımda |
+| E11 | Şikâyet et | Öğrenci, öğretmen | ❌ yalnızca tasarımda |
 | D1 | Ana akış (bilgisayar) | Öğrenci, öğretmen | ✅ |
 | D2 | İstek sayfası (bilgisayar) | Öğrenci, öğretmen | ✅ |
 | D3 | Yönetim özeti (bilgisayar) | Öğretmen, yönetici | ❌ yalnızca tasarımda |
@@ -170,7 +171,7 @@ Bu ekran role ve isteğin durumuna göre **farklı düğmeler** gösterir. Düğ
 
 ```
 ┌────────────────────────────────┐
-│ ←  k/ders                  ⋯   │  ← ⋯ menüsü: öğretmene "Gizle"
+│ ←  k/ders                  ⋯   │  ← ⋯ menüsü: herkese "Şikâyet et", öğretmene ayrıca "Gizle"
 ├────────────────────────────────┤
 │ k/ders · Mehmet A. · 2 sa      │
 │ Kimya notları lazım            │
@@ -394,6 +395,29 @@ Tamamlanan istekler akıştan kalkıp arşive taşınır. Arşive akıştaki **A
 - **Kişi bazında hiçbir sayı yok.** "En çok istek açan", "en çok iyilik yapan", "en az onay veren" gibi listeler yok. Uzun süredir bekleyenler listesinde de **kişi değil istek** gösterilir (T-02).
 - Sınıf ya da şube bazında kırılım yok, çünkü sınıf bilgisini tutmuyoruz (`veri.md`).
 - Bütün sayılar mevcut verilerden (istek, durum, zaman, kategori) hesaplanır. Bu sayfa için yeni bir veri tutulmaz.
+
+## E11. Şikâyet et
+
+İsteğin ya da yorumun `⋯` menüsünden açılır. Öğretmenler her isteği tek tek okuyamaz, bu yüzden uygunsuz içeriği öğrencilerin de bildirebilmesi gerekir (Soru 15).
+
+```
+┌────────────────────────────────┐
+│ Bu isteği neden bildiriyorsun? │
+│ ◉ Kişisel bilgi içeriyor       │
+│ ○ Birini küçük düşürüyor       │
+│ ○ Uygunsuz dil                 │
+│ ○ Okulla ilgisi yok / para     │
+│ ○ Diğer                        │
+│ 🔒 Bildirimin öğretmenlere     │
+│    gider. Yazan kişi kimin     │
+│    bildirdiğini görmez.        │
+│          ( Vazgeç ) ( Bildir ) │
+└────────────────────────────────┘
+```
+- Şikâyet **içeriği otomatik gizlemez** ve isteğin durumunu değiştirmez. Karar her zaman öğretmenindir (V-14). Böylece bir grup öğrencinin toplu şikâyetle birinin isteğini kaldırması önlenir.
+- İçeriği yazan kişi kimin şikâyet ettiğini görmez. Öğretmen görür, böylece şikâyetin kötüye kullanılması fark edilebilir (V-13).
+- Kişi kendi içeriğini şikâyet edemez, aynı içeriği bir kez şikâyet edebilir.
+- Şikâyet sebepleri örnektir, asıl listeyi hocalar belirleyecek.
 
 ## E6. Gizleme (öğretmen)
 

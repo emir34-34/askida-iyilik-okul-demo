@@ -46,6 +46,8 @@ Her geçiş, kimin ne zaman yaptığıyla birlikte durum geçmişine yazılır (
 
 - **V-07:** İstekler öğretmen onayı beklemeden hemen yayına girer, uygunsuz olanı öğretmen sonradan gizler. (Soru 14) Hocalar "önce öğretmen onaylasın" derse **Açık**'tan önce bir **Onay bekliyor** durumu eklenir.
 
+**Şikâyet** isteğin durumunu değiştirmez. Şikâyet edilen istek, öğretmen G8 ile gizleyene kadar olduğu durumda kalır (V-14, `ekranlar.md` E11).
+
 ## Görev tanımının üç sorusu
 
 ### 1. Aynı isteği iki kişi aynı anda üstlenirse ne olur?

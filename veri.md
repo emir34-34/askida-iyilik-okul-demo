@@ -60,6 +60,17 @@ Dosyadaki **konum ve cihaz bilgisi (EXIF)** kaydedilmeden önce silinir (T-03: k
 
 Oylar **istek başına** toplanır, **kişi başına asla toplanmaz**. Reddit'teki karma gibi bir kullanıcı puanı yoktur (T-02, S-01).
 
+## Şikâyet
+
+| Alan | Örnek değer | Neden tutuluyor |
+|------|-------------|-----------------|
+| `istek` ya da `yorum` | → İstek #20 | Neyin şikâyet edildiğini bilmek için |
+| `bildiren` | → `ogrenci2` | Aynı kişinin aynı içeriği tekrar tekrar şikâyet etmesini önlemek ve şikâyetin kötüye kullanılmasını fark etmek için. **İçeriği yazan kişiye gösterilmez** (V-13) |
+| `sebep` | `kisisel_bilgi` | Öğretmenin içeriğe neden bakması gerektiğini hızlıca anlaması için |
+| `aciklama` | `Telefon numarası yazmış.` (boş olabilir) | "Diğer" seçildiğinde ne olduğunu anlatmak için |
+| `zaman` | `2026-10-14 09:15` | Şikâyetleri sıraya koymak için |
+| `durum` | `bekliyor` | Öğretmenin inceleyip incelemediğini bilmek için (`bekliyor`, `gizlendi`, `sorun_yok`) |
+
 ## Bildirim
 
 | Alan | Örnek değer | Neden tutuluyor |

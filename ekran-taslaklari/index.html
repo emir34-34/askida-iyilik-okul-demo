@@ -103,6 +103,9 @@ figcaption small{display:block;font-weight:400;color:var(--muted)}
 .nhead a{color:var(--brand);font-weight:700;text-decoration:none}
 .npanel{position:absolute;top:50px;right:60px;width:360px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.2);overflow:hidden;z-index:5}
 .npanel .ttl{padding:12px 14px;font-weight:800;font-size:15px;border-bottom:1px solid var(--line)}
+/* şikâyet */
+.opt{display:flex;gap:10px;align-items:center;padding:11px 2px;border-bottom:1px solid var(--line);font-size:14px}
+.opt input{accent-color:var(--brand);width:18px;height:18px;margin:0}
 /* profil */
 .prof{background:var(--card);padding:20px 16px;text-align:center;border-bottom:1px solid var(--line)}
 .prof .big{width:72px;height:72px;font-size:24px;margin:0 auto 10px}
@@ -425,6 +428,27 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
     </div>
   </figure>
 
+  <!-- E11 -->
+  <figure id="e11">
+    <figcaption>E11 · Şikâyet et<small>İsteğin ya da yorumun ⋯ menüsünden. Bildirim öğretmene gider</small></figcaption>
+    <div class="phone">
+      <div class="bar"><button class="iconbtn" type="button" aria-label="Geri">←</button><b>k/eşya</b><div class="spacer"></div><button class="iconbtn" type="button" aria-label="Menü">⋯</button></div>
+      <div class="scroll" style="filter:saturate(.6)">
+        <div class="post"><div class="meta"><b>k/eşya</b>· Can B. · 20 dk</div><div class="title">Biri bana 50 TL borç versin</div><span class="flair f-open">🟢 Açık</span><p class="body">Numaram 05xx xxx xx xx, yazın.</p></div>
+      </div>
+      <div class="dim"><div class="sheet">
+        <h3>Bu isteği neden bildiriyorsun?</h3>
+        <label class="opt"><input type="radio" name="sk" checked> Kişisel bilgi içeriyor (telefon, adres…)</label>
+        <label class="opt"><input type="radio" name="sk"> Birini küçük düşürüyor ya da alay ediyor</label>
+        <label class="opt"><input type="radio" name="sk"> Uygunsuz dil</label>
+        <label class="opt"><input type="radio" name="sk"> Okulla ilgisi yok ya da para, alışveriş</label>
+        <label class="opt"><input type="radio" name="sk"> Diğer</label>
+        <p style="margin:10px 0;color:var(--muted);font-size:12px">🔒 Bildirimin öğretmenlere gider. İsteği yazan kişi kimin bildirdiğini görmez.</p>
+        <div style="display:flex;gap:8px;justify-content:flex-end"><button class="secondary" type="button">Vazgeç</button><button class="primary sm" type="button">Bildir</button></div>
+      </div></div>
+    </div>
+  </figure>
+
 </main>
 
 <section class="sec" id="bilgisayar"><h2>💻 Bilgisayar arayüzü</h2><p>Okul bilgisayarı ya da akıllı tahtadan açıldığında Reddit'in masaüstü düzeni: solda menü ve kategoriler, ortada akış, sağda bilgi kartları (Ö-05). Kartlar ve renkler telefondakiyle aynı. Dar ekranda çerçevenin içi yana kaydırılır.</p></section>
@@ -678,7 +702,7 @@ function render(){
   html+= bs.length? bs.map(function(x){return '<button type="button" class="'+x[0]+'" data-act="'+x[1]+'">'+x[1]+'</button>';}).join("") : '<span style="color:var(--muted);font-size:13px">Bu durumda senin için bir işlem yok.</span>';
   if(role==="acan"&&st==="done") html+='<div class="reasonbox" id="reason"><textarea class="input" style="min-height:60px;margin-top:6px" placeholder="Neyin eksik olduğunu yaz (zorunlu)" aria-label="Gerekçe"></textarea><button class="secondary" type="button" data-act="gonder" style="margin-top:6px">Gönder</button></div>';
   box.innerHTML=html;
-  document.getElementById("dots").style.visibility=role==="ogretmen"?"visible":"hidden";
+  
 }
 function toast(t){var el=document.getElementById("liveToast"); el.textContent=t; el.classList.add("show"); clearTimeout(el._t); el._t=setTimeout(function(){el.classList.remove("show");},2200);}
 document.querySelector(".rolepick").addEventListener("click",function(e){
@@ -694,7 +718,7 @@ document.getElementById("actionbox").addEventListener("click",function(e){
   if(a==="gonder"){var t=document.querySelector("#reason textarea").value.trim(); toast(t?"İstek yeniden Ayşe'ye döndü. Durum: Üstlenildi":"Lütfen neyin eksik olduğunu yaz."); return;}
   toast(MSG[a]||a);
 });
-document.getElementById("dots").addEventListener("click",function(){toast("Öğretmen menüsü: Gizle (bkz. E6)");});
+document.getElementById("dots").addEventListener("click",function(){toast(role==="ogretmen"?"Menü: Şikâyet et (E11), Gizle (E6)":"Menü: Şikâyet et (bkz. E11)");});
 render();
 </script>
 </body>

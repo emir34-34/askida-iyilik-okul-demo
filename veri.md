@@ -39,6 +39,17 @@
 | `gizli` | `false` | Öğretmen yorumu gizlerse silmeden saklamak için (V-02) |
 | `ust_yorum` | → Yorum #31 (boş olabilir) | Yanıtın hangi yorumun altında durduğunu bilmek için. Yalnızca bir seviye (V-11) |
 
+## Ek: resim ya da video (yalnızca S-09 kabul edilirse)
+
+| Alan | Örnek değer | Neden tutuluyor |
+|------|-------------|-----------------|
+| `istek` | → İstek #14 | Dosyanın hangi isteğe ait olduğunu bilmek için |
+| `dosya` | `ekler/2026/10/a3f9.jpg` | Gösterilecek resim ya da video. Dosya adı rastgele verilir, yükleyenin dosya adı saklanmaz |
+| `tur` | `resim` | Ekranda resim mi video mu gösterileceğini bilmek için |
+| `gizli` | `false` | Öğretmen uygunsuz bulursa silmeden gizlemek için (V-02) |
+
+Dosyadaki **konum ve cihaz bilgisi (EXIF)** kaydedilmeden önce silinir (T-03: konum tutulmaz). İstek gizlenir ya da silinirse eki de gizlenir ya da silinir.
+
 ## Oy (yalnızca S-08 kabul edilirse)
 
 | Alan | Örnek değer | Neden tutuluyor |
@@ -72,6 +83,7 @@ Durum geçmişi yalnızca öğretmenlere görünür. Ondan "kim kaç iyilik yapt
 | Özel mesajlar | Özel mesaj özelliği yok (T-01) |
 | Puan, kredi, "iyilik sayısı", karma | Kurallar kesinleşmedi (S-01). Sıralama tablosu da yok (T-02) |
 | Profil fotoğrafı, biyografi | Asgari veri ilkesi gereği gerek yok |
+| Resim ve videolardaki konum ve cihaz bilgisi (EXIF) | Konum tutulmaz (T-03). Dosya kaydedilmeden önce silinir |
 
 ## Açık konular
 - **S-04:** Veriler ne kadar süre saklanacak? Örneğin bir öğrenci mezun olunca hesabı ve istekleri ne olacak? Bu bir KVKK sorusu. → Özgür Hoca'ya sorulacak (okulun KVKK notları).

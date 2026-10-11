@@ -142,13 +142,21 @@ Oylama demoya ancak S-08 kararından sonra eklenir. Demonun zorunlu akışı (a�
 │ Salı günkü dersin notlarına    │
 │ ihtiyacım var.                 │
 │                                │
+│ ( 📷 Resim ekle ) ( 🎬 Video )  │  ← açık karar S-09
+│                                │
 │ ⓘ Telefon, adres ya da başka   │
-│   kişisel bilgi yazma. İstek-  │
-│   leri okuldaki herkes görür.  │
+│   kişisel bilgi yazma. Resim-  │
+│   de kimsenin yüzü görünmesin. │
+│   İstekleri herkes görür.      │
 └────────────────────────────────┘
 ```
 - Reddit'teki "gönderi oluştur" ekranı gibi: üstte kategori seçimi, sağ üstte **Yayınla**.
-- Fotoğraf ya da dosya yükleme alanı yok (T-03).
+- **Resim ve video ekleme: açık karar (S-09).** Bu benim önerim (Ö-04). Değişmez ilke 3 "fotoğraf tutulmaz" diyor, bu yüzden son onay Özgür Hoca'da. Onaylanmazsa bu düğmeler kaldırılır. Önerdiğim önlemler:
+  - Dosyadaki **konum ve cihaz bilgisi (EXIF)** sunucuya kaydedilmeden önce silinir.
+  - Ekranda "kimsenin yüzü görünmesin" uyarısı gösterilir. Kurala uymayan içeriği öğretmen gizler (V-02).
+  - Her isteğe en fazla 1 resim ya da 1 kısa video eklenir, boyut sınırı olur (ör. resim 5 MB, video 30 saniye).
+  - Profil fotoğrafı hâlâ yok. Bu öneri yalnızca isteklere eklenen dosyalar için.
+  - Video, resimden daha fazla risk ve depolama getirir (ses, yüzler, büyük dosya, eski ev sunucusu). İlk sürümde yalnızca resim olabilir, video sonraya kalabilir.
 - Hatırlatma notu, açıklamaya kişisel bilgi yazılmasını önlemek için konuldu. Asgari veri ilkesini ekranda da destekliyor.
 
 ## E4. İstek sayfası

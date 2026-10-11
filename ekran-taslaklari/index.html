@@ -104,6 +104,13 @@ textarea.input{min-height:110px;resize:none}
 .primary.sm{display:inline-block;width:auto;padding:8px 16px;font-size:14px}
 .secondary{border:0;background:var(--pill);color:var(--text);border-radius:999px;padding:8px 16px;font:inherit;font-weight:700;cursor:pointer}
 .danger{border:0;background:var(--danger);color:#fff;border-radius:999px;padding:8px 16px;font:inherit;font-weight:700;cursor:pointer}
+.media{margin:0 0 8px;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,var(--pill),var(--pill-hover));height:150px;display:grid;place-items:center;position:relative;color:var(--muted)}
+.media .ph{font-size:44px}
+.media .tag{position:absolute;left:8px;bottom:8px;font-size:11px;font-weight:700;background:rgba(0,0,0,.55);color:#fff;padding:2px 8px;border-radius:999px}
+.media .play{position:absolute;inset:auto 8px 8px auto;font-size:11px;font-weight:700;background:rgba(0,0,0,.55);color:#fff;padding:2px 8px;border-radius:999px}
+.attach{display:flex;gap:8px;margin:14px 14px 0}
+.attach button{flex:1;border:1px dashed var(--line);background:var(--card);color:var(--text);border-radius:12px;padding:12px 8px;font:inherit;font-weight:600;cursor:pointer}
+.pending{display:inline-block;font-size:11px;font-weight:700;color:var(--warn);background:var(--warn-bg);padding:2px 8px;border-radius:999px;margin:8px 14px 0}
 .info{margin:14px;padding:10px 12px;border-radius:12px;background:var(--pill);color:var(--muted);font-size:13px}
 .center{display:flex;flex-direction:column;justify-content:center;height:100%;padding:24px}
 /* ayrıntı */
@@ -177,7 +184,7 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
 
   <!-- E3 -->
   <figure>
-    <figcaption>E3 · Yeni istek<small>Fotoğraf yükleme yok, kişisel bilgi uyarısı var</small></figcaption>
+    <figcaption>E3 · Yeni istek<small>Resim/video ekleme önerisi (Ö-04), kişisel bilgi uyarısı</small></figcaption>
     <div class="phone">
       <div class="bar"><button class="iconbtn" type="button" aria-label="Kapat">✕</button><div class="spacer"></div><button class="primary sm" type="button">Yayınla</button></div>
       <div class="scroll">
@@ -189,7 +196,9 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
           <label class="l">Açıklama</label>
           <textarea class="input" aria-label="Açıklama">Salı günkü dersin notlarına ihtiyacım var.</textarea>
         </div>
-        <div class="info">ⓘ Telefon, adres ya da başka kişisel bilgi yazma. İstekleri okuldaki herkes görür.</div>
+        <span class="pending">Açık karar S-09: Özgür Hoca onayı bekliyor</span>
+        <div class="attach"><button type="button">📷 Resim ekle</button><button type="button">🎬 Video ekle</button></div>
+        <div class="info">ⓘ Telefon, adres ya da başka kişisel bilgi yazma. Resim ve videoda <b>kimsenin yüzü görünmesin</b>. Konum bilgisi dosyadan otomatik silinir. İstekleri okuldaki herkes görür.</div>
       </div>
     </div>
   </figure>
@@ -335,7 +344,7 @@ document.querySelectorAll(".nav[data-on]").forEach(function(n){
 var FLAIR={open:["f-open","🟢 Açık"],claimed:["f-claimed","🟡 Üstlenildi"],done:["f-done","🔵 Yapıldı"],closed:["f-closed","✅ Tamamlandı"]};
 var posts=[
   {k:"ders",who:"Mehmet A.",ini:"MA",t:"2 sa",title:"Kimya notları lazım",body:"Salı günkü dersin notlarına ihtiyacım var. Defterimi kaybettim, fotokopi çekip geri verebilirim.",st:"open",v:3,c:1},
-  {k:"okul",who:"Zeynep T.",ini:"ZT",t:"1 gün",title:"2. kat lavabo musluğu akıtıyor",body:"Kız tuvaletindeki soldan ikinci musluk sürekli akıyor.",st:"claimed",v:12,c:3},
+  {k:"okul",who:"Zeynep T.",ini:"ZT",t:"1 gün",title:"2. kat lavabo musluğu akıtıyor",body:"Kız tuvaletindeki soldan ikinci musluk sürekli akıyor.",st:"claimed",v:12,c:3,media:"🚰"},
   {k:"eşya",who:"Can B.",ini:"CB",t:"3 gün",title:"Hesap makinesi ödünç lazım",body:"Perşembe fizik sınavı için bilimsel hesap makinesi lazım, sınavdan sonra geri veririm.",st:"done",v:1,c:2},
   {k:"ders",who:"Elif S.",ini:"ES",t:"4 gün",title:"İngilizce konuşma pratiği yapacak arkadaş arıyorum",body:"Öğle arasında 15 dakika konuşma pratiği yapabiliriz.",st:"open",v:-2,c:0}
 ];
@@ -344,6 +353,7 @@ document.getElementById("feed").innerHTML=posts.map(function(p){
   var f=FLAIR[p.st];
   return '<div class="post"><div class="meta"><div class="av" style="width:22px;height:22px;font-size:9px">'+p.ini+'</div><b>k/'+p.k+'</b>· '+p.who+' · '+p.t+'</div>'+
     '<div class="title">'+p.title+'</div><span class="flair '+f[0]+'">'+f[1]+'</span>'+
+    (p.media?'<div class="media"><span class="ph">'+p.media+'</span><span class="tag">örnek görsel · S-09</span></div>':'')+
     '<p class="body">'+p.body+'</p><div class="actions">'+voteHTML(p.v)+'<button class="pillbtn" type="button">💬 '+p.c+'</button></div></div>';
 }).join("");
 

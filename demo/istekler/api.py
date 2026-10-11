@@ -94,7 +94,19 @@ def _istek_detay(istek, kullanici):
     # Yalnızca görünüş için: hangi düğmeler gösterilsin? Asıl kontrol gecisler.py'de.
     veri["dugmeler"] = gecisler.gorunen_dugmeler(istek, kullanici)
     veri["yorum_yazilabilir"] = istek.durum in gecisler.YORUM_YAZILABILEN_DURUMLAR
+    # Öğretmene özel düğmeler (E6). Yine yalnızca görünüş: gizle() öğretmen olmayanı reddeder.
+    if kullanici.ogretmen_mi:
+        veri["ogretmen_dugmeleri"] = ["gizlemeyi_kaldir"] if istek.durum == Durum.GIZLENDI else ["gizle"]
+    else:
+        veri["ogretmen_dugmeleri"] = []
+    if istek.durum == Durum.GIZLENDI:
+        veri["gizleme_gerekcesi"] = _gizleme_gerekcesi(istek)
     return veri
+
+
+def _gizleme_gerekcesi(istek):
+    son = istek.gecmis.filter(yeni_durum=Durum.GIZLENDI).select_related("yapan").last()
+    return f"{son.notu} ({son.yapan.gorunen_ad})" if son else ""
 
 
 def _ben(k):
@@ -105,6 +117,7 @@ def _ben(k):
         "rol": k.rol,
         "rol_adi": k.get_rol_display(),
         "yonetim_paneli": k.is_staff,
+        "ogretmen": k.ogretmen_mi,
         "kategoriler": [{"deger": d, "ad": a} for d, a in Istek.Kategori.choices],
     }
 
@@ -187,7 +200,24 @@ EYLEMLER = {
     "onayla": lambda no, k, v: gecisler.onayla(no, k, v.get("tesekkur", "")),
     "yapilmadi": lambda no, k, v: gecisler.yapilmadi_de(no, k, v.get("gerekce", "")),
     "yorum": lambda no, k, v: gecisler.yorum_yaz(no, k, v.get("metin", "")),
+    "gizle": lambda no, k, v: gecisler.gizle(no, k, v.get("gerekce", "")),
+    "gizlemeyi_kaldir": lambda no, k, v: gecisler.gizlemeyi_kaldir(no, k),
 }
+
+
+@require_GET
+@giris_gerekli
+def gizlenenler(request):
+    """D4: Kontrol sayfası, gizlenenler sekmesi. Yalnızca öğretmenler."""
+    if not request.user.ogretmen_mi:
+        raise YetkiYok("Bu sayfayı yalnızca öğretmenler görebilir.")
+    qs = _yorum_sayili(Istek.objects.filter(durum=Durum.GIZLENDI))
+    sonuc = []
+    for i in qs:
+        veri = _istek_ozet(i)
+        veri["gizleme_gerekcesi"] = _gizleme_gerekcesi(i)
+        sonuc.append(veri)
+    return JsonResponse({"istekler": sonuc})
 
 
 @require_POST

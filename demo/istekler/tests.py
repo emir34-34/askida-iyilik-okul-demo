@@ -232,3 +232,31 @@ class ApiTesti(OrnekVeri):
         cevap = c.post(f"/api/istekler/{self.istek.pk}/ustlen", content_type="application/json")
         self.assertEqual(cevap.status_code, 403)
         self.assertEqual(self.durum(), Durum.ACIK)
+
+
+class OgretmenApiTesti(OrnekVeri):
+    """E6, D4: Öğretmen uygulamanın içinden gizler. Öğrenci aynı adrese istek atsa bile yapamaz."""
+
+    def post(self, yol, veri=None):
+        return self.client.post(yol, data=veri or {}, content_type="application/json")
+
+    def test_ogrenci_api_ile_gizleyemez(self):
+        self.client.force_login(self.ayse)
+        cevap = self.post(f"/api/istekler/{self.istek.pk}/gizle", {"gerekce": "deneme"})
+        self.assertEqual(cevap.status_code, 403)
+        self.assertEqual(self.durum(), Durum.ACIK)
+        self.assertEqual(self.client.get("/api/gizlenenler").status_code, 403)
+        self.assertEqual(self.client.get(f"/api/istekler/{self.istek.pk}").json()["ogretmen_dugmeleri"], [])
+
+    def test_ogretmen_gerekceyle_gizler_ve_geri_acar(self):
+        self.client.force_login(self.selin)
+        self.assertEqual(self.client.get(f"/api/istekler/{self.istek.pk}").json()["ogretmen_dugmeleri"], ["gizle"])
+        self.assertEqual(self.post(f"/api/istekler/{self.istek.pk}/gizle", {"gerekce": " "}).status_code, 400)
+        cevap = self.post(f"/api/istekler/{self.istek.pk}/gizle", {"gerekce": "Kişisel bilgi içeriyor."})
+        self.assertEqual(cevap.status_code, 200)
+        self.assertEqual(cevap.json()["ogretmen_dugmeleri"], ["gizlemeyi_kaldir"])
+        liste = self.client.get("/api/gizlenenler").json()["istekler"]
+        self.assertEqual([i["baslik"] for i in liste], ["Kimya notları lazım"])
+        self.assertIn("Kişisel bilgi içeriyor.", liste[0]["gizleme_gerekcesi"])
+        self.assertEqual(self.post(f"/api/istekler/{self.istek.pk}/gizlemeyi_kaldir").status_code, 200)
+        self.assertEqual(self.durum(), Durum.ACIK)

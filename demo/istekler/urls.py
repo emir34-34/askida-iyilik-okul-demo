@@ -22,6 +22,7 @@ urlpatterns = [
     path("api/cikis", api.cikis),
     path("api/istekler", api.istekler),
     path("api/gorevler", api.gorevler),
+    path("api/gizlenenler", api.gizlenenler),
     path("api/istekler/<int:no>", api.istek),
     path("api/istekler/<int:no>/<slug:eylem>", api.istek_eylem),
 ]

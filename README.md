@@ -19,6 +19,7 @@ Askıda İyilik, okulda insanların birbirine yaptığı iyiliği görünür kı
 
 Yardımcı belgeler:
 - [gorusme-1-sorular.md](gorusme-1-sorular.md): Yasemin Hoca ve Eyüp Hoca ile yapılacak ilk görüşmenin soru listesi
+- [demo-plani.md](demo-plani.md): Demoya başlamadan önce yazılan plan: neyin olacağı, testler, sıra
 - [Ekran taslakları (tarayıcıda)](https://emir34-34.github.io/askida-iyilik-okul-demo/ekran-taslaklari/): ekranlar.md'deki ekranların görsel hâli, demo değil
 
 ## Demoyu kurma ve çalıştırma

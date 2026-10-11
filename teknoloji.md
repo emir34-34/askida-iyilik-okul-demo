@@ -50,6 +50,14 @@ Firebase'in sunucuları Türkiye dışında ve verilerin yurt dışına gitmesin
 - **Sunucunun bakımı benim sorumluluğumda.** Güncellemeleri ve yedekleri ben yapmalıyım.
 - **Firebase'deki hazır özellikler** (bildirimler, kendiliğinden ölçeklenme) Django'da yok. Gerekirse kendim yazmam gerekir.
 
+## Ek: Android APK kabuğu (Emir'in isteği, Özgür Hoca'ya sorulacak)
+
+Demo bir Django web uygulamasıdır ve telefon tarayıcısında çalışır. Bunun yanında, aynı sayfaları tam ekran açan bir **Android APK kabuğu** (WebView) yapılacak. Telefonda ikonu olan bir uygulama gibi görünür, ama içinde aynı Django sayfaları çalışır. Ayrı bir uygulama yazılmaz, bütün kurallar yine Django sunucusunda uygulanır.
+
+- **Neden:** Uygulamanın telefonda gerçek bir uygulama gibi nasıl hissettireceğini göstermek.
+- **Ne gerektirir:** Android SDK ve Java (bilgisayarda kurulu).
+- **Sınırı:** APK, bilgisayardaki ya da sunucudaki Django çalışmıyorsa hiçbir şey göstermez. Görev tanımı yeni teknoloji için Özgür Hoca'ya sormayı istediğinden bu bir **açık soru (S-11)**. Hoca hayır derse APK demodan çıkarılır, web demosu eksiksiz kalır.
+
 ## Kaynaklar
 - Firestore bölgeleri: https://firebase.google.com/docs/firestore/locations
 - Firebase fiyat planları: https://firebase.google.com/docs/projects/billing/firebase-pricing-plans

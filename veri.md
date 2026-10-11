@@ -77,7 +77,7 @@ Oylar **istek başına** toplanır, **kişi başına asla toplanmaz**. Reddit'te
 
 | Alan | Örnek değer | Neden tutuluyor |
 |------|-------------|-----------------|
-| `okul_kelimesi_ozeti` | (geri çevrilemez özet) | Görevli girişinde (E16) kelimeyi doğrulamak için. Kelimenin kendisi hiçbir yerde saklanmaz |
+| `okul_kelimesi_ozeti` | (geri çevrilemez özet) | Görevli girişinde (E16) kullanıcı adı ve şifreyle birlikte kelimeyi doğrulamak için. Kelimenin kendisi hiçbir yerde saklanmaz |
 | `okul_kelimesi_degisme_zamani` | `2026-09-15` | Kelimenin ne zamandır değişmediğini yöneticiye hatırlatmak için |
 
 ## Giriş denemesi
@@ -85,7 +85,7 @@ Oylar **istek başına** toplanır, **kişi başına asla toplanmaz**. Reddit'te
 | Alan | Örnek değer | Neden tutuluyor |
 |------|-------------|-----------------|
 | `kullanici` | → `ogretmen1` | Hangi hesaba deneme yapıldığını bilmek için |
-| `adim` | `okul_kelimesi` | Şifre mi, okul kelimesi mi yanlış girildi |
+| `ekran` | `gorevli` | Denemenin öğrenci girişinden mi, görevli girişinden mi yapıldığını bilmek için. Hangi alanın yanlış olduğu kaydedilmez |
 | `basarili` | `false` | Üst üste yanlış denemeleri sayıp hesabı geçici olarak kilitlemek için |
 | `zaman` | `2026-10-14 08:02` | 15 dakikalık kilidi hesaplamak için |
 

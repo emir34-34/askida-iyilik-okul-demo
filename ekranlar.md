@@ -67,7 +67,7 @@ Aşağı oyun riskini azaltmak için önerdiğim önlemler (bunlar da hocalara s
 | E13 | Onayla ve teşekkür et | İsteği açan kişi | ⚠️ Onay var, teşekkür notu zaman kalırsa |
 | E14 | Boş durumlar | Herkes | ✅ akış ve görevler için |
 | E15 | Arama sonuçları | Öğrenci, öğretmen | ❌ yalnızca tasarımda |
-| E16 | Görevli girişi (2. adım) | Öğretmen, yönetici | ❌ yalnızca tasarımda |
+| E16 | Görevli girişi (kullanıcı adı + şifre + okul kelimesi) | Öğretmen, yönetici | ❌ yalnızca tasarımda |
 | D1 | Ana akış (bilgisayar) | Öğrenci, öğretmen | ✅ |
 | D2 | İstek sayfası (bilgisayar) | Öğrenci, öğretmen | ✅ |
 | D3 | Yönetim özeti (bilgisayar) | Öğretmen, yönetici | ❌ yalnızca tasarımda |
@@ -100,6 +100,7 @@ Oylama demoya ancak S-08 kararından sonra eklenir. Demonun zorunlu akışı (a�
 └────────────────────────────────┘
 ```
 - "Kayıt ol" düğmesi yok, hesapları yönetici açar (V-03).
+- Altta **"Öğretmen / yönetici girişi"** bağlantısı E16'yı açar. Öğretmen ve yönetici hesapları bu ekrandan giriş yapamaz.
 - Şifre sıfırlama e-postayla yapılmaz, çünkü e-posta tutmuyoruz (`veri.md`).
 
 ## E2. Ana akış (istek kartları)
@@ -541,27 +542,29 @@ Gösterilecek bir şey olmadığında ekran boş kalmaz. Kullanıcıya neden bo�
 - Gizlenen istekler arama sonuçlarında çıkmaz.
 - Eşleşen kelime turuncu arka planla vurgulanır. Sonuç yoksa "farklı bir kelime dene ya da yeni bir istek aç" önerilir (E14).
 
-## E16 ve D5. Görevli girişi (2. adım)
+## E16 ve D5. Görevli girişi
 
-Öğretmen ve yönetici hesaplarında şifreden sonra ikinci bir adım vardır: öğretmenlerin ve yöneticilerin aralarında belirlediği **okul kelimesi** (Ö-07). Amaç, bir öğretmenin şifresini bir şekilde öğrenen bir öğrencinin o hesapla giriş yapamaması.
+Öğretmen ve yönetici hesapları ayrı bir giriş ekranından, **üç bilgiyle birlikte** giriş yapar: **kullanıcı adı + şifre + okul kelimesi** (Ö-07). Okul kelimesi, öğretmenlerin ve yöneticilerin aralarında belirlediği ortak bir kelimedir. Amaç, bir öğretmenin kullanıcı adını ve şifresini öğrenen bir öğrencinin, kelimeyi bilmediği için o hesapla giriş yapamaması.
 
 ```
-  1. adım (E1)                2. adım (E16)
-┌──────────────────┐       ┌──────────────────────────┐
-│ Kullanıcı adı    │       │ 2. ADIM · GÖREVLİ        │
-│ Şifre            │  ──▶  │ 🛡  Okul kelimesini gir  │
-│ ( Giriş yap )    │       │ (SÖ) Selin Öğretmen      │
-└──────────────────┘       │ [ •••••• ]               │
-  öğrenci hesabıysa        │ ✕ Kelime hatalı.         │
-  doğrudan akışa gider     │   2 deneme hakkın kaldı. │
-                           │ ( Giriş yap )            │
-                           └──────────────────────────┘
+  Öğrenci girişi (E1)              Görevli girişi (E16)
+┌──────────────────────┐        ┌──────────────────────────┐
+│ Kullanıcı adı        │        │ 🛡 ÖĞRETMEN / YÖNETİCİ   │
+│ Şifre                │        │ Kullanıcı adı            │
+│ ( Giriş yap )        │        │ Şifre                    │
+│                      │        │ Okul kelimesi            │
+│ 🛡 Öğretmen /        │  ──▶   │ ✕ Bilgiler hatalı.       │
+│   yönetici girişi →  │        │   2 deneme hakkın kaldı. │
+└──────────────────────┘        │ ( Giriş yap )            │
+                                │ ← Öğrenci girişine dön   │
+                                └──────────────────────────┘
 ```
 **Nasıl çalışır?**
-1. Herkes E1'de kullanıcı adı ve şifresini girer.
-2. Hesap **öğrenci** hesabıysa doğrudan akışa geçer. Öğrenciler ikinci adımı hiç görmez.
-3. Hesap **öğretmen ya da yönetici** hesabıysa E16 açılır ve okul kelimesi sorulur.
-4. Kelime doğruysa giriş tamamlanır. Kontrol sunucuda yapılır (T-07): Kelime doğru girilmeden hiçbir öğretmen sayfası açılmaz, adres elle yazılsa bile.
+1. Öğrenciler E1'de kullanıcı adı ve şifreyle girer.
+2. Öğretmen ve yöneticiler E1'deki **"Öğretmen / yönetici girişi"** bağlantısıyla E16'yı açar ve üç bilgiyi birlikte girer.
+3. **Öğretmen ya da yönetici hesabıyla E1'den giriş yapılamaz.** Sunucu bu hesapları yalnızca okul kelimesiyle birlikte kabul eder. Öğretmenin kullanıcı adını ve şifresini bilen biri öğrenci ekranından da giremez.
+4. Üç bilgiden biri bile yanlışsa yalnızca **"Bilgiler hatalı"** denir. **Hangisinin yanlış olduğu söylenmez.** Böylece öğretmenin şifresini bilen bir öğrenci "şifre doğruymuş, yalnızca kelime yanlışmış" diye bir ipucu alamaz.
+5. Bütün kontroller sunucuda yapılır (T-07). Kelime doğru girilmeden hiçbir öğretmen sayfası açılmaz, adres elle yazılsa bile.
 
 **Güvenlik önlemleri**
 - **3 yanlış denemede** hesap **15 dakika** kilitlenir ve yöneticiye bildirim gider. Böylece kelime tahmin edilerek bulunamaz. (Sayılar örnektir, sistem ayarlarından değiştirilebilir.)

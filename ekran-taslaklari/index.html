@@ -288,7 +288,7 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
 
   <!-- E1 -->
   <figure>
-    <figcaption>E1 · Giriş<small>Kayıt ol yok, hesapları yönetici açar (V-03)</small></figcaption>
+    <figcaption>E1 · Giriş<small>Öğrenci girişi. Altta görevli girişine bağlantı</small></figcaption>
     <div class="phone"><div class="scroll"><div class="center">
       <div style="text-align:center;margin-bottom:28px">
         <div class="logo" style="justify-content:center;font-size:22px"><span class="dot" style="width:40px;height:40px;font-size:20px">🤝</span>Askıda İyilik</div>
@@ -300,6 +300,7 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
       <div style="height:18px"></div>
       <button class="primary" type="button">Giriş yap</button>
       <p style="text-align:center;color:var(--muted);font-size:13px;margin-top:16px">Şifreni unuttuysan okul yöneticisine başvur.</p>
+      <p style="text-align:center;font-size:13px;margin-top:4px"><a href="#" style="color:var(--brand);font-weight:700;text-decoration:none">🛡️ Öğretmen / yönetici girişi →</a></p>
     </div></div></div>
   </figure>
 
@@ -552,17 +553,21 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
 
   <!-- E16 -->
   <figure id="e16">
-    <figcaption>E16 · Görevli girişi (2. adım)<small>Öğretmen ve yönetici hesaplarında şifreden sonra okul kelimesi sorulur</small></figcaption>
+    <figcaption>E16 · Görevli girişi<small>Kullanıcı adı + şifre + okul kelimesi, tek ekranda</small></figcaption>
     <div class="phone"><div class="scroll"><div style="padding:28px 22px">
-        <div style="text-align:center"><div class="step">2. ADIM · GÖREVLİ DOĞRULAMASI</div><div class="shield">🛡️</div>
-        <h3 style="margin:0 0 4px;font-size:19px">Okul kelimesini gir</h3>
-        <p style="margin:0 0 14px;color:var(--muted);font-size:13px">Bu hesap bir öğretmen hesabı. Öğretmenlerin ve yöneticilerin bildiği okul kelimesini yaz.</p></div>
-        <div class="who-box"><div class="av">SÖ</div><div><b>Selin Öğretmen</b><div style="color:var(--muted);font-size:12px">ogretmen1 · Öğretmen</div></div></div>
-        <input class="input" type="password" value="yanlis" aria-label="Okul kelimesi" placeholder="Okul kelimesi">
-        <div class="err">✕ Kelime hatalı. <b>2 deneme hakkın kaldı.</b> 3 yanlış denemede hesap 15 dakika kilitlenir ve yöneticiye haber verilir.</div>
+        <div style="text-align:center"><div class="step">ÖĞRETMEN / YÖNETİCİ GİRİŞİ</div><div class="shield">🛡️</div>
+        <h3 style="margin:0 0 4px;font-size:19px">Görevli girişi</h3>
+        <p style="margin:0 0 14px;color:var(--muted);font-size:13px">Öğretmen ve yönetici hesapları yalnızca buradan, üç bilgiyle giriş yapabilir.</p></div>
+        <input class="input" value="ogretmen1" aria-label="Kullanıcı adı" placeholder="Kullanıcı adı">
+        <div style="height:10px"></div>
+        <input class="input" type="password" value="12345678" aria-label="Şifre" placeholder="Şifre">
+        <div style="height:10px"></div>
+        <input class="input" type="password" value="kelime" aria-label="Okul kelimesi" placeholder="Okul kelimesi">
+        <div style="font-size:12px;color:var(--muted);margin:4px 2px 0">Okul kelimesi öğretmenlerin ve yöneticilerin aralarında belirlediği ortak kelimedir.</div>
+        <div class="err">✕ Bilgiler hatalı. <b>2 deneme hakkın kaldı.</b> 3 yanlış denemede hesap 15 dakika kilitlenir ve yöneticiye haber verilir.</div>
         <div style="height:14px"></div>
         <button class="primary" type="button">Giriş yap</button>
-        <p style="text-align:center;color:var(--muted);font-size:12px;margin-top:12px">Kelimeyi bilmiyorsan okul yöneticisine başvur.<br>← Farklı bir hesapla giriş yap</p>
+        <p style="text-align:center;color:var(--muted);font-size:12px;margin-top:12px">Kelimeyi bilmiyorsan okul yöneticisine başvur.<br>← Öğrenci girişine dön</p>
     </div></div></div>
   </figure>
 
@@ -792,21 +797,25 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
 
   <!-- D5 -->
   <figure style="width:100%" id="d5">
-    <figcaption>D5 · Görevli girişi (bilgisayar)<small>Aynı iki adım, ortada bir kart olarak</small></figcaption>
-    <div class="browser"><div class="chrome"><i></i><i></i><i></i><span class="url">localhost:8000/giris/dogrulama/</span></div>
+    <figcaption>D5 · Görevli girişi (bilgisayar)<small>Aynı üç alan, ortada bir kart olarak</small></figcaption>
+    <div class="browser"><div class="chrome"><i></i><i></i><i></i><span class="url">localhost:8000/giris/gorevli/</span></div>
     <div class="desk-scroll"><div class="desk" style="grid-template-rows:56px 1fr">
         <div class="dhead"><div class="logo"><span class="dot">🤝</span>Askıda İyilik</div></div>
         <div style="display:grid;place-items:center;background:var(--page)">
           <div class="card" style="width:420px;padding:26px 28px;margin:0">
-            <div style="text-align:center"><div class="step">2. ADIM · GÖREVLİ DOĞRULAMASI</div><div class="shield">🛡️</div>
-        <h3 style="margin:0 0 4px;font-size:19px">Okul kelimesini gir</h3>
-        <p style="margin:0 0 14px;color:var(--muted);font-size:13px">Bu hesap bir öğretmen hesabı. Öğretmenlerin ve yöneticilerin bildiği okul kelimesini yaz.</p></div>
-        <div class="who-box"><div class="av">SÖ</div><div><b>Selin Öğretmen</b><div style="color:var(--muted);font-size:12px">ogretmen1 · Öğretmen</div></div></div>
-        <input class="input" type="password" value="yanlis" aria-label="Okul kelimesi" placeholder="Okul kelimesi">
-        <div class="err">✕ Kelime hatalı. <b>2 deneme hakkın kaldı.</b> 3 yanlış denemede hesap 15 dakika kilitlenir ve yöneticiye haber verilir.</div>
+            <div style="text-align:center"><div class="step">ÖĞRETMEN / YÖNETİCİ GİRİŞİ</div><div class="shield">🛡️</div>
+        <h3 style="margin:0 0 4px;font-size:19px">Görevli girişi</h3>
+        <p style="margin:0 0 14px;color:var(--muted);font-size:13px">Öğretmen ve yönetici hesapları yalnızca buradan, üç bilgiyle giriş yapabilir.</p></div>
+        <input class="input" value="ogretmen1" aria-label="Kullanıcı adı" placeholder="Kullanıcı adı">
+        <div style="height:10px"></div>
+        <input class="input" type="password" value="12345678" aria-label="Şifre" placeholder="Şifre">
+        <div style="height:10px"></div>
+        <input class="input" type="password" value="kelime" aria-label="Okul kelimesi" placeholder="Okul kelimesi">
+        <div style="font-size:12px;color:var(--muted);margin:4px 2px 0">Okul kelimesi öğretmenlerin ve yöneticilerin aralarında belirlediği ortak kelimedir.</div>
+        <div class="err">✕ Bilgiler hatalı. <b>2 deneme hakkın kaldı.</b> 3 yanlış denemede hesap 15 dakika kilitlenir ve yöneticiye haber verilir.</div>
         <div style="height:14px"></div>
         <button class="primary" type="button">Giriş yap</button>
-        <p style="text-align:center;color:var(--muted);font-size:12px;margin-top:12px">Kelimeyi bilmiyorsan okul yöneticisine başvur.<br>← Farklı bir hesapla giriş yap</p>
+        <p style="text-align:center;color:var(--muted);font-size:12px;margin-top:12px">Kelimeyi bilmiyorsan okul yöneticisine başvur.<br>← Öğrenci girişine dön</p>
           </div>
         </div>
     </div></div></div>

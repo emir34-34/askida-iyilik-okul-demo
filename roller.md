@@ -39,6 +39,7 @@
 | Yönetim özetini görmek | ❌ | ✅ | ✅ | Yalnızca toplam sayılar, kişi bazında bilgi yok (V-12) |
 | İsteği ya da yorumu gizlemek | ❌ | ✅ | ❌ | Gerekçe yazmak zorunlu (V-02) |
 | Gizlenen içeriği geri açmak | ❌ | ✅ | ❌ | |
+| Kontrol sayfasını görmek, şikâyeti "sorun yok" diye kapatmak | ❌ | ✅ | ❌ | `ekranlar.md` D4 |
 | Hesap açmak ya da kapatmak | ❌ | ❌ | ✅ | V-03 |
 | Kimin kaç iyilik yaptığını gösteren bir liste görmek | ❌ | ❌ | ❌ | Sıralama tablosu yok (T-02). Bu liste kimseye gösterilmez |
 

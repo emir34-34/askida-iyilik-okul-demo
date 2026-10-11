@@ -66,6 +66,7 @@ Aşağı oyun riskini azaltmak için önerdiğim önlemler (bunlar da hocalara s
 | D1 | Ana akış (bilgisayar) | Öğrenci, öğretmen | ✅ |
 | D2 | İstek sayfası (bilgisayar) | Öğrenci, öğretmen | ✅ |
 | D3 | Yönetim özeti (bilgisayar) | Öğretmen, yönetici | ❌ yalnızca tasarımda |
+| D4 | Kontrol (bilgisayar) | Öğretmen | ⚠️ Django yönetim paneliyle |
 
 Oylama demoya ancak S-08 kararından sonra eklenir. Demonun zorunlu akışı (aç, üstlen, yapıldı, onayla) oylamaya bağlı değil.
 
@@ -419,6 +420,32 @@ Tamamlanan istekler akıştan kalkıp arşive taşınır. Arşive akıştaki **A
 - Kişi kendi içeriğini şikâyet edemez, aynı içeriği bir kez şikâyet edebilir.
 - Şikâyet sebepleri örnektir, asıl listeyi hocalar belirleyecek.
 
+## D4. Kontrol (öğretmen)
+
+Şikâyet edilen (E11) ve gizlenen (E6) içerikler tek bir sayfada toplanır. Öğretmen menüsündeki **Kontrol** bağlantısının yanında bekleyen şikâyet sayısı görünür. Telefonda da aynı liste tek sütun olarak açılır.
+
+```
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ ÖĞRETMEN      │ Kontrol           (Şikâyetler 3) (Gizlenenler) (İncelenenler)│
+│ 📊 Yönetim    │ ┌──────────────────────────────────────────────────────────┐ │
+│    özeti      │ │ [🔒 Kişisel bilgi] İstek · k/eşya · Can B.  2 kişi bildirdi│ │
+│ 🛡 Kontrol ③  │ │ Biri bana 50 TL borç versin                              │ │
+│               │ │ Numaram 05xx xxx xx xx, yazın.                           │ │
+│               │ │ ( Gizle… ) ( Sorun yok ) ( İsteğe git )                  │ │
+│               │ └──────────────────────────────────────────────────────────┘ │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+```
+
+| Sekme | Ne gösterir | Öğretmen ne yapabilir |
+|-------|-------------|-----------------------|
+| Şikâyetler | Durumu `bekliyor` olan şikâyetler, aynı içerik için gelen şikâyetler tek kartta | **Gizle…** (gerekçe ister, E6) ya da **Sorun yok** (şikâyet kapanır, içerik yayında kalır) |
+| Gizlenenler | Gizlenen istekler ve yorumlar, gerekçesi ve kimin gizlediği | **Geri aç** (G9) |
+| İncelenenler | "Sorun yok" denen şikâyetler | Yeniden açma |
+
+- "2 kişi bildirdi ›" bağlantısı, kimin şikâyet ettiğini yalnızca öğretmene gösterir (V-13).
+- Her karar durum geçmişine yazılır (`veri.md`).
+- Demoda bu sayfa yerine Django'nun yönetim paneli kullanılacak.
+
 ## E6. Gizleme (öğretmen)
 
 ```
@@ -436,7 +463,7 @@ Tamamlanan istekler akıştan kalkıp arşive taşınır. Arşive akıştaki **A
 │ ( Vazgeç )        ( Gizle )    │
 └────────────────────────────────┘
 ```
-- İsteğin ya da yorumun `⋯` menüsünden açılır.
+- İsteğin ya da yorumun `⋯` menüsünden, ya da Kontrol sayfasındaki (D4) **Gizle…** düğmesinden açılır.
 - İçerik silinmez, gizlenir. Gerekçe durum geçmişine yazılır (G8, `veri.md`).
 - Demoda bu ekran yerine Django'nun yönetim paneli kullanılacak.
 

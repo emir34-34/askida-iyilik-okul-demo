@@ -222,6 +222,14 @@ textarea.input{min-height:110px;resize:none}
 .mini td{padding:7px 0;border-top:1px solid var(--line)}
 .mini td:last-child{text-align:right;color:var(--muted);white-space:nowrap}
 .privacy{display:flex;gap:8px;align-items:center;background:var(--pill);border-radius:12px;padding:8px 12px;font-size:12px;color:var(--muted);margin-bottom:12px}
+/* kontrol */
+.mod{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px}
+.mod .top{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--muted);margin-bottom:4px}
+.mod .why{display:inline-flex;gap:4px;font-size:12px;font-weight:700;color:var(--warn);background:var(--warn-bg);padding:2px 8px;border-radius:999px}
+.mod .ttl2{font-weight:700;font-size:15px}
+.mod .bd{color:var(--text);opacity:.9;margin:4px 0 10px;font-size:13px}
+.mod .acts{display:flex;gap:8px;align-items:center}
+.cnt-badge{margin-left:auto;background:var(--brand);color:var(--brand-ink);font-size:11px;font-weight:800;border-radius:999px;padding:1px 7px}
 footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);font-size:13px}
 </style>
 </head>
@@ -583,6 +591,7 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
           <hr>
           <div class="lbl">ÖĞRETMEN</div>
           <a href="#" class="on"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Yönetim özeti</a>
+          <a href="#"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.5 8-8 9-4.5-1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>Kontrol<span class="cnt-badge">3</span></a>
         </div>
         <div class="dmain"><div class="inner" style="max-width:860px">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
@@ -619,6 +628,54 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
               <tr><td>Fizik deney raporu yardımı · 🔵 Yapıldı, onay bekliyor</td><td>5 gün</td></tr>
             </table>
           </div>
+        </div></div>
+      </div>
+    </div></div></div>
+  </figure>
+
+  <!-- D4 -->
+  <figure style="width:100%" id="d4">
+    <figcaption>D4 · Kontrol (öğretmen)<small>Şikâyet edilen ve gizlenen içerikler tek yerde</small></figcaption>
+    <div class="browser"><div class="chrome"><i></i><i></i><i></i><span class="url">localhost:8000/kontrol/</span></div>
+    <div class="desk-scroll"><div class="desk">
+        <div class="dhead">
+          <div class="logo"><span class="dot">🤝</span>Askıda İyilik</div>
+          <div class="search">🔍 İsteklerde ara</div>
+          <button class="iconbtn bell" type="button" aria-label="Bildirimler"><svg viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></button>
+          <div class="av">SÖ</div>
+        </div>
+      <div class="dbody" style="grid-template-columns:230px 1fr">
+        <div class="dleft">
+          <a href="#"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h5v-6h4v6h5V9.5"/></svg>Akış</a>
+          <a href="#"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="5" rx="1"/><path d="M5 9v10h14V9M10 13h4"/></svg>Arşiv</a>
+          <hr>
+          <div class="lbl">ÖĞRETMEN</div>
+          <a href="#"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Yönetim özeti</a>
+          <a href="#" class="on"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.5 8-8 9-4.5-1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>Kontrol<span class="cnt-badge">3</span></a>
+        </div>
+        <div class="dmain"><div class="inner" style="max-width:760px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+            <b style="font-size:18px">Kontrol</b><div class="spacer"></div>
+            <div class="tabs" style="background:transparent;border:0;padding:0"><button class="chip on" type="button">Şikâyetler (3)</button><button class="chip" type="button">Gizlenenler</button><button class="chip" type="button">İncelenenler</button></div>
+          </div>
+          <div class="mod">
+            <div class="top"><span class="why">🔒 Kişisel bilgi</span>İstek · k/eşya · Can B. · 20 dk önce<span class="spacer"></span>2 kişi bildirdi ›</div>
+            <div class="ttl2">Biri bana 50 TL borç versin</div>
+            <div class="bd">Numaram 05xx xxx xx xx, yazın.</div>
+            <div class="acts"><button class="danger" type="button">Gizle…</button><button class="secondary" type="button">Sorun yok</button><button class="pillbtn" type="button">İsteğe git</button></div>
+          </div>
+          <div class="mod">
+            <div class="top"><span class="why">😠 Uygunsuz dil</span>Yorum · "Kimya notları lazım" isteğinde · 1 sa önce<span class="spacer"></span>1 kişi bildirdi ›</div>
+            <div class="bd" style="margin-top:6px">"Bunu bile bilmiyor musun ya, [kaba bir söz]"</div>
+            <div class="acts"><button class="danger" type="button">Gizle…</button><button class="secondary" type="button">Sorun yok</button><button class="pillbtn" type="button">Yoruma git</button></div>
+          </div>
+          <div class="mod">
+            <div class="top"><span class="why">❓ Okulla ilgisi yok</span>İstek · k/eşya · Elif S. · 3 sa önce<span class="spacer"></span>1 kişi bildirdi ›</div>
+            <div class="ttl2">Hafta sonu maça gelecek var mı?</div>
+            <div class="bd">Cumartesi stadyuma gidiyoruz, bilet ayarlayabilirim.</div>
+            <div class="acts"><button class="danger" type="button">Gizle…</button><button class="secondary" type="button">Sorun yok</button><button class="pillbtn" type="button">İsteğe git</button></div>
+          </div>
+          <div class="privacy">ⓘ "Gizle…" gerekçe penceresini açar (E6). "Sorun yok" şikâyeti kapatır, içerik yayında kalır. Her karar durum geçmişine yazılır.</div>
         </div></div>
       </div>
     </div></div></div>

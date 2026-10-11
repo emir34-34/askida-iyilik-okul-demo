@@ -2,7 +2,7 @@
 
 Askıda İyilik, okulda insanların birbirine yaptığı iyiliği görünür kılmak için düşünülen bir uygulama: biri bir ihtiyacını ya da okulda gördüğü bir sorunu bildirir, başka biri karşılar, bildiren kişi onaylar. Bu repo, uygulamanın okul sürümünün **sistem tasarımını** (roller, akış, veri, ekranlar, senaryolar) ve bu tasarımın en önemli akışını (isteği aç → üstlen → yapıldı → onayla) uçtan uca yürüten **çalışan bir ilk demoyu** içerir. Uygulamadan ne istendiğini Yasemin Hoca ve Eyüp Hoca belirler. Danışman öğretmen Özgür Girgin'dir.
 
-> **Durum:** Tasarım dosyalarının hepsi taslak olarak hazır, hocaların varsayımları onaylaması bekleniyor. Demonun ilk dilimi çalışıyor: giriş, istek aç → üstlen → yapıldı → onayla, yorumlar ve 20 test. Arayüz istemcide (tarayıcı ve Android APK), Django yalnızca veri gönderir (`demo-plani.md`).
+> **Durum:** Tasarım dosyalarının hepsi taslak olarak hazır, hocaların varsayımları onaylaması bekleniyor. Demonun ilk dilimi çalışıyor: giriş, istek aç → üstlen → yapıldı → onayla, yorumlar ve 22 test. Arayüz istemcide (tarayıcı ve Android APK), Django yalnızca veri gönderir (`demo-plani.md`).
 
 ## Dosyalar
 
@@ -20,6 +20,7 @@ Askıda İyilik, okulda insanların birbirine yaptığı iyiliği görünür kı
 Yardımcı belgeler:
 - [gorusme-1-sorular.md](gorusme-1-sorular.md): Yasemin Hoca ve Eyüp Hoca ile yapılacak ilk görüşmenin soru listesi
 - [Görüşme formu](https://emir34-34.github.io/askida-iyilik-okul-demo/gorusme-formu.html): 12 Ekim görüşmesi için hocaların işaretleyeceği, yazdırılabilir form (bütün varsayımlar, öneriler ve açık sorular)
+- [sunum-plani.md](sunum-plani.md): 12 Ekim görüşmesinin akışı, canlı demo senaryosu, kurulum kontrol listesi, olası sorular
 - [demo-plani.md](demo-plani.md): Demoya başlamadan önce yazılan plan: neyin olacağı, testler, sıra
 - [Ekran taslakları (tarayıcıda)](https://emir34-34.github.io/askida-iyilik-okul-demo/ekran-taslaklari/): ekranlar.md'deki ekranların görsel hâli, demo değil
 
@@ -49,7 +50,7 @@ cp .env.example .env               # Windows: copy .env.example .env
 python manage.py migrate
 python manage.py ornek_veri
 
-# 5. Testleri çalıştır (20 test, hepsi geçmeli)
+# 5. Testleri çalıştır (22 test, hepsi geçmeli)
 python manage.py test
 
 # 6. Sunucuyu başlat

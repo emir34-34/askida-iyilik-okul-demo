@@ -47,6 +47,45 @@ async function api(yontem, yol, govde) {
   return { ok: cevap.ok, durum: cevap.status, veri };
 }
 
+// --- Canlı güncelleme (demo-plani.md): ekran açıkken belirli aralıklarla sunucuya sorar -------
+
+let canli = null;
+
+function canliBaslat(fonksiyon, aralikMs) {
+  clearInterval(canli);
+  canli = setInterval(() => { if (!document.hidden) fonksiyon(); }, aralikMs);
+}
+
+/** Sessiz istek: hata bildirimi göstermez (arka planda sorarken). */
+async function sessizGetir(yol) {
+  try {
+    const c = await fetch("/api/" + yol, { credentials: "same-origin" });
+    return { durum: c.status, veri: await c.json() };
+  } catch (e) {
+    return null;
+  }
+}
+
+/** Kullanıcı o an bir şey yazıyorsa ekranı yeniden çizme (yazdığı kaybolmasın). */
+function kullaniciMesgul() {
+  const odak = document.activeElement;
+  return (odak && (odak.tagName === "INPUT" || odak.tagName === "TEXTAREA")) || !!kok.querySelector("details[open]");
+}
+
+/** Ekran açıkken başka biri isteği değiştirdi: ne olduğunu söyle. */
+function degisiklikMesaji(eski, yeni) {
+  const ad = (k) => (k ? k.gorunen_ad : "Biri");
+  const once = eski.durum, simdi = yeni.durum;
+  if (once === simdi) return null; // yalnızca yeni yorum: sessizce güncelle
+  if (once === "acik" && simdi === "ustlenildi") return `Bu istek az önce ${ad(yeni.ustlenen)} tarafından üstlenildi.`;
+  if (once === "ustlenildi" && simdi === "acik") return `${ad(eski.ustlenen)} işi bıraktı. İstek yeniden açık.`;
+  if (once === "ustlenildi" && simdi === "yapildi") return `${ad(yeni.ustlenen)} işi yaptığını söyledi.`;
+  if (once === "yapildi" && simdi === "tamamlandi") return "İstek onaylandı ve tamamlandı. 🎉";
+  if (once === "yapildi" && simdi === "ustlenildi") return `İş yeniden ${ad(yeni.ustlenen)} kişisine döndü.`;
+  if (simdi === "geri_cekildi") return "İsteği açan kişi isteğini geri çekti.";
+  return "İstek güncellendi: " + yeni.durum_adi;
+}
+
 function zamanOnce(iso) {
   const sn = Math.max(0, (Date.now() - new Date(iso).getTime()) / 1000);
   if (sn < 60) return "az önce";
@@ -167,6 +206,11 @@ async function akisEkrani(parametre) {
     ? c.veri.istekler.map(kart).join("")
     : bos("🌱", "Şu an açık istek yok", "Bir ihtiyacın ya da okulda gördüğün bir sorun varsa ilk isteği sen aç.", '<a class="btn ana" href="#/yeni">＋ İstek aç</a>');
   kok.innerHTML = cerceve("akis", sekmeler + liste);
+  const son = JSON.stringify(c.veri);
+  canliBaslat(async () => {
+    const y = await sessizGetir(`istekler?sekme=${encodeURIComponent(sekme)}&k=${encodeURIComponent(k)}`);
+    if (y && y.durum === 200 && JSON.stringify(y.veri) !== son && !kullaniciMesgul()) akisEkrani(parametre);
+  }, 10000);
 }
 
 function dugmelerHTML(i) {
@@ -235,6 +279,18 @@ async function istekEkrani(no) {
       e.preventDefault();
       calistir(f.dataset.eylem, Object.fromEntries(new FormData(f)));
     }));
+
+  // Başka biri isteği değiştirirse (ör. üstlenirse) düğmeler 3 saniye içinde güncellenir.
+  const son = JSON.stringify(i);
+  canliBaslat(async () => {
+    const y = await sessizGetir(`istekler/${no}`);
+    if (!y) return;
+    if (y.durum === 404) return istekEkrani(no);
+    if (y.durum !== 200 || JSON.stringify(y.veri) === son || kullaniciMesgul()) return;
+    const mesaj = degisiklikMesaji(i, y.veri);
+    if (mesaj) bildir(mesaj);
+    istekEkrani(no);
+  }, 3000);
 }
 
 function yeniEkrani() {
@@ -293,6 +349,7 @@ function profilEkrani() {
 // --- Yönlendirme ---------------------------------------------------------------------------
 
 async function yonlendir() {
+  clearInterval(canli); // önceki ekranın canlı güncellemesi durur
   const [yol, sorgu] = (location.hash.slice(1) || "/").split("?");
   const parametre = new URLSearchParams(sorgu || "");
   if (yol === "/giris") return ben ? git("#/") : girisEkrani();

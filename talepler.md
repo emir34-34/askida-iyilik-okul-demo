@@ -9,13 +9,13 @@ Anlamadığım ya da birbiriyle çelişen bir talebi uydurmam: "Açık sorular" 
 
 | No | Talep | Kim istedi | Tarih | Geri okundu mu? | Tasarımda nerede | Demoda nerede |
 |----|-------|------------|-------|-----------------|------------------|---------------|
-| T-01 | Özel mesaj yok, konuşma isteğin altında herkese açık yorumlarla olur | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | roller.md (yorum yazmak), veri.md (Yorum) | — |
+| T-01 | Özel mesaj yok, konuşma isteğin altında herkese açık yorumlarla olur | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | roller.md (yorum yazmak), veri.md (Yorum) | İstek sayfasında yorumlar, özel mesaj yok |
 | T-02 | Sıralama tablosu yok | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | roller.md (son satır), akis.md, veri.md (Durum geçmişi) | — |
 | T-03 | TC kimlik no, telefon, fotoğraf, konum ve doğum tarihi tutulmaz, her alanın gerekçesi yazılır | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | veri.md (tamamı) | — |
-| T-04 | Demo yalnızca örnek veriyle çalışır | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | roller.md (demo rolleri), veri.md | — |
-| T-05 | Temel akış: isteği aç → üstlen → yapıldı → onayla, demoda uçtan uca çalışır | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | akis.md (G1, G2, G4, G5) | — |
-| T-06 | Aynı iş iki kişi tarafından aynı anda üstlenilemez | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | akis.md (soru 1) | — |
-| T-07 | Yetki kontrolü sunucuda yapılır, yalnızca ekranda yapılmaz | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | roller.md (yetki nerede kontrol edilir) | — |
+| T-04 | Demo yalnızca örnek veriyle çalışır | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | roller.md (demo rolleri), veri.md | `python manage.py ornek_veri` |
+| T-05 | Temel akış: isteği aç → üstlen → yapıldı → onayla, demoda uçtan uca çalışır | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | akis.md (G1, G2, G4, G5) | `demo/istekler/gecisler.py`, test: `OnayAkisiTesti` |
+| T-06 | Aynı iş iki kişi tarafından aynı anda üstlenilemez | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | akis.md (soru 1) | `gecisler.ustlen`, test: `CiftUstlenmeTesti` |
+| T-07 | Yetki kontrolü sunucuda yapılır, yalnızca ekranda yapılmaz | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | roller.md (yetki nerede kontrol edilir) | `gecisler.py`, test: `RolKuraliTesti`, `SayfaYetkiTesti` |
 
 ## B. Yasemin Hoca ve Eyüp Hoca'nın talepleri
 

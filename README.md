@@ -2,7 +2,7 @@
 
 Askıda İyilik, okulda insanların birbirine yaptığı iyiliği görünür kılmak için düşünülen bir uygulama: biri bir ihtiyacını ya da okulda gördüğü bir sorunu bildirir, başka biri karşılar, bildiren kişi onaylar. Bu repo, uygulamanın okul sürümünün **sistem tasarımını** (roller, akış, veri, ekranlar, senaryolar) ve bu tasarımın en önemli akışını (isteği aç → üstlen → yapıldı → onayla) uçtan uca yürüten **çalışan bir ilk demoyu** içerir. Uygulamadan ne istendiğini Yasemin Hoca ve Eyüp Hoca belirler. Danışman öğretmen Özgür Girgin'dir.
 
-> **Durum:** Aşama 1 — talepler toplanıyor. Demo henüz başlamadı. Görev tanımına göre demo en erken `roller.md`, `akis.md` ve `veri.md` bittikten sonra başlar.
+> **Durum:** Tasarım dosyalarının hepsi taslak olarak hazır, hocaların varsayımları onaylaması bekleniyor. Demonun ilk dilimi çalışıyor: giriş, istek aç → üstlen → yapıldı → onayla, yorumlar ve 15 test (`demo-plani.md`).
 
 ## Dosyalar
 
@@ -24,7 +24,53 @@ Yardımcı belgeler:
 
 ## Demoyu kurma ve çalıştırma
 
-Teknoloji: Django (gerekçe `teknoloji.md` dosyasında). Kurulum adımları demo yazılınca eklenecek.
+Teknoloji: Python + Django (gerekçe `teknoloji.md` dosyasında). Demo yalnızca uydurma örnek verilerle çalışır.
+
+**Gerekenler:** Python 3.12 ya da üstü, Git.
+
+```bash
+# 1. Repoyu indir ve demo klasörüne gir
+git clone https://github.com/emir34-34/askida-iyilik-okul-demo.git
+cd askida-iyilik-okul-demo/demo
+
+# 2. Sanal ortam kur ve Django'yu yükle
+python3 -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+
+# 3. Ayar dosyasını oluştur
+cp .env.example .env               # Windows: copy .env.example .env
+#    .env dosyasını açıp doldur:
+#    DJANGO_SECRET_KEY=  -> python -c "import secrets; print(secrets.token_urlsafe(50))" çıktısı
+#    DEMO_SIFRE=         -> örnek kullanıcıların şifresi, en az 8 karakter
+
+# 4. Veritabanını kur ve örnek verileri yükle
+python manage.py migrate
+python manage.py ornek_veri
+
+# 5. Testleri çalıştır (15 test, hepsi geçmeli)
+python manage.py test
+
+# 6. Sunucuyu başlat
+python manage.py runserver
+```
+
+Tarayıcıda **http://localhost:8000** adresini aç. Bütün örnek kullanıcıların şifresi `.env` dosyasındaki `DEMO_SIFRE` değeridir.
+
+| Kullanıcı adı | Kim | Rol |
+|---------------|-----|-----|
+| `ogrenci1` | Mehmet A. | Öğrenci |
+| `ogrenci2` | Ayşe K. | Öğrenci |
+| `ogrenci3` | Can B. | Öğrenci |
+| `ogrenci4`, `ogrenci5` | Zeynep T., Elif S. | Öğrenci |
+| `ogretmen1` | Selin Öğretmen | Öğretmen. Yönetim panelinde istek ve yorum gizleyebilir |
+| `yonetici1` | Kerem T. | Yönetici. Yönetim paneli: **http://localhost:8000/yonetim/** |
+
+**Senaryo 1'i demoda yürütmek** (`senaryolar.md`): `ogrenci1` ile gir, "Kimya notları lazım" isteğini gör → çıkış yap, `ogrenci2` ile gir, isteği **Üstlen**, yorum yaz, **Yapıldı** de → `ogrenci1` ile gir, **Onayla**. İki farklı kullanıcıyı aynı anda denemek için birini gizli pencerede aç.
+
+**Telefonda denemek:** Telefon USB ile bağlıyken (USB hata ayıklama açık) `adb reverse tcp:8000 tcp:8000` komutunu çalıştır, telefonun tarayıcısında `http://localhost:8000` adresini aç.
+
+**Örnek veriyi sıfırlamak:** `python manage.py ornek_veri` komutunu yeniden çalıştırmak bütün istekleri silip baştan oluşturur.
 
 ## Değişmez ilkeler (projenin baştan verilmiş kararları)
 

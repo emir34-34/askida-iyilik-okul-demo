@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Askıda İyilik APK kabuğunu Gradle olmadan, Android SDK'nın kendi araçlarıyla derler.
+# Askıda İyilik native Android uygulamasını Gradle olmadan, Android SDK'nın kendi araçlarıyla derler.
 # Kullanım:  cd apk && ./derle.sh      Çıktı: apk/build/AskidaIyilik.apk
 # Gerekenler: Android SDK (platforms;android-34, build-tools;35.0.0), JDK (javac, keytool), python3
 set -euo pipefail
@@ -12,22 +12,22 @@ ANAHTAR="${ANAHTAR:-$HOME/.android/debug.keystore}"
 
 rm -rf build && mkdir -p build/gen build/obj build/dex build/assets
 
-# Arayüz dosyaları APK'nın içine konur: sunucudan yalnızca veri gelir (demo-plani.md).
-cp -r ../demo/istemci build/assets/istemci
+# Uygulamanın içine konan dosyalar (yazı tipi). Sunucudan yalnızca veri gelir (demo-plani.md).
+cp -r assets/. build/assets/
 
 echo "1/6 Kaynaklar (simge, metinler) derleniyor"
 "$BT/aapt2" compile --dir res -o build/kaynaklar.zip
 
-echo "2/6 Manifest, kaynaklar ve arayüz dosyaları birleştiriliyor"
+echo "2/6 Manifest, kaynaklar ve yazı tipi birleştiriliyor"
 "$BT/aapt2" link build/kaynaklar.zip -I "$JAR" --manifest AndroidManifest.xml \
   -A build/assets --java build/gen -o build/ham.apk \
-  --min-sdk-version 24 --target-sdk-version 34 --version-code 1 --version-name 0.1
+  --min-sdk-version 26 --target-sdk-version 34 --version-code 2 --version-name 0.2
 
 echo "3/6 Java kodu derleniyor"
 javac --release 11 -classpath "$JAR" -d build/obj $(find src build/gen -name '*.java')
 
 echo "4/6 Android'in çalıştırdığı biçime (DEX) çevriliyor"
-"$BT/d8" --min-api 24 --lib "$JAR" --output build/dex $(find build/obj -name '*.class')
+"$BT/d8" --min-api 26 --lib "$JAR" --output build/dex $(find build/obj -name '*.class')
 
 echo "5/6 Paketleniyor ve hizalanıyor"
 python3 - <<'PY'

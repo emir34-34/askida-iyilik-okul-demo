@@ -70,6 +70,22 @@ Hatalar: yetki yok → **403**, durum uygun değil (ör. az önce başkası üst
 
 **Güvenlik:** Kullanıcıların yazdığı her metin (başlık, açıklama, yorum) ekrana basılmadan önce kaçış işlemine (escape) uğrar. Böylece birinin isteğine yazdığı bir kod başkasının telefonunda çalışamaz (XSS).
 
+## Native Android uygulaması (2026-10-12)
+
+WebView'li APK'yı telefonda denedikten sonra Emir, uygulamanın Reddit uygulaması gibi **tamamen native** olmasını istedi. Gerekçe: WebView içinde kaydırma, dokunma ve geçişler hâlâ bir web sayfası gibi hissettiriyor.
+
+| | WebView APK | Native APK |
+|---|-------------|------------|
+| Ekranlar | HTML/CSS, WebView içinde | Android'in kendi bileşenleri (View), Java ile |
+| Veri | `/api/` | `/api/` (değişmedi) |
+| Kurallar | Sunucuda | Sunucuda (değişmedi) |
+| Oturum | WebView çerezleri | Uygulama Django'nun `sessionid` ve `csrftoken` çerezlerini kendisi saklar ve gönderir |
+
+- **Neden Java ve Android'in kendi bileşenleri (ek kütüphane yok):** Kotlin ve Jetpack Compose için Gradle ve onlarca kütüphane indirmek gerekir. Bilgisayardaki Java 27 sürümüyle uyum sorunu çıkma riski yüksek. Java ile Android'in kendi bileşenleri mevcut derleme betiğiyle (`apk/derle.sh`) çalışır ve sonuç yine tamamen native olur.
+- **Tarayıcı demosu kalıyor:** Görev tanımı tarayıcıda açılan bir demo istediği için `demo/istemci/` silinmez. Bundan sonra iki arayüz var (web ve native), ikisi de aynı API'yi kullanır. Kurallar yalnızca sunucuda olduğu için iki arayüz birbirinden farklı davranamaz.
+- **Ekranlar:** Giriş, Akış (sekmeler, kategoriler, aşağı çekip yenileme), İstek (düğmeler, yorumlar), Yeni istek, Görevler, Profil (çıkış, sunucu adresi). Alt menü ve renkler ekran taslaklarıyla aynı.
+- **En düşük Android sürümü:** 8.0 (API 26). Yazı tipinin (Reddit Sans) ağırlıklarını native olarak ayarlayabilmek için gerekli.
+
 ## Testler (görev tanımı: en az 3, her birinde gerçek kontrol)
 
 | Test | Neyi kanıtlar |

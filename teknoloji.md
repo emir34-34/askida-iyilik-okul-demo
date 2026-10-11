@@ -57,7 +57,8 @@ Demo bir Django web uygulamasıdır ve telefon tarayıcısında çalışır. Bun
 - **Neden:** Uygulamanın telefonda gerçek bir uygulama gibi nasıl hissettireceğini göstermek.
 - **Ne gerektirir:** Android SDK ve Java (bilgisayarda kurulu).
 - **2026-10-12 güncellemesi:** Arayüz dosyaları (HTML, CSS, JavaScript, yazı tipi) APK'nın içine kondu. Sunucudan yalnızca veri (JSON) gelir, Reddit uygulaması gibi. Aynı arayüz dosyaları tarayıcıda da kullanılır (`demo-plani.md`, mimari değişikliği).
-- **Sınırı:** APK, Django sunucusu çalışmıyorsa veri gösteremez. Arayüz açılır, ama giriş yapılamaz. Görev tanımı yeni teknoloji için Özgür Hoca'ya sormayı istediğinden bu bir **açık soru (S-11)**. Hoca hayır derse APK demodan çıkarılır, web demosu eksiksiz kalır.
+- **2026-10-12 ikinci güncelleme:** WebView yerine **tamamen native** bir Android uygulaması yazıldı (Java, Android'in kendi bileşenleri, ek kütüphane yok). Tarayıcı demosu ayrıca duruyor. İki arayüz de aynı `/api/` adreslerini kullanıyor (`demo-plani.md`).
+- **Sınırı:** APK, Django sunucusu çalışmıyorsa veri gösteremez. Arayüz açılır, ama giriş yapılamaz. İki ayrı arayüz (web ve native) olduğu için bir ekran değişince ikisinin de güncellenmesi gerekir. Görev tanımı yeni teknoloji için Özgür Hoca'ya sormayı istediğinden bu bir **açık soru (S-11)**. Hoca hayır derse APK demodan çıkarılır, web demosu eksiksiz kalır.
 
 ## Kaynaklar
 - Firestore bölgeleri: https://firebase.google.com/docs/firestore/locations

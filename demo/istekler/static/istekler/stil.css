@@ -17,7 +17,12 @@
     --warn:#ffa657; --warn-bg:#3a250d; --toast:#e3e6e8; --toast-ink:#0e1113;
   }
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+/* Android'in dokunulan öğeye koyduğu mavi kutu yerine hafif bir basılma hissi */
+.btn,.chip,.alt a,.yan a,.av{transition:transform .08s ease,opacity .08s ease}
+.btn:active,.chip:active,.alt a:active,.yan a:active{transform:scale(.96);opacity:.85}
+.kart{transition:background .1s ease}
+.kart:active{background:var(--pill)}
 html,body{margin:0}
 body{background:var(--page);color:var(--text);font-family:"Reddit Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.4}
 a{color:inherit}

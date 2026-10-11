@@ -64,8 +64,9 @@ Aşağı oyun riskini azaltmak için önerdiğim önlemler (bunlar da hocalara s
 | E10 | Arşiv | Herkes | ❌ yalnızca tasarımda |
 | E11 | Şikâyet et | Öğrenci, öğretmen | ❌ yalnızca tasarımda |
 | E12 | İlk giriş tanıtımı | Herkes, yalnızca ilk girişte | ❌ yalnızca tasarımda |
-| E14 | Boş durumlar | Herkes | ✅ akış ve görevler için |
 | E13 | Onayla ve teşekkür et | İsteği açan kişi | ⚠️ Onay var, teşekkür notu zaman kalırsa |
+| E14 | Boş durumlar | Herkes | ✅ akış ve görevler için |
+| E15 | Arama sonuçları | Öğrenci, öğretmen | ❌ yalnızca tasarımda |
 | D1 | Ana akış (bilgisayar) | Öğrenci, öğretmen | ✅ |
 | D2 | İstek sayfası (bilgisayar) | Öğrenci, öğretmen | ✅ |
 | D3 | Yönetim özeti (bilgisayar) | Öğretmen, yönetici | ❌ yalnızca tasarımda |
@@ -508,6 +509,32 @@ Gösterilecek bir şey olmadığında ekran boş kalmaz. Kullanıcıya neden bo�
 
 - Boş ekranlar yeni bir kullanıcının ilk gördüğü şeydir. Okulda uygulama yeni açıldığında akış boş olacak, bu yüzden "ilk isteği sen aç" çağrısı önemli.
 - Metinlerde suçlayıcı ya da kıyaslayan bir dil yok ("henüz kimseye yardım etmedin" gibi ifadeler kullanılmaz).
+
+## E15. Arama sonuçları
+
+Üst çubuktaki 🔍 düğmesiyle (bilgisayarda arama kutusuyla) açılır.
+
+```
+┌────────────────────────────────┐
+│ ←  [ 🔍 hesap            ]  ✕  │
+├────────────────────────────────┤
+│ (Tümü) (Açık) (Tamamlanan) (Kategori▾)
+├────────────────────────────────┤
+│ "hesap" için 2 istek bulundu.  │
+├────────────────────────────────┤
+│ k/eşya · Can B. · 3 gün        │
+│ [Hesap] makinesi ödünç lazım   │
+│ [🔵 Yapıldı]                   │
+├────────────────────────────────┤
+│ k/ders · Elif S. · 2 hafta     │
+│ Faiz [hesap]lama konusu...     │
+│ [✅ Tamamlandı]                │
+└────────────────────────────────┘
+```
+- Arama **yalnızca isteklerin başlık ve açıklamalarında** yapılır. Yorumlarda ve kişi adlarında arama yapılmaz.
+- **Kişi aranamaz.** Bir öğrencinin adını yazıp bütün isteklerini ve yaptığı işleri listelemek mümkün olsaydı, bu bir kişi profili ve gizli bir sıralama oluştururdu (T-02). Ayrıca asgari veri ilkesinin ruhuna aykırı olurdu (T-03).
+- Gizlenen istekler arama sonuçlarında çıkmaz.
+- Eşleşen kelime turuncu arka planla vurgulanır. Sonuç yoksa "farklı bir kelime dene ya da yeni bir istek aç" önerilir (E14).
 
 ## E6. Gizleme (öğretmen)
 

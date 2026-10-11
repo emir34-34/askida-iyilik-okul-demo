@@ -130,6 +130,11 @@ figcaption small{display:block;font-weight:400;color:var(--muted)}
 .empty .ic{font-size:40px;margin:4px 0 6px}
 .empty h4{margin:0 0 4px;font-size:15px}
 .empty p{margin:0 0 12px;color:var(--muted);font-size:13px}
+/* arama */
+.sbar{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--card);border-bottom:1px solid var(--line)}
+.sbar .sin{flex:1;background:var(--pill);border-radius:999px;padding:8px 14px;font-size:14px}
+mark{background:color-mix(in srgb, var(--brand) 22%, transparent);color:inherit;border-radius:3px;padding:0 1px}
+.hint{font-size:12px;color:var(--muted);padding:8px 12px;background:var(--card);border-bottom:1px solid var(--line)}
 /* profil */
 .prof{background:var(--card);padding:20px 16px;text-align:center;border-bottom:1px solid var(--line)}
 .prof .big{width:72px;height:72px;font-size:24px;margin:0 auto 10px}
@@ -516,6 +521,21 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
       <div class="empty"><div class="lab">BİLDİRİMLER · YENİ BİR ŞEY YOK</div><div class="ic">🔔</div><h4>Yeni bildirim yok</h4><p>İsteğine yorum gelince ya da biri üstlenince burada göreceksin.</p></div>
       <div class="empty"><div class="lab">ARŞİV · BU KATEGORİ BOŞ</div><div class="ic">🗂️</div><h4>k/eşya kategorisinde henüz tamamlanan istek yok</h4><p>Başka bir kategoriye göz at.</p></div>
     </div></div>
+  </figure>
+
+  <!-- E15 -->
+  <figure id="e15">
+    <figcaption>E15 · Arama sonuçları<small>Yalnızca isteklerde arama. Kişi aranmaz</small></figcaption>
+    <div class="phone">
+      <div class="sbar"><button class="iconbtn" type="button" aria-label="Geri">←</button><div class="sin">🔍 hesap</div><button class="iconbtn" type="button" aria-label="Temizle">✕</button></div>
+      <div class="tabs"><button class="chip on" type="button">Tümü</button><button class="chip" type="button">Açık</button><button class="chip" type="button">Tamamlanan</button><button class="chip" type="button">Kategori ▾</button></div>
+      <div class="hint">"hesap" için 2 istek bulundu. Arama isteklerin başlık ve açıklamalarında yapılır.</div>
+      <div class="scroll">
+        <div class="post"><div class="meta"><b>k/eşya</b>· Can B. · 3 gün</div><div class="title"><mark>Hesap</mark> makinesi ödünç lazım</div><span class="flair f-done">🔵 Yapıldı</span><p class="body">Perşembe fizik sınavı için bilimsel <mark>hesap</mark> makinesi lazım.</p></div>
+        <div class="post"><div class="meta"><b>k/ders</b>· Elif S. · 2 hafta</div><div class="title">Faiz <mark>hesap</mark>lama konusunu anlatır mısınız?</div><span class="flair f-closed">✅ Tamamlandı</span><p class="body">Matematik ödevinde faiz sorularını yapamadım.</p></div>
+        <div class="empty" style="border-top:8px solid var(--page)"><div class="lab">SONUÇ YOKSA</div><div class="ic">🔎</div><h4>"pergel2" ile eşleşen istek yok</h4><p>Farklı bir kelime dene ya da bu konuda yeni bir istek aç.</p><button class="secondary" type="button">＋ İstek aç</button></div>
+      </div>
+    </div>
   </figure>
 
 </main>

@@ -22,6 +22,10 @@ Arayüz, öğrencilerin büyük kısmının zaten tanıdığı **Reddit'in aray�
 
 - **V-11:** Yorumlara yanıt verilebilir, ama yanıtlara yanıt verilemez (tek seviye). (Hocalara sorulacak)
 
+**Görsel taslak:** Ekranların tarayıcıda görünen hâli [`ekran-taslaklari/index.html`](ekran-taslaklari/index.html) sayfasında. Yayındaki adresi: https://emir34-34.github.io/askida-iyilik-okul-demo/ekran-taslaklari/ (demo değil, yalnızca görünüş).
+
+**Renk ve simge:** Ana renk Reddit'e uyumlu turuncu (`#d93a00`). Durum etiketleri anlamlarına göre renkli kalıyor (yeşil Açık, sarı Üstlenildi, mavi Yapıldı). Uygulama simgesini Emir tasarlayacak, o zamana kadar yer tutucu olarak 🤝 kullanılıyor.
+
 ### Oylama: açık karar (S-08)
 
 Oylama isteği benden geliyor (Emir). Kararı Yasemin Hoca ve Eyüp Hoca verecek, ilkelerle çeliştiği yerlerde Özgür Hoca'ya sorulacak. Gördüğüm riskler:

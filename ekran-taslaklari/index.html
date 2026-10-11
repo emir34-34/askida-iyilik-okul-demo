@@ -147,6 +147,20 @@ mark{background:color-mix(in srgb, var(--brand) 22%, transparent);color:inherit;
 .shield{width:64px;height:64px;border-radius:50%;background:color-mix(in srgb, var(--brand) 14%, var(--card));display:grid;place-items:center;font-size:30px;margin:0 auto 12px}
 .err{background:color-mix(in srgb, var(--danger) 12%, var(--card));color:var(--danger);border-radius:10px;padding:8px 10px;font-size:13px;margin-top:10px}
 .who-box{display:flex;gap:8px;align-items:center;background:var(--pill);border-radius:12px;padding:8px 10px;margin-bottom:14px;font-size:13px}
+/* yönetici paneli */
+.utable{width:100%;border-collapse:collapse;font-size:13px;background:var(--card)}
+.utable th{text-align:left;font-size:11px;letter-spacing:.05em;color:var(--muted);font-weight:700;padding:10px 12px;border-bottom:1px solid var(--line)}
+.utable td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+.utable td.act{text-align:right;white-space:nowrap}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--pill);color:var(--muted)}
+.tag.ok{color:var(--open);background:var(--open-bg)}
+.tag.lock{color:var(--danger);background:color-mix(in srgb, var(--danger) 12%, var(--card))}
+.tag.role{color:var(--text)}
+.linkbtn{border:0;background:none;color:var(--brand);font:inherit;font-weight:700;font-size:12px;cursor:pointer;padding:2px 6px}
+.urow{display:flex;gap:10px;align-items:center;padding:10px 12px;background:var(--card);border-bottom:1px solid var(--line)}
+.urow .txt{flex:1;min-width:0;font-size:13px}
+.urow .txt div{color:var(--muted);font-size:12px}
+.alertbar{display:flex;gap:8px;align-items:center;background:var(--warn-bg);color:var(--warn);font-size:12px;font-weight:600;padding:8px 12px;border-radius:12px;margin:10px 12px}
 /* profil */
 .prof{background:var(--card);padding:20px 16px;text-align:center;border-bottom:1px solid var(--line)}
 .prof .big{width:72px;height:72px;font-size:24px;margin:0 auto 10px}
@@ -571,6 +585,28 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
     </div></div></div>
   </figure>
 
+  <!-- E17 -->
+  <figure id="e17">
+    <figcaption>E17 · Yönetici paneli<small>Hesaplar ve kilitli hesaplar. Kişi başına istek sayısı yok</small></figcaption>
+    <div class="phone">
+      <div class="bar"><b style="font-size:16px">Yönetici paneli</b><div class="spacer"></div><div class="av">YK</div></div>
+      <div class="tabs"><button class="chip on" type="button">Hesaplar</button><button class="chip" type="button">Sistem ayarları</button><button class="chip" type="button">Özet</button></div>
+      <div class="scroll">
+        <div class="alertbar">🔒 1 hesap kilitli: 3 yanlış görevli girişi denemesi</div>
+        <div class="kpis" style="grid-template-columns:repeat(3,1fr);gap:8px;margin:0 12px 10px">
+          <div class="kpi" style="padding:10px"><div class="k">Öğrenci</div><div class="v" style="font-size:22px">412</div></div>
+          <div class="kpi" style="padding:10px"><div class="k">Öğretmen</div><div class="v" style="font-size:22px">38</div></div>
+          <div class="kpi" style="padding:10px"><div class="k">Yönetici</div><div class="v" style="font-size:22px">2</div></div>
+        </div>
+        <div style="display:flex;gap:8px;padding:0 12px 10px"><div class="sin" style="flex:1;background:var(--pill);border-radius:999px;padding:8px 14px;color:var(--muted)">🔍 Hesap ara</div><button class="primary sm" type="button">＋ Hesap aç</button></div>
+        <div class="urow"><div class="av">SÖ</div><div class="txt"><b>Selin Öğretmen</b><div>ogretmen1 · Öğretmen</div></div><span class="tag lock">Kilitli</span></div>
+        <div class="urow"><div class="av">AK</div><div class="txt"><b>Ayşe K.</b><div>ogrenci2 · Öğrenci</div></div><span class="tag ok">Aktif</span></div>
+        <div class="urow"><div class="av">MA</div><div class="txt"><b>Mehmet A.</b><div>ogrenci1 · Öğrenci</div></div><span class="tag ok">Aktif</span></div>
+        <div class="urow"><div class="av">DY</div><div class="txt"><b>Deniz Y.</b><div>ogrenci58 · Öğrenci</div></div><span class="tag">Kapalı</span></div>
+      </div>
+    </div>
+  </figure>
+
 </main>
 
 <section class="sec" id="bilgisayar"><h2>💻 Bilgisayar arayüzü</h2><p>Okul bilgisayarı ya da akıllı tahtadan açıldığında Reddit'in masaüstü düzeni: solda menü ve kategoriler, ortada akış, sağda bilgi kartları (Ö-05). Kartlar ve renkler telefondakiyle aynı. Dar ekranda çerçevenin içi yana kaydırılır.</p></section>
@@ -818,6 +854,43 @@ footer{max-width:1200px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
         <p style="text-align:center;color:var(--muted);font-size:12px;margin-top:12px">Kelimeyi bilmiyorsan okul yöneticisine başvur.<br>← Öğrenci girişine dön</p>
           </div>
         </div>
+    </div></div></div>
+  </figure>
+
+  <!-- D6 -->
+  <figure style="width:100%" id="d6">
+    <figcaption>D6 · Yönetici paneli (bilgisayar)<small>Hesap açma, kapatma, şifre sıfırlama, kilit açma</small></figcaption>
+    <div class="browser"><div class="chrome"><i></i><i></i><i></i><span class="url">localhost:8000/yonetici/hesaplar/</span></div>
+    <div class="desk-scroll"><div class="desk">
+        <div class="dhead"><div class="logo"><span class="dot">🤝</span>Askıda İyilik</div><div class="search">🔍 İsteklerde ara</div><div class="av">YK</div></div>
+      <div class="dbody" style="grid-template-columns:230px 1fr">
+        <div class="dleft">
+          <div class="lbl">YÖNETİCİ</div>
+          <a href="#" class="on"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c1-3.5 3.5-5 6.5-5s5.5 1.5 6.5 5"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.3 0 4 1.3 4.8 4"/></svg>Hesaplar</a>
+          <a href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>Sistem ayarları</a>
+          <a href="#"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Yönetim özeti</a>
+        </div>
+        <div class="dmain"><div class="inner" style="max-width:900px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+            <b style="font-size:18px">Hesaplar</b><div class="spacer"></div>
+            <div style="background:var(--pill);border-radius:999px;padding:8px 14px;color:var(--muted);width:240px">🔍 Ad ya da kullanıcı adı</div>
+            <button class="secondary" type="button">⇪ Toplu hesap aç</button><button class="primary sm" type="button">＋ Hesap aç</button>
+          </div>
+          <div class="alertbar" style="margin:0 0 10px">🔒 <b>ogretmen1</b> hesabı kilitli: 14 Eki 08:02'de 3 yanlış görevli girişi denemesi. <button class="linkbtn" type="button">Kilidi aç</button></div>
+          <div class="tabs" style="background:transparent;border:0;padding:0 0 10px"><button class="chip on" type="button">Tümü (452)</button><button class="chip" type="button">Öğrenci</button><button class="chip" type="button">Öğretmen</button><button class="chip" type="button">Yönetici</button><button class="chip" type="button">Kapalı</button></div>
+          <div class="card" style="padding:0;overflow:hidden">
+          <table class="utable">
+            <tr><th>Görünen ad</th><th>Kullanıcı adı</th><th>Rol</th><th>Durum</th><th></th></tr>
+            <tr><td><b>Selin Öğretmen</b></td><td>ogretmen1</td><td><span class="tag role">Öğretmen</span></td><td><span class="tag lock">Kilitli</span></td><td class="act"><button class="linkbtn" type="button">Kilidi aç</button><button class="linkbtn" type="button">Şifre sıfırla</button><button class="linkbtn" type="button">⋯</button></td></tr>
+            <tr><td><b>Ayşe K.</b></td><td>ogrenci2</td><td><span class="tag role">Öğrenci</span></td><td><span class="tag ok">Aktif</span></td><td class="act"><button class="linkbtn" type="button">Şifre sıfırla</button><button class="linkbtn" type="button">Hesabı kapat</button><button class="linkbtn" type="button">⋯</button></td></tr>
+            <tr><td><b>Mehmet A.</b></td><td>ogrenci1</td><td><span class="tag role">Öğrenci</span></td><td><span class="tag ok">Aktif</span></td><td class="act"><button class="linkbtn" type="button">Şifre sıfırla</button><button class="linkbtn" type="button">Hesabı kapat</button><button class="linkbtn" type="button">⋯</button></td></tr>
+            <tr><td><b>Kerem T.</b></td><td>yonetici2</td><td><span class="tag role">Yönetici</span></td><td><span class="tag ok">Aktif</span></td><td class="act"><button class="linkbtn" type="button">Şifre sıfırla</button><button class="linkbtn" type="button">⋯</button></td></tr>
+            <tr><td><b>Deniz Y.</b></td><td>ogrenci58</td><td><span class="tag role">Öğrenci</span></td><td><span class="tag">Kapalı</span></td><td class="act"><button class="linkbtn" type="button">Yeniden aç</button><button class="linkbtn" type="button">⋯</button></td></tr>
+          </table>
+          </div>
+          <div class="privacy" style="margin-top:12px">ⓘ Bu listede kimin kaç istek açtığı ya da kaç iyilik yaptığı yok (T-02). Yönetici yalnızca hesap işlerini görür. Şifreler hiçbir zaman görünmez, yalnızca sıfırlanır.</div>
+        </div></div>
+      </div>
     </div></div></div>
   </figure>
 

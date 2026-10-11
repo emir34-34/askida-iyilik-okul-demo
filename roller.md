@@ -41,7 +41,8 @@
 | İsteği ya da yorumu gizlemek | ❌ | ✅ | ❌ | Gerekçe yazmak zorunlu (V-02) |
 | Gizlenen içeriği geri açmak | ❌ | ✅ | ❌ | |
 | Kontrol sayfasını görmek, şikâyeti "sorun yok" diye kapatmak | ❌ | ✅ | ❌ | `ekranlar.md` D4 |
-| Hesap açmak ya da kapatmak | ❌ | ❌ | ✅ | V-03 |
+| Hesap açmak ya da kapatmak | ❌ | ❌ | ✅ | V-03. Toplu açmada yalnızca kullanıcı adı, görünen ad ve rol kabul edilir |
+| Şifre sıfırlamak, kilitli hesabın kilidini açmak, rol değiştirmek | ❌ | ❌ | ✅ | `ekranlar.md` E17, D6 |
 | Kimin kaç iyilik yaptığını gösteren bir liste görmek | ❌ | ❌ | ❌ | Sıralama tablosu yok (T-02). Bu liste kimseye gösterilmez |
 
 - **V-05:** Onayı isteği açan kişi verir, öğretmen vermez. (Soru 9)

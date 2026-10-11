@@ -68,11 +68,13 @@ Aşağı oyun riskini azaltmak için önerdiğim önlemler (bunlar da hocalara s
 | E14 | Boş durumlar | Herkes | ✅ akış ve görevler için |
 | E15 | Arama sonuçları | Öğrenci, öğretmen | ❌ yalnızca tasarımda |
 | E16 | Görevli girişi (kullanıcı adı + şifre + okul kelimesi) | Öğretmen, yönetici | ❌ yalnızca tasarımda |
+| E17 | Yönetici paneli | Yönetici | ⚠️ Django yönetim paneliyle |
 | D1 | Ana akış (bilgisayar) | Öğrenci, öğretmen | ✅ |
 | D2 | İstek sayfası (bilgisayar) | Öğrenci, öğretmen | ✅ |
 | D3 | Yönetim özeti (bilgisayar) | Öğretmen, yönetici | ❌ yalnızca tasarımda |
 | D4 | Kontrol (bilgisayar) | Öğretmen | ⚠️ Django yönetim paneliyle |
 | D5 | Görevli girişi (bilgisayar) | Öğretmen, yönetici | ❌ yalnızca tasarımda |
+| D6 | Yönetici paneli (bilgisayar) | Yönetici | ⚠️ Django yönetim paneliyle |
 
 Oylama demoya ancak S-08 kararından sonra eklenir. Demonun zorunlu akışı (aç, üstlen, yapıldı, onayla) oylamaya bağlı değil.
 
@@ -572,6 +574,40 @@ Gösterilecek bir şey olmadığında ekran boş kalmaz. Kullanıcıya neden bo�
 - Kelimeyi yalnızca yönetici, sistem ayarlarından **değiştirebilir**. Örneğin her dönem başında ya da bir öğrencinin kelimeyi öğrendiğinden şüphelenildiğinde.
 
 **Sınırı:** Okul kelimesi bütün öğretmenlerin paylaştığı tek bir kelimedir. Bir öğrenci kelimeyi bir kez duyarsa bütün öğretmen hesapları için işe yarar. Daha güçlü bir seçenek, her öğretmenin telefonundaki bir uygulamanın ürettiği **kişisel doğrulama kodu** (iki adımlı doğrulama, TOTP) olurdu. Hangisinin kullanılacağı açık bir karar (S-10).
+
+## E17 ve D6. Yönetici paneli
+
+Yönetici görevli girişinden (E16) girince bu panel açılır. Yönetici istek açmaz ya da üstlenmez, yalnızca hesap ve sistem işleriyle ilgilenir (`roller.md`).
+
+```
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ YÖNETİCİ      │ Hesaplar        [🔍 Ad ya da kullanıcı adı] (⇪ Toplu) (＋ Hesap aç)│
+│ 👥 Hesaplar   │ 🔒 ogretmen1 hesabı kilitli: 3 yanlış deneme.   Kilidi aç    │
+│ ⚙ Sistem      │ (Tümü 452) (Öğrenci) (Öğretmen) (Yönetici) (Kapalı)          │
+│   ayarları    │ ┌──────────────────────────────────────────────────────────┐ │
+│ 📊 Yönetim    │ │ Görünen ad     Kullanıcı adı  Rol       Durum            │ │
+│   özeti       │ │ Selin Öğretmen ogretmen1      Öğretmen  Kilitli  Kilidi aç│ │
+│               │ │ Ayşe K.        ogrenci2       Öğrenci   Aktif  Şifre sıfırla│ │
+│               │ │ Deniz Y.       ogrenci58      Öğrenci   Kapalı  Yeniden aç│ │
+│               │ └──────────────────────────────────────────────────────────┘ │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+```
+
+**Yönetici neler yapabilir?**
+
+| İşlem | Açıklama |
+|-------|----------|
+| Hesap açmak | Kullanıcı adı, görünen ad ve rol girilir. Sistem geçici bir şifre üretir, kullanıcı ilk girişte değiştirir. E-posta ya da telefon istenmez (V-03) |
+| Toplu hesap açmak | Dönem başında bir listeden (CSV) çok sayıda hesap açmak için. **Listede yalnızca kullanıcı adı, görünen ad ve rol sütunları kabul edilir.** TC no, numara, sınıf gibi sütunlar varsa yüklenmez (T-03) |
+| Şifre sıfırlamak | Şifreler hiçbir zaman görünmez, yalnızca yeni geçici şifre üretilir |
+| Kilidi açmak | Görevli girişinde 3 yanlış denemeyle kilitlenen hesabın kilidini 15 dakika dolmadan açmak için (E16) |
+| Hesabı kapatmak / yeniden açmak | Okuldan ayrılan ya da mezun olan birinin hesabı silinmeden kapatılır (`aktif` alanı). Kapalı hesaplar ne kadar süre tutulacak, S-04'e bağlı |
+| Rolü değiştirmek | `⋯` menüsünden. Örneğin yeni gelen bir öğretmene öğretmen rolü vermek |
+
+**Bilerek olmayanlar**
+- Hesap listesinde **kimin kaç istek açtığı ya da kaç iyilik yaptığı yoktur** (T-02). Yönetici kişilerin uygulamadaki etkinliğini görmez, yalnızca hesap işlerini yapar.
+- "Son giriş zamanı" sütunu yok. Bu bilgi hiçbir işe gerekmiyor ve kimin ne zaman uygulamaya girdiğini izlemeye dönüşebilir.
+- Demoda bu panelin yerini Django'nun yönetim paneli tutacak.
 
 ## E6. Gizleme (öğretmen)
 

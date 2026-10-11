@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Askıda İyilik · Görüşme Formu</title>
+<style>
+  :root{--metin:#1c1c1c;--soluk:#576f76;--cizgi:#d5dde1;--marka:#d93a00;--zemin:#f6f7f8}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--zemin);color:var(--metin);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+  main{max-width:860px;margin:0 auto;padding:24px 16px 48px}
+  .kagit{background:#fff;border:1px solid var(--cizgi);border-radius:12px;padding:28px 30px}
+  h1{margin:0 0 4px;font-size:24px}
+  .alt{color:var(--soluk);margin:0 0 16px}
+  .bilgi{background:#fff4ec;border-left:4px solid var(--marka);padding:10px 14px;border-radius:6px;margin:0 0 18px;font-size:14px}
+  h2{font-size:17px;margin:26px 0 8px;padding-bottom:6px;border-bottom:2px solid var(--marka)}
+  h3{font-size:14px;margin:16px 0 4px;color:var(--soluk);text-transform:uppercase;letter-spacing:.04em}
+  table{width:100%;border-collapse:collapse}
+  td{border-bottom:1px solid var(--cizgi);padding:9px 6px;vertical-align:top}
+  td.kod{width:46px;color:var(--soluk);font-size:11px;font-weight:700;padding-top:12px}
+  td.secim{width:170px;white-space:nowrap;font-size:13px}
+  .kutu{display:inline-block;width:13px;height:13px;border:1.5px solid var(--metin);border-radius:3px;vertical-align:-2px;margin:0 4px 0 8px}
+  .not{display:block;margin-top:8px;border-bottom:1px dotted var(--soluk);height:18px}
+  .neden{display:block;color:var(--soluk);font-size:12.5px;margin-top:2px}
+  .acik li{margin:8px 0}
+  .acik .not{margin-top:4px}
+  .imza{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:28px;font-size:13px;color:var(--soluk)}
+  .imza div{border-top:1px solid var(--metin);padding-top:4px}
+  .yazdir{position:fixed;right:16px;bottom:16px;background:var(--marka);color:#fff;border:0;border-radius:999px;padding:12px 20px;font:600 15px system-ui;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+  @media (max-width:640px){.kagit{padding:18px 14px} td.secim{width:auto;white-space:normal} td.kod{width:34px}}
+  @media print{
+    body{background:#fff;font-size:11.5px} main{padding:0;max-width:none} .kagit{border:0;padding:0}
+    .yazdir{display:none} h2{break-after:avoid;margin-top:16px} tr{break-inside:avoid} .bilgi{background:#fff}
+    @page{size:A4;margin:14mm 14mm}
+  }
+</style>
+</head>
+<body>
+<main><div class="kagit">
+  <h1>Askıda İyilik · Görüşme Formu</h1>
+  <p class="alt">Yasemin Hoca ve Eyüp Hoca ile görüşme · 12 Ekim 2026 · Hazırlayan: Emir</p>
+  <div class="bilgi">
+    Sizinle görüşemediğim için tasarımın taslağını <b>tahminlerle</b> yazdım ve çalışan bir demo hazırladım.
+    Bu formda her tahmini <b>“Evet”</b> ya da <b>“Hayır, şöyle olsun”</b> diye işaretlemeniz yeterli.
+    İşaretlediklerinizi <code>talepler.md</code> dosyasına talep olarak yazacak ve tasarımı buna göre düzelteceğim.
+    Küçük kodlar (V-01 gibi) repodaki dosyalarda aynı maddeyi bulmak için.
+  </div>
+
+  <h2>1. Önce sizden duymak istediklerim</h2>
+  <ol class="acik">
+    <li>Uygulamayı kimler kullanacak? Öğrenciler, öğretmenler, idare… başka kimler?<span class="not"></span></li>
+    <li>“İyilik” neleri kapsar, neleri <b>kapsamaz</b>? (ders yardımı, eşya ödünç, okuldaki bir sorunu bildirme… para, okul dışı buluşma?)<span class="not"></span></li>
+    <li>İstekler hangi kategorilere ayrılsın? (Demoda örnek olarak: ders, eşya, okul)<span class="not"></span></li>
+    <li>Uygulamada <b>mutlaka olsun</b> dediğiniz ve <b>kesinlikle olmasın</b> dediğiniz şeyler neler?<span class="not"></span><span class="not"></span></li>
+    <li>En önemli bulduğunuz iki durum hangisi? (İki senaryoyu bunlardan yazacağım.)<span class="not"></span></li>
+  </ol>
+
+  <h2>2. Tahminlerim: doğru mu?</h2>
+
+  <h3>Kim kullanır?</h3>
+  <table>
+    <tr><td class="kod">V-01</td><td>Öğrenciler hem istek <b>açabilir</b> hem de başkalarının isteğini <b>karşılayabilir</b>.<span class="not"></span></td><td class="secim"><span class="kutu"></span>Evet <span class="kutu"></span>Hayır</td></tr>
+    <tr><td class="kod">V-04</td><td>Veliler ve okul personeli bu sürümde kullanıcı değil.<span class="not"></span></td><td class="secim"><span class="kutu"></span>Evet <span class="kutu"></span>Hayır</td></tr>
+    <tr><td class="kod">V-03</td><td>Kimse kendi kendine kayıt olamaz, hesapları okul yöneticisi açar. Böylece okul dışından kimse giremez ve e-posta istenmez.<span class="not"></span></td><td class="secim"><span class="kutu"></span>Evet <span class="kutu"></span>Hayır</td></tr>
+    <tr><td class="kod">V-09</td><td>Uygulamada isimler “Ayşe K.” gibi görünür (ad + soyadın baş harfi).<span class="not"></span></td><td class="secim"><span class="kutu"></span>Evet <span class="kutu"></span>Hayır</td></tr>
+    <tr><td class="kod">V-10</td><td>Uygulama çoğunlukla öğrencilerin telefonundan kullanılır.<span class="not"></span></td><td class="secim"><span class="kutu"></span>Evet <span class="kutu"></span>Hayır</td></tr>
+  </table>
+
+  <h3>Bir isteğin akışı</h3>
+  <table>
+    <tr><td class="kod">V-05</td><td>İş yapılınca onayı <b>isteği açan kişi</b> verir, öğretmen vermez.<span class="not"></span></td><td class="secim"><span class="kutu"></span>Evet <span class="kutu"></span>Hayır</td></tr>
+    <tr><td class="kod">V-07</td><td>İstekler öğretmen onayı beklemeden hemen yayına girer, uygunsuz olanı öğretmen sonradan gizler.<span class="neden">“Hayır” derseniz istekler önce öğretmenin onayına düşer.</span><span class="not"></span></td><td class="secim"><span class="kutu"></span>Evet <span class="kutu"></span>Hayır</td></tr>
+    <tr><td class="kod">V-06</td><td>Biri üstlendikten sonra isteği açan kişi isteğini tek başına geri çekemez, önce konuşurlar.<span class="not"></span></td><td class="secim"><span class="kutu"></span>Evet <span class="kutu"></span>Hayır</td></tr>
+    <tr><td class="kod">V-08</td><td>Üstlenen kişi işi bırakırken sebep yazmak zorunda değil.<span class="not"></span></td><td class="secim"><span class="kutu"></span>Evet <span class="kutu"></span>Hayır</td></tr>
+    <tr><td class="kod">S-03</td><td>İsteği açan kişi iş yapıldıktan sonra <b>hiç onay vermezse</b> ne olsun?
+      <span class="neden"><span class="kutu" style="margin-left:0"></span>Belli bir süre sonra kendiliğinden tamamlansın &nbsp; <span class="kutu"></span>Bir öğretmene düşsün &nbsp; <span class="kutu"></span>Beklesin</span>
+      Süre: ______ gün<span class="not"></span></td><td class="secim"></td></tr>
+    <tr><td class="kod">S-06</td><td>Biri aynı isteği defalarca üstlenip bırakırsa bir sınır olsun mu?<span class="not"></span></td><td class="secim"><span class="kutu"></span>Evet <span class="kutu"></span>Hayır</td></tr>
+  </table>
+
+  <h3>Uygunsuz içerik ve güvenlik</h3>
+  <table>
+    <tr><td class="kod">V-02</td><td>Uygunsuz bir isteğe ya da yoruma <b>öğretmenler</b> müdahale eder. İçerik silinmez, gerekçe yazılarak gizlenir.<span class="not"></span></td><td class="secim"><span class="kutu"></span>Evet <span class="kutu"></span>Hayır</td></tr>
+    <tr><td class="kod">V-14</td><td>Öğrenciler uygunsuz içeriği “şikâyet” edebilir. Şikâyet içeriği kendiliğinden gizlemez, kararı öğretmen verir.<span class="not"></span></td><td class="secim"><span class="kutu"></span>Evet <span class="kutu"></span>Hayır</td></tr>
+    <tr><td class="kod">V-13</td><td>Kimin şikâyet ettiğini içeriği yazan kişi görmez, öğretmen görür.<span class="not"></span></td><td class="secim"><span class="kutu"></span>Evet <span class="kutu"></span>Hayır</td></tr>
+  </table>
+
+  <h3>Ekranlar</h3>
+  <table>
+    <tr><td class="kod">V-11</td><td>Yorumlara yanıt verilebilir (yanıta yanıt verilemez).<span class="not"></span></td><td class="secim"><span class="kutu"></span>Evet <span class="kutu"></span>Hayır</td></tr>
+    <tr><td class="kod">V-12</td><td>Öğretmenler ve idare bir “yönetim özeti” görür: kaç istek açıldı, kaçı tamamlandı, nelerin uzun süredir beklediği. <b>Kişi bazında hiçbir sayı yoktur.</b><span class="not"></span></td><td class="secim"><span class="kutu"></span>Evet <span class="kutu"></span>Hayır</td></tr>
+  </table>
+
+  <h2>3. Önerilerim: beğendiniz mi?</h2>
+  <table>
+    <tr><td class="kod">Ö-01</td><td>Görünüm, öğrencilerin tanıdığı <b>Reddit</b> uygulamasına benzesin: istek kartları, kategoriler, renkli durum etiketleri, isteğin altında herkese açık yorumlar.<span class="not"></span></td><td class="secim"><span class="kutu"></span>Evet <span class="kutu"></span>Hayır</td></tr>
+    <tr><td class="kod">S-08</td><td>İsteklere <b>oy</b> verilebilsin mi?
+      <span class="neden"><span class="kutu" style="margin-left:0"></span>A) Yukarı ve aşağı oy (benim tercihim) &nbsp; <span class="kutu"></span>B) Yalnızca “Ben de” desteği &nbsp; <span class="kutu"></span>C) Oylama olmasın</span>
+      <span class="neden">Önlem: oylar kişi başına toplanmaz, eksi gösterilmez, aşağı oy bir isteği gizlemez.</span><span class="not"></span></td><td class="secim"></td></tr>
+    <tr><td class="kod">S-09</td><td>İsteklere <b>resim/video</b> eklenebilsin mi? (ör. bozuk musluğun resmi)
+      <span class="neden"><span class="kutu" style="margin-left:0"></span>Resim ve video &nbsp; <span class="kutu"></span>Yalnızca resim &nbsp; <span class="kutu"></span>Hiçbiri</span>
+      <span class="neden">Önlem: fotoğraftaki konum bilgisi silinir, kimsenin yüzü görünmemeli, öğretmen gizleyebilir. Fotoğraf ilkesi nedeniyle Özgür Hoca'ya da sorulacak.</span><span class="not"></span></td><td class="secim"></td></tr>
+    <tr><td class="kod">Ö-06</td><td>Sağ üstte bir <b>bildirim</b> zili olsun: isteğime yorum geldi, biri üstlendi, işim onaylandı… (Oylar bildirim olmaz.)<span class="not"></span></td><td class="secim"><span class="kutu"></span>Evet <span class="kutu"></span>Hayır</td></tr>
+    <tr><td class="kod">Ö-07</td><td>Öğretmenler ayrı bir ekrandan, kullanıcı adı + şifre + öğretmenlerin aralarında belirlediği bir <b>okul kelimesi</b> ile girsin. Şifresini öğrenen bir öğrenci öğretmen hesabına giremesin.<span class="not"></span></td><td class="secim"><span class="kutu"></span>Evet <span class="kutu"></span>Hayır</td></tr>
+    <tr><td class="kod">Ö-08</td><td>Okul yöneticisi bazı kuralları (öğretmen onayı, oylama, kategoriler…) bir <b>ayarlar</b> sayfasından açıp kapatabilsin.<span class="not"></span></td><td class="secim"><span class="kutu"></span>Evet <span class="kutu"></span>Hayır</td></tr>
+    <tr><td class="kod">S-01</td><td>Yapılan iyilikler için <b>puan ya da kredi</b> olsun mu? (Kuralını ben koymam, Özgür Hoca'ya da sorulur.)<span class="not"></span></td><td class="secim"><span class="kutu"></span>Evet <span class="kutu"></span>Hayır</td></tr>
+  </table>
+
+  <h2>4. Teslim ve sunum</h2>
+  <table>
+    <tr><td class="kod">S-02</td><td>Teslim ve sunum tarihi: ____ / ____ / 2026<span class="not"></span></td><td class="secim"></td></tr>
+    <tr><td class="kod">S-07</td><td>Senaryo 3 ve 4 için önerdiğim durumlar uygun mu? (3: “iş yapılmadı” diye geri çevirme, 4: uygunsuz bir isteğin gizlenmesi)<span class="not"></span></td><td class="secim"><span class="kutu"></span>Evet <span class="kutu"></span>Hayır</td></tr>
+  </table>
+
+  <h2>5. Özgür Hoca'ya sorulacaklar <span style="font-weight:400;color:var(--soluk);font-size:13px">(kural, kapsam, teknoloji)</span></h2>
+  <table>
+    <tr><td class="kod">S-04</td><td>Veriler ne kadar süre saklanacak, mezun olan öğrencinin hesabı ne olacak? (KVKK)<span class="not"></span></td><td class="secim"></td></tr>
+    <tr><td class="kod">S-08 S-09</td><td>Aşağı oy (sıralama ve puan ilkeleri) ve resim/video (fotoğraf ilkesi) ilkelerle çelişir mi?<span class="not"></span></td><td class="secim"><span class="kutu"></span>Olur <span class="kutu"></span>Olmaz</td></tr>
+    <tr><td class="kod">S-10</td><td>Öğretmen girişinde ortak okul kelimesi mi, yoksa her öğretmenin telefonunda kendi doğrulama kodu mu?<span class="not"></span></td><td class="secim"></td></tr>
+    <tr><td class="kod">S-11</td><td>Web demosunun yanında <b>native Android uygulaması</b> (Java, Android SDK) yapılabilir mi? Yeni bir teknoloji olduğu için soruyorum.<span class="not"></span></td><td class="secim"><span class="kutu"></span>Olur <span class="kutu"></span>Olmaz</td></tr>
+    <tr><td class="kod">S-12</td><td>Demo, evdeki sunucumda yalnızca örnek veriyle, HTTPS ile internete açılabilir mi?<span class="not"></span></td><td class="secim"><span class="kutu"></span>Olur <span class="kutu"></span>Olmaz</td></tr>
+  </table>
+
+  <div class="imza"><div>Yasemin Hoca</div><div>Eyüp Hoca</div></div>
+</div></main>
+<button class="yazdir" onclick="window.print()">Yazdır / PDF</button>
+</body>
+</html>

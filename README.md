@@ -70,6 +70,15 @@ Tarayıcıda **http://localhost:8000** adresini aç. Bütün örnek kullanıcıl
 
 **Telefonda denemek:** Telefon USB ile bağlıyken (USB hata ayıklama açık) `adb reverse tcp:8000 tcp:8000` komutunu çalıştır, telefonun tarayıcısında `http://localhost:8000` adresini aç.
 
+**Android uygulaması (APK, ek):** `apk/` klasöründe, Django sayfalarını tam ekran açan küçük bir Android kabuğu var. Uygulamanın kendisi yine Django'dur, kurallar sunucuda uygulanır. Görev tanımı gereği Özgür Hoca'ya sorulacak bir ek (S-11). Derlemek için Android SDK (`platforms;android-34`, `build-tools;35.0.0`) ve JDK gerekir:
+
+```bash
+cd apk && ./derle.sh                       # çıktı: apk/build/AskidaIyilik.apk
+adb install -r build/AskidaIyilik.apk      # telefona kur (USB hata ayıklama açık)
+adb reverse tcp:8000 tcp:8000              # telefonun localhost'unu bilgisayardaki Django'ya yönlendir
+```
+Uygulama sunucuya bağlanamazsa başka bir adres sorar (ör. ev sunucusu).
+
 **Örnek veriyi sıfırlamak:** `python manage.py ornek_veri` komutunu yeniden çalıştırmak bütün istekleri silip baştan oluşturur.
 
 ## Değişmez ilkeler (projenin baştan verilmiş kararları)

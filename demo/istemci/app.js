@@ -34,7 +34,9 @@ async function api(yontem, yol, govde) {
       body: govde === undefined ? undefined : JSON.stringify(govde),
     });
   } catch (e) {
-    bildir("Sunucuya bağlanılamadı. İnternet bağlantını kontrol et.", true);
+    // APK'da arayüz telefonda olduğu için sunucu yokken de açılır: adres penceresini uygulama gösterir.
+    if (window.AskidaUygulama) window.AskidaUygulama.sunucuyaUlasilamadi();
+    else bildir("Sunucuya bağlanılamadı. İnternet bağlantını kontrol et.", true);
     throw e;
   }
   const veri = await cevap.json().catch(() => ({}));

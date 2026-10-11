@@ -10,14 +10,17 @@ BT="$SDK/build-tools/35.0.0"
 JAR="$SDK/platforms/android-34/android.jar"
 ANAHTAR="${ANAHTAR:-$HOME/.android/debug.keystore}"
 
-rm -rf build && mkdir -p build/gen build/obj build/dex
+rm -rf build && mkdir -p build/gen build/obj build/dex build/assets
+
+# Arayüz dosyaları APK'nın içine konur: sunucudan yalnızca veri gelir (demo-plani.md).
+cp -r ../demo/istemci build/assets/istemci
 
 echo "1/6 Kaynaklar (simge, metinler) derleniyor"
 "$BT/aapt2" compile --dir res -o build/kaynaklar.zip
 
-echo "2/6 Manifest ve kaynaklar birleştiriliyor"
+echo "2/6 Manifest, kaynaklar ve arayüz dosyaları birleştiriliyor"
 "$BT/aapt2" link build/kaynaklar.zip -I "$JAR" --manifest AndroidManifest.xml \
-  --java build/gen -o build/ham.apk \
+  -A build/assets --java build/gen -o build/ham.apk \
   --min-sdk-version 24 --target-sdk-version 34 --version-code 1 --version-name 0.1
 
 echo "3/6 Java kodu derleniyor"

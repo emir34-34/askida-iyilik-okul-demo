@@ -7,18 +7,25 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
 
+import java.io.IOException;
+
 /**
- * Askıda İyilik APK kabuğu.
+ * Askıda İyilik Android uygulaması.
  *
- * Bütün uygulama Django'dadır: bu sınıf yalnızca Django sayfalarını tam ekran bir WebView içinde
- * açar. Kurallar (kim neyi yapabilir) burada değil, sunucuda uygulanır (T-07).
+ * Arayüz dosyaları (demo/istemci/: HTML, CSS, JavaScript, yazı tipi) APK'nın içindedir (assets/istemci).
+ * WebView sunucunun adresini açar, ama "/" ve "/i/..." isteklerini sunucuya göndermeden APK'nın içinden
+ * verir. Sunucuya yalnızca "/api/..." veri istekleri gider (demo-plani.md, mimari değişikliği).
+ * Dosyalar sunucuyla aynı adresten geliyormuş gibi davrandığı için oturum çerezi ve CSRF koruması
+ * değişmeden çalışır. Kurallar (kim neyi yapabilir) burada değil, sunucuda uygulanır (T-07).
  *
  * Varsayılan adres http://localhost:8000/. Telefon USB ile bağlıyken bilgisayarda
  * "adb reverse tcp:8000 tcp:8000" çalıştırılırsa telefonun localhost'u bilgisayara yönlenir.
@@ -43,7 +50,14 @@ public class MainActivity extends Activity {
         WebSettings s = web.getSettings();
         s.setJavaScriptEnabled(true);   // sayfalardaki küçük bildirim betiği için
         s.setDomStorageEnabled(true);
+        // Arayüz sunucuya ulaşamazsa adres penceresini açabilsin diye tek bir yöntem açılır.
+        web.addJavascriptInterface(new Kopru(), "AskidaUygulama");
         web.setWebViewClient(new WebViewClient() {
+            @Override
+            public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest istek) {
+                return arayuzDosyasi(istek);
+            }
+
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest istek) {
                 Uri hedef = istek.getUrl();
@@ -70,6 +84,49 @@ public class MainActivity extends Activity {
             web.restoreState(kayitliDurum);
         } else {
             web.loadUrl(adres());
+        }
+    }
+
+    /** "/" ve "/i/..." isteklerini APK'nın içindeki arayüz dosyalarından karşılar. Diğerleri sunucuya gider. */
+    private WebResourceResponse arayuzDosyasi(WebResourceRequest istek) {
+        Uri hedef = istek.getUrl();
+        Uri sunucu = Uri.parse(adres());
+        if (!"GET".equals(istek.getMethod())
+                || hedef.getHost() == null || !hedef.getHost().equals(sunucu.getHost())
+                || hedef.getPort() != sunucu.getPort()) {
+            return null;
+        }
+        String yol = hedef.getPath() == null ? "/" : hedef.getPath();
+        String dosya;
+        if (yol.equals("/")) {
+            dosya = "index.html";
+        } else if (yol.startsWith("/i/") && !yol.contains("..")) {
+            dosya = yol.substring(3);
+        } else {
+            return null; // /api/, /yonetim/ ... sunucuya gider
+        }
+        try {
+            return new WebResourceResponse(turu(dosya), "UTF-8", getAssets().open("istemci/" + dosya));
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    private static String turu(String dosya) {
+        if (dosya.endsWith(".html")) return "text/html";
+        if (dosya.endsWith(".css")) return "text/css";
+        if (dosya.endsWith(".js")) return "application/javascript";
+        if (dosya.endsWith(".woff2")) return "font/woff2";
+        return "application/octet-stream";
+    }
+
+    /** JavaScript'in çağırabildiği tek yöntem: sunucuya ulaşılamadığında adres penceresini açmak. */
+    private class Kopru {
+        @JavascriptInterface
+        public void sunucuyaUlasilamadi() {
+            runOnUiThread(() -> adresSor("Sunucuya bağlanılamadı (" + adres() + ").\n\n"
+                    + "Bilgisayarda demo çalışıyor mu? USB ile bağlıysan bilgisayarda "
+                    + "\"adb reverse tcp:8000 tcp:8000\" komutunu çalıştır ya da başka bir adres yaz."));
         }
     }
 

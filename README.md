@@ -2,7 +2,7 @@
 
 Askıda İyilik, okulda insanların birbirine yaptığı iyiliği görünür kılmak için düşünülen bir uygulama: biri bir ihtiyacını ya da okulda gördüğü bir sorunu bildirir, başka biri karşılar, bildiren kişi onaylar. Bu repo, uygulamanın okul sürümünün **sistem tasarımını** (roller, akış, veri, ekranlar, senaryolar) ve bu tasarımın en önemli akışını (isteği aç → üstlen → yapıldı → onayla) uçtan uca yürüten **çalışan bir ilk demoyu** içerir. Uygulamadan ne istendiğini Yasemin Hoca ve Eyüp Hoca belirler. Danışman öğretmen Özgür Girgin'dir.
 
-> **Durum:** Tasarım dosyalarının hepsi taslak olarak hazır, hocaların varsayımları onaylaması bekleniyor. Demonun ilk dilimi çalışıyor: giriş, istek aç → üstlen → yapıldı → onayla, yorumlar ve 15 test (`demo-plani.md`).
+> **Durum:** Tasarım dosyalarının hepsi taslak olarak hazır, hocaların varsayımları onaylaması bekleniyor. Demonun ilk dilimi çalışıyor: giriş, istek aç → üstlen → yapıldı → onayla, yorumlar ve 20 test. Arayüz istemcide (tarayıcı ve Android APK), Django yalnızca veri gönderir (`demo-plani.md`).
 
 ## Dosyalar
 
@@ -48,7 +48,7 @@ cp .env.example .env               # Windows: copy .env.example .env
 python manage.py migrate
 python manage.py ornek_veri
 
-# 5. Testleri çalıştır (15 test, hepsi geçmeli)
+# 5. Testleri çalıştır (20 test, hepsi geçmeli)
 python manage.py test
 
 # 6. Sunucuyu başlat
@@ -70,7 +70,7 @@ Tarayıcıda **http://localhost:8000** adresini aç. Bütün örnek kullanıcıl
 
 **Telefonda denemek:** Telefon USB ile bağlıyken (USB hata ayıklama açık) `adb reverse tcp:8000 tcp:8000` komutunu çalıştır, telefonun tarayıcısında `http://localhost:8000` adresini aç.
 
-**Android uygulaması (APK, ek):** `apk/` klasöründe, Django sayfalarını tam ekran açan küçük bir Android kabuğu var. Uygulamanın kendisi yine Django'dur, kurallar sunucuda uygulanır. Görev tanımı gereği Özgür Hoca'ya sorulacak bir ek (S-11). Derlemek için Android SDK (`platforms;android-34`, `build-tools;35.0.0`) ve JDK gerekir:
+**Android uygulaması (APK, ek):** `apk/` klasöründe. Arayüz dosyaları (`demo/istemci/`) APK'nın içine konur, sunucudan yalnızca `/api/` üzerinden veri gelir (Reddit uygulaması gibi). Tarayıcıdaki demo da aynı arayüz dosyalarını kullanır. Kurallar yine sunucuda uygulanır. Görev tanımı gereği Özgür Hoca'ya sorulacak bir ek (S-11). Derlemek için Android SDK (`platforms;android-34`, `build-tools;35.0.0`) ve JDK gerekir:
 
 ```bash
 cd apk && ./derle.sh                       # çıktı: apk/build/AskidaIyilik.apk

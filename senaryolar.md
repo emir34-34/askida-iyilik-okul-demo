@@ -1,67 +1,44 @@
 # Senaryolar
 
-> **Durum: TASLAK.** Senaryo 1 ve 2 görev tanımına göre zorunludur. Senaryo 3 ve 4 **aday senaryolardır**: görev tanımı bunları Yasemin Hoca ve Eyüp Hoca'nın anlattığı en önemli durumlardan seçmemi istiyor (Soru 21). Görüşmeden sonra değiştirilebilirler.
-> Bütün isimler uydurmadır. Kullanıcı adları demodaki örnek kullanıcılarla aynıdır.
+> **Durum: TASLAK.** Senaryo 1 ve 2 görev tanımına göre zorunludur. Senaryo 3 ve 4 **aday**: görev tanımı bunları hocaların anlattığı durumlardan seçmemi istiyor (S-07).
+> Bütün isimler uydurmadır, kullanıcı adları demodaki örnek kullanıcılarla aynıdır.
 
-**Kişiler:** Mehmet A. (`ogrenci1`), Ayşe K. (`ogrenci2`), Can B. (`ogrenci3`), Selin Öğretmen (`ogretmen1`)
+**Kişiler:** Zeynep T. (`ogrenci4`), Ayşe K. (`ogrenci2`), Can B. (`ogrenci3`), Mehmet A. (`ogrenci1`)
 
----
+## Senaryo 1: Sorun bildirilir, biri üstlenir, bildiren onaylar
+**Zorunlu · demoda birebir yürütülen senaryo**
 
-## Senaryo 1: İstek açılır, başka biri karşılar, istek sahibi onaylar
-**Zorunlu · demoda birebir yürütülecek senaryo** (T-05)
-
-| Adım | Kim | Ne yapar | Ekran | Sonuç ve durum |
-|------|-----|----------|-------|----------------|
-| 1 | Mehmet | Giriş yapar | E1 | Ana sayfa açılır |
-| 2 | Mehmet | **Yeni istek** düğmesine basar, "Kimya notları lazım" yazıp yayınlar | E3 | İstek **Açık** (G1) |
-| 3 | Ayşe | Giriş yapar, listede isteği görür ve açar | E2 → E4 | **Üstlen** düğmesini görür. Mehmet kendi isteğinde bu düğmeyi görmez |
-| 4 | Ayşe | **Üstlen**'e basar | E4 | İstek **Üstlenildi**, üstlenen Ayşe (G2) |
-| 5 | Ayşe | "Yarın teneffüste getiririm." yorumunu yazar | E4 | Yorumu herkes görür (T-01) |
-| 6 | Ayşe | Notları verdikten sonra **Yapıldı**'ya basar | E4 | İstek **Yapıldı** (G4) |
-| 7 | Mehmet | **Benim işlerim**'de "Onayını bekliyor" uyarısını görür | E5 | |
-| 8 | Mehmet | İsteği açıp **Onayla**'ya basar, isteğe bağlı olarak "Çok sağ ol! 🙏" notunu yazar | E4, E13 | İstek **Tamamlandı** (G5), not yorum olarak görünür, istek arşive geçer |
-
-**Kontrol:** Her adımda durum geçmişine bir satır yazıldı mı? Ayşe 8. adımda **Onayla** düğmesini görmüyor mu, adresi elle yazarsa 403 alıyor mu?
+| Adım | Kim | Ne yapar | Ekran | Sonuç |
+|------|-----|----------|-------|-------|
+| 1 | Zeynep | Giriş yapar, **Sorun bildir**'e basar, "2. kat lavabo musluğu damlıyor" yazıp bildirir | E1, E3 | Sorun **Açık** (G1) |
+| 2 | Ayşe | Giriş yapar, listede sorunu görür ve açar | E2, E4 | **Üstlen** düğmesini görür. Zeynep kendi sorununda bu düğmeyi görmez |
+| 3 | Ayşe | **Üstlen**'e basar, "Hademe ablaya haber verdim." yorumunu yazar | E4 | **Üstlenildi** (G2), yorumu herkes görür |
+| 4 | Ayşe | Musluk tamir edilince **Yapıldı**'ya basar | E4 | **Yapıldı** (G4) |
+| 5 | Zeynep | **Benim işlerim**'de "Onayını bekliyor" uyarısını görür, sorunu açıp **Onayla**'ya basar | E5, E4 | **Tamamlandı** (G5) |
 
 ## Senaryo 2: Üstlenen kişi işi yapamayacağını fark eder
 **Zorunlu**
 
-| Adım | Kim | Ne yapar | Ekran | Sonuç ve durum |
-|------|-----|----------|-------|----------------|
-| 1 | Mehmet | "Hesap makinesi ödünç lazım" isteğini açar | E3 | **Açık** |
-| 2 | Can | İsteği üstlenir | E4 | **Üstlenildi**, üstlenen Can |
-| 3 | Can | Hesap makinesini evde unuttuğunu fark eder. "Kusura bakma, bugün getiremiyorum." yorumunu yazar | E4 | |
-| 4 | Can | **Bırak**'a basar | E4 | İstek yeniden **Açık**, üstlenen boşaldı (G3) |
-| 5 | Ayşe | Listede isteği yeniden **Açık** olarak görür ve üstlenir | E2 → E4 | **Üstlenildi**, üstlenen Ayşe |
-| 6 | Ayşe, Mehmet | Senaryo 1'in 6–8. adımları gibi devam eder | E4 | **Tamamlandı** |
+| Adım | Kim | Ne yapar | Ekran | Sonuç |
+|------|-----|----------|-------|-------|
+| 1 | Can | "Spor salonu kapısının kolu kırık" sorununu bildirir | E3 | **Açık** |
+| 2 | Mehmet | Sorunu üstlenir | E4 | **Üstlenildi**, üstlenen Mehmet |
+| 3 | Mehmet | Kolu kendisinin değiştiremeyeceğini fark eder, "Bunu ben yapamam, bir öğretmene haber vermek lazım." yorumunu yazar | E4 | |
+| 4 | Mehmet | **Bırak**'a basar | E4 | Sorun yeniden **Açık** (G3) |
+| 5 | Ayşe | Sorunu listede yeniden açık görür ve üstlenir | E2, E4 | **Üstlenildi**, üstlenen Ayşe |
 
-**Kontrol:** Can bıraktıktan sonra **Yapıldı** diyemiyor mu? Can'ın profilinde ya da listede bırakmayı gösteren bir işaret yok mu (`akis.md`)?
+## Senaryo 3 (aday): İki kişi aynı sorunu aynı anda üstlenmeye çalışır
 
-## Senaryo 3 (aday): İş yapılmadı, istek sahibi geri çevirir
+| Adım | Kim | Ne yapar | Sonuç |
+|------|-----|----------|-------|
+| 1 | Ayşe ve Mehmet | İkisi de "Kantin lavabosunda sabun bitti" sorununu açık olarak görür | Düğme ikisinde de görünür |
+| 2 | Ayşe ve Mehmet | İkisi aynı anda **Üstlen**'e basar | Yalnızca ilk gelen alır |
+| 3 | Mehmet | "Bu sorun az önce başka biri tarafından üstlenildi." mesajını görür | Sorun Ayşe'de kalır (akis.md, soru 1) |
 
-| Adım | Kim | Ne yapar | Ekran | Sonuç ve durum |
-|------|-----|----------|-------|----------------|
-| 1 | Mehmet | "Kimya notları lazım" isteğini açar, Ayşe üstlenir | E3, E4 | **Üstlenildi** |
-| 2 | Ayşe | **Yapıldı**'ya basar | E4 | **Yapıldı** |
-| 3 | Mehmet | Notların yarısının eksik olduğunu görür ve **Yapılmadı**'ya basar | E4 | Gerekçe kutusu açılır |
-| 4 | Mehmet | Gerekçe yazmadan göndermeye çalışır | E7 | "Lütfen neyin eksik olduğunu yaz." |
-| 5 | Mehmet | "Notların yarısı eksik." yazıp gönderir | E4 | İstek **Üstlenildi**, yine Ayşe'de (G6) |
-| 6 | Ayşe | Eksik notları verip yeniden **Yapıldı** der, Mehmet onaylar | E4 | **Tamamlandı** |
+## Senaryo 4 (aday): Bildiren kişi onay vermez
 
-## Senaryo 4 (aday): Uygunsuz bir istek gizlenir
-
-| Adım | Kim | Ne yapar | Ekran | Sonuç ve durum |
-|------|-----|----------|-------|----------------|
-| 1 | Can | Uygunsuz bir istek yayınlar (ör. başka bir öğrenciyle alay eden bir başlık) | E3 | **Açık**, listede görünür (V-07) |
-| 2 | Selin Öğretmen | İsteği görür ve **Gizle**'ye basar | E4 → E6 | Gerekçe kutusu açılır |
-| 3 | Selin Öğretmen | "Arkadaşını küçük düşüren içerik." gerekçesini yazar | E6 | İstek **Gizlendi** (G8), listeden kalkar |
-| 4 | Ayşe | Gizlenen isteğin adresini elle açmaya çalışır | E7 | İsteği göremez |
-| 5 | Selin Öğretmen | Durum geçmişinde kimin ne zaman gizlediğini ve gerekçeyi görür | — | İçerik silinmedi, kayıt duruyor |
-
-> Hocalar "istekler yayına girmeden önce öğretmen onaylasın" derse (V-07), bu senaryo "öğretmen isteği yayına almaz" olarak değişir.
-
----
-
-## Senaryolarla ortaya çıkan açık noktalar
-- Senaryo 1'in 7. adımında Mehmet onay vermeyi unutursa ne olacak? → S-03
-- Senaryo 2'de aynı kişi bir isteği defalarca üstlenip bırakırsa ne olacak? Taslakta bir sınır yok. → Hocalara sorulacak (yeni soru)
+| Adım | Kim | Ne yapar | Sonuç |
+|------|-----|----------|-------|
+| 1 | Ayşe | Zeynep'in bildirdiği sorunu üstlenir ve **Yapıldı** der | **Yapıldı** |
+| 2 | Zeynep | Onay vermeyi unutur | Sorun **Yapıldı**'da bekler |
+| 3 | — | Belli bir süre sonra ne olacağı | **Açık soru (S-03)**, hocalar karar verecek |

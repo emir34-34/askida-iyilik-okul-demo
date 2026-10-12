@@ -1,5 +1,7 @@
 # 1. Görüşme: Yasemin Hoca ve Eyüp Hoca
 
+> **Not (2026-10-12):** Bu, ilk hazırladığım soru listesi. Özgür Hoca'nın geri bildirimiyle bazı sorular cevaplandı: Askıya yalnızca okul sorunları konur (T-08), akış dört adımdır (T-09). Güncel sorular [görüşme formunda](gorusme-formu.html).
+
 Amaç: Uygulamadan ne istendiğini anlamak. Cevapları not alıp `talepler.md` dosyasına satır satır yazacağım, sonra hocalara "Şunu anladım, doğru mu?" diye geri okuyacağım.
 
 ## Kullanıcılar

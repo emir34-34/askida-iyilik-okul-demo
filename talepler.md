@@ -60,6 +60,7 @@ Hocalarla görüşemediğim için taslağı bu varsayımlarla yazdım. Hiçbiri 
 | S-07 | Zorunlu iki senaryonun yanına hangi iki durum yazılsın? | Eyüp Hoca | açık |
 | S-01 | Kredi veya puan istenecek mi? İstenirse kural icat edilmez, Özgür Hoca'ya sorulur | Eyüp Hoca → Özgür Hoca | açık |
 | S-02 | Teslim ve sunum tarihi | Eyüp Hoca, Yasemin Hoca | açık |
+| S-15 | Sistem okulda gerçekten kullanılırsa nerede çalışacak ve kim sorumlu olacak? (ör. bilişim teknolojileri öğretmeni) (teknoloji.md, Süreklilik) | Özgür Hoca, okul idaresi | açık |
 | S-04 | Veriler ne kadar süre saklanacak, mezun olan öğrencinin hesabı ne olacak? (KVKK) | Özgür Hoca | açık |
 | S-05 | Hocalarla görüşmeden önce taslak yazmam uygun mu? | Özgür Hoca | 2026-10-11: Devam etmemi söyledi. Akşam repoyu inceleyip geri bildirim verdi (A2) |
 

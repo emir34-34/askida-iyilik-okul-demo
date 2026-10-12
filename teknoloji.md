@@ -42,23 +42,37 @@
 
 Firebase'in sunucuları Türkiye dışında ve verilerin yurt dışına gitmesini istemiyorum. Bunun yerine evdeki Core 2 Duo'lu bilgisayarı tamir ettirip sunucu olarak kullanacağım. Bu yüzden Django benim için daha iyi bir seçenek.
 
+**Güncelleme (2026-10-12):** Özgür Hoca süreklilik sorusunu sordu (T-12). Ev sunucusu bu açıdan uygun değil: Ben mezun olunca sistem de benimle birlikte gider. Django seçimim aynı kalıyor, ama sistemin evde değil okulda çalışması gerekiyor (aşağıda, Süreklilik).
+
+## Süreklilik: Ben mezun olunca bu sistemi okulda kim çalıştıracak?
+
+> Taslak: Emir kontrol edip kendi cümleleriyle düzenleyecek.
+
+**Sorun:** Sistem benim bilgisayarımda ya da evimde çalışırsa, ben mezun olunca durur. Askıda İyilik'in yıllarca çalışması için okula ait olması gerekiyor.
+
+**Nerede çalışmalı?** Okulun kendi sunucusunda ya da okul idaresinin seçeceği bir yerde. Bir öğrencinin evinde değil. Gerçek veriyle canlıya geçiş kararı zaten okul idaresinin ve MEM'in (değişmez ilke 4).
+
+**Kim sorumlu olmalı?** Okulda bir öğretmen, örneğin bilişim teknolojileri öğretmeni. Her yıl yapılacak işler:
+- Dönem başında yeni öğrencilerin hesaplarını açmak, mezunlarınkini kapatmak (Django yönetim paneliyle, kod bilmeden yapılır)
+- Django'nun güvenlik güncellemelerini yüklemek (yılda birkaç kez)
+- Veritabanının yedeğini almak
+
+**Bakımı kolaylaştıranlar:**
+- Tek dil: Python. Okullarda öğretilen bir dil, sonraki öğrenciler ya da öğretmenler okuyabilir.
+- Ek kütüphane yok, yalnızca Django. Güncellenecek parça az.
+- Sade tasarım: dört adımlık akış, beş ekran.
+- README'de sıfırdan kurulum adımları var.
+- Testler var: Biri kodu değiştirince temel kuralların bozulup bozulmadığı hemen anlaşılır.
+
+**Risk:** Kimse sahiplenmezse sistem güncellenmez ve zamanla güvenlik açığı oluşur. Bu yüzden canlıya geçmeden önce okul idaresiyle bir sorumlu belirlenmeli (S-15).
+
+**Firebase olsaydı?** Sunucu bakımı gerekmezdi, ama proje bir Google hesabına bağlı olurdu ve o hesabın da birine devredilmesi gerekirdi. İki seçenekte de sistemin okulda bir sahibi olmalı.
+
 ## Sınırlar
 
-- **Evdeki sunucu yalnızca test ve demo için.** Orada da yalnızca örnek veri olacak. Gerçek öğrenci verisinin nerede duracağına okul idaresi ve MEM karar verir, ev sunucusu bunun için uygun bir yer değil.
-- **Demo GitHub Pages'te çalışmaz.** Pages'te yalnızca tasarım belgeleri durur. Demo yerelde (`runserver`) ya da evdeki sunucuda çalışır.
-- **Ev sunucusu eski bir bilgisayar** (Core 2 Duo, 3 GB RAM). Demo için yeterli, ama okulun tamamının kullanacağı bir sistem için değil.
-- **Sunucunun bakımı benim sorumluluğumda.** Güncellemeleri ve yedekleri ben yapmalıyım.
-- **Firebase'deki hazır özellikler** (bildirimler, kendiliğinden ölçeklenme) Django'da yok. Gerekirse kendim yazmam gerekir.
-
-## Ek: Android APK kabuğu (Emir'in isteği, Özgür Hoca'ya sorulacak)
-
-Demo bir Django web uygulamasıdır ve telefon tarayıcısında çalışır. Bunun yanında, aynı sayfaları tam ekran açan bir **Android APK kabuğu** (WebView) yapılacak. Telefonda ikonu olan bir uygulama gibi görünür, ama içinde aynı Django sayfaları çalışır. Ayrı bir uygulama yazılmaz, bütün kurallar yine Django sunucusunda uygulanır.
-
-- **Neden:** Uygulamanın telefonda gerçek bir uygulama gibi nasıl hissettireceğini göstermek.
-- **Ne gerektirir:** Android SDK ve Java (bilgisayarda kurulu).
-- **2026-10-11 güncellemesi:** Arayüz dosyaları (HTML, CSS, JavaScript, yazı tipi) APK'nın içine kondu. Sunucudan yalnızca veri (JSON) gelir, Reddit uygulaması gibi. Aynı arayüz dosyaları tarayıcıda da kullanılır (`demo-plani.md`, mimari değişikliği).
-- **2026-10-11 ikinci güncelleme:** WebView yerine **tamamen native** bir Android uygulaması yazıldı (Java, Android'in kendi bileşenleri, ek kütüphane yok). Tarayıcı demosu ayrıca duruyor. İki arayüz de aynı `/api/` adreslerini kullanıyor (`demo-plani.md`).
-- **Sınırı:** APK, Django sunucusu çalışmıyorsa veri gösteremez. Arayüz açılır, ama giriş yapılamaz. İki ayrı arayüz (web ve native) olduğu için bir ekran değişince ikisinin de güncellenmesi gerekir. Görev tanımı yeni teknoloji için Özgür Hoca'ya sormayı istediğinden bu bir **açık soru (S-11)**. Hoca hayır derse APK demodan çıkarılır, web demosu eksiksiz kalır.
+- **Demo şimdilik bilgisayarımda çalışıyor** (`runserver`), yalnızca örnek veriyle. Okulda gerçekten kullanılması için okulun bir sunucusu ve bir sorumlusu gerekir (Süreklilik).
+- **Demo GitHub Pages'te çalışmaz.** Pages'te yalnızca tasarım belgeleri durur.
+- **Sunucunun bakımı birinin sorumluluğunda olmalı:** güncellemeler, yedekler, hesaplar.
 
 ## Kaynaklar
 - Firestore bölgeleri: https://firebase.google.com/docs/firestore/locations

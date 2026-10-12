@@ -9,17 +9,27 @@ Anlamadığım ya da birbiriyle çelişen bir talebi uydurmam: "Açık sorular" 
 
 | No | Talep | Kim istedi | Tarih | Geri okundu mu? | Tasarımda nerede | Demoda nerede |
 |----|-------|------------|-------|-----------------|------------------|---------------|
-| T-01 | Özel mesaj yok, konuşma isteğin altında herkese açık yorumlarla olur | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | roller.md (yorum yazmak), veri.md (Yorum) | İstek sayfasında yorumlar, özel mesaj yok |
-| T-02 | Sıralama tablosu yok | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | roller.md (son satır), akis.md, veri.md (Durum geçmişi) | — |
-| T-03 | TC kimlik no, telefon, fotoğraf, konum ve doğum tarihi tutulmaz, her alanın gerekçesi yazılır | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | veri.md (tamamı) | — |
-| T-04 | Demo yalnızca örnek veriyle çalışır | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | roller.md (demo rolleri), veri.md | `python manage.py ornek_veri` |
-| T-05 | Temel akış: isteği aç → üstlen → yapıldı → onayla, demoda uçtan uca çalışır | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | akis.md (G1, G2, G4, G5) | `demo/istekler/gecisler.py`, test: `OnayAkisiTesti`. Senaryo 1 iki telefonda yürütüldü (demo-plani.md) |
+| T-01 | Özel mesaj yok, konuşma sorunun altında herkese açık yorumlarla olur | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | roller.md, veri.md (Yorum) | Sorun sayfasında yorumlar |
+| T-02 | Sıralama tablosu yok | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | roller.md (son satır) | Kişi başına hiçbir sayı yok |
+| T-03 | TC kimlik no, telefon, fotoğraf, konum ve doğum tarihi tutulmaz, her alanın gerekçesi yazılır | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | veri.md | `demo/istekler/models.py` |
+| T-04 | Demo yalnızca örnek veriyle çalışır | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | veri.md | `python manage.py ornek_veri` |
+| T-05 | Temel akış demoda uçtan uca çalışır | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | akis.md | `gecisler.py`, test: `OnayAkisiTesti` |
 | T-06 | Aynı iş iki kişi tarafından aynı anda üstlenilemez | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | akis.md (soru 1) | `gecisler.ustlen`, test: `CiftUstlenmeTesti` |
-| T-07 | Yetki kontrolü sunucuda yapılır, yalnızca ekranda yapılmaz | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | roller.md (yetki nerede kontrol edilir) | `gecisler.py`, test: `RolKuraliTesti`, `SayfaYetkiTesti` |
+| T-07 | Yetki kontrolü sunucuda yapılır, yalnızca ekranda yapılmaz | Görev tanımı (Özgür Hoca) | 2026-10-10 | — | roller.md | `gecisler.py`, test: `RolKuraliTesti`, `SayfaYetkiTesti` |
+
+## A2. Özgür Hoca'nın geri bildirimi (2026-10-11, repoyu inceledikten sonra)
+
+| No | Talep | Kim istedi | Tarih | Geri okundu mu? | Tasarımda nerede | Demoda nerede |
+|----|-------|------------|-------|-----------------|------------------|---------------|
+| T-08 | Askıya kişisel istekler konmaz. Yalnızca **okulda görülen sorunlar** konur: bozuk kapı, damlayan musluk, biten sabun gibi | Özgür Hoca | 2026-10-11 | — | README, akis.md, senaryolar.md | Örnek veriler |
+| T-09 | Tasarım sade olsun. Yalnızca şu akış kalsın: **sorunu bildir → biri üstlensin → yapıldı desin → bildiren onaylasın** | Özgür Hoca | 2026-10-11 | — | akis.md, ekranlar.md | Demonun tamamı |
+| T-10 | Kimsenin istemediği özellikler kaldırılsın (aşağıdaki "Kaldırılanlar" tablosu) | Özgür Hoca | 2026-10-11 | — | Bütün tasarım dosyaları | Android uygulaması ve ek özellikler kaldırıldı |
+| T-11 | Sadeleştirdikten sonra tasarım Eyüp Hoca'ya gösterilsin, ona danışılsın | Özgür Hoca | 2026-10-11 | — | gorusme-formu.html, sunum-plani.md | — |
+| T-12 | `teknoloji.md`'ye süreklilik yazılsın: Ben mezun olunca bu sistemi okulda kim çalıştıracak? | Özgür Hoca | 2026-10-11 | — | teknoloji.md (Süreklilik) | — |
 
 ## B. Yasemin Hoca ve Eyüp Hoca'nın talepleri
 
-İlk görüşmeden sonra doldurulacak. Sorular: [gorusme-1-sorular.md](gorusme-1-sorular.md)
+Görüşmeden sonra doldurulacak. Form: [gorusme-formu.html](gorusme-formu.html)
 
 | No | Talep | Kim istedi | Tarih | Geri okundu mu? | Tasarımda nerede | Demoda nerede |
 |----|-------|------------|-------|-----------------|------------------|---------------|
@@ -27,53 +37,47 @@ Anlamadığım ya da birbiriyle çelişen bir talebi uydurmam: "Açık sorular" 
 
 ## B2. Taslaktaki varsayımlar (hocalara sorulacak)
 
-Hocalarla görüşemediğim için roller, akış ve veri dosyalarının taslağını bu varsayımlarla yazdım. Hiçbiri talep değildir. Görüşmede her birini sorup sonucunu buraya yazacağım: onaylanırsa B tablosuna talep olarak geçer, reddedilirse taslak düzeltilir.
+Hocalarla görüşemediğim için taslağı bu varsayımlarla yazdım. Hiçbiri talep değildir. Görüşmede her birini sorup sonucunu buraya yazacağım.
 
-| No | Varsayım | Tasarımda nerede | Hangi soru | Sonuç |
-|----|----------|------------------|------------|-------|
-| V-01 | Öğrenciler hem istek açabilir hem de karşılayabilir | roller.md | 2 | bekliyor |
-| V-02 | Uygunsuz içeriğe öğretmenler müdahale eder, içerik silinmez, gerekçeyle gizlenir | roller.md, veri.md | 13 | bekliyor |
-| V-03 | Kimse kendi kendine kayıt olamaz, hesapları yönetici açar, e-posta tutulmaz | roller.md, veri.md | 3 | bekliyor |
-| V-04 | Veliler ve personel bu sürümde kullanıcı değil | roller.md | 1 | bekliyor |
-| V-05 | Yapılan işi isteği açan kişi onaylar, öğretmen onaylamaz | roller.md, akis.md | 9 | bekliyor |
-| V-06 | Üstlenilmiş bir istek açan kişi tarafından geri çekilemez | roller.md, akis.md | 11 | bekliyor |
-| V-07 | İstekler öğretmen onayı beklemeden yayına girer | akis.md | 14 | bekliyor |
-| V-08 | İşi bırakırken gerekçe yazmak zorunlu değil | akis.md | 11 | bekliyor |
-| V-09 | Görünen ad yalnızca ad ve soyadın baş harfi (Ayşe K.) | veri.md | — | bekliyor |
-| V-10 | Uygulama çoğunlukla telefondan kullanılır, ekranlar dar ekrana göre tasarlanır | ekranlar.md | 16 | bekliyor |
-| V-11 | Yorumlara tek seviye yanıt verilebilir | ekranlar.md, roller.md, veri.md | — | bekliyor |
-| V-12 | Yönetim özetini öğretmenler ve yönetici görür, öğrenciler görmez. Sayfada yalnızca toplam sayılar olur | roller.md, ekranlar.md (D3) | — | bekliyor |
-| V-13 | Şikâyet edenin kimliğini içeriği yazan kişi görmez, öğretmen görür | roller.md, veri.md (Şikâyet) | 15 | bekliyor |
-| V-14 | Şikâyet içeriği otomatik gizlemez, kararı öğretmen verir | akis.md, ekranlar.md (E11) | 13, 15 | bekliyor |
+| No | Varsayım | Tasarımda nerede | Sonuç |
+|----|----------|------------------|-------|
+| V-01 | Sorunu öğrenciler ve öğretmenler bildirebilir | roller.md | bekliyor |
+| V-03 | Kimse kendi kendine kayıt olamaz, hesapları okul yöneticisi açar, e-posta tutulmaz | roller.md, veri.md | bekliyor |
+| V-04 | Veliler bu sürümde kullanıcı değil | roller.md | bekliyor |
+| V-05 | İş yapılınca onayı sorunu bildiren kişi verir | roller.md, akis.md | bekliyor |
+| V-08 | Üstlenen kişi işi bırakırken sebep yazmak zorunda değil | akis.md | bekliyor |
+| V-09 | Görünen ad yalnızca ad ve soyadın baş harfi (Ayşe K.) | veri.md | bekliyor |
+| V-15 | Sorunun okulda nerede olduğu ayrı bir alan değil, açıklamaya yazılır ("2. kat kız tuvaleti, soldan ikinci musluk") | veri.md | bekliyor |
 
-## B3. Tasarımcının (benim) önerileri
-
-Bunlar hocalardan değil, benden gelen önerilerdir. Hocalara gösterilip onayları alınacak.
-
-| No | Öneri | Tarih | Tasarımda nerede | Sonuç |
-|----|-------|-------|------------------|-------|
-| Ö-01 | Arayüz Reddit'in arayüz diline göre tasarlansın: istek kartları, kategoriler, durum etiketi (flair), istek altında yorumlar. Öğrenciler bu düzeni zaten tanıyor | 2026-10-11 | ekranlar.md | hocalara gösterilecek |
-| Ö-02 | İsteklere yukarı ve aşağı oy verilebilsin (seçenek A). Riskleri bildiğim hâlde aşağı oyun da olmasını tercih ediyorum, önlemleri ekranlar.md'de | 2026-10-11 | ekranlar.md, veri.md | tasarıma A olarak kondu, son onay → S-08 |
-| Ö-03 | Alt menü Akış, Oluştur, Görevler ve Profil düğmelerinden oluşsun. Profil ekranı eklensin | 2026-10-11 | ekranlar.md (E2, E5, E8) | hocalara gösterilecek |
-| Ö-04 | İsteklere resim ve video eklenebilsin (ör. bozuk musluğun resmi) | 2026-10-11 | ekranlar.md (E2, E3), veri.md (Ek) | ilke 3 ile çelişebilir → S-09 |
-| Ö-05 | Telefon arayüzünün yanında bilgisayar arayüzü de olsun (Reddit'in masaüstü düzeni: sol menü, orta akış, sağ bilgi kartları) | 2026-10-11 | ekranlar.md (D1, D2) | hocalara gösterilecek |
-| Ö-06 | Sağ üstte bir bildirimler düğmesi olsun, gelen yorumlar ve isteklerdeki değişiklikler orada görünsün | 2026-10-11 | ekranlar.md (E9, D1), veri.md (Bildirim) | hocalara gösterilecek |
-| Ö-07 | Öğretmen ve yönetici hesapları ayrı bir ekrandan, kullanıcı adı + şifre + öğretmenlerin ve yöneticilerin aralarında belirlediği okul kelimesi ile birlikte giriş yapsın. Böylece öğretmenin şifresini öğrenen bir öğrenci giriş yapamasın | 2026-10-11 | ekranlar.md (E16, D5), veri.md (Sistem ayarı, Giriş denemesi) | hocalara gösterilecek → S-10 |
-| Ö-08 | Yönetici için sistem ayarları olsun, bazı kurallar açılıp kapanabilsin | 2026-10-11 | ekranlar.md (E18, D7), veri.md (Sistem ayarı, Ayar değişikliği) | hocalara gösterilecek. Değişmez ilkeler ayar yapılmadı |
-
-## C. Açık sorular ve açık kararlar
+## C. Açık sorular
 
 | No | Soru | Kime | Durum |
 |----|------|------|-------|
-| S-01 | Kredi veya puan istenecek mi? İstenirse kural icat edilmez, Özgür Hoca'ya sorulur | Yasemin Hoca, Eyüp Hoca → Özgür Hoca | açık |
-| S-02 | Teslim ve sunum tarihi | Yasemin Hoca, Eyüp Hoca | açık |
-| S-03 | İsteği açan kişi "Yapıldı" durumundaki isteğe hiç cevap vermezse ne olsun, ne kadar süre sonra? (akis.md, soru 3) | Yasemin Hoca, Eyüp Hoca | açık |
+| S-14 | **Bozuk kapı, damlayan musluk gibi sorunları kim üstlenir?** Öğrenciler mi, öğretmenler mi, okulun görevli personeli mi? (Taslakta: bildiren dışında herhangi bir öğrenci ya da öğretmen) | Eyüp Hoca | açık |
+| S-13 | Uygunsuz bir bildirim ya da yorum olursa kim müdahale eder? | Eyüp Hoca | açık |
+| S-03 | Bildiren kişi iş yapıldıktan sonra hiç onay vermezse ne olsun, ne kadar süre sonra? (akis.md, soru 3) | Eyüp Hoca | açık |
+| S-06 | Aynı kişi bir sorunu defalarca üstlenip bırakırsa bir sınır olsun mu? | Eyüp Hoca | açık |
+| S-07 | Zorunlu iki senaryonun yanına hangi iki durum yazılsın? | Eyüp Hoca | açık |
+| S-01 | Kredi veya puan istenecek mi? İstenirse kural icat edilmez, Özgür Hoca'ya sorulur | Eyüp Hoca → Özgür Hoca | açık |
+| S-02 | Teslim ve sunum tarihi | Eyüp Hoca, Yasemin Hoca | açık |
 | S-04 | Veriler ne kadar süre saklanacak, mezun olan öğrencinin hesabı ne olacak? (KVKK) | Özgür Hoca | açık |
-| S-05 | Hocalarla görüşmeden önce roller, akış ve veri taslağını yazmam uygun mu? | Özgür Hoca | 2026-10-11: Hafta içi bakacağını ve devam etmemi söyledi. Taslak, varsayımları işaretlenerek yazıldı |
-| S-06 | Aynı kişi bir isteği defalarca üstlenip bırakırsa bir sınır olsun mu? (senaryolar.md, Senaryo 2) | Yasemin Hoca, Eyüp Hoca | açık |
-| S-07 | Senaryo 3 ve 4 için adaylar (yapılmadı diye geri çevirme, uygunsuz içeriği gizleme) uygun mu, yoksa hocaların seçtiği başka durumlar mı yazılmalı? | Yasemin Hoca, Eyüp Hoca | açık |
-| S-08 | Oylama olsun mu? A) yukarı ve aşağı oy (tasarımcının tercihi, tasarımda bu var), B) yalnızca "Ben de" destek oyu, C) oylama yok. Aşağı oy zorbalığa dönüşebilir, kişi başına toplanan oy da ilke 2 (sıralama yok) ve ilke 5 (puan kuralı) ile çelişebilir (ekranlar.md) | Yasemin Hoca, Eyüp Hoca → Özgür Hoca | açık |
-| S-09 | İsteklere resim ve video eklenebilir mi? Değişmez ilke 3 "fotoğraf tutulmaz" diyor. Önerilen önlemler: konum ve cihaz bilgisi silinir, yüz görünmemesi kuralı, öğretmen gizleyebilir, boyut sınırı, istenirse yalnızca resim (ekranlar.md E3) | Özgür Hoca (ilke), Yasemin Hoca ve Eyüp Hoca (içerik) | açık |
-| S-10 | Görevli girişinde ortak okul kelimesi mi (Ö-07), yoksa her öğretmenin kendi telefonunda ürettiği kişisel doğrulama kodu mu (iki adımlı doğrulama) kullanılsın? Ortak kelime kolay ama bir kez öğrenilirse herkes için geçerli olur | Özgür Hoca (güvenlik), Yasemin Hoca ve Eyüp Hoca | açık |
-| S-11 | Web demosunun yanında native bir Android uygulaması (Java, Android SDK, aynı API'yi kullanır) yapılabilir mi? Görev tanımı yeni teknoloji için sormayı istiyor (teknoloji.md, demo-plani.md) | Özgür Hoca | açık |
-| S-12 | Demo, evdeki sunucuya kurulup (Emir'in Core 2 Duo bilgisayarı) internete açılabilir mi? Yalnızca örnek veriyle, HTTPS ile, hata ayıklama modu kapalı. Gerçek veri ve canlıya geçiş kararı okul idaresi ve MEM'de kalır | Özgür Hoca | açık |
+| S-05 | Hocalarla görüşmeden önce taslak yazmam uygun mu? | Özgür Hoca | 2026-10-11: Devam etmemi söyledi. Akşam repoyu inceleyip geri bildirim verdi (A2) |
+
+## Kaldırılanlar (Özgür Hoca'nın geri bildirimi, 2026-10-11)
+
+Bunlar hocalardan gelmeyen, benim eklediğim özellikler ve tahminlerdi. Tasarımı karmaşıklaştırdıkları için kaldırıldı (T-10). Git geçmişinde duruyorlar.
+
+| Ne | Neden kaldırıldı |
+|----|------------------|
+| Reddit görünümü (Ö-01), alt menü ve profil (Ö-03), bilgisayar düzeni (Ö-05) | İstenmedi. Tasarım sade bir listeye ve sorun sayfasına indi |
+| Yukarı/aşağı oy (Ö-02, S-08) | İstenmedi. Özgür Hoca'nın örneği: Bir öğrenci bozuk musluğu bildirir, beş kişi aşağı oy verir. O öğrenci bir daha bir şey bildirmez. Askının amacı sorunların bildirilmesi, aşağı oy bunu engeller |
+| Resim ve video ekleme (Ö-04, S-09) | İstenmedi. Fotoğraf ilkesiyle de çelişiyordu |
+| Bildirimler (Ö-06) | İstenmedi |
+| Okul kelimesiyle öğretmen girişi (Ö-07, S-10) | İstenmedi |
+| Sistem ayarları ve yönetici paneli ekranları (Ö-08) | İstenmedi. Hesap işleri Django'nun hazır yönetim panelinde |
+| İlk giriş tanıtımı ve easter egg | İstenmedi |
+| Arşiv, yönetim özeti, şikâyet, öğretmen kontrol sayfası, arama, teşekkür notu, canlı güncelleme (V-11…V-14) | İstenmedi. Akışın dışında kalıyorlar |
+| Geri çekme ve "yapılmadı" diye geri çevirme (V-06) | Akış yalnızca dört adım olsun (T-09). Bildiren onaylamazsa ne olacağı açık soru (S-03) |
+| Öğretmen onayıyla yayına girme (V-07), öğretmenin gizlemesi (V-02) | Uygunsuz içerikte kimin müdahale edeceği Eyüp Hoca'ya soruluyor (S-13) |
+| Native Android uygulaması (S-11) | İstenmedi. Görev tanımı tarayıcıda çalışan bir demo istiyor |
+| Ev sunucusunda internete açma (S-12) | Süreklilik açısından uygun değil (teknoloji.md, Süreklilik) |

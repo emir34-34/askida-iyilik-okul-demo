@@ -1,0 +1,12 @@
+{% extends "istekler/base.html" %}
+{% block icerik %}
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+  <h1 style="margin:0">Sorunlar</h1>
+  <a class="btn ana" href="{% url 'bildir' %}" style="margin-left:auto">Sorun bildir</a>
+</div>
+<div class="sekmeler">
+  <a href="?" class="{% if not hepsi %}secili{% endif %}">Açık olanlar</a>
+  <a href="?sekme=hepsi" class="{% if hepsi %}secili{% endif %}">Hepsi</a>
+</div>
+{% for sorun in sorunlar %}{% include "istekler/_kart.html" %}{% empty %}<p class="bos">Şu an açık bir sorun yok.</p>{% endfor %}
+{% endblock %}

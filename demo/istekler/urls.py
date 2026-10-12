@@ -1,28 +1,14 @@
-from django.conf import settings
-from django.http import FileResponse
-from django.urls import path, re_path
-from django.views.static import serve
+from django.contrib.auth import views as auth_views
+from django.urls import path
 
-from . import api
-
-
-def istemci(request):
-    """Arayüzün giriş sayfası. Tarayıcıda Django verir, APK'da ise APK kendi içinden verir."""
-    return FileResponse(open(settings.ISTEMCI_DIR / "index.html", "rb"), content_type="text/html; charset=utf-8")
-
+from . import views
 
 urlpatterns = [
-    # Arayüz dosyaları (demo/istemci/). Demo için Django'nun basit dosya sunucusu yeterli.
-    path("", istemci),
-    re_path(r"^i/(?P<path>.+)$", serve, {"document_root": settings.ISTEMCI_DIR}),
-
-    # Veri API'si (demo-plani.md, mimari değişikliği)
-    path("api/ben", api.ben),
-    path("api/giris", api.giris),
-    path("api/cikis", api.cikis),
-    path("api/istekler", api.istekler),
-    path("api/gorevler", api.gorevler),
-    path("api/gizlenenler", api.gizlenenler),
-    path("api/istekler/<int:no>", api.istek),
-    path("api/istekler/<int:no>/<slug:eylem>", api.istek_eylem),
+    path("", views.liste, name="liste"),
+    path("giris/", auth_views.LoginView.as_view(template_name="istekler/giris.html", redirect_authenticated_user=True), name="giris"),
+    path("cikis/", auth_views.LogoutView.as_view(), name="cikis"),
+    path("bildir/", views.bildir, name="bildir"),
+    path("sorun/<int:pk>/", views.sorun, name="sorun"),
+    path("sorun/<int:pk>/<slug:ad>/", views.eylem, name="eylem"),
+    path("islerim/", views.islerim, name="islerim"),
 ]

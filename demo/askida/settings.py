@@ -64,9 +64,9 @@ INSTALLED_APPS = [
 
 # Django'nun kullanıcı modeli yerine rol ve görünen ad eklenmiş kendi modelimiz (veri.md)
 AUTH_USER_MODEL = 'istekler.Kullanici'
-
-# Arayüz (HTML, CSS, JS, yazı tipi). Tarayıcıda Django verir, APK aynı dosyaları kendi içinde taşır.
-ISTEMCI_DIR = BASE_DIR / 'istemci'
+LOGIN_URL = 'giris'
+LOGIN_REDIRECT_URL = 'liste'
+LOGOUT_REDIRECT_URL = 'giris'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

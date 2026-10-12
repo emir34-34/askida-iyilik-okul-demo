@@ -1,14 +1,14 @@
-"""Demo testleri (demo-plani.md, görev tanımı: en az 3 test, her birinde gerçek kontrol).
+"""Demo testleri (görev tanımı: en az 3 test, her birinde gerçek kontrol).
 
 Çalıştırmak için:  python manage.py test
 """
 from django.test import TestCase
 
 from . import gecisler
-from .gecisler import DurumUygunDegil, GerekceGerekli, YetkiYok
-from .models import DurumGecmisi, Istek, Kullanici, Yorum
+from .gecisler import DurumUygunDegil, YetkiYok
+from .models import DurumGecmisi, Kullanici, Sorun
 
-Durum = Istek.Durum
+Durum = Sorun.Durum
 
 
 class OrnekVeri(TestCase):
@@ -18,245 +18,128 @@ class OrnekVeri(TestCase):
         def kisi(ad, gorunen, rol=Kullanici.Rol.OGRENCI):
             return Kullanici.objects.create_user(username=ad, password="test-sifresi-123", gorunen_ad=gorunen, rol=rol)
 
-        self.mehmet = kisi("ogrenci1", "Mehmet A.")
+        self.zeynep = kisi("ogrenci4", "Zeynep T.")
         self.ayse = kisi("ogrenci2", "Ayşe K.")
-        self.can = kisi("ogrenci3", "Can B.")
-        self.selin = kisi("ogretmen1", "Selin Öğretmen", Kullanici.Rol.OGRETMEN)
-        self.istek = gecisler.istek_ac(self.mehmet, "Kimya notları lazım", "Salı günkü dersin notları.", "ders")
+        self.mehmet = kisi("ogrenci1", "Mehmet A.")
+        self.sorun = gecisler.bildir(self.zeynep, "2. kat lavabo musluğu damlıyor", "Soldan ikinci musluk.")
 
     def durum(self):
-        self.istek.refresh_from_db()
-        return self.istek.durum
+        self.sorun.refresh_from_db()
+        return self.sorun.durum
 
 
 class RolKuraliTesti(OrnekVeri):
     """roller.md: kim neyi yapabilir? Kurallar sunucuda uygulanır (T-07)."""
 
-    def test_kendi_istegini_ustlenemez(self):
+    def test_kendi_bildirdigi_sorunu_ustlenemez(self):
         with self.assertRaises(YetkiYok):
-            gecisler.ustlen(self.istek.pk, self.mehmet)
+            gecisler.ustlen(self.sorun.pk, self.zeynep)
         self.assertEqual(self.durum(), Durum.ACIK)
-        self.assertIsNone(self.istek.ustlenen)
 
-    def test_baskasinin_istegini_onaylayamaz(self):
-        gecisler.ustlen(self.istek.pk, self.ayse)
-        gecisler.yapildi_de(self.istek.pk, self.ayse)
-        # Can isteği açan kişi değil: onaylayamaz. İşi yapan Ayşe de kendi işini onaylayamaz.
-        for yabanci in (self.can, self.ayse):
+    def test_yalnizca_bildiren_onaylayabilir(self):
+        gecisler.ustlen(self.sorun.pk, self.ayse)
+        gecisler.yapildi_de(self.sorun.pk, self.ayse)
+        for yabanci in (self.mehmet, self.ayse):  # ne başka biri ne de işi yapan onaylayabilir
             with self.assertRaises(YetkiYok):
-                gecisler.onayla(self.istek.pk, yabanci)
+                gecisler.onayla(self.sorun.pk, yabanci)
         self.assertEqual(self.durum(), Durum.YAPILDI)
 
     def test_yalnizca_ustlenen_yapildi_diyebilir(self):
-        gecisler.ustlen(self.istek.pk, self.ayse)
+        gecisler.ustlen(self.sorun.pk, self.ayse)
         with self.assertRaises(YetkiYok):
-            gecisler.yapildi_de(self.istek.pk, self.can)
+            gecisler.yapildi_de(self.sorun.pk, self.mehmet)
         self.assertEqual(self.durum(), Durum.USTLENILDI)
-
-    def test_ogrenci_gizleyemez_ogretmen_gizleyebilir(self):
-        with self.assertRaises(YetkiYok):
-            gecisler.gizle(self.istek.pk, self.ayse, "deneme")
-        gecisler.gizle(self.istek.pk, self.selin, "Kişisel bilgi içeriyor.")
-        self.assertEqual(self.durum(), Durum.GIZLENDI)
 
 
 class CiftUstlenmeTesti(OrnekVeri):
     """akis.md soru 1 / T-06: Aynı iş iki kişi tarafından üstlenilemez."""
 
     def test_ikinci_kisi_ustlenemez(self):
-        # Ayşe ve Can isteği "Açık" olarak gördü. Ayşe önce basıyor.
-        gecisler.ustlen(self.istek.pk, self.ayse)
+        gecisler.ustlen(self.sorun.pk, self.ayse)
         with self.assertRaisesMessage(DurumUygunDegil, "az önce başka biri tarafından üstlenildi"):
-            gecisler.ustlen(self.istek.pk, self.can)
+            gecisler.ustlen(self.sorun.pk, self.mehmet)
+        self.sorun.refresh_from_db()
+        self.assertEqual(self.sorun.ustlenen, self.ayse)  # iş ilk gelende kaldı
+        self.assertEqual(DurumGecmisi.objects.filter(sorun=self.sorun, yeni_durum=Durum.USTLENILDI).count(), 1)
 
-        self.istek.refresh_from_db()
-        self.assertEqual(self.istek.durum, Durum.USTLENILDI)
-        self.assertEqual(self.istek.ustlenen, self.ayse)  # iş ilk basanda kaldı
-        # Durum geçmişinde yalnızca bir üstlenme var
-        self.assertEqual(
-            DurumGecmisi.objects.filter(istek=self.istek, yeni_durum=Durum.USTLENILDI).count(), 1
-        )
-
-    def test_kosullu_guncelleme_eski_bilgiyle_yazmaz(self):
-        """Can'ın elinde isteğin eski ("Açık") hâli olsa bile UPDATE koşulu veritabanındaki
-        güncel duruma bakar. Önce-oku-sonra-yaz yapılsaydı bu test başarısız olurdu."""
-        eski_kopya = Istek.objects.get(pk=self.istek.pk)
+    def test_eski_bilgiyle_yazilamaz(self):
+        """Mehmet'in ekranında sorun hâlâ "Açık" görünse bile güncelleme veritabanındaki güncel
+        duruma bakar. Önce bakıp sonra yazsaydık bu test başarısız olurdu."""
+        eski_kopya = Sorun.objects.get(pk=self.sorun.pk)
         self.assertEqual(eski_kopya.durum, Durum.ACIK)
-        gecisler.ustlen(self.istek.pk, self.ayse)
+        gecisler.ustlen(self.sorun.pk, self.ayse)
         with self.assertRaises(DurumUygunDegil):
-            gecisler.ustlen(eski_kopya.pk, self.can)
-        self.assertEqual(Istek.objects.get(pk=self.istek.pk).ustlenen, self.ayse)
+            gecisler.ustlen(eski_kopya.pk, self.mehmet)
+        self.assertEqual(Sorun.objects.get(pk=self.sorun.pk).ustlenen, self.ayse)
 
 
 class OnayAkisiTesti(OrnekVeri):
-    """Senaryo 1 (senaryolar.md): aç → üstlen → yapıldı → onayla, uçtan uca."""
+    """Senaryo 1: bildir → üstlen → yapıldı → onayla, uçtan uca."""
 
     def test_senaryo_1(self):
         self.assertEqual(self.durum(), Durum.ACIK)
-
-        gecisler.ustlen(self.istek.pk, self.ayse)
+        gecisler.ustlen(self.sorun.pk, self.ayse)
         self.assertEqual(self.durum(), Durum.USTLENILDI)
-
-        gecisler.yorum_yaz(self.istek.pk, self.ayse, "Yarın teneffüste getiririm.")
-
-        gecisler.yapildi_de(self.istek.pk, self.ayse)
+        gecisler.yorum_yaz(self.sorun.pk, self.ayse, "Hademe ablaya haber verdim.")
+        gecisler.yapildi_de(self.sorun.pk, self.ayse)
         self.assertEqual(self.durum(), Durum.YAPILDI)
-
-        gecisler.onayla(self.istek.pk, self.mehmet, tesekkur_notu="Çok sağ ol! 🙏")
+        gecisler.onayla(self.sorun.pk, self.zeynep)
         self.assertEqual(self.durum(), Durum.TAMAMLANDI)
 
-        # Her geçiş, doğru kişiyle ve doğru sırayla durum geçmişine yazıldı
-        gecmis = list(DurumGecmisi.objects.filter(istek=self.istek).values_list("yeni_durum", "yapan__username"))
+        gecmis = list(DurumGecmisi.objects.filter(sorun=self.sorun).values_list("yeni_durum", "yapan__username"))
         self.assertEqual(gecmis, [
-            (Durum.ACIK, "ogrenci1"),
+            (Durum.ACIK, "ogrenci4"),
             (Durum.USTLENILDI, "ogrenci2"),
             (Durum.YAPILDI, "ogrenci2"),
-            (Durum.TAMAMLANDI, "ogrenci1"),
+            (Durum.TAMAMLANDI, "ogrenci4"),
         ])
-        # Teşekkür notu, vurgulu bir yorum olarak eklendi (E13)
-        self.assertTrue(Yorum.objects.filter(istek=self.istek, tesekkur=True, metin="Çok sağ ol! 🙏").exists())
 
-    def test_tamamlanan_istek_yeniden_onaylanamaz(self):
-        gecisler.ustlen(self.istek.pk, self.ayse)
-        gecisler.yapildi_de(self.istek.pk, self.ayse)
-        gecisler.onayla(self.istek.pk, self.mehmet)
+    def test_tamamlanan_sorun_yeniden_onaylanamaz(self):
+        gecisler.ustlen(self.sorun.pk, self.ayse)
+        gecisler.yapildi_de(self.sorun.pk, self.ayse)
+        gecisler.onayla(self.sorun.pk, self.zeynep)
         with self.assertRaises(DurumUygunDegil):
-            gecisler.onayla(self.istek.pk, self.mehmet)
+            gecisler.onayla(self.sorun.pk, self.zeynep)
 
 
-class BirakmaVeYapilmadiTesti(OrnekVeri):
-    """Senaryo 2 ve 3: işi bırakmak, "yapılmadı" demek."""
+class BirakmaTesti(OrnekVeri):
+    """Senaryo 2: üstlenen kişi işi yapamayacağını fark edip bırakır."""
 
-    def test_birakinca_istek_yeniden_acik_olur(self):
-        gecisler.ustlen(self.istek.pk, self.can)
-        gecisler.birak(self.istek.pk, self.can)
-        self.istek.refresh_from_db()
-        self.assertEqual(self.istek.durum, Durum.ACIK)
-        self.assertIsNone(self.istek.ustlenen)
-        # Bıraktıktan sonra başkası üstlenebilir
-        gecisler.ustlen(self.istek.pk, self.ayse)
+    def test_birakinca_sorun_yeniden_acik_olur(self):
+        gecisler.ustlen(self.sorun.pk, self.mehmet)
+        gecisler.birak(self.sorun.pk, self.mehmet)
+        self.sorun.refresh_from_db()
+        self.assertEqual(self.sorun.durum, Durum.ACIK)
+        self.assertIsNone(self.sorun.ustlenen)
+        gecisler.ustlen(self.sorun.pk, self.ayse)  # başkası üstlenebilir
         self.assertEqual(self.durum(), Durum.USTLENILDI)
 
-    def test_gerekcesiz_yapilmadi_reddedilir(self):
-        gecisler.ustlen(self.istek.pk, self.ayse)
-        gecisler.yapildi_de(self.istek.pk, self.ayse)
-        with self.assertRaises(GerekceGerekli):
-            gecisler.yapilmadi_de(self.istek.pk, self.mehmet, "   ")
-        self.assertEqual(self.durum(), Durum.YAPILDI)
-
-        gecisler.yapilmadi_de(self.istek.pk, self.mehmet, "Notların yarısı eksik.")
-        self.istek.refresh_from_db()
-        self.assertEqual(self.istek.durum, Durum.USTLENILDI)
-        self.assertEqual(self.istek.ustlenen, self.ayse)  # iş aynı kişide kalır
-        self.assertEqual(self.istek.gecmis.last().notu, "Notların yarısı eksik.")
-
-    def test_ustlenilmis_istek_geri_cekilemez(self):
-        gecisler.ustlen(self.istek.pk, self.ayse)
-        with self.assertRaises(DurumUygunDegil):
-            gecisler.geri_cek(self.istek.pk, self.mehmet)
+    def test_baskasi_birakamaz(self):
+        gecisler.ustlen(self.sorun.pk, self.mehmet)
+        with self.assertRaises(YetkiYok):
+            gecisler.birak(self.sorun.pk, self.ayse)
         self.assertEqual(self.durum(), Durum.USTLENILDI)
 
 
-class IstemciDosyalariTesti(TestCase):
-    """Arayüz dosyaları tarayıcıya veriliyor mu? (APK aynı dosyaları kendi içinden verir.)"""
+class SayfaYetkiTesti(OrnekVeri):
+    """T-07: Yetkisiz biri adresi elle yazsa bile başkasının işlemini yapamaz."""
 
-    def test_ana_sayfa_ve_uygulama_dosyalari(self):
-        cevap = self.client.get("/")
-        self.assertEqual(cevap.status_code, 200)
-        self.assertIn(b'<script src="/i/app.js">', b"".join(cevap.streaming_content))
-        self.assertEqual(self.client.get("/i/app.js").status_code, 200)
-        self.assertEqual(self.client.get("/i/stil.css").status_code, 200)
-
-
-class ApiTesti(OrnekVeri):
-    """API (demo-plani.md): kurallar API üzerinden de aynı şekilde uygulanır (T-07)."""
-
-    def post(self, yol, veri=None):
-        return self.client.post(yol, data=veri or {}, content_type="application/json")
-
-    def test_giris_yapmayan_401_alir(self):
-        self.assertEqual(self.client.get("/api/istekler").status_code, 401)
-        self.assertEqual(self.post(f"/api/istekler/{self.istek.pk}/ustlen").status_code, 401)
-        self.assertEqual(self.durum(), Durum.ACIK)
-
-    def test_api_ile_giris_ve_akis(self):
-        self.assertEqual(self.post("/api/giris", {"kullanici_adi": "ogrenci2", "sifre": "yanlis"}).status_code, 400)
-        cevap = self.post("/api/giris", {"kullanici_adi": "ogrenci2", "sifre": "test-sifresi-123"})
-        self.assertEqual(cevap.status_code, 200)
-        self.assertEqual(cevap.json()["gorunen_ad"], "Ayşe K.")
-        basliklar = [i["baslik"] for i in self.client.get("/api/istekler").json()["istekler"]]
-        self.assertIn("Kimya notları lazım", basliklar)
-
-    def test_api_adresine_dogrudan_istek_atan_yabanci_403_alir(self):
-        gecisler.ustlen(self.istek.pk, self.ayse)
-        gecisler.yapildi_de(self.istek.pk, self.ayse)
-        self.client.force_login(self.can)
-        cevap = self.post(f"/api/istekler/{self.istek.pk}/onayla")
+    def test_adresi_elle_yazan_yabanci_403_alir(self):
+        gecisler.ustlen(self.sorun.pk, self.ayse)
+        gecisler.yapildi_de(self.sorun.pk, self.ayse)
+        self.client.force_login(self.mehmet)  # onay düğmesini hiç görmedi ama adrese doğrudan gönderiyor
+        cevap = self.client.post(f"/sorun/{self.sorun.pk}/onayla/")
         self.assertEqual(cevap.status_code, 403)
-        self.assertIn("isteği açan", cevap.json()["hata"])
         self.assertEqual(self.durum(), Durum.YAPILDI)
 
-    def test_api_cift_ustlenme_409(self):
-        self.client.force_login(self.ayse)
-        self.assertEqual(self.post(f"/api/istekler/{self.istek.pk}/ustlen").status_code, 200)
-        self.client.force_login(self.can)
-        cevap = self.post(f"/api/istekler/{self.istek.pk}/ustlen")
-        self.assertEqual(cevap.status_code, 409)
-        self.assertEqual(Istek.objects.get(pk=self.istek.pk).ustlenen, self.ayse)
-
-    def test_api_dugmeleri_role_gore_doner(self):
-        self.client.force_login(self.ayse)
-        self.assertEqual(self.client.get(f"/api/istekler/{self.istek.pk}").json()["dugmeler"], ["ustlen"])
-        self.client.force_login(self.mehmet)
-        self.assertEqual(self.client.get(f"/api/istekler/{self.istek.pk}").json()["dugmeler"], ["geri_cek"])
-
-    def test_api_gizlenen_istegi_ogrenciye_gostermez(self):
-        gecisler.gizle(self.istek.pk, self.selin, "Uygunsuz.")
-        self.client.force_login(self.ayse)
-        self.assertEqual(self.client.get(f"/api/istekler/{self.istek.pk}").status_code, 404)
-        basliklar = [i["baslik"] for i in self.client.get("/api/istekler").json()["istekler"]]
-        self.assertNotIn("Kimya notları lazım", basliklar)
-
-    def test_api_gerekcesiz_yapilmadi_400(self):
-        gecisler.ustlen(self.istek.pk, self.ayse)
-        gecisler.yapildi_de(self.istek.pk, self.ayse)
-        self.client.force_login(self.mehmet)
-        self.assertEqual(self.post(f"/api/istekler/{self.istek.pk}/yapilmadi", {"gerekce": " "}).status_code, 400)
-        self.assertEqual(self.durum(), Durum.YAPILDI)
-
-    def test_csrf_jetonu_olmadan_veri_degistirilemez(self):
-        """Başka bir siteden gizlice gönderilen istek (CSRF) reddedilir."""
-        from django.test import Client
-        c = Client(enforce_csrf_checks=True)
-        c.force_login(self.ayse)
-        cevap = c.post(f"/api/istekler/{self.istek.pk}/ustlen", content_type="application/json")
-        self.assertEqual(cevap.status_code, 403)
+    def test_giris_yapmayan_giris_sayfasina_gider(self):
+        cevap = self.client.post(f"/sorun/{self.sorun.pk}/ustlen/")
+        self.assertEqual(cevap.status_code, 302)
+        self.assertIn("/giris/", cevap["Location"])
         self.assertEqual(self.durum(), Durum.ACIK)
 
-
-class OgretmenApiTesti(OrnekVeri):
-    """E6, D4: Öğretmen uygulamanın içinden gizler. Öğrenci aynı adrese istek atsa bile yapamaz."""
-
-    def post(self, yol, veri=None):
-        return self.client.post(yol, data=veri or {}, content_type="application/json")
-
-    def test_ogrenci_api_ile_gizleyemez(self):
+    def test_dugmeler_role_gore_degisir(self):
         self.client.force_login(self.ayse)
-        cevap = self.post(f"/api/istekler/{self.istek.pk}/gizle", {"gerekce": "deneme"})
-        self.assertEqual(cevap.status_code, 403)
-        self.assertEqual(self.durum(), Durum.ACIK)
-        self.assertEqual(self.client.get("/api/gizlenenler").status_code, 403)
-        self.assertEqual(self.client.get(f"/api/istekler/{self.istek.pk}").json()["ogretmen_dugmeleri"], [])
-
-    def test_ogretmen_gerekceyle_gizler_ve_geri_acar(self):
-        self.client.force_login(self.selin)
-        self.assertEqual(self.client.get(f"/api/istekler/{self.istek.pk}").json()["ogretmen_dugmeleri"], ["gizle"])
-        self.assertEqual(self.post(f"/api/istekler/{self.istek.pk}/gizle", {"gerekce": " "}).status_code, 400)
-        cevap = self.post(f"/api/istekler/{self.istek.pk}/gizle", {"gerekce": "Kişisel bilgi içeriyor."})
-        self.assertEqual(cevap.status_code, 200)
-        self.assertEqual(cevap.json()["ogretmen_dugmeleri"], ["gizlemeyi_kaldir"])
-        liste = self.client.get("/api/gizlenenler").json()["istekler"]
-        self.assertEqual([i["baslik"] for i in liste], ["Kimya notları lazım"])
-        self.assertIn("Kişisel bilgi içeriyor.", liste[0]["gizleme_gerekcesi"])
-        self.assertEqual(self.post(f"/api/istekler/{self.istek.pk}/gizlemeyi_kaldir").status_code, 200)
-        self.assertEqual(self.durum(), Durum.ACIK)
+        self.assertContains(self.client.get(f"/sorun/{self.sorun.pk}/"), "Üstlen</button>")
+        self.client.force_login(self.zeynep)  # kendi bildirdiği sorun: üstlen düğmesi yok
+        self.assertNotContains(self.client.get(f"/sorun/{self.sorun.pk}/"), "Üstlen</button>")

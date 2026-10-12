@@ -1,0 +1,5 @@
+<a class="kart" href="{% url 'sorun' sorun.pk %}">
+  <h2>{{ sorun.baslik }}</h2>
+  <div class="alt">{{ sorun.bildiren.gorunen_ad }} · {{ sorun.olusturma_zamani|timesince }} önce</div>
+  <span class="durum {{ sorun.durum }}">{{ sorun.get_durum_display }}{% if sorun.ustlenen %} · {{ sorun.ustlenen.gorunen_ad }}{% endif %}</span>
+</a>

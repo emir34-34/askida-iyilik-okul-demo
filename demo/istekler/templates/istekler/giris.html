@@ -1,0 +1,16 @@
+{% extends "istekler/base.html" %}
+{% block baslik %}Giriş · Askıda İyilik{% endblock %}
+{% block icerik %}
+<div class="kart" style="max-width:380px;margin:24px auto">
+  <h1>Giriş</h1>
+  <p class="alt">Okulda gördüğün sorunları bildir, birlikte çözelim.</p>
+  {% if form.errors %}<div class="mesaj error">Kullanıcı adı ya da şifre hatalı.</div>{% endif %}
+  <form method="post">{% csrf_token %}
+    <label for="k">Kullanıcı adı</label><input type="text" id="k" name="username" autocapitalize="none" required>
+    <label for="s">Şifre</label><input type="password" id="s" name="password" required>
+    <input type="hidden" name="next" value="{{ next }}">
+    <p><button class="btn ana" style="width:100%">Giriş yap</button></p>
+  </form>
+  <p class="alt">Demo · yalnızca örnek kullanıcılar</p>
+</div>
+{% endblock %}

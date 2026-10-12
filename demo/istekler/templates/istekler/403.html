@@ -1,0 +1,4 @@
+{% extends "istekler/base.html" %}
+{% block icerik %}
+<div class="kart"><h1>Bu işlemi yapma yetkin yok.</h1><p>{{ mesaj }}</p><a class="btn" href="{% url 'liste' %}">Sorunlara dön</a></div>
+{% endblock %}

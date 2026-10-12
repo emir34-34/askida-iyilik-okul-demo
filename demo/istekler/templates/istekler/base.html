@@ -1,0 +1,26 @@
+{% load static %}<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block baslik %}Askıda İyilik{% endblock %}</title>
+<link rel="stylesheet" href="{% static 'istekler/stil.css' %}">
+</head>
+<body>
+<header><div class="ic">
+  <a class="ad" href="{% url 'liste' %}">Askıda İyilik</a>
+  {% if user.is_authenticated %}
+  <nav>
+    <a href="{% url 'liste' %}">Sorunlar</a>
+    <a href="{% url 'islerim' %}">Benim işlerim</a>
+    <span class="alt">{{ user.gorunen_ad }}</span>
+    <form method="post" action="{% url 'cikis' %}">{% csrf_token %}<button class="btn link">Çıkış</button></form>
+  </nav>
+  {% endif %}
+</div></header>
+<main>
+  {% for m in messages %}<div class="mesaj {{ m.level_tag }}">{{ m }}</div>{% endfor %}
+  {% block icerik %}{% endblock %}
+</main>
+</body>
+</html>

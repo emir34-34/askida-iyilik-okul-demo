@@ -1,0 +1,13 @@
+{% extends "istekler/base.html" %}
+{% block baslik %}Sorun bildir · Askıda İyilik{% endblock %}
+{% block icerik %}
+<h1>Sorun bildir</h1>
+<form class="kart" method="post">{% csrf_token %}
+  <label for="b">Ne sorunu var?</label>
+  <input type="text" id="b" name="baslik" maxlength="120" required value="{{ form.baslik }}" placeholder="Spor salonu kapısının kolu kırık">
+  <label for="a">Nerede, nasıl?</label>
+  <textarea id="a" name="aciklama" maxlength="1000" required placeholder="Giriş kapısının sağ kanadındaki kol yerinden çıkmış.">{{ form.aciklama }}</textarea>
+  <div class="not">Yalnızca okulda gördüğün sorunları bildir: bozuk kapı, damlayan musluk, biten sabun gibi. Kişisel bilgi yazma.</div>
+  <button class="btn ana">Bildir</button>
+</form>
+{% endblock %}

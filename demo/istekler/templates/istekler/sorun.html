@@ -1,0 +1,32 @@
+{% extends "istekler/base.html" %}
+{% block baslik %}{{ sorun.baslik }} · Askıda İyilik{% endblock %}
+{% block icerik %}
+<div class="kart">
+  <h1>{{ sorun.baslik }}</h1>
+  <div class="alt">{{ sorun.bildiren.gorunen_ad }} bildirdi · {{ sorun.olusturma_zamani|timesince }} önce</div>
+  <span class="durum {{ sorun.durum }}">{{ sorun.get_durum_display }}{% if sorun.ustlenen %} · {{ sorun.ustlenen.gorunen_ad }}{% endif %}</span>
+  <p style="white-space:pre-line">{{ sorun.aciklama }}</p>
+  {% if dugmeler %}
+  <div class="dugmeler">
+    {% for d in dugmeler %}
+    <form method="post" action="{% url 'eylem' sorun.pk d %}">{% csrf_token %}
+      {% if d == "ustlen" %}<button class="btn ana">Üstlen</button>
+      {% elif d == "yapildi" %}<button class="btn ana">Yapıldı</button>
+      {% elif d == "birak" %}<button class="btn">Bırak</button>
+      {% elif d == "onayla" %}<button class="btn ana">Onayla</button>{% endif %}
+    </form>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+<div class="kart">
+  <strong>Yorumlar</strong> <span class="alt">· herkese açık</span>
+  {% for y in yorumlar %}
+    <div class="yorum"><div class="alt">{{ y.yazan.gorunen_ad }} · {{ y.zaman|timesince }} önce</div>{{ y.metin }}</div>
+  {% empty %}<p class="alt">Henüz yorum yok.</p>{% endfor %}
+  <form method="post" action="{% url 'eylem' sorun.pk 'yorum' %}">{% csrf_token %}
+    <label for="y">Yorum yaz</label><input type="text" id="y" name="metin" maxlength="1000" required>
+    <p><button class="btn">Gönder</button></p>
+  </form>
+</div>
+{% endblock %}

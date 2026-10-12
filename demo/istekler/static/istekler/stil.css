@@ -1,0 +1,36 @@
+/* Askıda İyilik demo: sade görünüm (ekranlar.md) */
+:root{--zemin:#f4f5f7;--kart:#fff;--metin:#1d1d1f;--soluk:#5f6b73;--cizgi:#e3e7ea;--vurgu:#c2410c;--vurgu-yazi:#fff;--hata:#b42318}
+*{box-sizing:border-box}
+body{margin:0;background:var(--zemin);color:var(--metin);font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit}
+header{background:var(--kart);border-bottom:1px solid var(--cizgi)}
+header .ic{max-width:720px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+header .ad{font-weight:700;font-size:18px;text-decoration:none}
+header nav{display:flex;gap:14px;margin-left:auto;font-size:14px;align-items:center}
+header nav form{margin:0}
+main{max-width:720px;margin:0 auto;padding:16px}
+h1{font-size:20px;margin:4px 0 12px}
+.kart{display:block;background:var(--kart);border:1px solid var(--cizgi);border-radius:12px;padding:14px 16px;margin-bottom:10px;text-decoration:none}
+.kart h2{font-size:17px;margin:0 0 4px}
+.alt{color:var(--soluk);font-size:13px}
+.durum{display:inline-block;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;margin-top:6px;background:#eef0f2}
+.durum.acik{background:#e3f4e8;color:#17663a}
+.durum.ustlenildi{background:#fff3d1;color:#7a5200}
+.durum.yapildi{background:#e1ebfd;color:#1e4fa8}
+.durum.tamamlandi{background:#eef0f2;color:#5f6b73}
+.sekmeler{display:flex;gap:8px;margin-bottom:12px}
+.sekmeler a{padding:6px 12px;border-radius:999px;background:#e8ebee;text-decoration:none;font-size:14px}
+.sekmeler a.secili{background:var(--metin);color:#fff}
+.btn{display:inline-block;border:0;border-radius:10px;padding:10px 16px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none;background:#e8ebee;color:var(--metin)}
+.btn.ana{background:var(--vurgu);color:var(--vurgu-yazi)}
+.btn.link{background:none;padding:0;font-weight:400;font-size:14px;text-decoration:underline}
+.dugmeler{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.dugmeler form{margin:0}
+label{display:block;font-size:14px;color:var(--soluk);margin:12px 0 4px}
+input[type=text],input[type=password],textarea{width:100%;border:1px solid var(--cizgi);border-radius:10px;padding:10px 12px;font:inherit;background:#fff}
+textarea{min-height:100px}
+.not{background:#fff4ec;border-radius:10px;padding:10px 12px;font-size:14px;margin:12px 0}
+.yorum{border-top:1px solid var(--cizgi);padding:10px 0}
+.mesaj{padding:10px 14px;border-radius:10px;margin-bottom:12px;background:#e3f4e8}
+.mesaj.error{background:#fde8e6;color:var(--hata)}
+.bos{text-align:center;color:var(--soluk);padding:32px 0}

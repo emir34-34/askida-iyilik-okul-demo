@@ -1,0 +1,13 @@
+{% extends "istekler/base.html" %}
+{% block baslik %}Benim işlerim · Askıda İyilik{% endblock %}
+{% block icerik %}
+<h1>Benim işlerim</h1>
+<div class="sekmeler">
+  <a href="?" class="{% if not ustlendiklerim %}secili{% endif %}">Bildirdiklerim</a>
+  <a href="?sekme=ustlendiklerim" class="{% if ustlendiklerim %}secili{% endif %}">Üstlendiklerim</a>
+</div>
+{% for sorun in sorunlar %}
+  {% include "istekler/_kart.html" %}
+  {% if not ustlendiklerim and sorun.durum == "yapildi" %}<p class="not" style="margin-top:-6px">Bu iş yapıldı, onayını bekliyor.</p>{% endif %}
+{% empty %}<p class="bos">Henüz bir işin yok.</p>{% endfor %}
+{% endblock %}
